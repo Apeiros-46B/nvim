@@ -138,6 +138,19 @@ return function(on_attach)
         -- {{{ julials
         julials = function()
             add(lspconfig.julials, {
+                settings = {
+                    enableTelemetry = false,
+
+                    NumThreads = 2,
+
+                    completionmode = 'import',
+                    runtimeCompletions = true,
+
+                    lint = {
+                        missingrefs = 'all',
+                    }
+                },
+
                 on_new_config = function(new_config, _)
                     -- custom julia executable
                     local julia = os.getenv('HOME') .. '/.julia/environments/nvim-lspconfig/bin/julia'
@@ -152,7 +165,7 @@ return function(on_attach)
         end,
         -- }}}
 
-        -- {{{ sumneko_lua
+        -- {{{ lua_ls
         lua_ls = function()
             -- lspconfig server, custom configuration
             add(lspconfig.sumneko_lua, {
