@@ -35,7 +35,6 @@ local M = {}
 vim.g.mapleader = ' ' -- Map leader key to space
 vim.g.maplocalleader = ','
 
-map('n', '<leader>', ':WhichKey \'<Space>\'<CR>', { noremap = true, silent = true }) -- which key
 map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<leader>/', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
