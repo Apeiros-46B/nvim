@@ -35,22 +35,27 @@ require('packer').startup({
 		use({ 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } })
 		use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' })
 		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
-		use('windwp/nvim-autopairs')
-		use('terrortylor/nvim-comment')
-		use('sbdchd/neoformat')
-		use('phaazon/hop.nvim')
-		use({ 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } })
-        use('liuchengxu/vim-which-key')
-        use('jghauser/mkdir.nvim')
-        use({ 'ellisonleao/glow.nvim', branch = 'main'} )
+		use({ 'windwp/nvim-autopairs' })
+		use({ 'terrortylor/nvim-comment' })
+		use({ 'sbdchd/neoformat' })
+		use({ 'phaazon/hop.nvim' })
+        use({ 'jghauser/mkdir.nvim' })
+        use({ 'folke/which-key.nvim' })
 		-- }}}
+
+        -- {{{ git plugins
+		use({ 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } })
+        use({ 'tpope/vim-fugitive' })
+        use({ 'tpope/vim-rhubarb' })
+        -- }}}
 
         -- {{{ improved syntax plugins
 		-- these add in a bit more bling and flair to nvim
 		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 		use({ 'glepnir/dashboard-nvim', disable = false })
-        use({'rrethy/vim-hexokinase', run = 'make hexokinase'})
-		use('norcalli/nvim-colorizer.lua')
+        use({ 'rrethy/vim-hexokinase', run = 'make hexokinase' })
+		use({ 'norcalli/nvim-colorizer.lua' })
+        use({ 'ellisonleao/glow.nvim', branch = 'main'})
 		-- }}}
 
 		-- {{{ themes
@@ -67,7 +72,7 @@ require('packer').startup({
 		use('haishanh/night-owl.vim')
 		-- }}}
 
-        -- {{{
+        -- {{{ misc plugins
         use('andweeb/presence.nvim')
         -- }}}
 	end,

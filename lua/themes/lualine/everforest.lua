@@ -9,7 +9,7 @@ local colors = {
 	norm_bg = '#A7C080',
 	ins_bg = '#7FBBB3',
 	vis_bg = '#D699B6',
-	rep_bg = '#E68E80',
+	rep_bg = '#E67E80',
 	cmd_bg = '#83C092',
 	int_bg = '#282C34',
 }

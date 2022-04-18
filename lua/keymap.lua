@@ -39,13 +39,13 @@ map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<leader>/', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
-map('n', '<leader>nf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
+map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 map('n', '<leader>~', ':Dashboard<CR>', opt) -- map show dashboard
 
 -- clipboard mappings
 map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to system clipboard
 map('n', '<leader>yl', '"+yy', opt) -- yank current line into system clipboard
-map('', '<leader>y',  '"+y', opt) -- yank selection into system clipboard
+map('', '<leader>ys',  '"+y', opt) -- yank selection into system clipboard
 
 -- write and quit shortcuts
 map('n', 'WW', ':w<CR>', opt)
@@ -53,6 +53,11 @@ map('n', 'WWQ', ':wqa<CR>', opt)
 
 -- glow
 map('n', '<leader>p', ':Glow<CR>', opt)
+
+-- macros
+for c in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
+    map('n', '<leader>m' .. c, '@' .. c, opt)
+end
 -- }}}
 
 -- {{{ autocompletion mappings for cmp
@@ -72,7 +77,7 @@ M.cmp_mappings = {
 }
 -- }}}
 
--- {{{ gitsigns mappings
+-- {{{ git mappings
 M.gitsigns_mappings = {
 	noremap = true,
 	['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
@@ -93,6 +98,10 @@ M.gitsigns_mappings = {
 	['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
 	['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
 }
+
+map('n', '<leader>gg', ':Git<CR>', opt)
+map('n', '<leader>gC', ':Git commit -a -m "', opt)
+map('n', '<leader>gP', ':Git push', opt)
 -- }}}
 
 -- {{{ buffer management

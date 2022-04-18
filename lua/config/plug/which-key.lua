@@ -20,7 +20,7 @@ wk.setup({
 
 local keymap = {
 	a = {
-		name = 'hop.nvim',
+		name = 'hop',
 		h = { 'hop by word' },
 		k = { 'hop by word (before cursor)' },
 		j = { 'hop by word (after cursor)' },
@@ -38,18 +38,22 @@ local keymap = {
 		j = { 'focus previous buffer in buflist' },
 		k = { 'focus next buffer in buflist' },
 		l = { 'focus last buffer in buflist' },
+        f = { 'format buffer' },
 	},
 
 	f = {
 		name = 'telescope',
 		f = { 'fuzzy file finder' },
 		w = { 'fuzzy word search' },
-		g = { 'fizzy git commit finder'},
-		G = { 'fizzy git branch finder'},
 	},
 
 	g = {
-		name = 'gitsigns',
+		name = 'git',
+        g = { 'fugitive' },
+        C = { 'commit' },
+        P = { 'push' },
+        B = { 'fuzzy branch finder' },
+        c = { 'fuzzy commit finder' },
 		s = { 'stage hunk' },
 		u = { 'undo stage hunk' },
 		r = { 'reset hunk' },
@@ -60,23 +64,28 @@ local keymap = {
 		U = { 'reset buffer index' },
 	},
 
-	n = {
-		f = { 'format buffer' },
-	},
+    m = {
+        name = 'macros',
+    },
 
-	h = { 'Win focus left' },
-	j = { 'Win focus up' },
-	k = { 'Win focus down' },
-	l = { 'Win focus right' },
-	s = { 'Buffer picker' },
+    p = { 'preview markdown' },
+
+	h = { 'win focus left' },
+	j = { 'win focus up' },
+	k = { 'win focus down' },
+	l = { 'win focus right' },
+	s = { 'buffer picker' },
 
 	y = {
 		name = 'yank',
 		a = { 'yank entire buffer to system clipboard' },
 		l = { 'yank line to system clipboard' },
+        s = { 'yank selection to system clipboard' },
 	},
-	['<cr>'] = { 'Term vsplit' },
-	['\\'] = { 'Term split' },
+	['<cr>'] = { 'term vsplit' },
+	['\\'] = { 'term hsplit' },
+    ['/'] = { 'toggle comment' },
+    ['~'] = { 'dashboard' },
 }
 
 wk.register(keymap, {
