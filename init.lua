@@ -1,4 +1,4 @@
--- Load All packer plugins
+-- Load all packer plugins
 require('plug')
 
 -- load keybindings and editor options

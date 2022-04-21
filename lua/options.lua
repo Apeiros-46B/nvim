@@ -25,13 +25,29 @@ opt.ignorecase = true
 opt.scrolloff = 8   	-- buffer starts scrolling 8 lines from the end of view
 opt.incsearch = true
 
--- Tab settings
+vim.diagnostic.config({
+    underline = true,
+    signs = true,
+    virtual_text = false,
+    float = {
+        show_header = true,
+        source = 'always',
+        -- border = 'rounded',
+        focusable = true,
+    },
+    update_in_insert = true, -- default to false
+    severity_sort = true, -- default to false
+})
+
+-- tab settings
 o.tabstop = 4 			-- 4 tabstop
 o.shiftwidth = 4
 o.expandtab = true     	-- tabs -> spaces
 o.smartindent = true    -- nice indenting
 
+-- folding
 o.foldmethod = 'marker' -- set fold method to marker
+g.markdown_folding = false -- markdown folding
 
 -- backup/swap files
 opt.swapfile = false  	-- have files saved to swap

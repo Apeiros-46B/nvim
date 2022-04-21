@@ -8,10 +8,10 @@ wk.setup({
 		},
 	},
 	key_labels = {
-		['<space>'] = 'SPC',
-		['<CR>'] = 'ENTR',
-		['<tab>'] = 'TAB',
-		['<bs>'] = 'BKSPC',
+		['<space>'] = '↦',
+		['<CR>'] = '↵',
+		['<tab>'] = '⇥',
+		['<bs>'] = '⌫',
 	},
 	layout = {
 		align = 'center',
@@ -41,9 +41,12 @@ local keymap = {
         f = { 'format buffer' },
 	},
 
+    d = { 'show diagnostic' },
+
 	f = {
 		name = 'telescope',
 		f = { 'fuzzy file finder' },
+        r = { 'recent files' },
 		w = { 'fuzzy word search' },
 	},
 
@@ -64,6 +67,29 @@ local keymap = {
 		U = { 'reset buffer index' },
 	},
 
+    J = {
+        name = 'java',
+        o = { 'organize imports' },
+        e = {
+            name = 'extract',
+            v = { 'variable' },
+            c = { 'constant' },
+            m = { 'method' },
+        },
+    },
+
+    L = {
+        name = 'LSP',
+        h = { 'signature help' },
+        l = { 'lsp finder' },
+        p = {
+            name = 'preview',
+            d = { 'definition' },
+            k = { 'hover doc' },
+        },
+        r = { 'rename' },
+    },
+
     m = {
         name = 'macros',
     },
@@ -75,6 +101,10 @@ local keymap = {
 	k = { 'win focus down' },
 	l = { 'win focus right' },
 	s = { 'buffer picker' },
+
+    q = { 'save and quit all' },
+
+    T = { 'toggle trouble panel' },
 
 	y = {
 		name = 'yank',

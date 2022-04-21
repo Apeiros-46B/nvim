@@ -27,12 +27,12 @@ local M = {}
 		map("n", "<C-n>", ":set rnu!<CR>", opt)
 --]]
 
--- {{{ Umapping
+-- {{{ Unmapping
 --unmap('n', '<leader>f')
 -- }}}
 
 -- {{{ misc bindings
-vim.g.mapleader = ' ' -- Map leader key to space
+vim.g.mapleader = ' ' -- map leader key to space
 vim.g.maplocalleader = ','
 
 map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
@@ -49,10 +49,13 @@ map('', '<leader>ys',  '"+y', opt) -- yank selection into system clipboard
 
 -- write and quit shortcuts
 map('n', 'WW', ':w<CR>', opt)
-map('n', 'WWQ', ':wqa<CR>', opt)
+map('n', '<leader>q', ':wqa<CR>', opt)
 
 -- glow
 map('n', '<leader>p', ':Glow<CR>', opt)
+
+-- mvn clean package
+map('n', '<leader>Jb', ':sp | terminal<CR>imvn clean package -T 4<CR>', opt)
 
 -- macros
 for c in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
@@ -69,12 +72,55 @@ M.cmp_mappings = {
 	['<C-Space>'] = cmp.mapping.complete(),
 	['<C-d>'] = cmp.mapping.scroll_docs(-4),
 	['<C-f>'] = cmp.mapping.scroll_docs(4),
-	['<C-e>'] = cmp.mapping.close(),
+	['<C-e>'] =cmp.mapping.close(),
 	['<CR>'] = cmp.mapping.confirm({
 		behavior = cmp.ConfirmBehavior.Insert,
 		select = true,
 	}),
 }
+-- }}}
+
+-- {{{ LSP/java-related binds
+-- show floating diagnostic
+map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opt)
+
+-- trouble
+map('n', '<leader>T', ':TroubleToggle<CR>', opt)
+
+-- {{{ lspsaga
+--- async lsp finder
+map('n', '<leader>Ll', ':Lspsaga lsp_finder<CR>', opt)
+
+--- code actions
+map('n', '<M-CR>', ':Lspsaga code_action<CR>', opt)
+map('v', '<M-CR>', ':<C-U>Lspsaga range_code_action<CR>', opt)
+
+--- hover doc
+map('n', '<leader>Lpk', ':Lspsaga hover_doc<CR>', opt)
+map('n', '<C-f>', ':lua require("lspsaga.action").smart_scroll_with_saga(1)', opt)
+map('n', '<C-b>', ':lua require("lspsaga.action").smart_scroll_with_saga(-1)', opt)
+
+--- signature help
+map('n', '<leader>Lh', ':Lspsaga signature_help<CR>', opt)
+
+--- rename
+map('n', '<leader>Lr', ':Lspsaga rename<CR>', opt)
+
+--- preview definition
+map('n', '<leader>Lpd', ':Lspsaga preview_definition<CR>', opt)
+
+--- floating term
+map('n', '<M-d>', ':Lspsaga open_floaterm<CR>', opt)
+map('t', '<M-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
+-- }}}
+
+-- jdtls
+map('n', '<leader>Jo', ':lua require("jdtls").organize_imports()<CR>', opt)
+map('n', '<leader>Jev', ':lua require("jdtls").extract_variable()<CR>', opt)
+map('v', '<leader>Jev', '<Esc>:lua require("jdtls").extract_variable(true)<CR>', opt)
+map('n', '<leader>Jec', ':lua require("jdtls").exttract_constant()<CR>', opt)
+map('v', '<leader>Jec', '<Esc>:lua require("jdtls").extract_constant(true)<CR>', opt)
+map('v', '<leader>Jem', '<Esc>:lua require("jdtls").extract_method(true)<CR>', opt)
 -- }}}
 
 -- {{{ git mappings
@@ -105,10 +151,10 @@ map('n', '<leader>gP', ':Git push', opt)
 -- }}}
 
 -- {{{ buffer management
-map('n', '<leader>bh', ':bf<CR>', { noremap = true })
-map('n', '<leader>bk', ':bn<CR>', { noremap = true })
-map('n', '<leader>bj', ':bp<CR>', { noremap = true })
-map('n', '<leader>bl', ':bl<CR>', { noremap = true })
+map('n', '<leader>bh', ':bp<CR>', { noremap = true })
+map('n', '<leader>bk', ':bl<CR>', { noremap = true })
+map('n', '<leader>bj', ':bf<CR>', { noremap = true })
+map('n', '<leader>bl', ':bn<CR>', { noremap = true })
 map('n', '<leader>bd', ':bd<CR>', { noremap = true })
 -- }}}
 
@@ -146,16 +192,6 @@ map('n', '<leader>an', ':HopLineStart<CR>', opt)
 map('n', '<leader>af', ':HopWordCurrentLine<CR>', opt)
 -- }}}
 
--- {{{ jdtls
-map('n', '<A-o>', ':lua require(\'jdtls\').organize_imports()<CR>', opt)
-map('n', '<leader>ev', '<Cmd>lua require(\'jdtls\').extract_variable()<CR>', opt)
-map('v', '<leader>ev', '<Esc><Cmd>lua require(\'jdtls\').extract_variable(true)<CR>', opt)
-map('n', '<leader>ec', '<Cmd>lua require(\'jdtls\').extract_constant()<CR>', opt)
-map('v', '<leader>ec', '<Esc><Cmd>lua require(\'jdtls\').extract_constant(true)<CR>', opt)
-map('v', '<leader>em', '<Esc><Cmd>lua require(\'jdtls\').extract_method(true)<CR>', opt)
--- }}}
-
 -- returns any externally-required keymaps for usage
 return M
-
 -- # vim foldmethod=marker

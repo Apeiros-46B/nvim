@@ -7,7 +7,7 @@ g.Hexokinase_highlighters = {
   -- 'background', -- Highlight background of the #
   -- 'backgroundfull', -- Highlight entire background
   -- 'foreground', -- Highlight foreground of the #
-  'foregroundfull' -- Highlight entire foreground
+  -- 'foregroundfull' -- Highlight entire foreground
 }
 
 -- Patterns to match for all filetypes

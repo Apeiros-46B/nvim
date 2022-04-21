@@ -7,8 +7,11 @@ require('packer').startup({
 		-- lsp plugins
 		use('neovim/nvim-lspconfig')
 		use('onsails/lspkind-nvim')
+        use('glepnir/lspsaga.nvim')
+        use('folke/lsp-colors.nvim')
+        use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
-        -- java lsp
+        -- jdtls
         use('mfussenegger/nvim-jdtls')
 
 		-- autocompletion
@@ -53,7 +56,7 @@ require('packer').startup({
 		-- these add in a bit more bling and flair to nvim
 		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
 		use({ 'glepnir/dashboard-nvim', disable = false })
-        use({ 'rrethy/vim-hexokinase', run = 'make hexokinase' })
+        -- use({ 'rrethy/vim-hexokinase', run = 'make hexokinase' })
 		use({ 'norcalli/nvim-colorizer.lua' })
         use({ 'ellisonleao/glow.nvim', branch = 'main'})
 		-- }}}
