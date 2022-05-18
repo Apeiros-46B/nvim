@@ -16,7 +16,7 @@ return {
 	require('config.plug.telescope'),
 	require('config.plug.which-key'),
 	require('config.plug.nvimcomment'),
-    -- require('config.plug.hexokinase'),
+    require('config.plug.hexokinase'),
 	require('config.plug.nvimcolorizer'),
 	require('config.plug.treesitter'),
     require('config.plug.presence')
