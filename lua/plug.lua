@@ -5,8 +5,8 @@ require('packer').startup({
 
 		-- {{{ lsp/autocompletion/snippets
 		-- lsp plugins
-		use('neovim/nvim-lspconfig')
-		use('onsails/lspkind-nvim')
+		use({ 'neovim/nvim-lspconfig', commit = '9069d14' })
+		use({ 'onsails/lspkind-nvim', commit = '57e5b5d' })
         use('glepnir/lspsaga.nvim')
         use('folke/lsp-colors.nvim')
         use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
@@ -18,36 +18,49 @@ require('packer').startup({
 		use({
 			'hrsh7th/nvim-cmp',
 			requires = {
-				{ 'hrsh7th/cmp-nvim-lsp' },
-				{ 'hrsh7th/cmp-path' },
-				{ 'hrsh7th/cmp-buffer' },
+				{ 'hrsh7th/cmp-nvim-lsp', commit = 'ebdfc20' },
+				{ 'hrsh7th/cmp-path', commit = '466b6b8' },
+				{ 'hrsh7th/cmp-buffer', commit = 'd66c4c2' },
 			},
+			commit = '2aa7eee',
 		})
 
         use({ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" })
 
 		-- snippets
-		use('sirver/ultisnips')
-		use('quangnguyen30192/cmp-nvim-ultisnips')
+		use({ 'sirver/ultisnips', commit = 'c6ace8c' })
+		use({ 'quangnguyen30192/cmp-nvim-ultisnips', commit = 'c6ace8c' })
 		-- }}}
 
 		-- {{{ utility plugins
 		-- these plugins are all realted to editor configs
-		use({ 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } })
-		use('kdheepak/tabline.nvim')
-		use({ 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } })
-		use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' })
-		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
-		use({ 'windwp/nvim-autopairs' })
-		use({ 'terrortylor/nvim-comment' })
-		use({ 'sbdchd/neoformat' })
-		use({ 'phaazon/hop.nvim' })
-        use({ 'jghauser/mkdir.nvim' })
-        use({ 'folke/which-key.nvim' })
+		use({
+            'nvim-lualine/lualine.nvim', requires = {
+                'kyazdani42/nvim-web-devicons',
+                opt = true
+            }, 
+            commit = '18a07f7'
+        })
+		use({ 'kdheepak/tabline.nvim', commit = 'b080ed3' })
+		use({
+            'nvim-telescope/telescope.nvim',
+            requires = {
+                { 'nvim-lua/popup.nvim', commit = 'b7404d3' },
+                { 'nvim-lua/plenary.nvim', commit = '9069d14' }
+            }
+        })
+		use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', commit = '0f0f858' })
+		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', commit = '8ec164b' })
+		use({ 'windwp/nvim-autopairs', commit = '38d486a' })
+		use({ 'terrortylor/nvim-comment', commit = '8619217' })
+		use({ 'sbdchd/neoformat', commit = '06920fa' })
+		use({ 'phaazon/hop.nvim', commit = 'e2f978b' })
+        use({ 'jghauser/mkdir.nvim', commit = '0126165' })
+        use({ 'folke/which-key.nvim', commit = 'a3c19ec' })
 		-- }}}
 
         -- {{{ git plugins
-		use({ 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } })
+		use({ 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim', commit = '565b94d' } })
         use({ 'tpope/vim-fugitive' })
         use({ 'tpope/vim-rhubarb' })
         -- }}}
@@ -55,24 +68,24 @@ require('packer').startup({
         -- {{{ improved syntax plugins
 		-- these add in a bit more bling and flair to nvim
 		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
-		use({ 'glepnir/dashboard-nvim', disable = false })
-        -- use({ 'rrethy/vim-hexokinase', run = 'make hexokinase' })
-		use({ 'norcalli/nvim-colorizer.lua' })
-        use({ 'ellisonleao/glow.nvim', branch = 'main'})
+		use({ 'glepnir/dashboard-nvim', disable = false, commit = 'a8bce85' })
+        use({ 'rrethy/vim-hexokinase', run = 'make hexokinase', commit = '62324b4' })
+		use({ 'norcalli/nvim-colorizer.lua', commit = '36c610a' })
+        use({ 'ellisonleao/glow.nvim', commit = '900042f'})
 		-- }}}
 
 		-- {{{ themes
 		-- popular themes incoming
-		use('joshdick/onedark.vim')
-		use('sickill/vim-monokai')
-		use('morhetz/gruvbox')
-		use('shaunsingh/nord.nvim')
-		use('sainnhe/gruvbox-material')
+		use({'joshdick/onedark.vim'})
+		use({'sickill/vim-monokai'})
+		use({'morhetz/gruvbox'})
+		use({'shaunsingh/nord.nvim'})
+		use({'sainnhe/gruvbox-material'})
 
 		-- neesh themes
-		use('sainnhe/everforest')
-		use('relastle/bluewery.vim')
-		use('haishanh/night-owl.vim')
+		use({'sainnhe/everforest'})
+		use({'relastle/bluewery.vim'})
+		use({'haishanh/night-owl.vim'})
 		-- }}}
 
         -- {{{ misc plugins
