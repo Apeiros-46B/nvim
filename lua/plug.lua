@@ -5,14 +5,17 @@ require('packer').startup({
 
 		-- {{{ lsp/autocompletion/snippets
 		-- lsp plugins
-		use({ 'neovim/nvim-lspconfig', commit = '9069d14' })
+		use({ 'neovim/nvim-lspconfig', commit = '9278dfb' })
 		use({ 'onsails/lspkind-nvim', commit = '57e5b5d' })
-        use('glepnir/lspsaga.nvim')
-        use('folke/lsp-colors.nvim')
-        use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
+        use({ 'glepnir/lspsaga.nvim', commit = '9d36a7a' })
+        use({ 'folke/lsp-colors.nvim', commit = '517fe3a' })
+        use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', commit = 'da61737' })
 
         -- jdtls
-        use('mfussenegger/nvim-jdtls')
+        use({ 'mfussenegger/nvim-jdtls', commit = '3a148da' })
+
+        -- debugging
+        use({ 'mfussenegger/nvim-dap', commit = '3b5e4b7' })
 
 		-- autocompletion
 		use({
@@ -25,10 +28,10 @@ require('packer').startup({
 			commit = '2aa7eee',
 		})
 
-        use({ "petertriho/cmp-git", requires = "nvim-lua/plenary.nvim" })
+        use({ 'petertriho/cmp-git', requires = 'nvim-lua/plenary.nvim', commit = '60e3de6' })
 
 		-- snippets
-		use({ 'sirver/ultisnips', commit = 'c6ace8c' })
+		use({ 'sirver/ultisnips', commit = '5fc4862' })
 		use({ 'quangnguyen30192/cmp-nvim-ultisnips', commit = 'c6ace8c' })
 		-- }}}
 
@@ -38,7 +41,7 @@ require('packer').startup({
             'nvim-lualine/lualine.nvim', requires = {
                 'kyazdani42/nvim-web-devicons',
                 opt = true
-            }, 
+            },
             commit = '18a07f7'
         })
 		use({ 'kdheepak/tabline.nvim', commit = 'b080ed3' })
@@ -47,7 +50,8 @@ require('packer').startup({
             requires = {
                 { 'nvim-lua/popup.nvim', commit = 'b7404d3' },
                 { 'nvim-lua/plenary.nvim', commit = '9069d14' }
-            }
+            },
+            commit = '60e3de6'
         })
 		use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', commit = '0f0f858' })
 		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', commit = '8ec164b' })
@@ -61,14 +65,14 @@ require('packer').startup({
 
         -- {{{ git plugins
 		use({ 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim', commit = '565b94d' } })
-        use({ 'tpope/vim-fugitive' })
-        use({ 'tpope/vim-rhubarb' })
+        use({ 'tpope/vim-fugitive', commit = '00cc238' })
+        use({ 'tpope/vim-rhubarb', commit = 'f8b70f5' })
         -- }}}
 
         -- {{{ improved syntax plugins
 		-- these add in a bit more bling and flair to nvim
-		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
-		use({ 'glepnir/dashboard-nvim', disable = false, commit = 'a8bce85' })
+		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', commit = 'd810c38' })
+		use({ 'glepnir/dashboard-nvim', disable = false, commit = '5763860' })
         use({ 'rrethy/vim-hexokinase', run = 'make hexokinase', commit = '62324b4' })
 		use({ 'norcalli/nvim-colorizer.lua', commit = '36c610a' })
         use({ 'ellisonleao/glow.nvim', commit = '900042f'})
