@@ -25,6 +25,7 @@ opt.ignorecase = true
 opt.scrolloff = 8   	-- buffer starts scrolling 8 lines from the end of view
 opt.incsearch = true
 
+-- diagnostics
 vim.diagnostic.config({
     underline = true,
     signs = true,
@@ -58,6 +59,10 @@ opt.splitbelow = true
 opt.splitright = true
 o.completeopt = 'menuone,noselect'
 
+-- truecolor
 vim.opt.termguicolors = true
+
+-- neovide
+o.guifont = 'JetBrainsMono Nerd Font:h13'
 
 -- # vim foldmethod=marker
