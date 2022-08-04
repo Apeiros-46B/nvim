@@ -123,7 +123,7 @@ local gitcommit = {}
 
 gitcommit.sections = {
     lualine_a = { mode },
-    lualine_b = { function() return "COMMITTING" end, short_cwd },
+    lualine_b = { { function() return "COMMITTING @" end, separator = '', padding = { left = 1} }, short_cwd },
     lualine_c = { branch },
     lualine_y = { 'hostname' },
     lualine_z = { 'location' },
