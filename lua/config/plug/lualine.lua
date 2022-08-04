@@ -106,63 +106,8 @@ local sections = {
 -- }}}
 
 -- {{{ custom extensions
--- {{{ git
-local fugitive = {}
-
-fugitive.sections = {
-    lualine_a = { function() return "GIT" end },
-    lualine_b = { short_cwd },
-    lualine_c = { branch },
-    lualine_y = { 'hostname' },
-    lualine_z = { 'location' },
-}
-
-fugitive.filetypes = { 'fugitive' }
-
-local gitcommit = {}
-
-gitcommit.sections = {
-    lualine_a = { mode },
-    lualine_b = { { function() return "COMMITTING @" end, separator = '', padding = { left = 1} }, short_cwd },
-    lualine_c = { branch },
-    lualine_y = { 'hostname' },
-    lualine_z = { 'location' },
-}
-
-gitcommit.filetypes = { 'gitcommit' }
--- }}}
-
--- {{{ telescope
-local telescope = {}
-
-telescope.sections = {
-    lualine_a = { function() return "TSC" end }, -- could have a better abbreviation
-    lualine_b = { short_cwd },
-    lualine_c = { branch },
-    lualine_z = { 'location' },
-}
-
-telescope.filetypes = { 'TelescopePrompt' }
--- }}}
-
--- {{{ nvim-tree
-local nvim_tree = {}
-
-nvim_tree.sections = {
-    lualine_a = { function() return "NVT" end },
-    lualine_b = { short_cwd },
-    lualine_c = { branch },
-    lualine_z = { 'location' },
-}
-
-nvim_tree.filetypes = { 'NvimTree' }
--- }}}
-
--- {{{ dashboard
-local dashboard = {}
-
-dashboard.sections = {
-    lualine_a = { function() return "DSH" end },
+-- template
+local extension_template = {
     lualine_b = { short_cwd },
     lualine_c = { branch },
     lualine_x = { 'os.date("%d/%m:%u")' },
@@ -170,16 +115,56 @@ dashboard.sections = {
     lualine_z = { 'location' },
 }
 
+-- {{{ dashboard
+local dashboard = {}
+
+dashboard.sections = vim.deepcopy(extension_template)
+dashboard.sections.lualine_a = { function() return "DSH" end }
+
 dashboard.filetypes = { 'dashboard' }
+-- }}}
+
+-- {{{ git
+local fugitive = {}
+
+fugitive.sections = vim.deepcopy(extension_template)
+fugitive.sections.lualine_a = { function() return "GIT" end }
+
+fugitive.filetypes = { 'fugitive' }
+
+local gitcommit = {}
+
+gitcommit.sections = vim.deepcopy(extension_template)
+gitcommit.sections.lualine_a = { mode }
+gitcommit.sections.lualine_b = { { function() return "COMMITTING @" end, separator = '', padding = { left = 1 } }, short_cwd }
+
+gitcommit.filetypes = { 'gitcommit' }
+-- }}}
+
+-- {{{ nvim-tree
+local nvim_tree = {}
+
+nvim_tree.sections = vim.deepcopy(extension_template)
+nvim_tree.sections.lualine_a = { function() return "NVT" end }
+
+nvim_tree.filetypes = { 'NvimTree' }
+-- }}}
+
+-- {{{ telescope
+local telescope = {}
+
+telescope.sections = vim.deepcopy(extension_template)
+telescope.sections.lualine_a = { function() return "TSC" end } -- could have a better abbreviation
+
+telescope.filetypes = { 'TelescopePrompt' }
 -- }}}
 
 -- {{{ word count
 local wc = {}
 
 wc.sections = vim.deepcopy(sections)
-
---                        vv some word count magic i'll implement later
 wc.sections.lualine_x = { '', filename }
+--                        ^^ some word count magic i'll implement later
 
 wc.filetypes = { 'markdown', 'org', 'text' }
 -- }}}
