@@ -13,8 +13,34 @@ local colors = {
 	cmd_bg = '#83C092',
 	int_bg = '#282C34',
 }
+
+local ext_colors = {
+    -- Gray
+	gray0  = '#282C34',
+    gray1  = "#2b3339",
+    gray2  = "#303c42",
+    gray3  = "#384348",
+    gray4  = "#445055",
+    gray5  = "#607279",
+    gray6  = "#7a8487",
+    gray7  = "#859289",
+    gray8  = '#9DA9A0',
+
+    -- Foreground
+    white  = "#d3c6aa",
+
+    -- Other colors
+    red    = "#e67e80",
+    orange = "#e69875",
+    yellow = "#ddbc7f",
+    green  = "#a7c080",
+    teal   = "#83c092",
+    blue   = "#7fbbb3",
+    purple = "#d699b6",
+}
+
 --LuaFormatter on
-return {
+local theme = {
 	normal = {
 		a = { bg = colors.norm_bg, fg = colors.base_fg, gui = 'bold' },
 		b = { bg = colors.secondary, fg = colors.light_fg },
@@ -46,3 +72,5 @@ return {
 		c = { bg = colors.background, fg = colors.light_fg },
 	},
 }
+
+return { colors = ext_colors, theme = theme }
