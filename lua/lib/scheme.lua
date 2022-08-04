@@ -58,20 +58,16 @@ local lualine_def_styles = {
 }
 -- }}}
 
--- {{{ varible definitions
+-- {{{ variable definitions
 M.scheme = 'everforest' -- specifies scheme. default is "everforest"
 
 -- specifies line style
--- M.lualine_style_left = ''
--- M.lualine_style_right = ''
-M.lualine_style_left = ''
-M.lualine_style_right = ''
+M.lualine_style_left = ''
+M.lualine_style_right = ''
 
 -- specifies line seperator style
--- M.lualine_seperator_left = ''
--- M.lualine_seperator_right = ''
-M.lualine_seperator_left = '│'
-M.lualine_seperator_right = '│'
+M.lualine_seperator_left = ''
+M.lualine_seperator_right = ''
 
 -- tabline styles
 M.tabline_style_left = ''
@@ -87,6 +83,46 @@ M.is_lualine_default = false
 
 -- local indicators if a scheme has been loaded
 local scheme_loaded = false
+
+-- custom mode indicator
+M.modes = {
+  ['n']      = 'NOR',
+  ['no']     = 'O-P',
+  ['nov']    = 'O-P',
+  ['noV']    = 'O-P',
+  ['no\22']  = 'O-P',
+  ['niI']    = 'NOR',
+  ['niR']    = 'NOR',
+  ['niV']    = 'NOR',
+  ['nt']     = 'NOR',
+  ['ntT']    = 'NOR',
+  ['v']      = 'VIS',
+  ['vs']     = 'VIS',
+  ['V']      = 'V-L',
+  ['Vs']     = 'V-L',
+  ['\22']    = 'V-B',
+  ['\22s']   = 'V-B',
+  ['s']      = 'SEL',
+  ['S']      = 'S-L',
+  ['\19']    = 'S-B',
+  ['i']      = 'INS',
+  ['ic']     = 'INS',
+  ['ix']     = 'INS',
+  ['R']      = 'REP',
+  ['Rc']     = 'REP',
+  ['Rx']     = 'REP',
+  ['Rv']     = 'V-R',
+  ['Rvc']    = 'V-R',
+  ['Rvx']    = 'V-R',
+  ['c']      = 'CMD',
+  ['cv']     = 'EX',
+  ['ce']     = 'EX',
+  ['r']      = 'REP',
+  ['rm']     = 'MOR',
+  ['r?']     = 'CON',
+  ['!']      = 'SHL',
+  ['t']      = 'TER',
+}
 -- }}}
 
 -- {{{ Global Wrappers

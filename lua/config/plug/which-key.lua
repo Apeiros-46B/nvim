@@ -8,10 +8,10 @@ wk.setup({
 		},
 	},
 	key_labels = {
-		['<space>'] = '↦',
-		['<CR>'] = '↵',
-		['<tab>'] = '⇥',
-		['<bs>'] = '⌫',
+		['<space>'] = 'SPC',
+		['<CR>'] = 'RET',
+		['<tab>'] = 'TAB',
+		['<bs>'] = 'BKSPC',
 	},
 	layout = {
 		align = 'center',
@@ -69,6 +69,7 @@ local keymap = {
 
     J = {
         name = 'java',
+        b = { 'build project with maven' },
         o = { 'organize imports' },
         e = {
             name = 'extract',
@@ -80,13 +81,10 @@ local keymap = {
 
     L = {
         name = 'LSP',
+        d = { 'preview definition' },
+        f = { 'lsp finder' },
         h = { 'signature help' },
-        l = { 'lsp finder' },
-        p = {
-            name = 'preview',
-            d = { 'definition' },
-            k = { 'hover doc' },
-        },
+        p = { 'open hover doc' },
         r = { 'rename' },
     },
 

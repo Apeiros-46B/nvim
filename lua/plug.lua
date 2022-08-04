@@ -11,8 +11,9 @@ require('packer').startup({
         use({ 'folke/lsp-colors.nvim', commit = '517fe3a' })
         use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', commit = 'da61737' })
 
-        -- jdtls
+        -- language servers
         use({ 'mfussenegger/nvim-jdtls', commit = '3a148da' })
+        use({ 'simrat39/rust-tools.nvim', commit = '11dcd67' })
 
         -- debugging
         use({ 'mfussenegger/nvim-dap', commit = '3b5e4b7' })
@@ -36,7 +37,7 @@ require('packer').startup({
 		-- }}}
 
 		-- {{{ utility plugins
-		-- these plugins are all realted to editor configs
+		-- status line
 		use({
             'nvim-lualine/lualine.nvim', requires = {
                 'kyazdani42/nvim-web-devicons',
@@ -44,15 +45,21 @@ require('packer').startup({
             },
             commit = '18a07f7'
         })
+
+        -- tabline
 		use({ 'kdheepak/tabline.nvim', commit = 'b080ed3' })
+
+        -- fuzzy finder
 		use({
             'nvim-telescope/telescope.nvim',
             requires = {
                 { 'nvim-lua/popup.nvim', commit = 'b7404d3' },
                 { 'nvim-lua/plenary.nvim', commit = '9069d14' }
             },
-            commit = '60e3de6'
+            commit = 'b5833a6'
         })
+
+        -- other
 		use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', commit = '0f0f858' })
 		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', commit = '8ec164b' })
 		use({ 'windwp/nvim-autopairs', commit = '38d486a' })
@@ -76,6 +83,9 @@ require('packer').startup({
         use({ 'rrethy/vim-hexokinase', run = 'make hexokinase', commit = '62324b4' })
 		use({ 'norcalli/nvim-colorizer.lua', commit = '36c610a' })
         use({ 'ellisonleao/glow.nvim', commit = '900042f'})
+
+        -- orgmode
+        use ({ 'nvim-orgmode/orgmode', commit = '8cc6fa4' })
 		-- }}}
 
 		-- {{{ themes

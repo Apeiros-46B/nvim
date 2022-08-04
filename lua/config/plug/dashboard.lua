@@ -4,7 +4,7 @@ db.hide_statusline = false
 db.hide_tabline = false
 
 db.custom_header = {
-    '',
+    -- '',
     '',
     '',
     '┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓',

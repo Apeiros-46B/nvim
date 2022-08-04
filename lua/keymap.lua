@@ -35,7 +35,12 @@ local M = {}
 vim.g.mapleader = ' ' -- map leader key to space
 vim.g.maplocalleader = ','
 
+-- line wrap movement
+map('', 'J', 'gj', opt)
+map('', 'K', 'gk', opt)
+
 map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
+map('n', '<leader>w', ':set wrap!<CR>', opt) -- toggle word wrap
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<leader>/', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
@@ -53,9 +58,6 @@ map('n', '<leader>q', ':wqa<CR>', opt)
 
 -- glow
 map('n', '<leader>p', ':Glow<CR>', opt)
-
--- mvn clean package
-map('n', '<leader>Jb', ':sp | terminal<CR>imvn clean package -T 4<CR>', opt)
 
 -- macros
 for c in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
@@ -89,16 +91,16 @@ map('n', '<leader>T', ':TroubleToggle<CR>', opt)
 
 -- {{{ lspsaga
 --- async lsp finder
-map('n', '<leader>Ll', ':Lspsaga lsp_finder<CR>', opt)
+map('n', '<leader>Lf', ':Lspsaga lsp_finder<CR>', opt)
 
 --- code actions
 map('n', '<M-CR>', ':Lspsaga code_action<CR>', opt)
 map('v', '<M-CR>', ':<C-U>Lspsaga range_code_action<CR>', opt)
 
 --- hover doc
-map('n', '<leader>Lpk', ':Lspsaga hover_doc<CR>', opt)
-map('n', '<C-f>', ':lua require("lspsaga.action").smart_scroll_with_saga(1)', opt)
-map('n', '<C-b>', ':lua require("lspsaga.action").smart_scroll_with_saga(-1)', opt)
+map('n', '<leader>Lp', ':Lspsaga hover_doc<CR>', opt)
+map('n', '<M-f>', ':lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opt)
+map('n', '<M-b>', ':lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', opt)
 
 --- signature help
 map('n', '<leader>Lh', ':Lspsaga signature_help<CR>', opt)
@@ -107,12 +109,15 @@ map('n', '<leader>Lh', ':Lspsaga signature_help<CR>', opt)
 map('n', '<leader>Lr', ':Lspsaga rename<CR>', opt)
 
 --- preview definition
-map('n', '<leader>Lpd', ':Lspsaga preview_definition<CR>', opt)
+map('n', '<leader>Ld', ':Lspsaga preview_definition<CR>', opt)
 
 --- floating term
 map('n', '<M-d>', ':Lspsaga open_floaterm<CR>', opt)
-map('t', '<M-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
+map('t', '<M-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>:q<CR>', opt)
 -- }}}
+
+-- mvn clean package
+map('n', '<leader>Jb', ':vs | terminal<CR>imvn clean package -T 4<CR>', opt)
 
 -- jdtls
 map('n', '<leader>Jo', ':lua require("jdtls").organize_imports()<CR>', opt)

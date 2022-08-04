@@ -6,6 +6,7 @@
 --]]
 local cmd = vim.cmd
 local opt = vim.opt
+local fn = vim.fn
 local g = vim.g
 local o = vim.o
 
@@ -63,6 +64,6 @@ o.completeopt = 'menuone,noselect'
 vim.opt.termguicolors = true
 
 -- neovide
-o.guifont = 'JetBrainsMono Nerd Font:h13'
+o.guifont = 'JetBrainsMono Nerd Font Mono:h13'
 
 -- # vim foldmethod=marker
