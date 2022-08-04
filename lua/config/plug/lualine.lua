@@ -3,13 +3,10 @@ local scheme = require('lib.scheme')
 
 -- initialize vars for schemes
 local lualine_theme = nil
-local colors = {}
 
 -- if a scheme is not bundled with lualine, look for a theme file
 if scheme.is_lualine_default == false then
 	lualine_theme = require('themes.lualine.' .. scheme.scheme)
-    colors = lualine_theme.colors
-    lualine_theme = lualine_theme.theme
 else
 	lualine_theme = scheme.scheme
 end
