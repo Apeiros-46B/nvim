@@ -177,20 +177,20 @@ dashboard.filetypes = { 'dashboard' }
 -- }}}
 
 -- {{{ word count
-local word_count = {}
+local wc = {}
 
-word_count.sections = vim.deepcopy(sections)
+wc.sections = vim.deepcopy(sections)
 
-word_count.sections.lualine_x = { '' } -- some word count magic that i'll implement later
-word_count.sections.lualine_y = { filename, fileformat, 'encoding' }
+--                        vv some word count magic i'll implement later
+wc.sections.lualine_x = { '', filename }
 
-word_count.filetypes = { 'markdown', 'org', 'text' }
+wc.filetypes = { 'markdown', 'org', 'text' }
 -- }}}
 -- }}}
 
 -- {{{ lualine setup config
 require('lualine').setup({
-    extensions = { dashboard, fugitive, gitcommit, nvim_tree, telescope, word_count },
+    extensions = { dashboard, fugitive, gitcommit, nvim_tree, telescope, wc },
 
 	options = {
 		theme = lualine_theme,
