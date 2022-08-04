@@ -8,10 +8,11 @@ wk.setup({
 		},
 	},
 	key_labels = {
+		['<leader>'] = 'SPC',
 		['<space>'] = 'SPC',
 		['<CR>'] = 'RET',
 		['<tab>'] = 'TAB',
-		['<bs>'] = 'BKSPC',
+		['<bs>'] = 'BSP',
 	},
 	layout = {
 		align = 'center',
@@ -110,6 +111,9 @@ local keymap = {
 		l = { 'yank line to system clipboard' },
         s = { 'yank selection to system clipboard' },
 	},
+
+    w = { 'toggle word wrap' },
+
 	['<cr>'] = { 'term vsplit' },
 	['\\'] = { 'term hsplit' },
     ['/'] = { 'toggle comment' },
