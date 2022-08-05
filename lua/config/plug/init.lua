@@ -22,6 +22,7 @@ return {
 
     -- plugins added by me
     require('config.plug.hexokinase'),
+    require('config.plug.fugitive'),
     require('config.plug.lspsaga'),
     require('config.plug.navic'),
     require('config.plug.orgmode'),

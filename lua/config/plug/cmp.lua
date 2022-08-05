@@ -21,9 +21,9 @@ cmp.setup({
                and not context.in_syntax_group('Comment')
         end
     end,
-    -- view = {
-    --     entries = {name = 'custom', selection_order = 'near_cursor' }
-    -- },
+    view = { -- select upwards if cursor is near the bottom
+        entries = {name = 'custom', selection_order = 'near_cursor' }
+    },
     window = {
         completion = {
             winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
@@ -38,7 +38,7 @@ cmp.setup({
             local strings = vim.split(kind.kind, '%s', { trimempty = true })
 
             kind.kind = ' ' .. strings[1] .. ' '
-            kind.menu = '    -> ' .. strings[2]
+            kind.menu = '      [' .. strings[2] .. ']'
 
             return kind
         end,
@@ -63,51 +63,52 @@ cmp.setup({
 local none = 'NONE'
 local hl = {
     -- pmenu
-    PmenuThumb               = { bg = colors.gray5, fg = none },
-    PmenuSbar                = { bg = colors.gray4, fg = none },
-    PmenuSel                 = { fg = colors.gray1, bg = colors.green },
-    Pmenu                    = { fg = colors.white, bg = colors.gray3 },
+    PmenuThumb               = { bg = colors.gray5,  fg = none          },
+    PmenuSbar                = { bg = colors.gray4,  fg = none          },
+    PmenuSel                 = { fg = colors.gray1,  bg = colors.green  },
+    Pmenu                    = { fg = colors.white,  bg = colors.gray3  },
 
     -- cmp general
-    CmpItemAbbrDeprecated    = { fg = colors.gray8, bg = none }, -- strikethrough
-    CmpItemAbbrMatch         = { fg = colors.green, bg = none }, -- bold
-    CmpItemAbbrMatchFuzzy    = { fg = colors.green, bg = none }, -- bold
-    CmpItemMenu              = { fg = colors.blue,  bg = none }, -- italic
+    -- TODO: text formatting, idk why it won't work
+    CmpItemAbbrDeprecated    = { fg = colors.gray8,  bg = none          }, -- strikethrough
+    CmpItemAbbrMatch         = { fg = colors.green,  bg = none          }, -- bold
+    CmpItemAbbrMatchFuzzy    = { fg = colors.green,  bg = none          }, -- bold
+    CmpItemMenu              = { fg = colors.green,  bg = none          }, -- italic
 
     -- kinds
-    CmpItemKindField         = { fg = colors.gray1, bg = colors.red },
-    CmpItemKindEvent         = { fg = colors.gray1, bg = colors.red },
-    CmpItemKindKeyword       = { fg = colors.gray1, bg = colors.red },
+    CmpItemKindField         = { fg = colors.gray1,  bg = colors.red    },
+    CmpItemKindEvent         = { fg = colors.gray1,  bg = colors.red    },
+    CmpItemKindKeyword       = { fg = colors.gray1,  bg = colors.red    },
 
-    CmpItemKindConstant      = { fg = colors.gray1, bg = colors.orange },
-    CmpItemKindFolder        = { fg = colors.gray1, bg = colors.orange },
-    CmpItemKindOperator      = { fg = colors.gray1, bg = colors.orange },
-    CmpItemKindSnippet       = { fg = colors.gray1, bg = colors.orange },
-    CmpItemKindUnit          = { fg = colors.gray1, bg = colors.orange },
+    CmpItemKindConstant      = { fg = colors.gray1,  bg = colors.orange },
+    CmpItemKindFolder        = { fg = colors.gray1,  bg = colors.orange },
+    CmpItemKindOperator      = { fg = colors.gray1,  bg = colors.orange },
+    CmpItemKindSnippet       = { fg = colors.gray1,  bg = colors.orange },
+    CmpItemKindUnit          = { fg = colors.gray1,  bg = colors.orange },
 
-    CmpItemKindEnum          = { fg = colors.gray1, bg = colors.yellow },
-    CmpItemKindEnumMember    = { fg = colors.gray1, bg = colors.yellow },
-    CmpItemKindReference     = { fg = colors.gray1, bg = colors.yellow },
+    CmpItemKindEnum          = { fg = colors.gray1,  bg = colors.yellow },
+    CmpItemKindEnumMember    = { fg = colors.gray1,  bg = colors.yellow },
+    CmpItemKindReference     = { fg = colors.gray1,  bg = colors.yellow },
 
-    CmpItemKindConstructor   = { fg = colors.gray1, bg = colors.green },
-    CmpItemKindFunction      = { fg = colors.gray1, bg = colors.green },
-    CmpItemKindProperty      = { fg = colors.gray1, bg = colors.green },
+    CmpItemKindConstructor   = { fg = colors.gray1,  bg = colors.green  },
+    CmpItemKindFunction      = { fg = colors.gray1,  bg = colors.green  },
+    CmpItemKindMethod        = { fg = colors.gray1,  bg = colors.green  },
+    CmpItemKindProperty      = { fg = colors.gray1,  bg = colors.green  },
 
-    CmpItemKindColor         = { fg = colors.gray1, bg = colors.teal },
-    CmpItemKindInterface     = { fg = colors.gray1, bg = colors.teal },
-    CmpItemKindTypeParameter = { fg = colors.gray1, bg = colors.teal },
+    CmpItemKindColor         = { fg = colors.gray1,  bg = colors.teal   },
+    CmpItemKindInterface     = { fg = colors.gray1,  bg = colors.teal   },
+    CmpItemKindTypeParameter = { fg = colors.gray1,  bg = colors.teal   },
 
-    CmpItemKindMethod        = { fg = colors.gray1, bg = colors.blue },
-    CmpItemKindVariable      = { fg = colors.gray1, bg = colors.blue },
+    CmpItemKindVariable      = { fg = colors.gray1,  bg = colors.blue   },
 
-    CmpItemKindClass         = { fg = colors.gray1, bg = colors.purple },
-    CmpItemKindStruct        = { fg = colors.gray1, bg = colors.purple },
-    CmpItemKindValue         = { fg = colors.gray1, bg = colors.purple },
+    CmpItemKindClass         = { fg = colors.gray1,  bg = colors.purple },
+    CmpItemKindStruct        = { fg = colors.gray1,  bg = colors.purple },
+    CmpItemKindValue         = { fg = colors.gray1,  bg = colors.purple },
 
-    CmpItemKindFile          = { fg = colors.gray1, bg = colors.white },
-    CmpItemKindModule        = { fg = colors.gray1, bg = colors.white },
+    CmpItemKindFile          = { fg = colors.gray1,  bg = colors.white  },
+    CmpItemKindModule        = { fg = colors.gray1,  bg = colors.white  },
 
-    CmpItemKindText          = { fg = colors.gray1, bg = colors.gray8 },
+    CmpItemKindText          = { fg = colors.gray1,  bg = colors.gray8  },
 }
 
 for k,v in pairs(hl) do set_hl(0, k, v) end

@@ -38,36 +38,44 @@ navic.setup {
     depth_limit_indicator = "...",
 }
 
-local none = 'NONE'
 local hl = {
-    NavicIconsFile =          { default = true, bg = none, fg = colors.gray8  },
-    NavicIconsModule =        { default = true, bg = none, fg = colors.gray7  },
-    NavicIconsNamespace =     { default = true, bg = none, fg = colors.gray7  },
-    NavicIconsPackage =       { default = true, bg = none, fg = colors.gray7  },
-    NavicIconsClass =         { default = true, bg = none, fg = colors.purple },
-    NavicIconsMethod =        { default = true, bg = none, fg = colors.green  },
-    NavicIconsProperty =      { default = true, bg = none, fg = colors.green  },
-    NavicIconsField =         { default = true, bg = none, fg = colors.orange },
-    NavicIconsConstructor =   { default = true, bg = none, fg = colors.green  },
-    NavicIconsEnum =          { default = true, bg = none, fg = colors.yellow },
-    NavicIconsInterface =     { default = true, bg = none, fg = colors.purple },
-    NavicIconsFunction =      { default = true, bg = none, fg = colors.green  },
-    NavicIconsVariable =      { default = true, bg = none, fg = colors.blue   },
-    NavicIconsConstant =      { default = true, bg = none, fg = colors.red    },
-    NavicIconsString =        { default = true, bg = none, fg = colors.teal   },
-    NavicIconsNumber =        { default = true, bg = none, fg = colors.yellow },
-    NavicIconsBoolean =       { default = true, bg = none, fg = colors.yellow },
-    NavicIconsArray =         { default = true, bg = none, fg = colors.gray8  },
-    NavicIconsObject =        { default = true, bg = none, fg = colors.purple },
-    NavicIconsKey =           { default = true, bg = none, fg = colors.red    },
-    NavicIconsNull =          { default = true, bg = none, fg = colors.gray8  },
-    NavicIconsEnumMember =    { default = true, bg = none, fg = colors.orange },
-    NavicIconsStruct =        { default = true, bg = none, fg = colors.purple },
-    NavicIconsEvent =         { default = true, bg = none, fg = colors.red    },
-    NavicIconsOperator =      { default = true, bg = none, fg = colors.orange },
-    NavicIconsTypeParameter = { default = true, bg = none, fg = colors.green  },
-    NavicText =               { default = true, bg = none, fg = colors.gray8  },
-    NavicSeparator =          { default = true, bg = none, fg = colors.gray5  },
+    NavicIconsField         = { default = true, bg = colors.gray3, fg = colors.red    },
+    NavicIconsEvent         = { default = true, bg = colors.gray3, fg = colors.red    },
+    NavicIconsKey           = { default = true, bg = colors.gray3, fg = colors.red    },
+
+    NavicIconsConstant      = { default = true, bg = colors.gray3, fg = colors.orange },
+    NavicIconsOperator      = { default = true, bg = colors.gray3, fg = colors.orange },
+
+    NavicIconsEnum          = { default = true, bg = colors.gray3, fg = colors.yellow },
+    NavicIconsEnumMember    = { default = true, bg = colors.gray3, fg = colors.yellow },
+
+    NavicIconsConstructor   = { default = true, bg = colors.gray3, fg = colors.green  },
+    NavicIconsFunction      = { default = true, bg = colors.gray3, fg = colors.green  },
+    NavicIconsMethod        = { default = true, bg = colors.gray3, fg = colors.green  },
+    NavicIconsProperty      = { default = true, bg = colors.gray3, fg = colors.green  },
+
+    NavicIconsInterface     = { default = true, bg = colors.gray3, fg = colors.teal   },
+    NavicIconsTypeParameter = { default = true, bg = colors.gray3, fg = colors.teal   },
+
+    NavicIconsVariable      = { default = true, bg = colors.gray3, fg = colors.blue   },
+    NavicIconsObject        = { default = true, bg = colors.gray3, fg = colors.blue   },
+
+    NavicIconsArray         = { default = true, bg = colors.gray3, fg = colors.purple },
+    NavicIconsBoolean       = { default = true, bg = colors.gray3, fg = colors.purple },
+    NavicIconsClass         = { default = true, bg = colors.gray3, fg = colors.purple },
+    NavicIconsNumber        = { default = true, bg = colors.gray3, fg = colors.purple },
+    NavicIconsString        = { default = true, bg = colors.gray3, fg = colors.purple },
+    NavicIconsStruct        = { default = true, bg = colors.gray3, fg = colors.purple },
+
+    NavicIconsFile          = { default = true, bg = colors.gray3, fg = colors.white  },
+    NavicIconsModule        = { default = true, bg = colors.gray3, fg = colors.white  },
+    NavicIconsNamespace     = { default = true, bg = colors.gray3, fg = colors.white  },
+    NavicIconsPackage       = { default = true, bg = colors.gray3, fg = colors.white  },
+
+    NavicText               = { default = true, bg = colors.gray3, fg = colors.gray8  },
+    NavicIconsNull          = { default = true, bg = colors.gray3, fg = colors.gray8  },
+
+    NavicSeparator          = { default = true, bg = colors.gray3, fg = colors.gray5  },
 }
 
 for k,v in pairs(hl) do set_hl(0, k, v) end
