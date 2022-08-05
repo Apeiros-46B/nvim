@@ -1,9 +1,14 @@
+-- {{{ imports
+-- main
 local navic = require('nvim-navic')
+
+-- scheme
 local scheme = require('lib.scheme')
 local colors = scheme.colors
-local set_hl = vim.api.nvim_set_hl
+-- }}}
 
-navic.setup {
+-- {{{ setup
+navic.setup({
     icons = {
         File          = " ",
         Module        = " ",
@@ -36,8 +41,11 @@ navic.setup {
     separator = "  ",
     depth_limit = 5,
     depth_limit_indicator = "...",
-}
+})
+-- }}}
 
+-- {{{ custom highlight
+local set_hl = vim.api.nvim_set_hl
 local hl = {
     NavicIconsField         = { default = true, bg = colors.gray3, fg = colors.red    },
     NavicIconsEvent         = { default = true, bg = colors.gray3, fg = colors.red    },
@@ -79,3 +87,4 @@ local hl = {
 }
 
 for k,v in pairs(hl) do set_hl(0, k, v) end
+-- }}}

@@ -1,12 +1,16 @@
--- Setup nvim-cmp.
+-- {{{ imports
+-- main
 local cmp = require('cmp')
 local keymap = require('keymap')
 
+-- scheme
 local scheme = require('lib.scheme')
 local colors = scheme.colors
-local set_hl = vim.api.nvim_set_hl
+-- }}}
 
+-- {{{ setup
 cmp.setup({
+    -- {{{ disable completion depending on context
     enabled = function()
         -- disable completion in telescope
         if vim.bo.filetype == "TelescopePrompt" then return false end
@@ -21,6 +25,9 @@ cmp.setup({
                and not context.in_syntax_group('Comment')
         end
     end,
+    -- }}}
+
+    -- {{{ formatting and visual options
     view = { -- select upwards if cursor is near the bottom
         entries = {name = 'custom', selection_order = 'near_cursor' }
     },
@@ -43,12 +50,9 @@ cmp.setup({
             return kind
         end,
     },
-	snippet = {
-		expand = function(args)
-			vim.fn['UltiSnips#Anon'](args.body)
-		end,
-	},
-	mapping = keymap.cmp_mappings,
+    -- }}}
+
+    -- {{{ sources
 	sources = cmp.config.sources({
             { name = 'nvim_lsp', priority = 1 },
             { name = 'ultisnips' },
@@ -58,8 +62,21 @@ cmp.setup({
             { name = 'path' },
         }
     ),
-})
+    -- }}}
 
+    -- {{{ other options
+	snippet = {
+		expand = function(args)
+			vim.fn['UltiSnips#Anon'](args.body)
+		end,
+	},
+	mapping = keymap.cmp_mappings,
+    -- }}}
+})
+-- }}}
+
+-- {{{ custom highlight
+local set_hl = vim.api.nvim_set_hl
 local none = 'NONE'
 local hl = {
     -- pmenu
@@ -112,3 +129,4 @@ local hl = {
 }
 
 for k,v in pairs(hl) do set_hl(0, k, v) end
+-- }}}
