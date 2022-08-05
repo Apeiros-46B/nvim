@@ -194,9 +194,18 @@ tree.filetypes = { 'CHADTree', 'nerdtree', 'NvimTree' }
 -- {{{ word count for documents
 local wc = {}
 
+local function count_words()
+    local count = vim.fn.wordcount()
+
+    if count.visual_bytes ~= nil then
+        return count.visual_chars .. 'c ' .. count.visual_words .. 'w'
+    else
+        return count.chars        .. 'c ' .. count.words        .. 'w'
+    end
+end
+
 wc.sections = vim.deepcopy(sections)
-wc.sections.lualine_x = { '', filename }
---                        ^^ some word count magic i'll implement later
+wc.sections.lualine_x = { count_words, filename }
 
 wc.filetypes = { 'markdown', 'org', 'text' }
 -- }}}
