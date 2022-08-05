@@ -40,30 +40,30 @@ local keymap = {
 		k = { 'focus next buffer in buflist' },
 		l = { 'focus last buffer in buflist' },
         f = { 'format buffer' },
+	    p = { 'buffer picker' },
 	},
 
     d = { 'show diagnostic' },
 
 	f = {
-		name = 'telescope',
-		f = { 'fuzzy file finder' },
-        r = { 'recent files' },
-		w = { 'fuzzy word search' },
+		name = 'find [telescope]',
+        b = { 'bookmark' },
+		f = { 'file' },
+        r = { 'recent file' },
+		w = { 'word' },
 	},
 
 	g = {
 		name = 'git',
         g = { 'fugitive' },
-        C = { 'commit' },
-        P = { 'push' },
         B = { 'fuzzy branch finder' },
-        c = { 'fuzzy commit finder' },
+        C = { 'fuzzy commit finder' },
 		s = { 'stage hunk' },
 		u = { 'undo stage hunk' },
 		r = { 'reset hunk' },
 		R = { 'reset buffer' },
 		p = { 'preview hunk' },
-		b = { 'blame line' },
+		b = { 'blame' },
 		S = { 'stage buffer' },
 		U = { 'reset buffer index' },
 	},
@@ -83,25 +83,44 @@ local keymap = {
     L = {
         name = 'LSP',
         d = { 'preview definition' },
-        f = { 'lsp finder' },
-        h = { 'signature help' },
+        f = { 'LSP finder' },
+        g = {
+            name = 'go',
+            D = { 'declaration' },
+            d = { 'definition' },
+            i = { 'implementation' },
+            t = { 'type definition' },
+        },
+        h = { 'previous diagnostic' },
+        l = { 'next diagnostic' },
         p = { 'open hover doc' },
+        R = { 'see references' },
         r = { 'rename' },
+        s = { 'signature help' },
+        w = {
+            name = 'workspace',
+            a = { 'add folder' },
+            l = { 'list folders' },
+            r = { 'remove folder' },
+        }
     },
 
     m = {
         name = 'macros',
     },
 
+    N = {
+        name = 'new',
+        f = { 'file' },
+    },
+
+    n = { 'toggle navic' },
+
     p = { 'preview markdown' },
 
-	h = { 'win focus left' },
-	j = { 'win focus up' },
-	k = { 'win focus down' },
-	l = { 'win focus right' },
-	s = { 'buffer picker' },
-
     q = { 'save and quit all' },
+
+    S = { 'source current file' },
 
     T = { 'toggle trouble panel' },
 
@@ -112,12 +131,19 @@ local keymap = {
         s = { 'yank selection to system clipboard' },
 	},
 
-    w = { 'toggle word wrap' },
+    W = { 'toggle word wrap' },
+    w = { 'toggle word count' },
 
-	['<cr>'] = { 'term vsplit' },
-	['\\'] = { 'term hsplit' },
+	h = { 'win focus left' },
+	j = { 'win focus up' },
+	k = { 'win focus down' },
+	l = { 'win focus right' },
+
+    ['<leader>'] = { 'reload configuration' },
+	['<cr>'] = { 'vsplit -> term' },
+	['\\'] = { 'hsplit -> term' },
     ['/'] = { 'toggle comment' },
-    ['~'] = { 'dashboard' },
+    ['~'] = { 'go to dashboard' },
 }
 
 wk.register(keymap, {

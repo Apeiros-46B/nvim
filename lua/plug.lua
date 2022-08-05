@@ -7,9 +7,6 @@ require('packer').startup({
 		-- lsp plugins
 		use({ 'neovim/nvim-lspconfig', commit = '9278dfb' })
 		use({ 'onsails/lspkind-nvim', commit = '57e5b5d' })
-        use({ 'glepnir/lspsaga.nvim', commit = '9d36a7a' })
-        use({ 'folke/lsp-colors.nvim', commit = '517fe3a' })
-        use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', commit = 'da61737' })
 
         -- language servers
         use({ 'mfussenegger/nvim-jdtls', commit = '3a148da' })
@@ -34,6 +31,12 @@ require('packer').startup({
 		-- snippets
 		use({ 'sirver/ultisnips', commit = '5fc4862' })
 		use({ 'quangnguyen30192/cmp-nvim-ultisnips', commit = 'c6ace8c' })
+
+        -- lsp-related utils
+        use({ 'folke/lsp-colors.nvim', commit = '517fe3a' })
+        use({ 'glepnir/lspsaga.nvim', commit = '9d36a7a' })
+        use({ 'SmiteshP/nvim-navic', commit = '94bf6fc' })
+        use({ 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons', commit = 'da61737' })
 		-- }}}
 
 		-- {{{ utility plugins
@@ -61,7 +64,6 @@ require('packer').startup({
 
         -- other
 		use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', commit = '0f0f858' })
-        -- use({ 'ms-jpq/chadtree', run = 'python3 -m chadtree deps', commit = '0e30f36' })
 		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', commit = '8ec164b' })
 		use({ 'windwp/nvim-autopairs', commit = '38d486a' })
 		use({ 'terrortylor/nvim-comment', commit = '8619217' })
@@ -69,6 +71,9 @@ require('packer').startup({
 		use({ 'phaazon/hop.nvim', commit = 'e2f978b' })
         use({ 'jghauser/mkdir.nvim', commit = '0126165' })
         use({ 'folke/which-key.nvim', commit = 'a3c19ec' })
+
+        -- live reloading
+        use({ 'famiu/nvim-reload', commit = '7c1ab3f' })
 		-- }}}
 
         -- {{{ git plugins

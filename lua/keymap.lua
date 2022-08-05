@@ -27,7 +27,7 @@ local M = {}
 		map("n", "<C-n>", ":set rnu!<CR>", opt)
 --]]
 
--- {{{ Unmapping
+-- {{{ unmapping
 --unmap('n', '<leader>f')
 -- }}}
 
@@ -35,18 +35,23 @@ local M = {}
 vim.g.mapleader = ' ' -- map leader key to space
 vim.g.maplocalleader = ','
 
+map('n', '<leader><leader>', ':Reload<CR>', opt) -- reload config
+map('n', '<leader>S', ':source<CR>', opt) -- source current file
+
 -- line wrap movement
 map('', 'J', 'gj', opt)
 map('', 'K', 'gk', opt)
 
 map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
-map('n', '<leader>w', ':set wrap!<CR>', opt) -- toggle word wrap
+map('n', '<leader>W', ':set wrap!<CR>', opt) -- toggle word wrap
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<leader>/', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
 -- map('', '<C-n>', ':CHADopen<CR>', opt) -- toggle chadtree
 map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
+
 map('n', '<leader>~', ':Dashboard<CR>', opt) -- map show dashboard
+map('n', '<leader>Nf', ':DashboardNewFile', opt) -- new file
 
 -- clipboard mappings
 map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to system clipboard
@@ -59,6 +64,10 @@ map('n', '<leader>q', ':wqa<CR>', opt)
 
 -- glow
 map('n', '<leader>p', ':Glow<CR>', opt)
+
+-- toggle word counter and navic (see config/plug/lualine.lua)
+map('n', '<leader>w', ':WordCountToggle<CR>', opt)
+map('n', '<leader>n', ':NavicToggle<CR>', opt)
 
 -- macros
 for c in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
@@ -104,7 +113,7 @@ map('n', '<M-f>', ':lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>'
 map('n', '<M-b>', ':lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', opt)
 
 --- signature help
-map('n', '<leader>Lh', ':Lspsaga signature_help<CR>', opt)
+map('n', '<leader>Ls', ':Lspsaga signature_help<CR>', opt)
 
 --- rename
 map('n', '<leader>Lr', ':Lspsaga rename<CR>', opt)
@@ -142,7 +151,7 @@ M.gitsigns_mappings = {
 	['v <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
 	['n <leader>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
 	['n <leader>gp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-	['n <leader>gb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+	-- ['n <leader>gb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
 	['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
 	['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
 
@@ -152,8 +161,7 @@ M.gitsigns_mappings = {
 }
 
 map('n', '<leader>gg', ':Git<CR>', opt)
-map('n', '<leader>gC', ':Git commit -a -m "', opt)
-map('n', '<leader>gP', ':Git push', opt)
+map('n', '<leader>gb', ':Git blame<CR>', opt)
 -- }}}
 
 -- {{{ buffer management
@@ -178,12 +186,13 @@ map('t', '<C-esc>', '<C-\\><C-n>', opt)
 -- }}}
 
 -- {{{ telescope pullup
+map('n', '<leader>fm', ':Telescope marks<CR>', { noremap = true })
 map('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 map('n', '<leader>fr', ':Telescope oldfiles<CR>', { noremap = true })
 map('n', '<leader>fw', ':Telescope live_grep<CR>', { noremap = true })
-map('n', '<leader>gc', ':Telescope git_commits<CR>', { noremap = true })
+map('n', '<leader>gC', ':Telescope git_commits<CR>', { noremap = true })
 map('n', '<leader>gB', ':Telescope git_branches<CR>', { noremap = true })
-map('n', '<leader>s', ':Telescope buffers<CR>', opt)
+map('n', '<leader>bp', ':Telescope buffers<CR>', opt)
 -- }}}
 
 -- {{{ hop.nvim

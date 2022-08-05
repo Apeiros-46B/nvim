@@ -83,6 +83,32 @@ M.is_lualine_default = false
 
 -- local indicators if a scheme has been loaded
 local scheme_loaded = false
+
+-- colors
+M.colors = {
+    -- gray
+    gray0  = "#282C34",
+    gray1  = "#2b3339",
+    gray2  = "#303c42",
+    gray3  = "#384348",
+    gray4  = "#445055",
+    gray5  = "#607279",
+    gray6  = "#7a8487",
+    gray7  = "#859289",
+    gray8  = "#9DA9A0",
+
+    -- foreground
+    white  = "#d3c6aa",
+
+    -- other colors
+    red    = "#e67e80",
+    orange = "#e69875",
+    yellow = "#ddbc7f",
+    green  = "#a7c080",
+    teal   = "#83c092",
+    blue   = "#7fbbb3",
+    purple = "#d699b6",
+}
 -- }}}
 
 -- {{{ Global Wrappers
@@ -90,7 +116,7 @@ local scheme_loaded = false
 -- @param choice string
 -- The scheme name to load
 function M.load_scheme(choice)
-	require('themes.' .. choice)
+	M.colors = require('themes.' .. choice)
 	scheme_loaded = true
 end
 
@@ -119,7 +145,7 @@ end
 -- @param choice string
 -- The scheme name to load
 function M.load_shared_scheme(choice)
-	require('themes.' .. choice)
+	M.colors = require('themes.' .. choice)
 	M.load_lualine_scheme(choice)
 	scheme_loaded = true
 end
