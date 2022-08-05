@@ -38,8 +38,8 @@ scheme.set_lualine_style({ '',  ''  })
 -- scheme.set_lualine_seperator({ '<-', '->' })
 
 -- other
-scheme.set_lualine_seperator({ '-', '-' })
--- scheme.set_lualine_seperator({ '~', '~' })
+-- scheme.set_lualine_seperator({ '-', '-' })
+scheme.set_lualine_seperator({ '~', '~' })
 -- scheme.set_lualine_seperator({ '+', '+' })
 -- scheme.set_lualine_seperator({ '', '' })
 -- scheme.set_lualine_seperator({ '🞙', '🞙' })
