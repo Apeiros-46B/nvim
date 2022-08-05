@@ -87,9 +87,35 @@ local mode_fmt = function(str) return mode_fmts[str] end
 local diff_fmt = function(str) return str:gsub('%+', ''):gsub('~', ''):gsub('-', '') end
 -- }}}
 
--- {{{ reused widgets/functions/sections
+-- {{{ reused colors, components, functions & sections
+local colors = {
+    -- gray
+    gray0  = "#282C34",
+    gray1  = "#2b3339",
+    gray2  = "#303c42",
+    gray3  = "#384348",
+    gray4  = "#445055",
+    gray5  = "#607279",
+    gray6  = "#7a8487",
+    gray7  = "#859289",
+    gray8  = "#9DA9A0",
+
+    -- foreground
+    white  = "#d3c6aa",
+
+    -- other colors
+    red    = "#e67e80",
+    orange = "#e69875",
+    yellow = "#ddbc7f",
+    green  = "#a7c080",
+    teal   = "#83c092",
+    blue   = "#7fbbb3",
+    purple = "#d699b6",
+}
+
 local mode = { 'mode', fmt = mode_fmt }
 local branch = { 'branch', icon = '' }
+-- local lastcommit = { function() return 'lc: ' .. '' end }
 local filename   = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '', readonly = ' +RO', unnamed = 'No Name' } }
 local fileformat = { 'fileformat', symbols = { unix = 'u', dos = 'd', mac = 'm' } }
 
@@ -103,63 +129,69 @@ local sections = {
     lualine_y = { fileformat, 'encoding' },
     lualine_z = { 'location' },
 }
--- }}}
 
--- {{{ custom extensions
--- template
 local extension_template = {
     lualine_b = { short_cwd },
+    -- lualine_c = { branch, lastcommit },
     lualine_c = { branch },
     lualine_x = { 'os.date("%d/%m:%u")' },
     lualine_y = { 'hostname' },
     lualine_z = { 'location' },
 }
+-- }}}
 
+-- {{{ custom extensions
 -- {{{ dashboard
 local dashboard = {}
 
 dashboard.sections = vim.deepcopy(extension_template)
-dashboard.sections.lualine_a = { function() return "DSH" end }
+dashboard.sections.lualine_a = { function() return "DSH" end } -- DaSHboard
 
 dashboard.filetypes = { 'dashboard' }
 -- }}}
 
 -- {{{ git
+local GIT = { function() return "GIT" end, color = { bg = colors.orange, gui = 'bold' } } -- This one is obvious
+
 local fugitive = {}
 
 fugitive.sections = vim.deepcopy(extension_template)
-fugitive.sections.lualine_a = { function() return "GIT" end }
+fugitive.sections.lualine_a = { GIT }
+fugitive.sections.lualine_z = { { 'location', color = { bg = colors.orange, gui = 'bold' } } }
 
 fugitive.filetypes = { 'fugitive' }
 
 local gitcommit = {}
 
 gitcommit.sections = vim.deepcopy(extension_template)
-gitcommit.sections.lualine_a = { mode }
-gitcommit.sections.lualine_b = { { function() return "COMMITTING @" end, separator = '', padding = { left = 1 } }, short_cwd }
+gitcommit.sections.lualine_a = { GIT }
+gitcommit.sections.lualine_b = { { function() return "committing @" end, separator = '', padding = { left = 1 } }, short_cwd }
+gitcommit.sections.lualine_z = { { 'location', color = { bg = colors.orange, gui = 'bold' } } }
 
 gitcommit.filetypes = { 'gitcommit' }
--- }}}
-
--- {{{ nvim-tree
-local nvim_tree = {}
-
-nvim_tree.sections = vim.deepcopy(extension_template)
-nvim_tree.sections.lualine_a = { function() return "NVT" end }
-
-nvim_tree.filetypes = { 'NvimTree' }
 -- }}}
 
 -- {{{ telescope
 local telescope = {}
 
 telescope.sections = vim.deepcopy(extension_template)
-telescope.sections.lualine_a = { function() return "TSC" end } -- could have a better abbreviation
+telescope.sections.lualine_a = { { function() return "TSC" end, color = { bg = colors.purple, gui = 'bold' } } } -- TeleSCope (I *really* need better abbreviations)
+telescope.sections.lualine_z = { { 'location', color = { bg = colors.purple, gui = 'bold' } } }
 
 telescope.filetypes = { 'TelescopePrompt' }
 -- }}}
 
--- {{{ word count
+-- {{{ tree
+local tree = {}
+
+tree.sections = vim.deepcopy(extension_template)
+tree.sections.lualine_a = { { function() return "FTR" end, color = { bg = colors.red, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
+tree.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'bold' } } }
+
+tree.filetypes = { 'CHADTree', 'nerdtree', 'NvimTree' }
+-- }}}
+
+-- {{{ word count for documents
 local wc = {}
 
 wc.sections = vim.deepcopy(sections)
@@ -172,7 +204,7 @@ wc.filetypes = { 'markdown', 'org', 'text' }
 
 -- {{{ lualine setup config
 require('lualine').setup({
-    extensions = { dashboard, fugitive, gitcommit, nvim_tree, telescope, wc },
+    extensions = { dashboard, fugitive, gitcommit, telescope, tree, wc },
 
 	options = {
 		theme = lualine_theme,

@@ -44,6 +44,7 @@ map('n', '<leader>w', ':set wrap!<CR>', opt) -- toggle word wrap
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<leader>/', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
+-- map('', '<C-n>', ':CHADopen<CR>', opt) -- toggle chadtree
 map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 map('n', '<leader>~', ':Dashboard<CR>', opt) -- map show dashboard
 

@@ -61,6 +61,7 @@ require('packer').startup({
 
         -- other
 		use({ 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', commit = '0f0f858' })
+        -- use({ 'ms-jpq/chadtree', run = 'python3 -m chadtree deps', commit = '0e30f36' })
 		use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', commit = '8ec164b' })
 		use({ 'windwp/nvim-autopairs', commit = '38d486a' })
 		use({ 'terrortylor/nvim-comment', commit = '8619217' })

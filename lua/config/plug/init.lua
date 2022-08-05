@@ -21,10 +21,11 @@ return {
     require('config.plug.treesitter'),
 
     -- plugins added by me
-    require('config.plug.lspsaga'),
+    -- require('config.plug.chadtree'),
     require('config.plug.hexokinase'),
-    require('config.plug.presence'),
+    require('config.plug.lspsaga'),
     require('config.plug.orgmode'),
+    require('config.plug.presence'),
 }
 
 -- # vim foldmethod=marker

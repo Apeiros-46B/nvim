@@ -1,5 +1,10 @@
 local scheme = require('lib.scheme')
 
+-- scheme.set_tabline_style({ ' ', ' ' })
+-- scheme.set_tabline_seperator({ '│', '│' })
+scheme.set_tabline_style({ '', '' })
+scheme.set_tabline_seperator({ '', '' })
+
 require('tabline').setup({
 	-- Defaults configuration options
 	enable = true,
