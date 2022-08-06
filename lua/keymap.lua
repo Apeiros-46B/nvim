@@ -45,7 +45,6 @@ map('', 'K', 'gk', opt)
 map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('n', '<leader>W', ':set wrap!<CR>', opt) -- toggle word wrap
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
-map('', '<leader>/', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
 -- map('', '<C-n>', ':CHADopen<CR>', opt) -- toggle chadtree
 map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
@@ -66,8 +65,8 @@ map('n', '<leader>q', ':wqa<CR>', opt)
 map('n', '<leader>p', ':Glow<CR>', opt)
 
 -- toggle word counter and navic (see config/plug/lualine.lua)
-map('n', '<leader>w', ':WordCountToggle<CR>', opt)
-map('n', '<leader>n', ':NavicToggle<CR>', opt)
+map('', '<leader>w', ':WordCountToggle<CR>', opt)
+map('', '<leader>n', ':NavicToggle<CR>', opt)
 
 -- macros
 for c in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
@@ -180,8 +179,8 @@ map('n', '<leader>l', ':wincmd l<CR>', opt)
 -- }}}
 
 -- {{{ terminal commands
-map('n', '<leader><CR>', ':vs | terminal<CR>i', opt)
-map('n', '<leader>\\', ':sp | terminal<CR>i', opt)
+map('n', '<leader><CR><CR>', ':vs | terminal<CR>i', opt)
+map('n', '<leader><CR>h', ':sp | terminal<CR>i', opt)
 map('t', '<C-esc>', '<C-\\><C-n>', opt)
 -- }}}
 

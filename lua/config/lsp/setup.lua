@@ -57,7 +57,7 @@ local on_attach = function(client, bufnr)
     require('nvim-navic').attach(client, bufnr)
 
     -- Notify the user that the server has been started
-    vim.notify(' LSP  -> attached ' .. client.name, 'INFO')
+    vim.notify(' LSP -> attached ' .. client.name, 'INFO')
 end
 -- }}}
 

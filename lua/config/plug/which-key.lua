@@ -141,8 +141,13 @@ local keymap = {
 	l = { 'win focus right' },
 
     ['<leader>'] = { 'reload configuration' },
-	['<cr>'] = { 'vsplit -> term' },
-	['\\'] = { 'hsplit -> term' },
+
+	['<CR>'] = {
+        name = 'terminal',
+        ['<CR>'] = 'vertical',
+        h = 'horizontal',
+    },
+
     ['/'] = { 'toggle comment' },
     ['~'] = { 'go to dashboard' },
 }
