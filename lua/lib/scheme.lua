@@ -108,6 +108,9 @@ M.colors = {
     teal   = "#83c092",
     blue   = "#7fbbb3",
     purple = "#d699b6",
+
+    -- misc
+    visual_bg = "#503946",
 }
 -- }}}
 
