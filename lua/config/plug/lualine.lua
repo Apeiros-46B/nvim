@@ -159,6 +159,18 @@ dashboard.sections.lualine_a = { function() return "DSH" end } -- DaSHboard
 dashboard.filetypes = { 'dashboard' }
 -- }}}
 
+-- {{{ file tree
+local file_tree = {}
+
+file_tree.sections = vim.deepcopy(extension_template)
+
+file_tree.sections.lualine_a = { { function() return "FTR" end, color = { bg = colors.red, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
+
+file_tree.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'bold' } } }
+
+file_tree.filetypes = { 'CHADTree', 'nerdtree', 'NvimTree' }
+-- }}}
+
 -- {{{ git
 local GIT = { function() return "GIT" end, color = { bg = colors.orange, gui = 'bold' } } -- This one is obvious
 
@@ -227,24 +239,12 @@ terminal.sections.lualine_z = { { date, color = { bg = colors.teal, gui = 'bold'
 terminal.filetypes = { 'terminal' }
 -- }}}
 
--- {{{ tree
-local tree = {}
-
-tree.sections = vim.deepcopy(extension_template)
-
-tree.sections.lualine_a = { { function() return "FTR" end, color = { bg = colors.red, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
-
-tree.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'bold' } } }
-
-tree.filetypes = { 'CHADTree', 'nerdtree', 'NvimTree' }
--- }}}
-
 -- {{{ trouble
 local trouble = {}
 
 trouble.sections = vim.deepcopy(extension_template)
 
-trouble.sections.lualine_a = { { function() return "LSP" end, color = { bg = colors.blue, gui = 'bold'} } } -- This one is also obvious
+trouble.sections.lualine_a = { { function() return "TRB" end, color = { bg = colors.blue, gui = 'bold'} } }
 
 trouble.sections.lualine_z = { { 'location', color = { bg = colors.blue, gui = 'bold' } } }
 
@@ -306,12 +306,12 @@ require('lualine').setup({
     extensions = {
         -- uses a more minimal template
         dashboard, -- dashboard
+        file_tree, -- file trees (CHADTree, NERDTree, NvimTree)
         fugitive,  -- fugitive pane
         gitblame,  -- fugitive blame sidebar
         gitcommit, -- editing commit messages
         telescope, -- telescope fuzzy finder
         terminal,  -- terminal
-        tree,      -- file trees (CHADTree, NERDTree, NvimTree)
         trouble,   -- trouble.nvim
 
         -- modifies the default sections
