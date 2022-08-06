@@ -50,7 +50,7 @@ map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
 map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 
 map('n', '<leader>~', ':Dashboard<CR>', opt) -- map show dashboard
-map('n', '<leader>Nf', ':DashboardNewFile', opt) -- new file
+map('n', '<leader>Nf', ':DashboardNewFile<CR>', opt) -- new file
 
 -- clipboard mappings
 map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to system clipboard

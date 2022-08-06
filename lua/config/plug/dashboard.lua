@@ -32,7 +32,7 @@ db.custom_header = {
 }
 
 db.custom_center = {
-    { icon = '  ', desc = 'New File                        ', shortcut = 'SPC n f', action = 'DashboardNewFile', },
+    { icon = '  ', desc = 'New File                        ', shortcut = 'SPC N f', action = 'DashboardNewFile', },
     { icon = '  ', desc = 'Bookmarks                       ', shortcut = 'SPC f b', action = 'Telescope marks', },
     { icon = '  ', desc = 'Browse Files                    ', shortcut = 'SPC f f', action = 'Telescope find_files', },
     { icon = '  ', desc = 'Recent Files                    ', shortcut = 'SPC f r', action = 'Telescope oldfiles', },
