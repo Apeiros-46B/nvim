@@ -35,7 +35,7 @@ cmp.setup({
         completion = {
             winhighlight = 'Normal:Pmenu,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None',
             col_offset = -4, -- why won't this work?
-            side_padding = -1,
+            side_padding = 0,
         },
     },
     formatting = {
@@ -51,6 +51,7 @@ cmp.setup({
         end,
     },
     -- }}}
+
     -- {{{ sources
 	sources = cmp.config.sources({
             { name = 'nvim_lsp', priority = 1 },

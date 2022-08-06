@@ -60,7 +60,7 @@ scheme.set_lualine_seperator({ '~', '~' })
 local mode_fmts = {
     -- normal/misc
     ['NORMAL'] = 'NOR',
-    ['O-PENDING'] = 'O-P',
+    ['O-PENDING'] = 'OPR',
     ['MORE'] = 'MOR',
     ['CONFIRM'] = 'CF?',
 
@@ -82,7 +82,8 @@ local mode_fmts = {
     -- ['S-BLOCK'] = 'SBL',
 
     -- replace
-    ['REPLACE'] = 'RPL',
+    ['REPLACE'] = 'REP',
+    -- ['REPLACE'] = 'RPL',
     ['V-REPLACE'] = 'V-R',
     -- ['V-REPLACE'] = 'VRP',
 
