@@ -186,13 +186,14 @@ map('t', '<C-esc>', '<C-\\><C-n>', opt)
 -- }}}
 
 -- {{{ telescope pullup
-map('n', '<leader>fm', ':Telescope marks<CR>', { noremap = true })
+map('n', '<leader>fb', ':Telescope marks<CR>', { noremap = true })
 map('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 map('n', '<leader>fr', ':Telescope oldfiles<CR>', { noremap = true })
 map('n', '<leader>fw', ':Telescope live_grep<CR>', { noremap = true })
+map('n', '<leader>fn', ':Telescope notify<CR>', { noremap = true })
 map('n', '<leader>gC', ':Telescope git_commits<CR>', { noremap = true })
 map('n', '<leader>gB', ':Telescope git_branches<CR>', { noremap = true })
-map('n', '<leader>bp', ':Telescope buffers<CR>', opt)
+map('n', '<leader>bp', ':Telescope buffers<CR>', { noremap = true })
 -- }}}
 
 -- {{{ hop.nvim

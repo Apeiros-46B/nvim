@@ -49,6 +49,7 @@ local keymap = {
 		name = 'find [telescope]',
         b = { 'bookmark' },
 		f = { 'file' },
+        n = { 'notification history' },
         r = { 'recent file' },
 		w = { 'word' },
 	},

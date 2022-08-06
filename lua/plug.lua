@@ -71,6 +71,7 @@ require('packer').startup({
 		use({ 'phaazon/hop.nvim', commit = 'e2f978b' })
         use({ 'jghauser/mkdir.nvim', commit = '0126165' })
         use({ 'folke/which-key.nvim', commit = 'a3c19ec' })
+        -- use({ 'rcarriga/nvim-notify', commit = '60bb6bf' })
 
         -- live reloading
         use({ 'famiu/nvim-reload', commit = '7c1ab3f' })

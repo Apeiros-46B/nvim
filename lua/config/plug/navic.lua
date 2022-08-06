@@ -85,6 +85,5 @@ local hl = {
 
     NavicSeparator          = { default = true, bg = colors.gray3, fg = colors.gray5  },
 }
-
 for k,v in pairs(hl) do set_hl(0, k, v) end
 -- }}}

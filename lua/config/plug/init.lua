@@ -25,6 +25,7 @@ return {
     require('config.plug.fugitive'),
     require('config.plug.lspsaga'),
     require('config.plug.navic'),
+    -- require('config.plug.notify'),
     require('config.plug.orgmode'),
     require('config.plug.presence'),
 }
