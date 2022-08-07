@@ -1,0 +1,55 @@
+* level 1
+** level 2
+*** level 3
+**** level 4
+***** level 5
+****** level 6
+* basic formatting
+  - *bold*
+  - /italic/
+  - _underline_
+  - -strikethrough-
+  - |spoiler|
+  - `inline code`
+  - +inline comment+
+  - $f(x) = y$
+  - =variable=
+  - ^superscript^
+  - ,subscript,
+  @code java
+  public class Main() {
+      public static void main(String[] args) {
+          System.println("Hello world!");
+      }
+  }
+  @end
+* quotes
+  > test quote
+  >> layer 2
+  >>> layer 3
+  >>>> layer 4
+  >>>>> layer 5
+  >>>>>> layer 6
+* todo lists
+  - [ ] Undone
+  - [x] Done
+  - [?] Needs further input
+  - [!] Urgent
+  - [+] Recurring task
+  - [-] Pending
+    - [x] A
+    - [ ] B
+  - [=] Task put on hold
+  - [_] Task cancelled
+* neorg highlights
+  - [x] selection window
+  - [x] tags
+  - [x] headings
+  - [x] todos
+  - [x] lists
+    - [x] ordered
+    - [x] unordered
+  - [x] quotes
+  - [x] links
+  - [x] markup & delimiters
+  - [ ] misc

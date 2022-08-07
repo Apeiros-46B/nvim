@@ -49,8 +49,8 @@ local name_replacements = {
     ["There are no detected sessions in 'mini.sessions'"] = 'there are no detected sessions',
 }
 
-local sessions = starter.sections.sessions()()
-for _,v in pairs(sessions) do
+local sessions_section = starter.sections.sessions()()
+for _,v in pairs(sessions_section) do
     for k,new in pairs(name_replacements) do
         if v.name == k then
             v.name = new
@@ -75,7 +75,7 @@ starter.setup({
     autoopen = true,
     evaluate_single = false,
     items = {
-        sessions,
+        sessions_section,
         telescope,
     },
     content_hooks = {
@@ -90,12 +90,12 @@ starter.setup({
 
 -- {{{ custom highlight
 hl = {
-    MiniStarterCurrent    = {                     bold = true },
-    MiniStarterSection    = { fg = colors.blue  , bold = true },
-    MiniStarterHeader     = { fg = colors.red   , bold = true },
-    MiniStarterFooter     = { fg = colors.orange, bold = true },
-    MiniStarterQuery      = { fg = colors.purple,             },
-    MiniStarterItemPrefix = { fg = colors.green ,             },
+    MiniStarterCurrent    = {                                       bold = true },
+    MiniStarterSection    = { fg = colors.blue  ,                   bold = true },
+    MiniStarterHeader     = { fg = colors.red   ,                   bold = true },
+    MiniStarterFooter     = { fg = colors.orange,                   bold = true },
+    MiniStarterQuery      = { fg = colors.purple,                               },
+    MiniStarterItemPrefix = { fg = colors.green ,                               },
 }
 for k,v in pairs(hl) do set_hl(0, k, v) end
 -- }}}

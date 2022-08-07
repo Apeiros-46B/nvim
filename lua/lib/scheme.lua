@@ -121,7 +121,8 @@ M.colors = {
 -- @param choice string
 -- The scheme name to load
 function M.load_scheme(choice)
-	M.colors = require('themes.' .. choice)
+	-- M.colors = require('themes.' .. choice) -- TODO add this back when i change all the colors manually
+	require('themes.' .. choice)
 	scheme_loaded = true
 end
 
@@ -150,7 +151,8 @@ end
 -- @param choice string
 -- The scheme name to load
 function M.load_shared_scheme(choice)
-	M.colors = require('themes.' .. choice)
+	-- M.colors = require('themes.' .. choice) -- TODO add this back when i change all the colors manually
+	require('themes.' .. choice)
 	M.load_lualine_scheme(choice)
 	scheme_loaded = true
 end

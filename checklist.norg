@@ -1,98 +1,107 @@
 * neovim checklist
 ** aesthetics
-*** TODO cmp [3/5]
-- [X] kind symbol before the autocomplete
-- [X] colorful symbols
-- [X] make selected autocomplete option brighter instead of darker
-- [ ] fix column offset (low priority)
-- [ ] remove left padding (low priority)
-*** TODO navic [2/3]
-- [X] colors of kind symbols, consistent with cmp
-- [X] find a nice separator
-- [ ] fix that one darker character in the statusline
-*** TODO lualine [2/3]
-- [X] cleanup (shorter mode names, cleaner appearance)
-- [X] find a nice component separator
-- [-] make some better 3-character abbreviations for ~lualine_a~ section (medium priority)
-  - [-] vim modes (checked off = decision finalized, not checked off = more than one option, first option = currently using)
-    - [X] ~NORMAL~ = ~NOR~
-    - [X] ~OPERATOR PENDING~ = ~OPR~
-    - [ ] ~MORE~ = ~MOR~ or ~MRE~
-    - [X] ~CONFIRM~ = ~CF?~
-    - [X] ~INSERT~ = ~INS~
-    - [X] ~VISUAL~ = ~VIS~
-    - [ ] ~V-LINE~ = ~V-L~ or ~VLN~
-    - [ ] ~V-BLOCK~ = ~V-B~ or ~VBL~
-    - [X] ~SELECT~ = ~SEL~
-    - [ ] ~S-LINE~ = ~S-L~ or ~SLN~
-    - [ ] ~S-BLOCK~ = ~V-B~ or ~SBL~
-    - [ ] ~REPLACE~ = ~REP~ or ~RPL~
-    - [ ] ~V-REPLACE~ = ~V-R~ or ~VRP~
-    - [X] ~COMMAND~ = ~CMD~
-    - [X] ~SHELL~ = ~SHL~
-    - [X] ~TERMINAL~ = ~TER~
-    - [X] ~EX~ = ~EXM~ (M stands for Mode)
-  - [-] plugin extensions (checked off = decision finalized, not checked off = not happy with the current abbreviation)
-    - [X] DaSHboard
-      - [X] ~DSH~
-      - [X] mode background (default green)
-    - [-] ~File TRee~
-      - [ ] ~FTR~
-      - [X] red background
-    - [X] ~fuGITive~, ~GIT blame~ and ~GITcommit~
-      - [X] ~GIT~
-      - [X] orange background
-    - [X] ~:help~ / ~DOCumentation panel~
-      - [X] ~DOC~
-      - [X] yellow background
-    - [-] ~TeleSCope~
-      - [ ] ~TSC~
-      - [X] purple background
-    - [X] ~TERminal~
-      - [X] ~TER~
-      - [X] cyan/teal background
-    - [X] ~TRouBle.nvim~
-      - [X] ~TRB~
-      - [X] blue background
-    - [X] ~word counter~
-      - [X] N/A
-      - [X] mode background
-*** TODO nvim-tree [0/1]
-- [ ] make the git signs look nicer
-*** TODO lspsaga [0/1]
-- [ ] change the gutter diagnostic icons
+*** cmp
+    - [ ] kind symbol before the autocomplete
+    - [x] colorful symbols
+    - [x] make selected autocomplete option brighter instead of darker
+    - [ ] fix column offset (low priority)
+    - [ ] remove left padding (low priority)
+*** lspsaga
+    - [ ] change the gutter diagnostic icons
+*** lualine
+    - [x] cleanup (shorter mode names, cleaner appearance)
+    - [x] find a nice component separator
+    - [-] make some better 3-character abbreviations for `lualine_a` section (medium priority)
+        - [-] vim modes (checked off = decision finalized, not checked off = more than one option, first option = currently using)
+            - [x] `NORMAL`           = `NOR`
+            - [x] `OPERATOR PENDING` = `OPR`
+            - [?] `MORE`             = `MOR` or `MRE`
+            - [x] `CONFIRM`          = `CF?`
+            - [x] `INSERT`           = `INS`
+            - [x] `VISUAL`           = `VIS`
+            - [?] `V-LINE`           = `V-L` or `VLN`
+            - [?] `V-BLOCK`          = `V-B` or `VBL`
+            - [x] `SELECT`           = `SEL`
+            - [?] `S-LINE`           = `S-L` or `SLN`
+            - [?] `S-BLOCK`          = `V-B` or `SBL`
+            - [?] `REPLACE`          = `REP` or `RPL`
+            - [?] `V-REPLACE`        = `V-R` or `VRP`
+            - [x] `COMMAND`          = `CMD`
+            - [x] `SHELL`            = `SHL`
+            - [x] `TERMINAL`         = `TER`
+            - [x] `EX`               = `EXM` (M stands for Mode)
+    	- [-] plugin extensions (checked off = decision finalized, not checked off = not happy with the current abbreviation)
+    	    - [x] DaSHboard
+    	        - [x] `DSH`
+    	        - [x] mode background (default green)
+    	    - [-] `File TRee`
+    	        - [?] `FTR`
+    	        - [x] red background
+    	    - [x] `fuGITive`, `GIT blame` and `GITcommit`
+    	        - [x] `GIT`
+    	        - [x] orange background
+    	    - [x] `:help` / `DOCumentation panel`
+    	        - [x] `DOC`
+    	        - [x] yellow background
+    	    - [-] `TeleSCope`
+    	        - [?] `TSC`
+    	        - [x] purple background
+    	    - [x] `TERminal`
+    	        - [x] `TER`
+    	        - [x] cyan/teal background
+    	    - [x] `TRouBle.nvim`
+    	        - [x] `TRB`
+    	        - [x] blue background
+    	    - [x] `word counter`
+    	        - [x] N/A
+    	        - [x] mode background
+*** mini
+    - [x] dashboard module
+    - [x] tabline module
+    - [x] trailspace module
+*** navic
+    - [x] colors of kind symbols, consistent with cmp
+    - [x] find a nice separator
+    - [ ] fix that one darker character in the statusline
+*** nvim-tree
+    - [ ] make the git signs look nicer
 ** functionality
-*** TODO cmp [0/1]
-- [ ] snappier completion (might not be fixable, probably LSP bottleneck) (low priority, it's not much of an issue)
-  - consider switching to coq (very low priority, will take a lot of time)
-*** TODO navic [0/2]
-- [X] toggleable
-- [-] lsp support
-  - [X] with sumneko lua
-  - [ ] with rust analyzer (medium priority)
-  - [ ] with jdtls (medium priority)
-*** TODO lualine [2/3]
-- [X] custom extensions
-- [X] toggleable word count on the right in only markdown, org, and text files
-- [ ] toggleable diagnostic info on the left side (low priority)
-*** TODO tabline [0/2]
-- [ ] hide certain buffers from the tabline to reduce clutter (nvim-tree, other plugins, etc)
-*** TODO nvim-tree [0/2]
-- [ ] prevent it from taking up the whole screen when it's open and all other buffers are closed
-- [ ] replace with CHADtree for better performance and features (low priority, will take some time to fix colors)
-*** TODO lspsaga [0/1]
-- [ ] remove the lightbulb feature because it's buggy (otherwise, find some way to display the lightbulb only in the gutter)
-*** TODO other [0/2]
-- [ ] autocmds
-  - [ ] automatically open hover diagnostic when holding cursor on a word
-- [ ] add a notification system, preferrably not nvim-notify because i don't like how it looks
+*** cmp
+    - [ ] snappier completion (might not be fixable, probably LSP bottleneck) (low priority, it's not much of an issue)
+        - [ ] consider switching to coq (very low priority, will take a lot of time)
+*** lspsaga
+    - [ ] remove the lightbulb feature because it's buggy (otherwise, find some way to display the lightbulb only in the gutter)
+*** lualine
+    - [x] custom extensions
+    - [x] toggleable word count on the right in only markdown, org, and text files
+    - [ ] toggleable diagnostic info on the left side (low priority)
+*** mini
+    - [x] dashboard module
+    - [x] tabline module
+    - [x] sessions module
+    - [x] trailspace module
+*** navic
+    - [x] toggleable
+    - [-] lsp support
+        - [x] with sumneko lua
+        - [ ] with rust analyzer (medium priority)
+        - [ ] with jdtls (medium priority)
+*** nvim-tree
+    - [ ] prevent it from taking up the whole screen when it's open and all other buffers are closed
+    - [ ] replace with CHADtree for better performance and features (low priority, will take some time to fix colors)
+*** other
+    - [ ] autocmds
+        - [ ] automatically open hover diagnostic when holding cursor on a word
+    - [ ] add a notification system, preferrably not nvim-notify because i don't like how it looks
+*** tabline
+    - [ ] hide certain buffers from the tabline to reduce clutter (nvim-tree, other plugins, etc)
 ** general
-*** TODO stuff that's annoying now but will be even more annoying later [0/5]
-- [ ] restructure ~config.lsp~ and ~lib.scheme~ (medium priority)
-- [ ] consistent string style (~'single quotations'~ vs ~"double quotations"~) (medium priority)
-- [ ] add colors to ~lib.scheme~  for other colorschemes (low priority since i won't be using anything other than everforest, nice to have consistency though)
-- [ ] re-pin package versions (update them) (low priority)
-- [ ] fix typos in comments (low priority)
-*** TODO other [0/2]
-- [ ] wait for theory's upstream changes, and resolve the merge conflict (medium priority)
-- [ ] changing the readme and potentially renaming the repo (i don't want my config to be associated too much with the original nii-nvim)
+*** other
+    - [ ] wait for theory's upstream changes, and resolve the merge conflict (medium priority)
+    - [ ] changing the readme and potentially renaming the repo (i don't want my config to be associated too much with the original nii-nvim)
+*** stuff that's annoying now but will be even more annoying later
+    - [ ] restructure `config.lsp` and `lib.scheme` (medium priority)
+    - [ ] consistent string style (`'single quotations'` vs `"double quotations"`) (medium priority)
+    - [ ] add colors to `lib.scheme`  for other colorschemes (low priority since i won't be using anything other than everforest, nice to have consistency though)
+    - [ ] re-pin package versions (update them) (low priority)
+    - [ ] fix typos in comments (low priority)
