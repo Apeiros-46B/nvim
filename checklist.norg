@@ -110,8 +110,8 @@
     - [ ] autocmds
         - [ ] automatically open hover diagnostic when holding cursor on a word
     - [ ] add a notification system, preferrably not nvim-notify because i don't like how it looks
-*** tabline
-    - [ ] hide certain buffers from the tabline to reduce clutter (nvim-tree, other plugins, etc)
+*** tabline (cancelled due to switching to mini.nvim)
+    - [_] hide certain buffers from the tabline to reduce clutter (nvim-tree, other plugins, etc)
 *** telescope
     - [ ] add more useful pickers and assign keybinds to them
 ** general
