@@ -63,8 +63,25 @@
     - [x] colors of kind symbols, consistent with cmp
     - [x] find a nice separator
     - [ ] fix that one darker character in the statusline
+*** neorg
+    - [x] concealer module configuration
+    - [x] custom highlights
+        - [x] selection window
+        - [x] tags
+        - [x] headings
+        - [x] todos
+        - [x] lists
+            - [x] ordered
+            - [x] unordered
+        - [x] quotes
+        - [x] links
+        - [x] markup
+        - [x] delimiters
+        - [x] misc
 *** nvim-tree
     - [ ] make the git signs look nicer
+*** telescope
+    - [x] cleanup (borderless theme)
 ** functionality
 *** cmp
     - [ ] snappier completion (might not be fixable, probably LSP bottleneck) (low priority, it's not much of an issue)
@@ -95,6 +112,8 @@
     - [ ] add a notification system, preferrably not nvim-notify because i don't like how it looks
 *** tabline
     - [ ] hide certain buffers from the tabline to reduce clutter (nvim-tree, other plugins, etc)
+*** telescope
+    - [ ] add more useful pickers and assign keybinds to them
 ** general
 *** other
     - [ ] wait for theory's upstream changes, and resolve the merge conflict (medium priority)
