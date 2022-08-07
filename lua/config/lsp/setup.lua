@@ -31,23 +31,23 @@ local on_attach = function(client, bufnr)
 	-- }}}
 
 	-- {{{ Set some keybinds conditional on server capabilities
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.document_formatting then
 		buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-	elseif client.resolved_capabilities.document_range_formatting then
+	elseif client.server_capabilities.document_range_formatting then
 		buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
 	end
 	-- }}}
 
 	-- {{{ Set autocommands conditional on server_capabilities
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
-    augroup lsp_document_highlight
-    autocmd! * <buffer>
-    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-    ]],
+                augroup lsp_document_highlight
+                autocmd! * <buffer>
+                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+                augroup END
+            ]],
 			false
 		)
 	end
@@ -57,7 +57,7 @@ local on_attach = function(client, bufnr)
     require('nvim-navic').attach(client, bufnr)
 
     -- Notify the user that the server has been started
-    vim.notify(' LSP -> attached ' .. client.name, 'INFO')
+    -- vim.notify(' LSP -> attached ' .. client.name, 'INFO')
 end
 -- }}}
 

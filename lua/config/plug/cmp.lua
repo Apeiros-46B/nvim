@@ -87,11 +87,10 @@ local set_hl = vim.api.nvim_set_hl
 local none = 'NONE'
 local hl = {
     -- {{{ pmenu
-    PmenuThumb               = { bg = colors.gray5, fg = none                        },
-    PmenuSbar                = { bg = colors.gray4, fg = none                        },
-    PmenuSel                 = { bg = colors.gray4, fg = none, bold = true           }, -- gray selected item
-    -- PmenuSel                 = { bg = colors.visual_bg, fg = none, bold = true       }, -- dark red selected item
-    Pmenu                    = { bg = colors.gray3, fg = none                        },
+    PmenuThumb               = { bg = colors.gray5,    fg = none              },
+    PmenuSbar                = { bg = colors.gray4,    fg = none              },
+    PmenuSel                 = { bg = colors.diff_add, fg = none, bold = true }, -- dark green selected item
+    Pmenu                    = { bg = colors.gray3,    fg = none              },
     -- }}}
 
     -- {{{ cmp general

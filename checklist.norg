@@ -1,6 +1,6 @@
 * neovim checklist
 ** aesthetics
-*** TODO *cmp* [3/5]
+*** TODO cmp [3/5]
 - [X] kind symbol before the autocomplete
 - [X] colorful symbols
 - [X] make selected autocomplete option brighter instead of darker

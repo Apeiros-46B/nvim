@@ -1,20 +1,34 @@
-require('telescope').setup({
-	defaults = {
-		prompt_prefix = '=> ',
-		selection_caret = '-> ',
-		entry_prefix = '   ',
-		borderchars = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
-		sorting_strategy = "descending",
+-- {{{ imports
+-- main
+local telescope = require('telescope')
 
-		-- layout_strategy = 'center',
-		-- layout_config = {
-			-- height = 25,
-		-- },
-		-- borderchars = {
-			-- prompt = { '━', '┃', ' ', '┃', '┣', '┫', ' ', ' ' },
-			-- results = { '━', '┃', '━', '┃', '┣', '┫', '┛', '┗' },
-			-- preview = { '━', '┃', ' ', '┃', '┏', '┓', '┃', '┃' },
-		-- },
+-- scheme
+local scheme = require('lib.scheme')
+local colors = scheme.colors
+-- }}}
+
+-- {{{ setup
+telescope.setup({
+	defaults = {
+        -- Prefixes
+        prompt_prefix = '   ',
+		selection_caret = '  ',
+		entry_prefix = '   ',
+
+        -- Border
+		borderchars = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
+
+        -- Ascending sort
+		sorting_strategy = 'ascending',
+
+        -- Layout
+        layout_strategy = 'horizontal',
+        layout_config = {
+            horizontal = {
+                -- Put the search box at the top
+                prompt_position = 'top',
+            },
+        },
 	},
 	extensions = {
 		fzf = {
@@ -44,10 +58,41 @@ local new_maker = function(filepath, bufnr, opts)
 	end)
 end
 
-require('telescope').setup({
+telescope.setup({
 	defaults = {
 		buffer_previewer_maker = new_maker,
 	},
 })
 
-require('telescope').load_extension('fzf')
+telescope.load_extension('fzf')
+-- }}}
+
+-- {{{ custom highlight
+local set_hl = vim.api.nvim_set_hl
+local hl = {
+    -- {{{ general
+    TelescopeNormal    = { bg = colors.gray2                         },
+    TelescopeSelection = { bg = colors.visual_bg, bold = true        },
+
+    TelescopeMatching  = { fg = colors.purple,    bold = true        },
+    TelescopeBorder    = { fg = colors.gray2,     bg = colors.gray2  },
+    -- }}}
+
+    -- {{{ prompt
+    TelescopePromptNormal  = { bg = colors.gray3                     },
+
+    TelescopePromptBorder  = { fg = colors.gray3, bg = colors.gray3  },
+    TelescopePromptCounter = { fg = colors.gray8, bg = colors.gray3  },
+    TelescopePromptTitle   = { fg = colors.gray1, bg = colors.purple },
+    -- }}}
+
+    -- {{{ preview
+    TelescopePreviewTitle  = { fg = colors.gray1, bg = colors.purple },
+    -- }}}
+
+    -- {{{ results
+    TelescopeResultsTitle  = { fg = colors.gray2, bg = colors.gray2  },
+    -- }}}
+}
+for k,v in pairs(hl) do set_hl(0, k, v) end
+-- }}}

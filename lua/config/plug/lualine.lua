@@ -16,6 +16,8 @@ local colors = scheme.colors
 -- }}}
 
 -- {{{ other imports
+local vim = vim
+local fn = vim.fn
 local g = vim.g
 local cc = vim.api.nvim_create_user_command -- cc stands for create command
 -- }}}
@@ -96,7 +98,7 @@ local mode_fmts = {
 
 local function mode_fmt(str) return mode_fmts[str] end
 
-local function short_cwd() return vim.fn.fnamemodify(vim.fn.getcwd(), ':~') end -- iconless
+local function short_cwd() return fn.fnamemodify(fn.getcwd(), ':~') end -- iconless
 -- }}}
 
 -- {{{ components
@@ -156,7 +158,10 @@ dashboard.sections = vim.deepcopy(extension_template)
 
 dashboard.sections.lualine_a = { function() return "DSH" end } -- DaSHboard
 
-dashboard.filetypes = { 'dashboard' }
+dashboard.sections.lualine_x = { '' }
+dashboard.sections.lualine_z = { time }
+
+dashboard.filetypes = { 'dashboard', 'starter' }
 -- }}}
 
 -- {{{ file tree
@@ -274,7 +279,7 @@ local wc = {}
 
 -- {{{ word count function
 local function word_count()
-    local count = vim.fn.wordcount()
+    local count = fn.wordcount()
 
     if count.visual_bytes ~= nil then
         return count.visual_chars .. 'c ' .. count.visual_words .. 'w'
@@ -295,7 +300,7 @@ wc.sections = vim.deepcopy(sections)
 
 wc.sections.lualine_x = { { word_count, cond = should_show_word_count }, filename }
 
-wc.filetypes = { 'markdown', 'org', 'text' }
+wc.filetypes = { 'markdown', 'adoc', 'norg', 'org', 'text' }
 -- }}}
 -- }}}
 -- }}}

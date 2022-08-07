@@ -50,7 +50,7 @@ require('packer').startup({
         })
 
         -- tabline
-		use({ 'kdheepak/tabline.nvim', commit = 'b080ed3' })
+		-- use({ 'kdheepak/tabline.nvim', commit = 'b080ed3' })
 
         -- fuzzy finder
 		use({
@@ -71,6 +71,7 @@ require('packer').startup({
 		use({ 'phaazon/hop.nvim', commit = 'e2f978b' })
         use({ 'jghauser/mkdir.nvim', commit = '0126165' })
         use({ 'folke/which-key.nvim', commit = 'a3c19ec' })
+        use({ 'echasnovski/mini.nvim', commit = '5561844' })
         -- use({ 'rcarriga/nvim-notify', commit = '60bb6bf' })
 
         -- live reloading
@@ -86,13 +87,13 @@ require('packer').startup({
         -- {{{ improved syntax plugins
 		-- these add in a bit more bling and flair to nvim
 		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', commit = 'd810c38' })
-		use({ 'glepnir/dashboard-nvim', disable = false, commit = '5763860' })
+		-- use({ 'glepnir/dashboard-nvim', disable = false, commit = '5763860' })
         use({ 'rrethy/vim-hexokinase', run = 'make hexokinase', commit = '62324b4' })
 		use({ 'norcalli/nvim-colorizer.lua', commit = '36c610a' })
         use({ 'ellisonleao/glow.nvim', commit = '900042f'})
 
-        -- orgmode
-        use ({ 'nvim-orgmode/orgmode', commit = '8cc6fa4' })
+        -- neorg
+        use ({ 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', commit = '5dc942c' })
 		-- }}}
 
 		-- {{{ themes
