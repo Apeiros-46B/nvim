@@ -1,5 +1,16 @@
--- {{{ plugins
-require('packer').startup({
+-- {{{ bootstrapping
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local packer_bootstrap
+if fn.empty(fn.glob(install_path)) > 0 then
+    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+end
+-- }}}
+
+-- {{{ packer
+local packer = require('packer')
+packer.startup({
 	function(use)
 		-- packer self management
 		use('wbthomason/packer.nvim')
@@ -111,13 +122,21 @@ require('packer').startup({
 		use({'relastle/bluewery.vim'})
 		use({'haishanh/night-owl.vim'})
 		-- }}}
+
+        -- {{{ bootstrapping
+        if packer_bootstrap then
+            packer.sync()
+        end
+        -- }}}
 	end,
-	-- display packer dialouge in the center in a floating window
+    -- {{{ packer config
 	config = {
 		display = {
+	        -- display packer dialogue in the center in a floating window
 			open_fn = require('packer.util').float,
 		},
 	},
+    -- }}}
 })
 -- }}}
 
