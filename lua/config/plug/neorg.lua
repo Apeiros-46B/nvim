@@ -140,19 +140,19 @@ neorg.setup({
 
                         level_3 = {
                             enabled = true,
-                            icon = '  ◓ ',
+                            icon = '  ▣ ',
                             highlight = 'NeorgHeading3',
                         },
 
                         level_4 = {
                             enabled = true,
-                            icon = '   ◒ ',
+                            icon = '   🞅 ',
                             highlight = 'NeorgHeading4',
                         },
 
                         level_5 = {
                             enabled = true,
-                            icon = '    🞅 ',
+                            icon = '    🮮 ',
                             highlight = 'NeorgHeading5',
                         },
 
@@ -266,10 +266,14 @@ neorg.setup({
         -- }}}
 
         -- {{{ highlights
-        ['core.highlights'] = {}
+        ['core.highlights'] = {},
         -- }}}
 
-        -- ['core.presenter'] = {}
+        -- ['core.presenter'] = {},
+
+        -- {{{ telescope integration
+        ['core.integrations.telescope'] = {},
+        -- }}}
     }
 })
 -- }}}
@@ -490,4 +494,25 @@ end
 
 -- set highlights
 for k,v in pairs(hl) do set_hl(0, k, v) end
+-- }}}
+
+-- {{{ norg-specific keybinds
+local neorg_callbacks = require("neorg.callbacks")
+
+neorg_callbacks.on_event("core.keybinds.events.enable_keybinds", function(_, keybinds)
+    -- Map all the below keybinds only when the "norg" mode is active
+    keybinds.map_event_to_mode("norg", {
+        n = { -- Bind keys in normal mode
+            { "<C-s>", "core.integrations.telescope.find_linkable" },
+        },
+
+        i = { -- Bind in insert mode
+            { "<C-l>", "core.integrations.telescope.insert_link" },
+        },
+    },
+    {
+        silent = true,
+        noremap = true,
+    })
+end)
 -- }}}

@@ -121,6 +121,7 @@ tabline.setup({
 
 -- {{{ custom highlight
 hl = {
+    MiniTablineTabpagesection             = { bg = colors.green, fg = colors.gray1, bold = true                },
     MiniTablineCurrent                    = { bg = colors.green, fg = colors.gray1, bold = true                },
     MiniTablineModifiedCurrent            = { bg = colors.green, fg = colors.gray1, bold = true, italic = true },
     MiniTablineVisible                    = { bg = colors.gray4, fg = colors.gray8, bold = true,               },
@@ -128,7 +129,6 @@ hl = {
     MiniTablineHidden                     = { bg = colors.gray4, fg = colors.gray8,                            },
     MiniTablineModifiedHidden             = { bg = colors.gray4, fg = colors.gray8,              italic = true },
     MiniTablineFill                       = { bg = colors.gray3,                                               },
-    MiniTablineTabpagesection             = { bg = colors.green,                                               },
 }
 for k,v in pairs(hl) do set_hl(0, k, v) end
 -- }}}

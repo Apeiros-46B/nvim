@@ -113,6 +113,7 @@ M.colors = {
     visual_bg = '#503946',
     diff_del  = '#4e3e43',
     diff_add  = '#404d44',
+    diff_mod  = '#394f5a',
 }
 -- }}}
 

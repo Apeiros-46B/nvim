@@ -19,140 +19,176 @@ wk.setup({
 	},
 })
 
-local keymap = {
+local ldr_keymap = {
 	a = {
-		name = 'hop',
-		h = { 'hop by word' },
-		k = { 'hop by word (before cursor)' },
-		j = { 'hop by word (after cursor)' },
-		l = { 'hop by word (all windows)' },
-		f = { 'hop by word (current line)' },
-		c = { 'hop by given char' },
-		C = { 'hop by 2 given chars' },
-		g = { 'hop by pattern' },
-		n = { 'hop by line start' },
+		name = 'Hop',
+		h = { 'Hop by word' },
+		k = { 'Hop by word (before cursor)' },
+		j = { 'Hop by word (after cursor)' },
+		l = { 'Hop by word (all windows)' },
+		f = { 'Hop by word (current line)' },
+		c = { 'Hop by given char' },
+		C = { 'Hop by 2 given chars' },
+		g = { 'Hop by pattern' },
+		n = { 'Hop by line start' },
 	},
 
 	b = {
-		name = 'buffers',
-		h = { 'focus first buffer in buflist' },
-		j = { 'focus previous buffer in buflist' },
-		k = { 'focus next buffer in buflist' },
-		l = { 'focus last buffer in buflist' },
-        f = { 'format buffer' },
-	    p = { 'buffer picker' },
+		name = 'Buffers',
+		h = { 'Focus first buffer in buflist' },
+		j = { 'Focus previous buffer in buflist' },
+		k = { 'Focus next buffer in buflist' },
+		l = { 'Focus last buffer in buflist' },
+        f = { 'Format buffer' },
+	    p = { 'Buffer picker' },
 	},
 
-    d = { 'show diagnostic' },
+    d = { 'Show diagnostic' },
 
 	f = {
-		name = 'find [telescope]',
-        b = { 'bookmark' },
-		f = { 'file' },
-        r = { 'recent file' },
-		w = { 'word' },
+		name = 'Find [Telescope]',
+        b = { 'Bookmark' },
+		f = { 'File' },
+        r = { 'Recent file' },
+		w = { 'Word' },
 	},
 
 	g = {
-		name = 'git',
-        g = { 'fugitive' },
-        B = { 'fuzzy branch finder' },
-        C = { 'fuzzy commit finder' },
-		s = { 'stage hunk' },
-		u = { 'undo stage hunk' },
-		r = { 'reset hunk' },
-		R = { 'reset buffer' },
-		p = { 'preview hunk' },
-		b = { 'blame' },
-		S = { 'stage buffer' },
-		U = { 'reset buffer index' },
+		name = 'Git',
+        g = { 'Fugitive' },
+        B = { 'Fuzzy branch finder' },
+        C = { 'Fuzzy commit finder' },
+		s = { 'Stage hunk' },
+		u = { 'Undo stage hunk' },
+		r = { 'Reset hunk' },
+		R = { 'Reset buffer' },
+		p = { 'Preview hunk' },
+		b = { 'Blame' },
+		S = { 'Stage buffer' },
+		U = { 'Reset buffer index' },
 	},
 
     J = {
-        name = 'java',
-        b = { 'build project with maven' },
-        o = { 'organize imports' },
+        name = 'JDTLS',
+        b = { 'Build project with Maven' },
+        o = { 'Organize imports' },
         e = {
-            name = 'extract',
-            v = { 'variable' },
-            c = { 'constant' },
-            m = { 'method' },
+            name = 'Extract',
+            v = { 'Variable' },
+            c = { 'Constant' },
+            m = { 'Method' },
         },
     },
 
     L = {
         name = 'LSP',
-        d = { 'preview definition' },
+        d = { 'Preview definition' },
         f = { 'LSP finder' },
         g = {
-            name = 'go',
-            D = { 'declaration' },
-            d = { 'definition' },
-            i = { 'implementation' },
-            t = { 'type definition' },
+            name = 'Go to',
+            D = { 'Declaration' },
+            d = { 'Definition' },
+            i = { 'Implementation' },
+            t = { 'Type definition' },
         },
-        h = { 'previous diagnostic' },
-        l = { 'next diagnostic' },
-        p = { 'open hover doc' },
-        R = { 'see references' },
-        r = { 'rename' },
-        s = { 'signature help' },
+        h = { 'Previous diagnostic' },
+        l = { 'Next diagnostic' },
+        p = { 'Open hover doc' },
+        R = { 'See references' },
+        r = { 'Rename' },
+        s = { 'Signature help' },
         w = {
-            name = 'workspace',
-            a = { 'add folder' },
-            l = { 'list folders' },
-            r = { 'remove folder' },
+            name = 'Workspace',
+            a = { 'Add folder' },
+            l = { 'List folders' },
+            r = { 'Remove folder' },
         }
     },
 
+    M = {
+        name = 'Macros',
+    },
+
     m = {
-        name = 'macros',
+        name = 'Render math',
+        a = { 'All' },
+        p = { 'Popup' },
     },
 
     N = {
-        name = 'new',
-        f = { 'file' },
+        name = 'New',
+        f = { 'File' },
     },
 
-    n = { 'toggle navic' },
+    n = { 'Toggle Navic' },
 
-    p = { 'preview markdown' },
+    P = { 'Render Markdown' },
 
-    q = { 'save and quit all' },
+    q = { 'Save and quit all' },
 
-    S = { 'source current file' },
+    S = { 'Source current file' },
 
-    T = { 'toggle trouble panel' },
+    T = { 'Toggle Trouble panel' },
 
-    t = { 'trim trailing spaces' },
+    t = { 'Trim trailing spaces' },
 
 	y = {
-		name = 'yank',
-		a = { 'yank entire buffer to system clipboard' },
-		l = { 'yank line to system clipboard' },
-        s = { 'yank selection to system clipboard' },
+		name = 'Yank',
+		a = { 'Yank entire buffer to system clipboard' },
+		l = { 'Yank line to system clipboard' },
+        s = { 'Yank selection to system clipboard' },
 	},
 
-    W = { 'toggle word wrap' },
-    w = { 'toggle word count' },
+    W = { 'Toggle word wrap' },
+    w = { 'Toggle word count' },
 
-	h = { 'win focus left' },
-	j = { 'win focus up' },
-	k = { 'win focus down' },
-	l = { 'win focus right' },
+	h = { 'Focus left window' },
+	j = { 'Focus up window' },
+	k = { 'Focus down window' },
+	l = { 'Focus right window' },
 
-    ['<leader>'] = { 'reload configuration' },
+    ['<leader>'] = { 'Reload configuration' },
 
 	['<CR>'] = {
-        name = 'terminal',
-        ['<CR>'] = 'vertical',
-        h = 'horizontal',
+        name = 'Terminal',
+        ['<CR>'] = 'Vertical',
+        h = 'Horizontal',
     },
 
-    ['/'] = { 'toggle comment' },
-    ['~'] = { 'go to dashboard' },
+    ['/'] = { 'Toggle comment' },
+    ['~'] = { 'Show splash screen' },
 }
 
-wk.register(keymap, {
+wk.register(ldr_keymap, {
 	prefix = '<leader>',
+})
+
+local g_keymap = {
+    -- himalaya
+    a = { 'Download attachments' },
+    C = { 'Copy message' },
+    D = { 'Delete message' },
+    m = { 'Change mailbox' },
+    M = { 'Move message' },
+    p = { 'Previous inbox page' },
+    r = { 'Reply' },
+    R = { 'Reply all' },
+    w = { 'Write a new message' },
+
+    -- neorg
+    t = {
+        name = 'Todos',
+        c = { 'Cancel' },
+        d = { 'Mark as done' },
+        h = { 'Put on hold' },
+        i = { 'Mark as important' },
+        p = { 'Mark as pending' },
+        r = { 'Mark as recurring' },
+        u = { 'Mark as undone' },
+    },
+    O = { 'Show ToC' },
+}
+
+wk.register(g_keymap, {
+    prefix = 'g'
 })

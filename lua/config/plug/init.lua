@@ -8,11 +8,9 @@ return {
     require('config.plug.cmp'),
     require('config.plug.lualine'),
     require('config.plug.lspkind'),
-    -- require('config.plug.tabline'),
     require('config.plug.nvimtree'),
     require('config.plug.gitsigns'),
     require('config.plug.ultisnips'),
-    -- require('config.plug.dashboard'),
     require('config.plug.autopairs'),
     require('config.plug.telescope'),
     require('config.plug.which-key'),
@@ -21,14 +19,14 @@ return {
     require('config.plug.treesitter'),
 
     -- plugins added by me
+    require('config.plug.calendar'),
     require('config.plug.hexokinase'),
+    require('config.plug.himalaya'),
     require('config.plug.fugitive'),
     require('config.plug.lspsaga'),
     require('config.plug.navic'),
     require('config.plug.neorg'),
-    -- require('config.plug.notify'),
     require('config.plug.mini'),
-    require('config.plug.presence'),
 }
 
 -- # vim foldmethod=marker

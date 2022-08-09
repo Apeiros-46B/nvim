@@ -35,49 +35,52 @@ local M = {}
 vim.g.mapleader = ' ' -- map leader key to space
 vim.g.maplocalleader = ','
 
+-- source files
 map('n', '<leader><leader>', ':Reload<CR>', opt) -- reload config
 map('n', '<leader>S', ':source<CR>', opt) -- source current file
 
--- line wrap movement
-map('', 'J', 'gj', opt)
-map('', 'K', 'gk', opt)
-
+-- toggles
+--> options
 map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('n', '<leader>W', ':set wrap!<CR>', opt) -- toggle word wrap
+
+--> lualine components
+map('', '<leader>w', ':WordCountToggle<CR>', opt) -- toggle word counter (see `config/plug/lualine.lua`)
+map('', '<leader>n', ':NavicToggle<CR>', opt) -- toggle navic (see `config/plug/lualine.lua`)
+
+--> other
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
--- map('', '<C-n>', ':CHADopen<CR>', opt) -- toggle chadtree
-map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 
-map('n', '<leader>~', ':Dashboard<CR>', opt) -- map show dashboard
-map('n', '<leader>Nf', ':DashboardNewFile<CR>', opt) -- new file
+-- write and quit shortcuts
+map('n', 'WW', ':w<CR>', opt)
+map('n', '<leader>q', ':wqa<CR>', opt)
 
 -- clipboard mappings
 map('n', '<leader>ya', ':%y+<CR>', opt) -- Copy content of entire buffer to system clipboard
 map('n', '<leader>yl', '"+yy', opt) -- yank current line into system clipboard
 map('', '<leader>ys',  '"+y', opt) -- yank selection into system clipboard
 
--- write and quit shortcuts
-map('n', 'WW', ':w<CR>', opt)
-map('n', '<leader>q', ':wqa<CR>', opt)
+-- dashboard/starter
+map('n', '<leader>~', ':lua MiniStarter.open()<CR>', opt) -- map show dashboard
+map('n', '<leader>Nf', ':enew<CR>', opt) -- new file
 
--- glow
-map('n', '<leader>p', ':Glow<CR>', opt)
-
--- toggle word counter and navic (see config/plug/lualine.lua)
-map('', '<leader>w', ':WordCountToggle<CR>', opt)
-map('', '<leader>n', ':NavicToggle<CR>', opt)
-
--- mini.nvim
+-- formatters
+map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
 map('n', '<leader>t', ':lua MiniTrailspace.trim()<CR>', opt)
+
+-- documents
+map('n', '<leader>P', ':Glow<CR>', opt) -- render markdown in a popup
+map('n', '<leader>ma', [[:lua require('nabla').toggle_viewmode()]], opt) -- render all math in current file
+map('n', '<leader>mp', [[:lua require('nabla').popup()]], opt) -- render math under cursor
 
 -- macros
 for c in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
-    map('n', '<leader>m' .. c, '@' .. c, opt)
+    map('n', '<leader>M' .. c, '@' .. c, opt)
 end
 -- }}}
 
--- {{{ autocompletion mappings for cmp
+-- {{{ cmp
 local cmp = require('cmp')
 
 local next = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
@@ -103,7 +106,7 @@ M.cmp_mappings = {
 }
 -- }}}
 
--- {{{ LSP/java-related binds
+-- {{{ LSP & jdtls
 -- show floating diagnostic
 map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opt)
 
@@ -149,7 +152,7 @@ map('v', '<leader>Jec', '<Esc>:lua require("jdtls").extract_constant(true)<CR>',
 map('v', '<leader>Jem', '<Esc>:lua require("jdtls").extract_method(true)<CR>', opt)
 -- }}}
 
--- {{{ git mappings
+-- {{{ git
 M.gitsigns_mappings = {
 	noremap = true,
 	['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
@@ -190,13 +193,13 @@ map('n', '<leader>k', ':wincmd k<CR>', opt)
 map('n', '<leader>l', ':wincmd l<CR>', opt)
 -- }}}
 
--- {{{ terminal commands
+-- {{{ terminal
 map('n', '<leader><CR><CR>', ':vs | terminal<CR>i', opt)
 map('n', '<leader><CR>h', ':sp | terminal<CR>i', opt)
 map('t', '<C-esc>', '<C-\\><C-n>', opt)
 -- }}}
 
--- {{{ telescope pullup
+-- {{{ telescope
 map('n', '<leader>fb', ':Telescope marks<CR>', { noremap = true })
 map('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
 map('n', '<leader>fr', ':Telescope oldfiles<CR>', { noremap = true })
@@ -206,7 +209,7 @@ map('n', '<leader>gB', ':Telescope git_branches<CR>', { noremap = true })
 map('n', '<leader>bp', ':Telescope buffers<CR>', { noremap = true })
 -- }}}
 
--- {{{ hop.nvim
+-- {{{ hop
 map('n', '<leader>ah', ':HopWord<CR>', opt)
 map('n', '<leader>ak', ':HopWordBC<CR>', opt)
 map('n', '<leader>aj', ':HopWordAC<CR>', opt)

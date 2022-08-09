@@ -1,4 +1,4 @@
--- Load all packer plugins
+-- load all packer plugins
 require('plug')
 
 -- load keybindings and editor options
@@ -9,29 +9,14 @@ require('autocmds')
 -- load theme loading library
 local scheme = require('lib.scheme')
 
--- Load Themes (loads everforest theme by default)
--- load editor color theme
+-- load theme
 -- scheme.load_scheme('everforest')
-
--- load statusline theme
 -- scheme.load_lualine_scheme('everforest')
-
--- if you don't  want to specify the theme for each component,
--- you can use the following function
 scheme.load_shared_scheme('everforest')
 
--- set the statusline and tabline style
--- you can change the characters used
--- for seperators in the statusline and tabline
--- for instance, we can use bubble characters
--- scheme.load_global_style({'', ''}, {'', ''})
-
 -- load configurations
--- config.plug loads plugin configurations
--- config.lsp handles all lsp server configuration
--- config.module loads user contrib files (work in progress)
-require('config.lsp')
-require('config.plug')
-require('config.modules')
+require('config.lsp') -- lsp server config
+require('config.plug') -- plugin config
+require('config.modules') -- user contrib files (wip)
 
 -- # vim foldmethod=marker

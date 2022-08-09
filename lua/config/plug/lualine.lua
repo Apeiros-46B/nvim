@@ -99,18 +99,71 @@ local mode_fmts = {
 local function mode_fmt(str) return mode_fmts[str] end
 
 local function short_cwd() return fn.fnamemodify(fn.getcwd(), ':~') end -- iconless
+
+-- {{{ word count function
+local function word_count_fn()
+    local count = fn.wordcount()
+
+    if count.visual_bytes ~= nil then
+        return count.visual_chars .. 'c ' .. count.visual_words .. 'w'
+    else
+        return count.chars        .. 'c ' .. count.words        .. 'w'
+    end
+end
+
+-- {{{ toggle with a command
+g.show_word_count = true
+
+local function should_show_word_count() return g.show_word_count end
+cc('WordCountToggle', function() g.show_word_count = not g.show_word_count end, { nargs = 0 })
+-- }}}
+-- }}}
 -- }}}
 
 -- {{{ components
+-- {{{ date/time
 local datetime     = 'os.date("%d/%m:%u -> %R")'
 local date         = 'os.date("%d/%m:%u")'
 local time         = 'os.date("%R")'
+-- }}}
 
+-- {{{ editing/files
 local mode         = { 'mode', fmt = mode_fmt }
-local branch       = { 'FugitiveHead', icon = '' }
+local filetype     = { 'filetype', colored = false, icon = { align = 'right' } } -- why won't right align work?
+local fileformat   = { 'fileformat', symbols = { unix = 'u', dos = 'd', mac = 'm' } }
 local filename     = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '', readonly = ' +RO', unnamed = 'No Name' } }
 local filename_alt = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '', readonly = '', unnamed = 'No Name' }, icon = '' }
-local fileformat   = { 'fileformat', symbols = { unix = 'u', dos = 'd', mac = 'm' } }
+local word_count   = { word_count_fn, cond = should_show_word_count }
+-- }}}
+
+-- {{{ git
+local branch       = { 'FugitiveHead', icon = '' }
+local diff         = { 'diff', symbols = { added = '', modified = '', removed = '' } }
+-- }}}
+
+-- {{{ lsp
+local diagnostics  = {
+    'diagnostics',
+    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+    diagnostics_color = {
+        -- i would rather not do this but it seems like i have to (see 'custom highlights' below)
+        error = 'LualineRed',
+        warn  = 'LualineYellow',
+        info  = 'LualineBlue',
+        hint  = 'LualineAqua',
+    }
+}
+
+-- {{{ custom highlights
+local set_hl = vim.api.nvim_set_hl
+local hl = {
+    LualineRed    = { fg = colors.red   , bg = colors.gray3 },
+    LualineYellow = { fg = colors.yellow, bg = colors.gray3 },
+    LualineBlue   = { fg = colors.blue  , bg = colors.gray3 },
+    LualineAqua   = { fg = colors.teal  , bg = colors.gray3 },
+}
+for k,v in pairs(hl) do set_hl(0, k, v) end
+-- }}}
 
 -- {{{ navic
 local navic_plugin = require('nvim-navic')
@@ -125,12 +178,13 @@ cc('NavicToggle', function(_) g.show_navic = not g.show_navic end, { nargs = 0 }
 local navic = { navic_plugin.get_location, cond = should_show_navic, colors = { bg = colors.gray3 } }
 -- }}}
 -- }}}
+-- }}}
 
 -- {{{ main sections
 local sections = {
     lualine_a = { mode },
-    lualine_b = { 'filesize', { 'filetype', colored = false, icon = { align = 'right' } } }, -- why won't right align work?
-    lualine_c = { branch, { 'diff', symbols = { added = '', modified = '', removed = '' } } },
+    lualine_b = { 'filesize', filetype },
+    lualine_c = { branch, diff, diagnostics },
     lualine_x = { navic, filename },
     lualine_y = { fileformat, 'encoding' },
     lualine_z = { 'location' },
@@ -274,54 +328,66 @@ help.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'b
 help.filetypes = { 'help' }
 -- }}}
 
+-- {{{ himalaya
+local himalaya = {}
+
+himalaya.sections = vim.deepcopy(sections)
+
+himalaya.sections.lualine_a = { { function() return "MSG" end, color = { bg = colors.yellow, gui = 'bold' } } } -- Same could be said about this
+himalaya.sections.lualine_b = { filename_alt }
+himalaya.sections.lualine_c = { 'filesize' }
+
+himalaya.sections.lualine_x = { word_count }
+himalaya.sections.lualine_y = { 'progress' }
+himalaya.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'bold' } } }
+
+himalaya.filetypes = { 'himalaya-msg-list', 'himalaya-msg-read' }
+
+local himalaya_write = {}
+
+himalaya_write.sections = vim.deepcopy(sections)
+
+himalaya_write.sections.lualine_b = { filename_alt }
+himalaya_write.sections.lualine_c = { word_count, 'filesize' }
+
+himalaya_write.sections.lualine_x = { fileformat }
+himalaya_write.sections.lualine_y = { 'progress' }
+
+himalaya_write.filetypes = { 'himalaya-msg-write', 'mail' }
+-- }}}
+
 -- {{{ word count for documents
 local wc = {}
 
--- {{{ word count function
-local function word_count()
-    local count = fn.wordcount()
-
-    if count.visual_bytes ~= nil then
-        return count.visual_chars .. 'c ' .. count.visual_words .. 'w'
-    else
-        return count.chars        .. 'c ' .. count.words        .. 'w'
-    end
-end
--- }}}
-
--- {{{ toggle with a command
-g.show_word_count = true
-
-local function should_show_word_count() return g.show_word_count end
-cc('WordCountToggle', function() g.show_word_count = not g.show_word_count end, { nargs = 0 })
--- }}}
-
 wc.sections = vim.deepcopy(sections)
 
-wc.sections.lualine_x = { { word_count, cond = should_show_word_count }, filename }
+wc.sections.lualine_x = { word_count, filename }
 
-wc.filetypes = { 'markdown', 'adoc', 'norg', 'org', 'text' }
+--                markdown    asciidoc  neorg   org    text
+wc.filetypes = { 'markdown', 'adoc',   'norg', 'org', 'text' }
 -- }}}
 -- }}}
 -- }}}
 
--- {{{ lualine setup config
+-- {{{ setup
 require('lualine').setup({
     -- {{{ extensions
     extensions = {
         -- uses a more minimal template
-        dashboard, -- dashboard
-        file_tree, -- file trees (CHADTree, NERDTree, NvimTree)
-        fugitive,  -- fugitive pane
-        gitblame,  -- fugitive blame sidebar
-        gitcommit, -- editing commit messages
-        telescope, -- telescope fuzzy finder
-        terminal,  -- terminal
-        trouble,   -- trouble.nvim
+        dashboard,      -- dashboard
+        file_tree,      -- file trees (CHADTree, NERDTree, NvimTree)
+        fugitive,       -- fugitive pane
+        gitblame,       -- fugitive blame sidebar
+        gitcommit,      -- editing commit messages
+        telescope,      -- telescope fuzzy finder
+        terminal,       -- terminal
+        trouble,        -- trouble.nvim
 
         -- modifies the default sections
-        help,      -- `:help` panel
-        wc         -- word counter for markdown, org, and txt files
+        help,           -- `:help` panel
+        himalaya,       -- inbox list and reading messages in himalaya
+        himalaya_write, -- writing messages in himalaya
+        wc              -- word counter for markdown, org, and txt files
     },
     -- }}}
 

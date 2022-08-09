@@ -1,3 +1,4 @@
+-- {{{ plugins
 require('packer').startup({
 	function(use)
 		-- packer self management
@@ -72,10 +73,9 @@ require('packer').startup({
         use({ 'jghauser/mkdir.nvim', commit = '0126165' })
         use({ 'folke/which-key.nvim', commit = 'a3c19ec' })
         use({ 'echasnovski/mini.nvim', commit = '5561844' })
-        -- use({ 'rcarriga/nvim-notify', commit = '60bb6bf' })
-
-        -- live reloading
+        use({ 'Apeiros-46B/calendar.vim', commit = 'ac289da' })
         use({ 'famiu/nvim-reload', commit = '7c1ab3f' })
+        use({ 'soywod/himalaya', commit = '0696f36', rtp = '/vim' })
 		-- }}}
 
         -- {{{ git plugins
@@ -85,15 +85,17 @@ require('packer').startup({
         -- }}}
 
         -- {{{ improved syntax plugins
-		-- these add in a bit more bling and flair to nvim
+        -- treesitter
 		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', commit = 'd810c38' })
-		-- use({ 'glepnir/dashboard-nvim', disable = false, commit = '5763860' })
+
+        -- colors
         use({ 'rrethy/vim-hexokinase', run = 'make hexokinase', commit = '62324b4' })
 		use({ 'norcalli/nvim-colorizer.lua', commit = '36c610a' })
-        use({ 'ellisonleao/glow.nvim', commit = '900042f'})
 
-        -- neorg
-        use ({ 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', commit = '5dc942c' })
+        -- documents
+        use({ 'nvim-neorg/neorg', requires = { 'nvim-lua/plenary.nvim', 'nvim-neorg/neorg-telescope' }, commit = '5dc942c' })
+        use({ 'ellisonleao/glow.nvim', commit = '900042f'})
+        use({ 'jbyuki/nabla.nvim', commit = '8bcec91' })
 		-- }}}
 
 		-- {{{ themes
@@ -105,14 +107,10 @@ require('packer').startup({
 		use({'sainnhe/gruvbox-material'})
 
 		-- neesh themes
-		use({'sainnhe/everforest'})
+		use({'sainnhe/everforest'}) -- best theme btw
 		use({'relastle/bluewery.vim'})
 		use({'haishanh/night-owl.vim'})
 		-- }}}
-
-        -- {{{ misc plugins
-        use('andweeb/presence.nvim')
-        -- }}}
 	end,
 	-- display packer dialouge in the center in a floating window
 	config = {
@@ -121,5 +119,12 @@ require('packer').startup({
 		},
 	},
 })
+-- }}}
+
+-- {{{ other
+-- workaround for plugins that need rtp (himalaya)
+local packer_compiled = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua'
+vim.cmd('luafile'  .. packer_compiled)
+-- }}}
 
 -- # vim foldmethod=marker
