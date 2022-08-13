@@ -87,7 +87,7 @@ local scheme_loaded = false
 -- colors
 M.colors = {
     -- gray
-    gray0  = '#282C34',
+    gray0  = '#282c34',
     gray1  = '#2b3339',
     gray2  = '#303c42',
     gray3  = '#384348',
@@ -95,7 +95,7 @@ M.colors = {
     gray5  = '#607279',
     gray6  = '#7a8487',
     gray7  = '#859289',
-    gray8  = '#9DA9A0',
+    gray8  = '#9da9a0',
 
     -- foreground
     white  = '#d3c6aa',

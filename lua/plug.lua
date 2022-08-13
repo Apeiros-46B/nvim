@@ -84,7 +84,7 @@ packer.startup({
         use({ 'jghauser/mkdir.nvim', commit = '0126165' })
         use({ 'folke/which-key.nvim', commit = 'a3c19ec' })
         use({ 'echasnovski/mini.nvim', commit = '5561844' })
-        use({ 'Apeiros-46B/calendar.vim', commit = 'ac289da' })
+        use({ 'itchyny/calendar.vim', commit = 'fe13024' })
         use({ 'famiu/nvim-reload', commit = '7c1ab3f' })
         use({ 'soywod/himalaya', commit = '0696f36', rtp = '/vim' })
 		-- }}}
