@@ -23,7 +23,7 @@ o.errorbells = false 	-- auditory stimulation annoying
 opt.ruler = false		-- how line number/column
 opt.hidden = true 		-- keeps buffers loaded in the background
 opt.ignorecase = true
-opt.scrolloff = 8   	-- buffer starts scrolling 8 lines from the end of view
+opt.scrolloff = 4   	-- buffer starts scrolling 4 lines from the end of view
 opt.incsearch = true
 
 -- diagnostics
@@ -43,7 +43,8 @@ vim.diagnostic.config({
 
 -- tab settings
 o.tabstop = 4 			-- 4 tabstop
-o.shiftwidth = 4
+o.softtabstop = -1      -- inherit tabstop
+o.shiftwidth = 0        -- inherit tabstop
 o.expandtab = true     	-- tabs -> spaces
 o.smartindent = true    -- nice indenting
 
@@ -61,7 +62,7 @@ opt.splitright = true
 o.completeopt = 'menuone,noselect'
 
 -- truecolor
-vim.opt.termguicolors = true
+opt.termguicolors = true
 
 -- neovide
 o.guifont = 'JetBrainsMono Nerd Font Mono:h13'
