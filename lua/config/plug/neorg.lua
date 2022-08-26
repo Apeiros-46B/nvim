@@ -10,7 +10,10 @@ local colors = scheme.colors
 -- {{{ setup
 neorg.setup({
     load = {
+        -- {{{ essentials
         ['core.defaults'] = {},
+        ['core.integrations.treesitter'] = {},
+        -- }}}
 
         -- {{{ completion
         ['core.norg.completion'] = {
@@ -255,18 +258,36 @@ neorg.setup({
         -- }}}
 
         -- {{{ directory manager
-        ['core.norg.dirman'] = {
-            config = {
-                workspaces = {
-                    school = '~/notes/school',
-                    home   = '~/notes/home',
-                },
-            },
-        },
+        -- ['core.norg.dirman'] = {
+        --     config = {
+        --         workspaces = {
+        --             school = '~/notes/school',
+        --             home   = '~/notes/home',
+        --         },
+        --     },
+        -- },
         -- }}}
 
         -- {{{ highlights
         ['core.highlights'] = {},
+        -- }}}
+
+        -- {{{ indentation
+        -- ['core.norg.esupports.indent'] = {
+        --     config = {
+        --         -- Configuration here
+        --     }
+        -- },
+        -- }}}
+
+        -- {{{ exports
+        ['core.export']          = {},
+        ['core.export.markdown'] = {
+            config = {
+                -- extensions = { 'todo-items-basic', 'todo-items-extended', 'definition-lists', 'mathematics' },
+                extensions = 'all',
+            }
+        },
         -- }}}
 
         -- ['core.presenter'] = {},
@@ -497,17 +518,17 @@ for k,v in pairs(hl) do set_hl(0, k, v) end
 -- }}}
 
 -- {{{ norg-specific keybinds
-local neorg_callbacks = require("neorg.callbacks")
+local neorg_callbacks = require('neorg.callbacks')
 
-neorg_callbacks.on_event("core.keybinds.events.enable_keybinds", function(_, keybinds)
-    -- Map all the below keybinds only when the "norg" mode is active
-    keybinds.map_event_to_mode("norg", {
+neorg_callbacks.on_event('core.keybinds.events.enable_keybinds', function(_, keybinds)
+    -- Map all the below keybinds only when the 'norg' mode is active
+    keybinds.map_event_to_mode('norg', {
         n = { -- Bind keys in normal mode
-            { "<C-s>", "core.integrations.telescope.find_linkable" },
+            { '<C-s>', 'core.integrations.telescope.find_linkable' },
         },
 
         i = { -- Bind in insert mode
-            { "<C-l>", "core.integrations.telescope.insert_link" },
+            { '<C-k>', 'core.integrations.telescope.insert_link' },
         },
     },
     {

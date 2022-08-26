@@ -110,7 +110,7 @@ local ldr_keymap = {
     },
 
     m = {
-        name = 'Render math',
+        name = 'Preview math',
         a = { 'All' },
         p = { 'Popup' },
     },
@@ -122,7 +122,7 @@ local ldr_keymap = {
 
     n = { 'Toggle Navic' },
 
-    P = { 'Render Markdown' },
+    P = { 'Preview Markdown' },
 
     q = { 'Save and quit all' },
 
@@ -187,6 +187,11 @@ local g_keymap = {
         u = { 'Mark as undone' },
     },
     O = { 'Show ToC' },
+    -- e = {
+    --     name = 'Export',
+    --     p = 'As PDF',
+    --     d = 'As DOCX',
+    -- },
 }
 
 wk.register(g_keymap, {

@@ -53,7 +53,7 @@ o.foldmethod = 'marker' -- set fold method to marker
 g.markdown_folding = false -- markdown folding
 
 -- backup/swap files
-opt.swapfile = false  	-- have files saved to swap
+opt.swapfile = true  	-- have files saved to swap
 opt.undofile = true		-- file undo history preserved outside current session
 
 -- new win split options
