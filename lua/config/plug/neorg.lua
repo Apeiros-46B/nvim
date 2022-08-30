@@ -1,6 +1,7 @@
 -- {{{ imports
 -- main
 local neorg = require('neorg')
+local api   = vim.api
 
 -- scheme
 local scheme = require('lib.scheme')
@@ -305,7 +306,8 @@ neorg.setup({
 -- 2. i want to maintain consistency with my other configs
 -- 3. i have no idea how it works, so i'm just gonna stick with this
 
-local set_hl = vim.api.nvim_set_hl
+-- import
+local set_hl = api.nvim_set_hl
 
 local hl = {
     -- {{{ selection window
@@ -536,4 +538,97 @@ neorg_callbacks.on_event('core.keybinds.events.enable_keybinds', function(_, key
         noremap = true,
     })
 end)
+-- }}}
+
+-- {{{ autocmds
+-- {{{ imports
+local au = api.nvim_create_autocmd
+local cc = api.nvim_create_user_command
+local exec = api.nvim_exec
+local optl = vim.opt_local
+-- }}}
+
+-- {{{ autocmd on opening a norg file
+au({ 'Filetype' }, { pattern = 'norg', callback = function()
+    -- {{{ change indentation width to 1
+    optl.tabstop = 1
+    -- }}}
+
+    -- {{{ custom comment function
+    cc('CommentToggle', function(tbl)
+        -- {{{ +one-line comment+
+        if tbl.range == 0 then
+            -- one-line comment +like this+
+
+            -- {{{ check if commented
+            local current_line = api.nvim_get_current_line()
+            local comment_expr = vim.regex([[^\s*+.*+\s*$]])
+
+            if comment_expr:match_str(current_line) then
+            -- }}}
+            -- {{{ comment or uncomment
+                -- there is already a comment, so uncomment the line
+                exec([[exec 's/\(^\s*\)+\(.*\)+\(\s*$\)/\1\2\3' | noh]], false)
+            else
+                -- there isn't a comment, so comment the line
+                exec([[exec 's/\(^\s*\)\(.*\)\(\s*$\)/\1+\2+\3' | noh]], false)
+            end
+            -- }}}
+        -- }}}
+        -- {{{ @comment multiline comment @end
+        elseif tbl.range == 2 then
+            -- multiline comment
+            -- @comment
+            -- like this
+            -- @end
+
+            -- {{{ check if commented
+            local commented0 = false
+            local commented1 = false
+
+            local comment_expr = vim.regex([[^\s*@comment\s*$]])
+            local end_expr     = vim.regex([[^\s*@end\s*$]]    )
+
+            exec(tostring(tbl.line2),     false); commented0 = (end_expr    :match_str(api.nvim_get_current_line()) and                 true )
+            exec(tostring(tbl.line1),     false); commented0 = (comment_expr:match_str(api.nvim_get_current_line()) and (commented0 and true))
+            exec(tostring(tbl.line2 + 1), false); commented1 = (end_expr    :match_str(api.nvim_get_current_line()) and                 true )
+            exec(tostring(tbl.line1 - 1), false); commented1 = (comment_expr:match_str(api.nvim_get_current_line()) and (commented1 and true))
+            -- }}}
+            -- {{{ comment or uncomment
+            if commented0 then -- uncomment
+                -- last
+                exec(tostring(tbl.line2), false)
+                api.nvim_set_current_line(''); exec([[exec "normal i\<BS>\<Esc>"]], false)
+
+                -- first
+                exec(tostring(tbl.line1), false)
+                api.nvim_set_current_line(''); exec([[exec "normal i\<BS>\<Esc>"]], false)
+            elseif commented1 then -- uncomment
+                -- last
+                exec(tostring(tbl.line2 + 1), false)
+                api.nvim_set_current_line(''); exec([[exec "normal i\<BS>\<Esc>"]], false)
+
+                -- first
+                exec(tostring(tbl.line1 - 1), false)
+                api.nvim_set_current_line(''); exec([[exec "normal i\<BS>\<Esc>"]], false)
+            else -- comment
+                -- last
+                exec(tostring(tbl.line2),       false)
+                exec([[exec "normal o\<Esc>"]], false)
+
+                api.nvim_set_current_line('@end')
+
+                -- first
+                exec(tostring(tbl.line1),       false)
+                exec([[exec "normal O\<Esc>"]], false)
+
+                api.nvim_set_current_line('@comment')
+            end
+            -- }}}
+        end
+        -- }}}
+    end, { range = true, nargs = 0 })
+    -- }}}
+end})
+-- }}}
 -- }}}

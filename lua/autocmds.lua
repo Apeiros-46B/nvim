@@ -1,17 +1,16 @@
 --[[
 
     autocmds.lua
-    This file defines various autocmds that nii-nvim uses
+    this file defines miscellaneous (non-plugin related) autocmds
 
 --]]
 
-local au = vim.api.nvim_create_autocmd
-local optl = vim.opt_local
+-- {{{ imports
+local api = vim.api
+local au = api.nvim_create_autocmd
+-- }}}
 
--- Don't show line numbers on terminal window
+-- don't show line numbers on terminal window
 au({ 'TermOpen' }, { pattern = 'term://*', command = 'setlocal nonumber norelativenumber ft=terminal' })
-
--- Change indentation to one space in Neorg files
-au({ 'Filetype' }, { pattern = 'norg', callback = function() optl.tabstop = 1 end })
 
 -- # vim: foldmethod=marker
