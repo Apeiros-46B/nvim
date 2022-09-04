@@ -63,7 +63,6 @@ map('', '<leader>ys',  '"+y', opt) -- yank selection into system clipboard
 
 -- dashboard/starter
 map('n', '<leader>~', ':lua MiniStarter.open()<CR>', opt) -- map show dashboard
-map('n', '<leader>Nf', ':enew<CR>', opt) -- new file
 
 -- formatters
 map('n', '<leader>bf', ':Neoformat<CR>', { noremap = true }) -- format current buffer with neoformat
@@ -150,6 +149,11 @@ map('v', '<leader>Jev', '<Esc>:lua require("jdtls").extract_variable(true)<CR>',
 map('n', '<leader>Jec', ':lua require("jdtls").exttract_constant()<CR>', opt)
 map('v', '<leader>Jec', '<Esc>:lua require("jdtls").extract_constant(true)<CR>', opt)
 map('v', '<leader>Jem', '<Esc>:lua require("jdtls").extract_method(true)<CR>', opt)
+-- }}}
+
+-- {{{ neorg
+map('n', '<leader>Nc', ':Neorg toggle-concealer<CR>', opt)
+map('n', '<leader>NC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', opt)
 -- }}}
 
 -- {{{ git

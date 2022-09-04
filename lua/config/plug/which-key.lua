@@ -158,8 +158,9 @@ local ldr_keymap = {
     },
 
     N = {
-        name = 'New',
-        f = { 'File' },
+        name = 'Neorg',
+        c = { 'Toggle concealer' },
+        C = { 'Refresh concealer' },
     },
 
     n = { 'Toggle Navic' },

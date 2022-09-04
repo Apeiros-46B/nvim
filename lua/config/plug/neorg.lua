@@ -519,7 +519,7 @@ end
 for k,v in pairs(hl) do set_hl(0, k, v) end
 -- }}}
 
--- {{{ norg-specific keybinds
+-- {{{ neorg-specific keybinds
 local neorg_callbacks = require('neorg.callbacks')
 
 neorg_callbacks.on_event('core.keybinds.events.enable_keybinds', function(_, keybinds)
@@ -530,7 +530,7 @@ neorg_callbacks.on_event('core.keybinds.events.enable_keybinds', function(_, key
         },
 
         i = { -- Bind in insert mode
-            { '<C-k>', 'core.integrations.telescope.insert_link' },
+            { '<C-l>', 'core.integrations.telescope.insert_link' },
         },
     },
     {
