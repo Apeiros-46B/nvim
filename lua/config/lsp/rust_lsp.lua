@@ -1,5 +1,5 @@
 return function(on_attach)
-    local opts = {
+    require('rust-tools').setup({
         -- rust-tools options
         tools = {
             autoSetHints = true,
@@ -29,7 +29,5 @@ return function(on_attach)
                 }
             }
         },
-    }
-
-    require('rust-tools').setup(opts)
+    })
 end
