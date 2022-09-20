@@ -5,4 +5,6 @@ return {
 	require('config.lsp.lua_lsp')(setup.on_attach),
     require('config.lsp.python_lsp')(setup.on_attach),
 	require('config.lsp.rust_lsp')(setup.on_attach),
+    require('config.lsp.webdev_lsp')(setup.on_attach),
+    require('config.lsp.tex_lsp')(setup.on_attach),
 }
