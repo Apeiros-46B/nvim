@@ -24,9 +24,10 @@ return {
     require('config.plug.himalaya'),
     require('config.plug.fugitive'),
     require('config.plug.lspsaga'),
+    require('config.plug.mini'),
     require('config.plug.navic'),
     require('config.plug.neorg'),
-    require('config.plug.mini'),
+    require('config.plug.trouble'),
 }
 
 -- # vim foldmethod=marker

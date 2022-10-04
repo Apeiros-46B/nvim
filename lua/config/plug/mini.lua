@@ -143,5 +143,7 @@ trailspace.setup({
 })
 
 -- custom highlight
-set_hl(0, 'MiniTrailspace', { bg = colors.orange })
+-- set_hl(0, 'MiniTrailspace', { bg = colors.orange                       }) -- style 1 (filled)
+-- set_hl(0, 'MiniTrailspace', { fg = colors.orange, underline     = true }) -- style 2 (underline)
+set_hl(0, 'MiniTrailspace', { fg = colors.orange, strikethrough = true }) -- style 3 (strike)
 -- }}}

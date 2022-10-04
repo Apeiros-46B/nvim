@@ -45,8 +45,8 @@ map('n', '<leader>R', ':set rnu!<CR>', opt) -- toggle relative line numbers
 map('n', '<leader>W', ':set wrap!<CR>', opt) -- toggle word wrap
 
 --> lualine components
-map('', '<leader>w', ':WordCountToggle<CR>', opt) -- toggle word counter (see `config/plug/lualine.lua`)
-map('', '<leader>n', ':NavicToggle<CR>', opt) -- toggle navic (see `config/plug/lualine.lua`)
+map('n', '<leader>w', ':WordCountToggle<CR>', opt) -- toggle word counter (see `config/plug/lualine.lua`)
+map('n', '<leader>n', ':NavicToggle<CR>', opt) -- toggle navic (see `config/plug/lualine.lua`)
 
 --> other
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
@@ -72,6 +72,9 @@ map('n', '<leader>t', ':lua MiniTrailspace.trim()<CR>', opt)
 map('n', '<leader>P', ':Glow<CR>', opt) -- render markdown in a popup
 map('n', '<leader>ma', [[:lua require('nabla').toggle_viewmode()]], opt) -- render all math in current file
 map('n', '<leader>mp', [[:lua require('nabla').popup()]], opt) -- render math under cursor
+
+-- misc
+map('n', '<M-x>', ':Lspsaga open_floaterm<CR>xplr<CR>', opt) -- open xplr popup
 
 -- macros
 for c in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
@@ -137,6 +140,7 @@ map('n', '<leader>Ld', ':Lspsaga preview_definition<CR>', opt)
 --- floating term
 map('n', '<M-d>', ':Lspsaga open_floaterm<CR>', opt)
 map('t', '<M-d>', '<C-\\><C-n>:exec "Lspsaga close_floaterm" <Bar> q<CR>', opt)
+map('t', '<M-x>', '<C-\\><C-n>:exec "Lspsaga close_floaterm" <Bar> q<CR>', opt)
 -- }}}
 
 -- mvn clean package
@@ -154,6 +158,7 @@ map('v', '<leader>Jem', '<Esc>:lua require("jdtls").extract_method(true)<CR>', o
 -- {{{ neorg
 map('n', '<leader>Nc', ':Neorg toggle-concealer<CR>', opt)
 map('n', '<leader>NC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', opt)
+map('n', [[\]], 'o- <Esc>a', opt)
 -- }}}
 
 -- {{{ git

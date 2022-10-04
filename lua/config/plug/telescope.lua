@@ -29,6 +29,11 @@ telescope.setup({
                 prompt_position = 'top',
             },
         },
+        mappings = {
+            i = {
+                ["<C-o>"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) require("telescope.builtin").resume() end,
+            },
+        },
 	},
 	extensions = {
 		fzf = {
