@@ -291,8 +291,6 @@ neorg.setup({
         },
         -- }}}
 
-        -- ['core.presenter'] = {},
-
         -- {{{ telescope integration
         ['core.integrations.telescope'] = {},
         -- }}}
@@ -302,215 +300,226 @@ neorg.setup({
 
 -- {{{ custom highlights
 -- i'm not using core.highlights module because
--- 1. it uses vim.cmd which is slower than this approach afaik
--- 2. i want to maintain consistency with my other configs
--- 3. i have no idea how it works, so i'm just gonna stick with this
+-- 1. i want to maintain consistency with my other configs
+-- 2. i have no idea how it works, so i'm just gonna stick with this
 
 -- import
 local set_hl = api.nvim_set_hl
 
 local hl = {
     -- {{{ selection window
-    NeorgSelectionWindowHeading       = { fg = colors.purple },
-    NeorgSelectionWindowArrow         = { fg = colors.white  },
-    NeorgSelectionWindowKey           = { fg = colors.yellow },
-    NeorgSelectionWindowKeyname       = { fg = colors.blue   },
-    NeorgSelectionWindowNestedkeyname = { fg = colors.teal   },
+    ['@neorg.selection_window.arrow'        ] = { fg = colors.white  },
+    ['@neorg.selection_window.heading'      ] = { fg = colors.purple },
+    ['@neorg.selection_window.key'          ] = { fg = colors.yellow },
+    ['@neorg.selection_window.keyname'      ] = { fg = colors.blue   },
+    ['@neorg.selection_window.nestedkeyname'] = { fg = colors.teal   },
     -- }}}
 
     -- {{{ tags
-    NeorgTagBegin     = { fg = colors.red    },
-    NeorgTagEnd       = { fg = colors.red    },
-    NeorgTagName      = { fg = colors.white  },
-    NeorgTagNameWord  = { fg = colors.red    },
-    NeorgTagParameter = { fg = colors.yellow },
+    ['@neorg.tags.ranged_verbatim.begin'         ] = { fg = colors.red    },
+    ['@neorg.tags.ranged_verbatim.code_block'    ] = { bg = colors.gray2  },
+    ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.red    },
+    ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.yellow },
 
-    NeorgCarryoverTagBegin     = { fg = colors.orange },
-    NeorgCarryoverTagName      = { fg = colors.white  },
-    NeorgCarryoverTagNameWord  = { fg = colors.orange },
-    NeorgCarryoverTagParameter = { fg = colors.teal   },
+    ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.white  },
+    ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.gray7  },
+    ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.red    },
+
+    -- {{{ document meta
+    ['@neorg.tags.ranged_verbatim.document_meta.authors'       ] = { fg = colors.purple              },
+    ['@neorg.tags.ranged_verbatim.document_meta.categories'    ] = { fg = colors.green               },
+    ['@neorg.tags.ranged_verbatim.document_meta.description'   ] = { fg = colors.yellow              },
+    ['@neorg.tags.ranged_verbatim.document_meta.title'         ] = { fg = colors.orange, bold = true },
+
+    ['@neorg.tags.ranged_verbatim.document_meta.created'       ] = { fg = colors.blue                },
+    ['@neorg.tags.ranged_verbatim.document_meta.updated'       ] = { fg = colors.blue                },
+    ['@neorg.tags.ranged_verbatim.document_meta.version'       ] = { fg = colors.teal                },
+
+    ['@neorg.tags.ranged_verbatim.document_meta.array.bracket' ] = { fg = colors.white               },
+    ['@neorg.tags.ranged_verbatim.document_meta.array.value'   ] = { fg = colors.white               },
+    ['@neorg.tags.ranged_verbatim.document_meta.object.bracket'] = { fg = colors.white               },
+    ['@neorg.tags.ranged_verbatim.document_meta.trailing'      ] = { fg = colors.white               },
+
+    ['@neorg.tags.ranged_verbatim.document_meta.key'           ] = { fg = colors.yellow, bold = true },
+    ['@neorg.tags.ranged_verbatim.document_meta.value'         ] = { fg = colors.white               },
+    -- }}}
+
+    ['@neorg.tags.carryover.begin'         ] = { fg = colors.orange },
+    ['@neorg.tags.carryover.parameters'    ] = { fg = colors.teal   },
+
+    ['@neorg.tags.carryover.name'          ] = { fg = colors.white  },
+    ['@neorg.tags.carryover.name.delimiter'] = { fg = colors.gray7  },
+    ['@neorg.tags.carryover.name.word'     ] = { fg = colors.white  },
     -- }}}
 
     -- {{{ headings
-    NeorgHeading1Title  = { fg = colors.red   , bold = true },
-    NeorgHeading1Prefix = { fg = colors.red   , bold = true },
-    NeorgHeading2Title  = { fg = colors.orange, bold = true },
-    NeorgHeading2Prefix = { fg = colors.orange, bold = true },
-    NeorgHeading3Title  = { fg = colors.yellow, bold = true },
-    NeorgHeading3Prefix = { fg = colors.yellow, bold = true },
-    NeorgHeading4Title  = { fg = colors.green , bold = true },
-    NeorgHeading4Prefix = { fg = colors.green , bold = true },
-    NeorgHeading5Title  = { fg = colors.blue  , bold = true },
-    NeorgHeading5Prefix = { fg = colors.blue  , bold = true },
-    NeorgHeading6Title  = { fg = colors.purple, bold = true },
-    NeorgHeading6Prefix = { fg = colors.purple, bold = true },
+    ['@neorg.headings.1.title' ] = { fg = colors.red   , bold = true },
+    ['@neorg.headings.1.prefix'] = { fg = colors.red   , bold = true },
+    ['@neorg.headings.2.title' ] = { fg = colors.orange, bold = true },
+    ['@neorg.headings.2.prefix'] = { fg = colors.orange, bold = true },
+    ['@neorg.headings.3.title' ] = { fg = colors.yellow, bold = true },
+    ['@neorg.headings.3.prefix'] = { fg = colors.yellow, bold = true },
+    ['@neorg.headings.4.title' ] = { fg = colors.green , bold = true },
+    ['@neorg.headings.4.prefix'] = { fg = colors.green , bold = true },
+    ['@neorg.headings.5.title' ] = { fg = colors.blue  , bold = true },
+    ['@neorg.headings.5.prefix'] = { fg = colors.blue  , bold = true },
+    ['@neorg.headings.6.title' ] = { fg = colors.purple, bold = true },
+    ['@neorg.headings.6.prefix'] = { fg = colors.purple, bold = true },
     -- }}}
 
     -- {{{ quotes
-    NeorgQuote1        = { fg = colors.gray7                 },
-    NeorgQuote1Content = { fg = colors.gray7 , italic = true },
-    NeorgQuote2        = { fg = colors.gray8                 },
-    NeorgQuote2Content = { fg = colors.gray8 , italic = true },
-    NeorgQuote3        = { fg = colors.green                 },
-    NeorgQuote3Content = { fg = colors.green , italic = true },
-    NeorgQuote4        = { fg = colors.teal                  },
-    NeorgQuote4Content = { fg = colors.teal  , italic = true },
-    NeorgQuote5        = { fg = colors.blue                  },
-    NeorgQuote5Content = { fg = colors.blue  , italic = true },
-    NeorgQuote6        = { fg = colors.purple                },
-    NeorgQuote6Content = { fg = colors.purple, italic = true },
+    ['@neorg.quotes.1.prefix' ] = { fg = colors.gray5                },
+    ['@neorg.quotes.1.content'] = { fg = colors.gray5, italic = true },
+    ['@neorg.quotes.2.prefix' ] = { fg = colors.gray6                },
+    ['@neorg.quotes.2.content'] = { fg = colors.gray6, italic = true },
+    ['@neorg.quotes.3.prefix' ] = { fg = colors.gray7                },
+    ['@neorg.quotes.3.content'] = { fg = colors.gray7, italic = true },
+    ['@neorg.quotes.4.prefix' ] = { fg = colors.gray8                },
+    ['@neorg.quotes.4.content'] = { fg = colors.gray8, italic = true },
+    ['@neorg.quotes.5.prefix' ] = { fg = colors.gray9                },
+    ['@neorg.quotes.5.content'] = { fg = colors.gray9, italic = true },
+    ['@neorg.quotes.6.prefix' ] = { fg = colors.gray9                },
+    ['@neorg.quotes.6.content'] = { fg = colors.gray9, italic = true },
     -- }}}
 
     -- {{{ links
-    NeorgLinkText          = { fg = colors.blue, underline = true },
-    NeorgLinkTextDelimiter = { fg = colors.gray7                  },
+    ['@neorg.links.description'          ] = { fg = colors.green },
+    ['@neorg.links.description.delimiter'] = { fg = colors.gray7 },
 
-    NeorgLinkFile          = { fg = colors.purple, underline = true },
-    NeorgLinkFileDelimiter = { fg = colors.gray7                    },
+    ['@neorg.links.file'          ] = { fg = colors.purple, underline = true },
+    ['@neorg.links.file.delimiter'] = { fg = colors.gray7                    },
 
     -- {{{ location
-    NeorgLinkLocationDelimiter           = { fg = colors.gray7 ,                  },
+    ['@neorg.links.location.definition'          ] = { fg = colors.white , bold      = true },
+    ['@neorg.links.location.definition.prefix'   ] = { fg = colors.gray7                    },
+    ['@neorg.links.location.delimiter'           ] = { fg = colors.gray7                    },
+    ['@neorg.links.location.external_file'       ] = { fg = colors.orange                   },
+    ['@neorg.links.location.external_file.prefix'] = { fg = colors.orange                   },
+    ['@neorg.links.location.footnote'            ] = { fg = colors.white , bold      = true },
+    ['@neorg.links.location.footnote.prefix'     ] = { fg = colors.gray7                    },
+    ['@neorg.links.location.generic'             ] = { fg = colors.yellow                   },
+    ['@neorg.links.location.generic.prefix'      ] = { fg = colors.yellow                   },
+    ['@neorg.links.location.marker'              ] = { fg = colors.white                    },
+    ['@neorg.links.location.marker.prefix'       ] = { fg = colors.orange                   },
+    ['@neorg.links.location.url'                 ] = { fg = colors.blue  , underline = true },
 
-    NeorgLinkLocationURL                 = { fg = colors.blue  , underline = true },
-
-    NeorgLinkLocationGeneric             = { fg = colors.yellow,                  },
-    NeorgLinkLocationGenericPrefix       = { fg = colors.yellow,                  },
-
-    NeorgLinkLocationExternalFile        = { fg = colors.orange,                  },
-    NeorgLinkLocationExternalFilePrefix  = { fg = colors.orange,                  },
-
-    NeorgLinkLocationMarker              = { fg = colors.white ,                  },
-    NeorgLinkLocationMarkerPrefix        = { fg = colors.orange,                  },
-
-    NeorgLinkLocationDefinition          = { fg = colors.white , bold      = true },
-    NeorgLinkLocationDefinitionPrefix    = { fg = colors.gray7 ,                  },
-
-    NeorgLinkLocationFootnote            = { fg = colors.white , bold      = true },
-    NeorgLinkLocationFootnotePrefix      = { fg = colors.gray7 ,                  },
-
-    NeorgLinkLocationHeading1            = { fg = colors.red   ,                  },
-    NeorgLinkLocationHeading1Prefix      = { fg = colors.red   ,                  },
-    NeorgLinkLocationHeading2            = { fg = colors.orange,                  },
-    NeorgLinkLocationHeading2Prefix      = { fg = colors.orange,                  },
-    NeorgLinkLocationHeading3            = { fg = colors.yellow,                  },
-    NeorgLinkLocationHeading3Prefix      = { fg = colors.yellow,                  },
-    NeorgLinkLocationHeading4            = { fg = colors.green ,                  },
-    NeorgLinkLocationHeading4Prefix      = { fg = colors.green ,                  },
-    NeorgLinkLocationHeading5            = { fg = colors.blue  ,                  },
-    NeorgLinkLocationHeading5Prefix      = { fg = colors.blue  ,                  },
-    NeorgLinkLocationHeading6            = { fg = colors.purple,                  },
-    NeorgLinkLocationHeading6Prefix      = { fg = colors.purple,                  },
+    ['@neorg.links.location.heading.1'           ] = { fg = colors.red                      },
+    ['@neorg.links.location.heading.1.prefix'    ] = { fg = colors.red                      },
+    ['@neorg.links.location.heading.2'           ] = { fg = colors.orange                   },
+    ['@neorg.links.location.heading.2.prefix'    ] = { fg = colors.orange                   },
+    ['@neorg.links.location.heading.3'           ] = { fg = colors.yellow                   },
+    ['@neorg.links.location.heading.3.prefix'    ] = { fg = colors.yellow                   },
+    ['@neorg.links.location.heading.4'           ] = { fg = colors.green                    },
+    ['@neorg.links.location.heading.4.prefix'    ] = { fg = colors.green                    },
+    ['@neorg.links.location.heading.5'           ] = { fg = colors.blue                     },
+    ['@neorg.links.location.heading.5.prefix'    ] = { fg = colors.blue                     },
+    ['@neorg.links.location.heading.6'           ] = { fg = colors.purple                   },
+    ['@neorg.links.location.heading.6.prefix'    ] = { fg = colors.purple                   },
     -- }}}
     -- }}}
 
     -- {{{ markup & delimiters
-    NeorgMarkupBold                   = { fg = colors.white ,                    bold          = true  },
-    NeorgMarkupBoldDelimiter          = { fg = colors.gray7 ,                    bold          = true  },
-    NeorgMarkupItalic                 = { fg = colors.white ,                    italic        = true  },
-    NeorgMarkupItalicDelimiter        = { fg = colors.gray7 ,                    italic        = true  },
-    NeorgMarkupUnderline              = { fg = colors.white ,                    underline     = true  },
-    NeorgMarkupUnderlineDelimiter     = { fg = colors.gray7 ,                    underline     = true  },
-    NeorgMarkupStrikethrough          = { fg = colors.white ,                    strikethrough = true  },
-    NeorgMarkupStrikethroughDelimiter = { fg = colors.gray7 ,                    strikethrough = true  },
-    NeorgMarkupSpoiler                = { fg = colors.white , bg = colors.gray2, bold          = false },
-    NeorgMarkupSpoilerDelimiter       = { fg = colors.white , bg = colors.white, bold          = true  },
-    NeorgMarkupSubscript              = { fg = colors.orange,                    bold          = false },
-    NeorgMarkupSubscriptDelimiter     = { fg = colors.gray7 ,                    bold          = true  },
-    NeorgMarkupSuperscript            = { fg = colors.purple,                    bold          = false },
-    NeorgMarkupSuperscriptDelimiter   = { fg = colors.gray7 ,                    bold          = true  },
-    NeorgMarkupMath                   = { fg = colors.blue  , bg = colors.gray2, bold          = false },
-    NeorgMarkupMathDelimiter          = { fg = colors.gray7 , bg = colors.gray2, bold          = true  },
-    NeorgMarkupVariable               = { fg = colors.teal  , bg = colors.gray2, bold          = false },
-    NeorgMarkupVariableDelimiter      = { fg = colors.gray7 , bg = colors.gray2, bold          = true  },
-    NeorgMarkupVerbatim               = { fg = colors.green , bg = colors.gray2, bold          = false },
-    NeorgMarkupVerbatimDelimiter      = { fg = colors.green , bg = colors.gray2, bold          = true  },
-    NeorgMarkupInlineComment          = { fg = colors.gray7 ,                    italic        = true  },
-    NeorgMarkupInlineCommentDelimiter = { fg = colors.gray7 ,                    italic        = true  },
+    -- standard
+    ['@neorg.markup.bold'                    ] = {                                        bold          = true  },
+    ['@neorg.markup.bold.delimiter'          ] = { fg = colors.gray7 ,                    bold          = true  },
+    ['@neorg.markup.italic'                  ] = {                                        italic        = true  },
+    ['@neorg.markup.italic.delimiter'        ] = { fg = colors.gray7 ,                    italic        = true  },
+    ['@neorg.markup.underline'               ] = {                                        underline     = true  },
+    ['@neorg.markup.underline.delimiter'     ] = { fg = colors.gray7 ,                    underline     = true  },
+    ['@neorg.markup.strikethrough'           ] = {                                        strikethrough = true  },
+    ['@neorg.markup.strikethrough.delimiter' ] = { fg = colors.gray7 ,                    strikethrough = true  },
+    ['@neorg.markup.verbatim'                ] = { fg = colors.green , bg = colors.gray2,                       },
+    ['@neorg.markup.verbatim.delimiter'      ] = { fg = colors.green , bg = colors.gray2, bold          = true  },
 
-    NeorgStrongParagraphDelimiter     = { fg = colors.gray7                                            },
-    NeorgWeakParagraphDelimiter       = { fg = colors.gray7                                            },
-    NeorgHorizontalLine               = { fg = colors.gray7                                            },
+    -- other
+    ['@neorg.markup.inline_math'             ] = { fg = colors.blue  , bg = colors.gray2,                       },
+    ['@neorg.markup.inline_math.delimiter'   ] = { fg = colors.gray7 , bg = colors.gray2, bold          = true  },
+    ['@neorg.markup.spoiler'                 ] = { fg = colors.white , bg = colors.gray2,                       },
+    ['@neorg.markup.spoiler.delimiter'       ] = { fg = colors.white , bg = colors.white, bold          = true  },
+    ['@neorg.markup.subscript'               ] = { fg = colors.orange,                                          },
+    ['@neorg.markup.subscript.delimiter'     ] = { fg = colors.gray7 ,                    bold          = true  },
+    ['@neorg.markup.superscript'             ] = { fg = colors.purple,                                          },
+    ['@neorg.markup.superscript.delimiter'   ] = { fg = colors.gray7 ,                    bold          = true  },
+
+    -- special
+    ['@neorg.markup.inline_comment'          ] = { fg = colors.gray7 ,                    italic        = true  },
+    ['@neorg.markup.inline_comment.delimiter'] = { fg = colors.gray7 ,                    italic        = true  },
+    ['@neorg.markup.variable'                ] = { fg = colors.teal  , bg = colors.gray2,                       },
+    ['@neorg.markup.variable.delimiter'      ] = { fg = colors.gray7 , bg = colors.gray2, bold          = true  },
+
+    -- delimiters
+    ['@neorg.delimiters.horizontal_line'     ] = { fg = colors.gray7                                            },
+    ['@neorg.delimiters.strong'              ] = { fg = colors.gray7                                            },
+    ['@neorg.delimiters.weak'                ] = { fg = colors.gray7                                            },
     -- }}}
 
     -- {{{ misc
-    NeorgCodeBlock                  = { bg = colors.gray2 }, -- no idea why this won't work
+    ['@neorg.error'                        ] = { fg = colors.red                   },
 
-    NeorgError                      = { fg = colors.red  },
-    NeorgEscapeSequence             = { fg = colors.teal },
+    ['@neorg.markers.prefix'               ] = { fg = colors.orange                },
+    ['@neorg.markers.title'                ] = { fg = colors.white                 },
 
-    NeorgMarker                     = { fg = colors.orange },
-    NeorgMarkerTitle                = { fg = colors.white  },
+    ['@neorg.definitions.content'          ] = { fg = colors.white , italic = true },
+    ['@neorg.definitions.prefix'           ] = { fg = colors.gray7                 },
+    ['@neorg.definitions.suffix'           ] = { fg = colors.gray7                 },
+    ['@neorg.definitions.title'            ] = { fg = colors.white , bold   = true },
 
-    NeorgDefinition                 = { fg = colors.gray7                },
-    NeorgDefinitionEnd              = { fg = colors.gray7                },
-    NeorgDefinitionTitle            = { fg = colors.white, bold   = true },
-    NeorgDefinitionContent          = { fg = colors.white, italic = true },
+    ['@neorg.footnotes.content'            ] = { fg = colors.white , italic = true },
+    ['@neorg.footnotes.prefix'             ] = { fg = colors.gray7                 },
+    ['@neorg.footnotes.suffix'             ] = { fg = colors.gray7                 },
+    ['@neorg.footnotes.title'              ] = { fg = colors.white , bold   = true },
 
-    NeorgFootnote                   = { fg = colors.gray7                },
-    NeorgFootnoteEnd                = { fg = colors.gray7                },
-    NeorgFootnoteTitle              = { fg = colors.white, bold   = true },
-    NeorgFootnoteContent            = { fg = colors.white, italic = true },
+    ['@neorg.anchors.declaration'          ] = { fg = colors.teal                  },
+    ['@neorg.anchors.declaration.delimiter'] = { fg = colors.gray7                 },
+    ['@neorg.anchors.definition.delimiter' ] = { fg = colors.gray7                 },
 
-    NeorgAnchorDeclarationText      = { fg = colors.teal  },
-    NeorgAnchorDeclarationDelimiter = { fg = colors.gray7 },
-    NeorgAnchorDefinitionDelimiter  = { fg = colors.gray7 },
+    ['@neorg.insertions'                   ] = { fg = colors.white , bold   = true },
+    ['@neorg.insertions.item'              ] = { fg = colors.yellow                },
+    ['@neorg.insertions.parameters'        ] = { fg = colors.gray7 , italic = true },
+    ['@neorg.insertions.prefix'            ] = { fg = colors.gray7                 },
+    ['@neorg.insertions.variable.name'     ] = { fg = colors.teal                  },
+    ['@neorg.insertions.variable.value'    ] = { fg = colors.gray7                 },
 
-    NeorgInsertion                  = { fg = colors.white, bold   = true },
-    NeorgInsertionPrefix            = { fg = colors.gray7                },
-    NeorgInsertionVariable          = { fg = colors.teal                 },
-    NeorgInsertionVariableValue     = { fg = colors.gray7                },
-    NeorgInsertionItem              = { fg = colors.yellow               },
-    NeorgInsertionParameters        = { fg = colors.gray7, italic = true },
-
-    NeorgTrailingModifier           = { fg = colors.gray7 },
-    NeorgLinkModifier               = { fg = colors.gray7 },
-
-    NeorgDocumentMetaKey            = { fg = colors.green,  bold = true },
-    NeorgDocumentMetaValue          = { fg = colors.white               },
-    NeorgDocumentMetaCarryover      = { fg = colors.red                 },
-    NeorgDocumentMetaTitle          = { fg = colors.orange, bold = true },
-    NeorgDocumentMetaDescription    = { fg = colors.yellow              },
-    NeorgDocumentMetaAuthors        = { fg = colors.purple              },
-    NeorgDocumentMetaCategories     = { fg = colors.blue                },
-    NeorgDocumentMetaCreated        = { fg = colors.blue                },
-    NeorgDocumentMetaVersion        = { fg = colors.teal                },
-    NeorgDocumentMetaObjectBracket  = { fg = colors.white               },
-    NeorgDocumentMetaArrayBracket   = { fg = colors.white               },
-    NeorgDocumentMetaArrayValue     = { fg = colors.white               },
+    ['@neorg.modifiers.escape'             ] = { fg = colors.yellow                },
+    ['@neorg.modifiers.link'               ] = { fg = colors.gray7                 },
+    ['@neorg.modifiers.trailing'           ] = { fg = colors.gray7                 },
     -- }}}
 }
 
--- {{{ repetition is annoying
-for i=1,6 do --
-    -- {{{ ordered lists
-    set_hl(0, 'NeorgOrderedList' .. i, { fg = colors.red,   bold      = true })
-    set_hl(0, 'NeorgOrderedLink' .. i, { fg = colors.blue,  underline = true })
-    -- }}}
+-- {{{ same value for 6 highlights
+for i = 1, 6 do
+    -- {{{ lists
+    -- ordered lists
+    hl['@neorg.lists.unordered.' .. i .. '.prefix'] = { fg = colors.gray7 }
 
-    -- {{{ unordered lists
-    set_hl(0, 'NeorgOrderedList' .. i, { fg = colors.gray7, bold      = true })
-    set_hl(0, 'NeorgOrderedLink' .. i, { fg = colors.blue,  underline = true })
+    -- unordered lists
+    hl['@neorg.lists.ordered'    .. i .. '.prefix'] = { fg = colors.gray7 }
     -- }}}
 
     -- {{{ todos
-    --                                item                  fg                  strikethrough         italic         bold
-    set_hl(0, 'NeorgTodoItem' .. i                      , { fg = colors.gray7 ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'Undone'          , { fg = colors.gray7 ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'UndoneContent'   , { fg = colors.white ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'Pending'         , { fg = colors.yellow,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'PendingContent'  , { fg = colors.white ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'Done'            , { fg = colors.teal  ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'DoneContent'     , { fg = colors.white ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'Cancelled'       , { fg = colors.gray7 ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'CancelledContent', { fg = colors.gray7 , strikethrough = true, italic = true,             })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'Urgent'          , { fg = colors.red   ,                                      bold = true })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'UrgentContent'   , { fg = colors.red   ,                                      bold = true })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'OnHold'          , { fg = colors.blue  ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'OnHoldContent'   , { fg = colors.white ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'Recurring'       , { fg = colors.green ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'RecurringContent', { fg = colors.white ,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'Uncertain'       , { fg = colors.purple,                                                  })
-    set_hl(0, 'NeorgTodoItem' .. i .. 'UncertainContent', { fg = colors.white ,                                                  })
+    local todos = {
+        undone    = { pre = { fg = colors.gray7  } },
+        pending   = { pre = { fg = colors.yellow } },
+        done      = { pre = { fg = colors.teal   } },
+        cancelled = {
+            pre     = { fg = colors.gray7                                      },
+            content = { fg = colors.gray7, strikethrough = true, italic = true },
+        },
+        urgent    = {
+            pre     = { fg = colors.red, bold = true },
+            content = { fg = colors.red              },
+        },
+        on_hold   = { pre = { fg = colors.blue   } },
+        recurring = { pre = { fg = colors.green  } },
+        uncertain = { pre = { fg = colors.purple } },
+    }
+
+    for k, v in pairs(todos) do
+        local content = v.content or { fg = colors.white }
+
+        hl['@neorg.todo_items.' .. k .. '.' .. i              ] = v.pre
+        hl['@neorg.todo_items.' .. k .. '.' .. i .. '.content'] = content
+    end
     -- }}}
 end
 -- }}}

@@ -97,16 +97,14 @@ packer.startup({
 
         -- {{{ improved syntax plugins
         -- treesitter
-		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', commit = 'd810c38' })
+		use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', commit = '2f5be45' })
 
         -- colors
         use({ 'rrethy/vim-hexokinase', run = 'make hexokinase', commit = '62324b4' })
 		use({ 'norcalli/nvim-colorizer.lua', commit = '36c610a' })
 
         -- documents
-        use({ 'nvim-neorg/neorg', requires = { 'nvim-lua/plenary.nvim', 'nvim-neorg/neorg-telescope' }, commit = '5dc942c' })
-        use({ 'ellisonleao/glow.nvim', commit = '900042f'})
-        use({ 'jbyuki/nabla.nvim', commit = '8bcec91' })
+        use({ 'nvim-neorg/neorg', requires = { 'nvim-lua/plenary.nvim', 'nvim-neorg/neorg-telescope' }, commit = '10cd28e' })
 		-- }}}
 
 		-- {{{ themes

@@ -5,7 +5,6 @@ local saga = require('lspsaga')
 -- scheme
 local scheme = require('lib.scheme')
 local colors = scheme.colors
-local a = ''
 -- }}}
 
 -- {{{ setup
