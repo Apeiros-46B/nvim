@@ -150,19 +150,22 @@ neorg.setup({
 
                         level_4 = {
                             enabled = true,
-                            icon = '   🞅 ',
+                            -- icon = '   🞅 ',
+                            icon = '   ◉ ',
                             highlight = 'NeorgHeading4',
                         },
 
                         level_5 = {
                             enabled = true,
-                            icon = '    🮮 ',
+                            -- icon = '    🮮 ',
+                            icon = '    ◈ ',
                             highlight = 'NeorgHeading5',
                         },
 
                         level_6 = {
                             enabled = true,
-                            icon = '     🞏 ',
+                            -- icon = '     🞏 ',
+                            icon = '     ▣ ',
                             highlight = 'NeorgHeading6',
                         },
                     },
@@ -317,23 +320,23 @@ local hl = {
 
     -- {{{ tags
     ['@neorg.tags.ranged_verbatim.begin'         ] = { fg = colors.red    },
-    ['@neorg.tags.ranged_verbatim.code_block'    ] = { bg = colors.gray2  },
+    ['@neorg.tags.ranged_verbatim.code_block'    ] = { fg = colors.gray6  },
     ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.red    },
-    ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.yellow },
+    ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.teal   },
 
     ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.white  },
     ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.gray7  },
     ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.red    },
 
     -- {{{ document meta
-    ['@neorg.tags.ranged_verbatim.document_meta.authors'       ] = { fg = colors.purple              },
-    ['@neorg.tags.ranged_verbatim.document_meta.categories'    ] = { fg = colors.green               },
-    ['@neorg.tags.ranged_verbatim.document_meta.description'   ] = { fg = colors.yellow              },
-    ['@neorg.tags.ranged_verbatim.document_meta.title'         ] = { fg = colors.orange, bold = true },
+    ['@neorg.tags.ranged_verbatim.document_meta.authors'       ] = { fg = colors.green               },
+    ['@neorg.tags.ranged_verbatim.document_meta.description'   ] = { fg = colors.orange              },
+    ['@neorg.tags.ranged_verbatim.document_meta.title'         ] = { fg = colors.red,    bold = true },
 
+    ['@neorg.tags.ranged_verbatim.document_meta.categories'    ] = { fg = colors.blue                },
     ['@neorg.tags.ranged_verbatim.document_meta.created'       ] = { fg = colors.blue                },
     ['@neorg.tags.ranged_verbatim.document_meta.updated'       ] = { fg = colors.blue                },
-    ['@neorg.tags.ranged_verbatim.document_meta.version'       ] = { fg = colors.teal                },
+    ['@neorg.tags.ranged_verbatim.document_meta.version'       ] = { fg = colors.blue                },
 
     ['@neorg.tags.ranged_verbatim.document_meta.array.bracket' ] = { fg = colors.white               },
     ['@neorg.tags.ranged_verbatim.document_meta.array.value'   ] = { fg = colors.white               },
@@ -341,15 +344,15 @@ local hl = {
     ['@neorg.tags.ranged_verbatim.document_meta.trailing'      ] = { fg = colors.white               },
 
     ['@neorg.tags.ranged_verbatim.document_meta.key'           ] = { fg = colors.yellow, bold = true },
-    ['@neorg.tags.ranged_verbatim.document_meta.value'         ] = { fg = colors.white               },
+    ['@neorg.tags.ranged_verbatim.document_meta.value'         ] = { fg = colors.green               },
     -- }}}
 
     ['@neorg.tags.carryover.begin'         ] = { fg = colors.orange },
     ['@neorg.tags.carryover.parameters'    ] = { fg = colors.teal   },
 
-    ['@neorg.tags.carryover.name'          ] = { fg = colors.white  },
+    ['@neorg.tags.carryover.name'          ] = { fg = colors.orange },
     ['@neorg.tags.carryover.name.delimiter'] = { fg = colors.gray7  },
-    ['@neorg.tags.carryover.name.word'     ] = { fg = colors.white  },
+    ['@neorg.tags.carryover.name.word'     ] = { fg = colors.orange },
     -- }}}
 
     -- {{{ headings
@@ -493,7 +496,7 @@ for i = 1, 6 do
     hl['@neorg.lists.unordered.' .. i .. '.prefix'] = { fg = colors.gray7 }
 
     -- unordered lists
-    hl['@neorg.lists.ordered'    .. i .. '.prefix'] = { fg = colors.gray7 }
+    hl['@neorg.lists.ordered.'   .. i .. '.prefix'] = { fg = colors.gray7 }
     -- }}}
 
     -- {{{ todos
@@ -509,9 +512,9 @@ for i = 1, 6 do
             pre     = { fg = colors.red, bold = true },
             content = { fg = colors.red              },
         },
-        on_hold   = { pre = { fg = colors.blue   } },
-        recurring = { pre = { fg = colors.green  } },
-        uncertain = { pre = { fg = colors.purple } },
+        on_hold   = { pre = { fg = colors.blue                } },
+        recurring = { pre = { fg = colors.green               } },
+        uncertain = { pre = { fg = colors.purple, bold = true } },
     }
 
     for k, v in pairs(todos) do
