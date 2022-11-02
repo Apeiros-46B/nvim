@@ -139,8 +139,8 @@ map('n', '<leader>Ld', ':Lspsaga preview_definition<CR>', opt)
 
 --- floating term
 map('n', '<M-d>', ':Lspsaga open_floaterm<CR>', opt)
-map('t', '<M-d>', '<C-\\><C-n>:exec "Lspsaga close_floaterm" <Bar> q<CR>', opt)
-map('t', '<M-x>', '<C-\\><C-n>:exec "Lspsaga close_floaterm" <Bar> q<CR>', opt)
+map('t', '<M-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
+map('t', '<M-x>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
 -- }}}
 
 -- mvn clean package

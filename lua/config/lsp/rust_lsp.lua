@@ -3,7 +3,7 @@ return function(on_attach)
         -- rust-tools options
         tools = {
             autoSetHints = true,
-            hover_with_actions = true,
+            -- hover_with_actions = true,
             inlay_hints = {
                 right_align = true,
                 show_parameter_hints = true,

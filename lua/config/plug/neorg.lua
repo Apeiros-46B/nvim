@@ -183,17 +183,17 @@ neorg.setup({
 
                         single = {
                             enabled = true,
-                            icon = '≡',
+                            icon = '',
                             highlight = 'NeorgDefinition',
                         },
                         multi_prefix = {
                             enabled = true,
-                            icon = '⋙ ',
+                            icon = '->',
                             highlight = 'NeorgDefinition',
                         },
                         multi_suffix = {
                             enabled = true,
-                            icon = '⋘ ',
+                            icon = '<-',
                             highlight = 'NeorgDefinitionEnd',
                         },
                     },
@@ -262,14 +262,15 @@ neorg.setup({
         -- }}}
 
         -- {{{ directory manager
-        -- ['core.norg.dirman'] = {
-        --     config = {
-        --         workspaces = {
-        --             school = '~/notes/school',
-        --             home   = '~/notes/home',
-        --         },
-        --     },
-        -- },
+        ['core.norg.dirman'] = {
+            config = {
+                workspaces = {
+                    school = '~/notes/school',
+                    home   = '~/notes/home',
+                    gtd    = '~/notes/gtd'
+                },
+            },
+        },
         -- }}}
 
         -- {{{ highlights
@@ -296,6 +297,14 @@ neorg.setup({
 
         -- {{{ telescope integration
         ['core.integrations.telescope'] = {},
+        -- }}}
+
+        -- {{{ gtd
+        ["core.gtd.base"] = {
+            config = {
+                workspace = 'gtd',
+            }
+        }
         -- }}}
     }
 })
@@ -333,9 +342,9 @@ local hl = {
     ['@neorg.tags.ranged_verbatim.document_meta.description'   ] = { fg = colors.orange              },
     ['@neorg.tags.ranged_verbatim.document_meta.title'         ] = { fg = colors.red,    bold = true },
 
-    ['@neorg.tags.ranged_verbatim.document_meta.categories'    ] = { fg = colors.blue                },
-    ['@neorg.tags.ranged_verbatim.document_meta.created'       ] = { fg = colors.blue                },
-    ['@neorg.tags.ranged_verbatim.document_meta.updated'       ] = { fg = colors.blue                },
+    ['@neorg.tags.ranged_verbatim.document_meta.categories'    ] = { fg = colors.green               },
+    ['@neorg.tags.ranged_verbatim.document_meta.created'       ] = { fg = colors.teal                },
+    ['@neorg.tags.ranged_verbatim.document_meta.updated'       ] = { fg = colors.teal                },
     ['@neorg.tags.ranged_verbatim.document_meta.version'       ] = { fg = colors.blue                },
 
     ['@neorg.tags.ranged_verbatim.document_meta.array.bracket' ] = { fg = colors.white               },
@@ -371,12 +380,12 @@ local hl = {
     -- }}}
 
     -- {{{ quotes
-    ['@neorg.quotes.1.prefix' ] = { fg = colors.gray5                },
-    ['@neorg.quotes.1.content'] = { fg = colors.gray5, italic = true },
-    ['@neorg.quotes.2.prefix' ] = { fg = colors.gray6                },
-    ['@neorg.quotes.2.content'] = { fg = colors.gray6, italic = true },
-    ['@neorg.quotes.3.prefix' ] = { fg = colors.gray7                },
-    ['@neorg.quotes.3.content'] = { fg = colors.gray7, italic = true },
+    ['@neorg.quotes.1.prefix' ] = { fg = colors.gray7                },
+    ['@neorg.quotes.1.content'] = { fg = colors.gray7, italic = true },
+    ['@neorg.quotes.2.prefix' ] = { fg = colors.gray7                },
+    ['@neorg.quotes.2.content'] = { fg = colors.gray7, italic = true },
+    ['@neorg.quotes.3.prefix' ] = { fg = colors.gray8                },
+    ['@neorg.quotes.3.content'] = { fg = colors.gray8, italic = true },
     ['@neorg.quotes.4.prefix' ] = { fg = colors.gray8                },
     ['@neorg.quotes.4.content'] = { fg = colors.gray8, italic = true },
     ['@neorg.quotes.5.prefix' ] = { fg = colors.gray9                },

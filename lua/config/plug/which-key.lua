@@ -1,3 +1,4 @@
+-- {{{ setup
 local wk = require('which-key')
 
 wk.setup({
@@ -60,7 +61,9 @@ wk.setup({
       v = { 'j', 'k' },
     },
 })
+-- }}}
 
+-- {{{ leader
 local ldr_keymap = {
 	a = {
 		name = 'Hop',
@@ -205,7 +208,34 @@ local ldr_keymap = {
 wk.register(ldr_keymap, {
 	prefix = '<leader>',
 })
+-- }}}
 
+-- {{{ local leader
+local lldr_keymap = {
+    -- neorg
+    m = {
+        name = 'Mode',
+        h = 'Traverse headings',
+        n = 'Normal',
+    },
+    n = {
+        name = 'New',
+        n = 'Neorg document',
+    },
+    t = {
+        name = 'GTD',
+        c = 'Capture task',
+        e = 'Edit task under cursor',
+        v = 'Open views',
+    }
+}
+
+wk.register(lldr_keymap, {
+    prefix = '<localleader>'
+})
+-- }}}
+
+-- {{{ g
 local g_keymap = {
     -- himalaya
     a = { 'Download attachments' },
@@ -220,7 +250,7 @@ local g_keymap = {
 
     -- neorg
     t = {
-        name = 'Todos',
+        name = 'Todo under cursor',
         c = { 'Cancel' },
         d = { 'Mark as done' },
         h = { 'Put on hold' },
@@ -230,13 +260,9 @@ local g_keymap = {
         u = { 'Mark as undone' },
     },
     O = { 'Show ToC' },
-    -- e = {
-    --     name = 'Export',
-    --     p = 'As PDF',
-    --     d = 'As DOCX',
-    -- },
 }
 
 wk.register(g_keymap, {
     prefix = 'g'
 })
+-- }}}
