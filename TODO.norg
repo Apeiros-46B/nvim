@@ -1,0 +1,8 @@
+* Neovim to-do list
+  - [ ] Add `init.lua` under `lua/config/core`
+  - [ ] Look into replacing `packer.nvim` with `dep`
+  - [ ] Fix potentially broken configs after restructure
+  - [ ] Look into `legendary.nvim` and potentially consider
+  -- [ ] Replacing current keybind system with `legendary.nvim`
+  -- [ ] Replacing `which-key` and current keybind system with `hydra.nvim`
+  - [ ] Add all other new plugins queued
