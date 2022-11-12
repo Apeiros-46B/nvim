@@ -273,6 +273,14 @@ neorg.setup({
         },
         -- }}}
 
+        -- {{{ gtd
+        ["core.gtd.base"] = {
+            config = {
+                workspace = 'gtd',
+            }
+        },
+        -- }}}
+
         -- {{{ highlights
         ['core.highlights'] = {},
         -- }}}
@@ -297,14 +305,6 @@ neorg.setup({
 
         -- {{{ telescope integration
         ['core.integrations.telescope'] = {},
-        -- }}}
-
-        -- {{{ gtd
-        ["core.gtd.base"] = {
-            config = {
-                workspace = 'gtd',
-            }
-        }
         -- }}}
     }
 })

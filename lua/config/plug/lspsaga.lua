@@ -10,7 +10,7 @@ local colors = scheme.colors
 -- {{{ setup
 saga.init_lsp_saga({
     -- border_style           = 'bold',
-    -- code_action_lightbulb  = { enable = false, },
+    code_action_lightbulb  = { enable = false, },
 })
 
 -- for some reason `diagnostic_header_icon` option won't work, so i have to do this:

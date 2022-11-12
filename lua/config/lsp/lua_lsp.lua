@@ -1,5 +1,5 @@
 return function(on_attach)
-    require('lspconfig').sumneko_lua.setup({
+    return require('lspconfig').sumneko_lua.setup({
 	    -- cmd = { sumneko_binary, '-E', sumneko_install_path .. '/main.lua' },
 	    settings = {
 		    Lua = {
@@ -11,7 +11,7 @@ return function(on_attach)
 			    },
 			    diagnostics = {
 				    -- Get the language server to recognize the `vim` global and `awesome`-related globals
-				    globals = { 'vim', 'root', 'client', 'awesome' },
+				    globals = { 'vim', 'root', 'client', 'awesome', 'screen', 'tag' },
 			    },
 			    workspace = {
 				    -- Make the server aware of Neovim runtime files

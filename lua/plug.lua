@@ -84,6 +84,10 @@ packer.startup({
         use({ 'itchyny/calendar.vim' })
         use({ 'famiu/nvim-reload' })
         use({ 'soywod/himalaya' })
+        use({ 'jbyuki/quickmath.nvim' })
+
+        -- #3a454a
+        -- #384348
 		-- }}}
 
         -- {{{ git plugins

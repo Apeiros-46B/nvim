@@ -1,5 +1,5 @@
 return function(on_attach)
-    require('rust-tools').setup({
+    return require('rust-tools').setup({
         -- rust-tools options
         tools = {
             autoSetHints = true,
