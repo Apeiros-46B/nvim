@@ -1,20 +1,20 @@
--- load all packer plugins
+-- {{{ load plugins
+--> incl. dep bootstrap, plugin declarations
 require('plug')
+-- }}}
 
--- load keybindings and editor options
-require('keymap')
-require('options')
-require('autocmds')
+-- {{{ load core config
+--> autocmds, keymaps, and options
+require('config.core')
 
--- load theme
-require('lib.scheme').load_shared_scheme('everforest')
+--> theme library
+require('theme').load_both('everforest')
+-- }}}
 
--- load custom highlights
-require('highlights')
+-- {{{ load other config
+--> lsp server configurations
+require('config.lsp')
 
--- load configurations
-require('config.lsp')     -- lsp server config
-require('config.plug')    -- plugin config
-require('config.modules') -- user contrib files (wip)
-
--- # vim foldmethod=marker
+--> plugin configurations
+require('config.plug')
+-- }}}

@@ -1,2 +1,2 @@
 -- Start JDTLS
-require('config.lsp.java_lsp')
+require('config.lsp.servers.java')

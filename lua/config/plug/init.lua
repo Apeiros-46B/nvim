@@ -1,33 +1,11 @@
---[[
-This init file loads all of the plugin configuration files
---]]
-
+-- load all plugin configurations
+-- {{{ return
 return {
-    -- original nii-nvim plugins
-    require('config.plug.hop'),
-    require('config.plug.cmp'),
-    require('config.plug.lualine'),
-    require('config.plug.lspkind'),
-    require('config.plug.nvimtree'),
-    require('config.plug.gitsigns'),
-    require('config.plug.ultisnips'),
-    require('config.plug.autopairs'),
-    require('config.plug.telescope'),
-    require('config.plug.which-key'),
-    require('config.plug.nvimcomment'),
-    -- require('config.plug.nvimcolorizer'),
-    require('config.plug.treesitter'),
-
-    -- plugins added by me
-    require('config.plug.calendar'),
-    require('config.plug.hexokinase'),
-    require('config.plug.himalaya'),
-    require('config.plug.fugitive'),
-    require('config.plug.lspsaga'),
-    require('config.plug.mini'),
-    require('config.plug.navic'),
-    require('config.plug.neorg'),
-    require('config.plug.trouble'),
+    require('config.plug.completion'), -- configs related to completion engine
+    require('config.plug.editing'),    -- configs related to general text editing
+    require('config.plug.git'),        -- configs related to git plugins
+    require('config.plug.lsp'),        -- configs related to lsp plugins
+    require('config.plug.ui'),         -- configs related to user interface
+    require('config.plug.util'),       -- configs related to other utility plugins
 }
-
--- # vim foldmethod=marker
+-- }}}
