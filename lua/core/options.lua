@@ -22,6 +22,7 @@ opt.hidden = true 		-- keeps buffers loaded in the background
 opt.ignorecase = true
 opt.scrolloff = 4   	-- buffer starts scrolling 4 lines from the end of view
 opt.incsearch = true
+opt.lazyredraw = true   -- lazy redraw
 
 -- diagnostics
 vim.diagnostic.config({

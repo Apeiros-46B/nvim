@@ -26,32 +26,6 @@ vim.g.maplocalleader = ','
 -- }}}
 
 -- {{{ mapping
--- {{{ cmp
-local cmp = require('cmp')
-
-local next = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
-local prev = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' })
-
-M.cmp_mappings = {
-    ['<Tab>']     = next,
-    ['<S-Tab>']   = prev,
-    ['<C-n>']     = next,
-    ['<C-p>']     = prev,
-
-    ['<C-Space>'] = cmp.mapping.complete(),
-
-    ['<C-d>']     = cmp.mapping.scroll_docs(-4),
-    ['<C-f>']     = cmp.mapping.scroll_docs(4),
-
-    ['<C-e>']     = cmp.mapping.close(),
-
-    ['<CR>']      = cmp.mapping.confirm({
-        behavior  = cmp.ConfirmBehavior.Insert,
-        select    = true,
-    }),
-}
--- }}}
-
 -- {{{ misc
 map('n', 'WW', ':w<CR>', opt)
 
@@ -87,27 +61,6 @@ map('n', '<leader>fw', ':Telescope live_grep<CR>', { noremap = true })
 -- }}}
 
 -- {{{ [g] git
-M.gitsigns_mappings = {
-    noremap = true,
-    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
-    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
-
-    ['n <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['v <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['v <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ['n <leader>gp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n <leader>gb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-    ['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
-    ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
-
-    -- Text objects
-    ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-    ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-}
-
 map('n', '<leader>gg', ':Git<CR>', opt)
 map('n', '<leader>gB', ':Git blame<CR>', opt)
 map('n', '<leader>gc', ':Git commit<CR>', opt)

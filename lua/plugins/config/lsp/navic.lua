@@ -4,7 +4,7 @@
 local navic = require('nvim-navic')
 
 -- theme
-local theme = require('theme')
+local theme = require('core.theme')
 local colors = theme.colors
 -- }}}
 

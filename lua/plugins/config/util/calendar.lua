@@ -4,7 +4,7 @@
 local g = vim.g
 
 -- theme
-local theme = require('theme')
+local theme = require('core.theme')
 local colors = theme.colors
 -- }}}
 
@@ -21,6 +21,7 @@ g.calendar_frame = 'default'
 
 -- {{{ custom highlights
 local set_hl = vim.api.nvim_set_hl
+
 local hl = {
     CalendarSelect           = {                    bg = colors.gray3                },
     CalendarDayTitle         = { fg = colors.white, bg = colors.gray3, bold   = true },
@@ -42,5 +43,6 @@ local hl = {
     CalendarOtherMonth       = { fg = colors.gray8                                   },
     CalendarOtherMonthSelect = { fg = colors.gray8, bg = colors.gray3                },
 }
-for k,v in pairs(hl) do set_hl(0, k, v) end
+
+for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}

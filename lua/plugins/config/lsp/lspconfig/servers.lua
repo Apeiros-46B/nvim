@@ -1,28 +1,21 @@
--- define and set opts for LSP servers
+-- define and set opts for lsp servers
 -- {{{ imports
 local t = table
 local lspconfig = require('lspconfig')
-local rust_tools = require('rust-tools')
 -- }}}
 
 -- {{{ setup
 return function(on_attach)
-
-    -- {{{ helpers
-    local M = {}
-
+    -- {{{ helper
     local function add(server, opts)
         local new_opts = { on_attach = on_attach }
 
-        if server == rust_tools then
-            -- if setting up non-lspconfig servers, don't add on_attach
-            new_opts = opts
-        elseif opts then
+        if opts then
             -- add on_attach
             new_opts = vim.tbl_extend('force', opts, new_opts)
         end
 
-        t.insert(M, server.setup(new_opts))
+        server.setup(new_opts)
     end
     -- }}}
 
@@ -47,31 +40,6 @@ return function(on_attach)
     -- }}}
 
     -- {{{ opts
-    --> {{{ [rust] rust_analyzer (rust-tools)
-    add(require('rust-tools'), {
-        tools = {
-            autoSetHints = true,
-            inlay_hints = {
-                right_align = true,
-                show_parameter_hints = true,
-                parameter_hints_prefix = "",
-                other_hints_prefix = "",
-            },
-        },
-
-        server = {
-            on_attach = on_attach,
-            settings = {
-                ["rust-analyzer"] = {
-                    checkOnSave = {
-                        command = "clippy"
-                    },
-                }
-            }
-        },
-    })
-    --> }}}
-
     --> {{{ [lua] sumneko_lua
     add(lspconfig.sumneko_lua, {
         settings = {
@@ -108,7 +76,5 @@ return function(on_attach)
     })
     --> }}}
     -- }}}
-
-    return M
 end
 -- }}}

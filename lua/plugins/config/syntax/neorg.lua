@@ -5,7 +5,7 @@ local neorg = require('neorg')
 local api   = vim.api
 
 -- theme
-local theme = require('theme')
+local theme = require('core.theme')
 local colors = theme.colors
 -- }}}
 
@@ -18,11 +18,11 @@ neorg.setup({
         -- }}}
 
         -- {{{ completion
-        ['core.norg.completion'] = {
-            config = {
-                engine = 'nvim-cmp',
-            },
-        },
+        -- ['core.norg.completion'] = {
+        --     config = {
+        --         engine = 'nvim-cmp',
+        --     },
+        -- },
         -- }}}
 
         -- {{{ concealer

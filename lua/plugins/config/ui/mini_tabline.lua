@@ -1,6 +1,11 @@
 -- configuration of tabline module for mini.nvim
 -- {{{ imports
+-- main
 local tabline = require('mini.tabline')
+
+-- theme
+local theme = require('core.theme')
+local colors = theme.colors
 -- }}}
 
 -- {{{ setup
@@ -19,9 +24,6 @@ tabline.setup({
 -- }}}
 
 -- {{{ custom highlight
-local theme = require('theme')
-local colors = theme.colors
-
 local set_hl = vim.api.nvim_set_hl
 
 local hl = {

@@ -4,7 +4,7 @@
 local saga = require('lspsaga')
 
 -- theme
-local theme = require('theme')
+local theme = require('core.theme')
 local colors = theme.colors
 -- }}}
 

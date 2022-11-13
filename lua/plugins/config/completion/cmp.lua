@@ -2,11 +2,34 @@
 -- {{{ imports
 -- main
 local cmp = require('cmp')
-local keys = require('config.core.keys')
 
 -- theme
-local theme = require('theme')
+local theme = require('core.theme')
 local colors = theme.colors
+-- }}}
+
+-- {{{ keymaps
+local next = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
+local prev = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' })
+
+local keymaps = {
+    ['<Tab>']     = next,
+    ['<S-Tab>']   = prev,
+    ['<C-n>']     = next,
+    ['<C-p>']     = prev,
+
+    ['<C-Space>'] = cmp.mapping.complete(),
+
+    ['<C-d>']     = cmp.mapping.scroll_docs(-4),
+    ['<C-f>']     = cmp.mapping.scroll_docs(4),
+
+    ['<C-e>']     = cmp.mapping.close(),
+
+    ['<CR>']      = cmp.mapping.confirm({
+        behavior  = cmp.ConfirmBehavior.Insert,
+        select    = true,
+    }),
+}
 -- }}}
 
 -- {{{ setup
@@ -35,7 +58,7 @@ cmp.setup({
     window = {
         completion = {
             winhighlight = 'Normal:Pmenu,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None',
-            col_offset = -4, -- why won't this work?
+            col_offset = -4,
             side_padding = 0,
         },
     },
@@ -54,7 +77,7 @@ cmp.setup({
     -- }}}
 
     -- {{{ sources
-	sources = cmp.config.sources({
+    sources = cmp.config.sources({
             { name = 'nvim_lsp', priority = 1 },
             { name = 'ultisnips' },
         },
@@ -66,18 +89,18 @@ cmp.setup({
     -- }}}
 
     -- {{{ other options
-	snippet = {
-		expand = function(args)
-			vim.fn['UltiSnips#Anon'](args.body)
-		end,
-	},
+    snippet = {
+        expand = function(args)
+            vim.fn['UltiSnips#Anon'](args.body)
+        end,
+    },
     experimental = {
         ghost_text = true,
     },
     completion = {
         keyword_length = 1,
     },
-	mapping = keys.cmp_mappings,
+    mapping = keymaps,
     preselect = cmp.PreselectMode.None,
     -- }}}
 })

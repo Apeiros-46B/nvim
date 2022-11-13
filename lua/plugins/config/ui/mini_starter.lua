@@ -1,6 +1,11 @@
 -- configuration for starter module of mini.nvim
 -- {{{ imports
+-- main
 local starter = require('mini.starter')
+
+-- theme
+local theme = require('core.theme')
+local colors = theme.colors
 -- }}}
 
 -- {{{ sections
@@ -32,9 +37,6 @@ starter.setup({
 -- }}}
 
 -- {{{ custom highlights
-local theme = require('theme')
-local colors = theme.colors
-
 local set_hl = vim.api.nvim_set_hl
 
 local hl = {
