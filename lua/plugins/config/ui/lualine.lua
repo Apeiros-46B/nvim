@@ -1,65 +1,91 @@
 -- configuration for lualine statusline
--- {{{ load theme library
-local theme = require('theme')
-
--- initialize vars for themes
-local lualine_theme = nil
-
--- if a theme is not bundled with lualine, look for a theme file
-if theme.is_lualine_default == false then
-	lualine_theme = require('theme.lualine.' .. theme.theme)
-else
-	lualine_theme = theme.theme
-end
-
--- get colors
-local colors = theme.colors
--- }}}
-
--- {{{ other imports
+-- {{{ imports
 local vim = vim
 local fn = vim.fn
 local g = vim.g
 local cc = vim.api.nvim_create_user_command -- *c*reate *c*ommand
+
+local theme = require('core.theme')
+local colors = theme.colors
 -- }}}
 
--- {{{ custom separators
-theme.set_lualine_style({ '',  ''  })
+-- {{{ main style
+local style = {}
 
--- {{{ vertical lines
--- theme.set_lualine_separator({ '│', '│' })
--- theme.set_lualine_separator({ '┃', '┃' })
--- theme.set_lualine_separator({ '⎮', '⎮' })
--- theme.set_lualine_separator({ '|', '|' })
+style = { '', '' }
 -- }}}
 
--- {{{ slashes
--- theme.set_lualine_separator({ [[\]], [[\]] })
--- theme.set_lualine_separator({ [[/]], [[/]] })
--- theme.set_lualine_separator({ [[/]], [[\]] })
--- theme.set_lualine_separator({ [[\]], [[/]] })
+-- {{{ separator style
+local sep = {}
+
+-- sep = { '│', '│' }
+-- sep = { '┃', '┃' }
+-- sep = { '⎮', '⎮' }
+-- sep = { '|', '|' }
+
+-- sep = { [[\]], [[\]] }
+-- sep = { [[/]], [[/]] }
+-- sep = { [[/]], [[\]] }
+-- sep = { [[\]], [[/]] }
+
+-- sep = { '>', '<' }
+-- sep = { '<', '>' }
+-- sep = { '', '' }
+-- sep = { '', '' }
+-- sep = { '', '' }
+-- sep = { '', '' }
+-- sep = { '🞂',  '🞀'  }
+-- sep = { '🞀',  '🞂'  }
+-- sep = { '->', '<-' }
+-- sep = { '<-', '->' }
+
+-- sep = { '-', '-' }
+sep = { '~', '~' }
+-- sep = { '+', '+' }
+-- sep = { '', '' }
+-- sep = { '🞙', '🞙' }
 -- }}}
 
--- {{{ pointy
--- theme.set_lualine_separator({ '>', '<' })
--- theme.set_lualine_separator({ '<', '>' })
--- theme.set_lualine_separator({ '', '' })
--- theme.set_lualine_separator({ '', '' })
--- theme.set_lualine_separator({ '', '' })
--- theme.set_lualine_separator({ '', '' })
--- theme.set_lualine_separator({ '🞂',  '🞀'  })
--- theme.set_lualine_separator({ '🞀',  '🞂'  })
--- theme.set_lualine_separator({ '->', '<-' })
--- theme.set_lualine_separator({ '<-', '->' })
--- }}}
+-- {{{ theme
+local function a(color)
+	return { bg = color, fg = colors.gray1, gui = 'bold' }
+end
 
--- {{{ other
--- theme.set_lualine_separator({ '-', '-' })
-theme.set_lualine_separator({ '~', '~' })
--- theme.set_lualine_separator({ '+', '+' })
--- theme.set_lualine_separator({ '', '' })
--- theme.set_lualine_separator({ '🞙', '🞙' })
--- }}}
+local b = { bg = colors.gray4, fg = colors.gray8 }
+local c = { bg = colors.gray3, fg = colors.gray8 }
+
+local lualine_theme = {
+	normal = {
+		a = a(colors.green),
+		b = b,
+		c = c,
+	},
+	insert = {
+		a = a(colors.blue),
+		b = b,
+		c = c,
+	},
+	visual = {
+		a = a(colors.purple),
+		b = b,
+		c = c,
+	},
+	replace = {
+		a = a(colors.red),
+		b = b,
+		c = c,
+	},
+	command = {
+		a = a(colors.teal),
+		b = b,
+		c = c,
+	},
+	inactive = {
+		a = a(colors.gray8),
+		b = b,
+		c = c,
+	},
+}
 -- }}}
 
 -- {{{ reused functions, components & sections
@@ -394,7 +420,7 @@ require('lualine').setup({
         help,           -- `:help` panel
         himalaya,       -- inbox list and reading messages in himalaya
         himalaya_write, -- writing messages in himalaya
-        wc              -- word counter for markdown, org, and txt files
+        wc              -- word counter for markdown, norg, and txt files
     },
     -- }}}
 
@@ -402,8 +428,8 @@ require('lualine').setup({
 	options = {
 		theme = lualine_theme,
 
-		section_separators = { left = theme.lualine_style_left, right = theme.lualine_style_right },
-		component_separators = { left = theme.lualine_separator_left, right = theme.lualine_separator_right },
+		section_separators   = { left = style[1], style[2] },
+		component_separators = { left = sep[1],   sep[2]   },
 
         always_divide_middle = true,
         globalstatus = true,

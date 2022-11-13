@@ -1,20 +1,21 @@
--- {{{ load plugins
---> incl. dep bootstrap, plugin declarations
-require('plug')
+-- initialize configuration
+-- {{{ core
+-- disable shadafile during core config loading
+vim.opt.shadafile = "NONE"
+
+require('core.autocmds') -- autocommands
+require('core.keymaps')  -- keymaps
+require('core.options')  -- vim options
+require('core.theme')    -- theme and colorscheme
+require('core.misc')     -- miscellaneous
+
+-- re-enable shadafile after core config loading
+vim.opt.shadafile = ""
 -- }}}
 
--- {{{ load core config
---> autocmds, keymaps, and options
-require('config.core')
+-- {{{ plugins & lsp
+require('core.plugins')  -- load all plugins and lazy-load their configs
+                         -- note that lspconfig and related are not lazy-loaded
 
---> theme library
-require('theme').load_both('everforest')
--- }}}
-
--- {{{ load other config
---> lsp server configurations
-require('config.lsp')
-
---> plugin configurations
-require('config.plug')
+require('core.lsp')      -- load lsp setup script and language servers
 -- }}}

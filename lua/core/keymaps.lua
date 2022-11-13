@@ -1,4 +1,5 @@
--- {{{ helper functions
+-- define keymaps
+-- {{{ imports & helpers
 local function map(mode, bind, exec, opts)
     local options = { noremap = true, silent = true }
 

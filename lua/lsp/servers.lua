@@ -1,4 +1,4 @@
--- LSP servers
+-- define and set opts for LSP servers
 -- {{{ imports
 local t = table
 local lspconfig = require('lspconfig')

@@ -1,4 +1,4 @@
--- LSP setup script
+-- define LSP setup script
 -- {{{ imports
 local fn = vim.fn
 local api = vim.api

@@ -1,15 +1,12 @@
---[[
-	File for setting vim options
-
-	vim.cmd is like executing a whole command
-	vim.opt is like setting an opt
---]]
+-- set vim options
+-- {{{ imports
 local cmd = vim.cmd
 local opt = vim.opt
-local fn = vim.fn
 local g = vim.g
 local o = vim.o
+-- }}}
 
+-- {{{ options
 cmd('syntax enable') 	-- syntax highlighting
 o.rnu = false         	-- relative line numbers
 o.nu = true         	-- line numbers
@@ -66,5 +63,4 @@ opt.termguicolors = true
 
 -- neovide
 o.guifont = 'JetBrainsMono Nerd Font Mono:h13'
-
--- # vim foldmethod=marker
+-- }}}
