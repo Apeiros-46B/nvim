@@ -12,11 +12,6 @@ local colors = theme.colors
 -- {{{ setup
 neorg.setup({
     load = {
-        -- {{{ essentials
-        ['core.defaults'] = {},
-        ['core.integrations.treesitter'] = {},
-        -- }}}
-
         -- {{{ completion
         -- ['core.norg.completion'] = {
         --     config = {
@@ -274,6 +269,20 @@ neorg.setup({
         },
         -- }}}
 
+        -- {{{ essentials
+        ['core.defaults'] = {},
+        ['core.integrations.treesitter'] = {},
+        -- }}}
+
+        -- {{{ exports
+        ['core.export']          = {},
+        ['core.export.markdown'] = {
+            config = {
+                extensions = 'all',
+            }
+        },
+        -- }}}
+
         -- {{{ gtd
         ["core.gtd.base"] = {
             config = {
@@ -282,31 +291,12 @@ neorg.setup({
         },
         -- }}}
 
-        -- {{{ highlights
-        ['core.highlights'] = {},
-        -- }}}
-
-        -- {{{ indentation
-        -- ['core.norg.esupports.indent'] = {
-        --     config = {
-        --         -- Configuration here
-        --     }
-        -- },
-        -- }}}
-
-        -- {{{ exports
-        ['core.export']          = {},
-        ['core.export.markdown'] = {
-            config = {
-                -- extensions = { 'todo-items-basic', 'todo-items-extended', 'definition-lists', 'mathematics' },
-                extensions = 'all',
-            }
-        },
-        -- }}}
-
         -- {{{ telescope integration
         -- ['core.integrations.telescope'] = {},
         -- }}}
+
+        ['core.itero'] = {},
+        ['core.promo'] = {},
     }
 })
 -- }}}

@@ -126,7 +126,6 @@ map('t', '<M-x>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
 -- {{{ [n] neorg
 map('n', '<leader>nc', ':Neorg toggle-concealer<CR>', opt)
 map('n', '<leader>nC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', opt)
-map('n', [[\]], 'o- <Esc>a', opt)
 -- }}}
 
 -- {{{ [t] toggle
