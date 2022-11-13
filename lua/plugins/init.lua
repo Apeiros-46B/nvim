@@ -203,7 +203,7 @@ packer.startup({
         -- treesitter
         use({
             'nvim-treesitter/nvim-treesitter',
-            cmd = lazy.treesitter_cmds,
+            -- cmd = lazy.treesitter_cmds,
             -- setup = function()
             --     lazy.on_file_open('nvim-treesitter')
             -- end,

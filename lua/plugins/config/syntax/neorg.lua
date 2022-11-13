@@ -305,7 +305,7 @@ neorg.setup({
         -- }}}
 
         -- {{{ telescope integration
-        ['core.integrations.telescope'] = {},
+        -- ['core.integrations.telescope'] = {},
         -- }}}
     }
 })
