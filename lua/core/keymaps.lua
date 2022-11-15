@@ -14,7 +14,7 @@ local function unmap(mode, bind)
     vim.api.nvim_del_keymap(mode, bind)
 end
 
-local opt = {} --empty opt for maps with no extra options
+local opt = { silent = true } -- default opts
 local M = {}
 
 vim.g.mapleader = ' ' -- map leader key to space
@@ -40,12 +40,12 @@ map('n', '<leader>m', ':vs | enew | Quickmath<CR>', opt) -- open Quickmath in ve
 -- }}}
 
 -- {{{ [b] buffer
-map('n', '<leader>bd', ':bd<CR>',                { noremap = true })
-map('n', '<leader>bh', ':bp<CR>',                { noremap = true })
-map('n', '<leader>bj', ':bf<CR>',                { noremap = true })
-map('n', '<leader>bk', ':bl<CR>',                { noremap = true })
-map('n', '<leader>bl', ':bn<CR>',                { noremap = true })
-map('n', '<leader>bp', ':Telescope buffers<CR>', { noremap = true })
+map('n', '<leader>bd', ':bd<CR>',                opt)
+map('n', '<leader>bh', ':bp<CR>',                opt)
+map('n', '<leader>bj', ':bf<CR>',                opt)
+map('n', '<leader>bk', ':bl<CR>',                opt)
+map('n', '<leader>bl', ':bn<CR>',                opt)
+map('n', '<leader>bp', ':Telescope buffers<CR>', opt)
 -- }}}
 
 -- {{{ [F] format
@@ -54,40 +54,40 @@ map('n', '<leader>Fs', ':lua MiniTrailspace.trim()<CR>', opt) -- trim trailing s
 -- }}}
 
 -- {{{ [f] find
-map('n', '<leader>fb', ':Telescope marks<CR>', { noremap = true })
-map('n', '<leader>ff', ':Telescope find_files<CR>', { noremap = true })
-map('n', '<leader>fr', ':Telescope oldfiles<CR>', { noremap = true })
-map('n', '<leader>fw', ':Telescope live_grep<CR>', { noremap = true })
+map('n', '<leader>fb', ':Telescope marks<CR>', opt)
+map('n', '<leader>ff', ':Telescope find_files<CR>', opt)
+map('n', '<leader>fr', ':Telescope oldfiles<CR>', opt)
+map('n', '<leader>fw', ':Telescope live_grep<CR>', opt)
 -- }}}
 
 -- {{{ [g] git
 map('n', '<leader>gg', ':Git<CR>', opt)
 map('n', '<leader>gB', ':Git blame<CR>', opt)
 map('n', '<leader>gc', ':Git commit<CR>', opt)
-map('n', '<leader>gfc', ':Telescope git_commits<CR>', { noremap = true })
-map('n', '<leader>gfb', ':Telescope git_branches<CR>', { noremap = true })
+map('n', '<leader>gfc', ':Telescope git_commits<CR>', opt)
+map('n', '<leader>gfb', ':Telescope git_branches<CR>', opt)
 -- }}}
 
 -- {{{ [h] hop
-map('n', '<leader>hh', ':HopWord<CR>', opt)
-map('n', '<leader>hk', ':HopWordBC<CR>', opt)
-map('n', '<leader>hj', ':HopWordAC<CR>', opt)
-map('n', '<leader>hl', ':HopWordMW<CR>', opt)
-map('n', '<leader>hc', ':HopChar1<CR>', opt)
-map('n', '<leader>hC', ':HopChar2<CR>', opt)
-map('n', '<leader>hg', ':HopPattern<CR>', opt)
-map('n', '<leader>hn', ':HopLineStart<CR>', opt)
-map('n', '<leader>hf', ':HopWordCurrentLine<CR>', opt)
+map('n', '<leader>hh', ':HopWord<CR>', {})
+map('n', '<leader>hk', ':HopWordBC<CR>', {})
+map('n', '<leader>hj', ':HopWordAC<CR>', {})
+map('n', '<leader>hl', ':HopWordMW<CR>', {})
+map('n', '<leader>hc', ':HopChar1<CR>', {})
+map('n', '<leader>hC', ':HopChar2<CR>', {})
+map('n', '<leader>hg', ':HopPattern<CR>', {})
+map('n', '<leader>hn', ':HopLineStart<CR>', {})
+map('n', '<leader>hf', ':HopWordCurrentLine<CR>', {})
 -- }}}
 
 -- {{{ [j] jdtls
 map('n', '<leader>jb', ':vs | terminal<CR>imvn clean package -T 4<CR>', opt)
 map('n', '<leader>jo', ':lua require("jdtls").organize_imports()<CR>', opt)
 map('n', '<leader>jev', ':lua require("jdtls").extract_variable()<CR>', opt)
-map('v', '<leader>jev', '<Esc>:lua require("jdtls").extract_variable(true)<CR>', opt)
+map('v', '<leader>jev', ':<C-u>lua require("jdtls").extract_variable(true)<CR>', opt)
 map('n', '<leader>jec', ':lua require("jdtls").exttract_constant()<CR>', opt)
-map('v', '<leader>jec', '<Esc>:lua require("jdtls").extract_constant(true)<CR>', opt)
-map('v', '<leader>jem', '<Esc>:lua require("jdtls").extract_method(true)<CR>', opt)
+map('v', '<leader>jec', ':<C-u>lua require("jdtls").extract_constant(true)<CR>', opt)
+map('v', '<leader>jem', ':<C-u>lua require("jdtls").extract_method(true)<CR>', opt)
 -- }}}
 
 -- {{{ [l] lsp
@@ -103,12 +103,9 @@ map('n', '<leader>lf', ':Lspsaga lsp_finder<CR>', opt)
 
 --- code actions
 map('n', '<M-CR>', ':Lspsaga code_action<CR>', opt)
-map('v', '<M-CR>', ':<C-U>Lspsaga range_code_action<CR>', opt)
 
 --- hover doc
 map('n', '<leader>lp', ':Lspsaga hover_doc<CR>', opt)
-map('n', '<M-f>', ':lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', opt)
-map('n', '<M-b>', ':lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', opt)
 
 --- rename
 map('n', '<leader>lr', ':Lspsaga rename<CR>', opt)
@@ -129,11 +126,11 @@ map('n', '<leader>nC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>',
 -- }}}
 
 -- {{{ [t] toggle
-map('n', '<leader>tr', ':set rnu!<CR>', opt) -- relative line numbers
-map('n', '<leader>tW', ':set wrap!<CR>', opt) -- word wrap
+map('n', '<leader>tr', ':set rnu!<CR>', {}) -- relative line numbers
+map('n', '<leader>tW', ':set wrap!<CR>', {}) -- word wrap
 
-map('n', '<leader>tn', ':NavicToggle<CR>', opt) -- (lualine) navic
-map('n', '<leader>tw', ':WordCountToggle<CR>', opt) -- (lualine) word counter
+map('n', '<leader>tn', ':NavicToggle<CR>', {}) -- (lualine) navic
+map('n', '<leader>tw', ':WordCountToggle<CR>', {}) -- (lualine) word counter
 -- }}}
 
 -- {{{ [y] yank

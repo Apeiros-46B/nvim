@@ -38,48 +38,6 @@ M.colors = {
 }
 -- }}}
 
--- {{{ lualine theme
-local function a(color)
-	return { bg = color, fg = M.colors.gray1, gui = 'bold' }
-end
-
-local b = { bg = M.colors.gray4, fg = M.colors.gray8 }
-local c = { bg = M.colors.gray3, fg = M.colors.gray8 }
-
-M.lualine_theme = {
-	normal = {
-		a = a(M.colors.green),
-		b = b,
-		c = c,
-	},
-	insert = {
-		a = a(M.colors.blue),
-		b = b,
-		c = c,
-	},
-	visual = {
-		a = a(M.colors.purple),
-		b = b,
-		c = c,
-	},
-	replace = {
-		a = a(M.colors.red),
-		b = b,
-		c = c,
-	},
-	command = {
-		a = a(M.colors.teal),
-		b = b,
-		c = c,
-	},
-	inactive = {
-		a = a(M.colors.gray8),
-		b = b,
-		c = c,
-	},
-}
--- }}}
-
 -- {{{ load colorscheme
 vim.g.everforest_background = 'hard'
 vim.o.background = 'dark'
@@ -88,8 +46,9 @@ vim.cmd('colorscheme everforest')
 
 -- {{{ custom highlights
 M.hl = {
-    NormalFloat = { bg = M.colors.gray3                      },
-    FloatBorder = { bg = M.colors.gray3, fg = M.colors.gray3 },
+    NormalFloat = { bg = M.colors.gray3                      }, -- set background for floating windows
+    FloatBorder = { bg = M.colors.gray3, fg = M.colors.gray3 }, -- remove border for floating windows
+    EndOfBuffer = { bg = M.colors.gray1, fg = M.colors.gray1 }, -- remove tildes from gutter
 }
 
 for k,v in pairs(M.hl) do set_hl(0, k, v) end

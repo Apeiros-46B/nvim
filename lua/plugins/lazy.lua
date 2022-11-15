@@ -1,15 +1,13 @@
 -- lazy loading
 -- from NvChad
 local M = {}
-local au = vim.api.nvim_create_autocmd
-local aug = vim.api.nvim_create_augroup
 
 -- require('packer').loader(tbl.plugins)
 -- this must be used for plugins that need to be loaded just after a file
 -- e.g. treesitter, lspconfig etc
 M.lazy_load = function(tbl)
-    au(tbl.events, {
-        group = aug(tbl.augroup_name, {}),
+    vim.api.nvim_create_autocmd(tbl.events, {
+        group = vim.api.nvim_create_augroup(tbl.augroup_name, {}),
         callback = function()
             if tbl.condition() then
                 vim.api.nvim_del_augroup_by_name(tbl.augroup_name)
@@ -46,6 +44,21 @@ M.on_file_open = function(plugin_name)
     }
 end
 
+M.gitsigns = function()
+    vim.api.nvim_create_autocmd({ 'BufRead' }, {
+        group = vim.api.nvim_create_augroup('GitSignsLazyLoad', { clear = true }),
+        callback = function()
+            vim.fn.system('git -C ' .. vim.fn.expand '%:p:h' .. ' rev-parse')
+            if vim.v.shell_error == 0 then
+                vim.api.nvim_del_augroup_by_name('GitSignsLazyLoad')
+                vim.schedule(function()
+                    require('packer').loader('gitsigns.nvim')
+                end)
+            end
+        end,
+    })
+end
+
 M.packer_cmds = {
     'PackerSnapshot',
     'PackerSnapshotRollback',
@@ -60,21 +73,37 @@ M.packer_cmds = {
     'PackerLoad',
 }
 
-M.treesitter_cmds = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSEnable', 'TSDisable', 'TSModuleInfo' }
+M.treesitter_cmds = {
+    'TSInstall',
+    'TSBufEnable',
+    'TSBufDisable',
+    'TSEnable',
+    'TSDisable',
+    'TSModuleInfo'
+}
 
-M.gitsigns = function()
-    au({ 'BufRead' }, {
-        group = aug('GitSignsLazyLoad', { clear = true }),
-        callback = function()
-            vim.fn.system('git -C ' .. vim.fn.expand '%:p:h' .. ' rev-parse')
-            if vim.v.shell_error == 0 then
-                vim.api.nvim_del_augroup_by_name 'GitSignsLazyLoad'
-                vim.schedule(function()
-                    require('packer').loader 'gitsigns.nvim'
-                end)
-            end
-        end,
-    })
-end
+M.hop_cmds = {
+    'HopWord',
+    'HopWordBC',
+    'HopWordAC',
+    'HopPattern',
+    'HopPatternBC',
+    'HopPatternAC',
+    'HopChar1',
+    'HopChar1BC',
+    'HopChar1AC',
+    'HopChar2',
+    'HopChar2BC',
+    'HopChar2AC',
+    'HopLine',
+    'HopLineBC',
+    'HopLineAC',
+    'HopLineStart',
+    'HopLineStartBC',
+    'HopLineStartAC',
+    'HopChar1Line',
+    'HopChar1LineAC',
+    'HopChar1LineBC',
+}
 
 return M

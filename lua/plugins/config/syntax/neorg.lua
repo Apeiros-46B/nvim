@@ -13,11 +13,11 @@ local colors = theme.colors
 neorg.setup({
     load = {
         -- {{{ completion
-        -- ['core.norg.completion'] = {
-        --     config = {
-        --         engine = 'nvim-cmp',
-        --     },
-        -- },
+        ['core.norg.completion'] = {
+            config = {
+                engine = 'nvim-cmp',
+            },
+        },
         -- }}}
 
         -- {{{ concealer
@@ -292,7 +292,7 @@ neorg.setup({
         -- }}}
 
         -- {{{ telescope integration
-        -- ['core.integrations.telescope'] = {},
+        ['core.integrations.telescope'] = {},
         -- }}}
 
         ['core.itero'] = {},

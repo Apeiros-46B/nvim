@@ -49,20 +49,36 @@ packer.startup({
         -- cmp
         use({
             'hrsh7th/nvim-cmp',
-            after = 'ultisnips',
             config = function()
                 require('plugins.config.completion.cmp')
             end,
             requires = {
+                -- cmp sources
                 {
                     'hrsh7th/cmp-nvim-lsp',
                     event = 'LspAttach',
                     after = 'nvim-cmp',
                 },
-                { 'hrsh7th/cmp-path'                   , after = 'nvim-cmp' },
-                { 'hrsh7th/cmp-buffer'                 , after = 'nvim-cmp' },
-                { 'petertriho/cmp-git'                 , after = 'nvim-cmp' },
-                { 'quangnguyen30192/cmp-nvim-ultisnips', after = 'nvim-cmp' },
+                {
+                    'hrsh7th/cmp-path',
+                    event = 'InsertEnter',
+                    after = 'nvim-cmp',
+                },
+                {
+                    'hrsh7th/cmp-buffer',
+                    event = 'InsertEnter',
+                    after = 'nvim-cmp',
+                },
+                {
+                    'petertriho/cmp-git',
+                    event = 'InsertEnter',
+                    after = 'nvim-cmp',
+                },
+                {
+                    'quangnguyen30192/cmp-nvim-ultisnips',
+                    event = 'InsertEnter',
+                    after = 'nvim-cmp',
+                },
             }
         })
         -- }}}
@@ -86,13 +102,12 @@ packer.startup({
         use({
             'sbdchd/neoformat',
             cmd = 'Neoformat',
-            event = 'BufRead',
         })
 
         -- navigation
         use({
             'phaazon/hop.nvim',
-            event = 'BufRead',
+            cmd = lazy.hop_cmds,
             config = function()
                 require('plugins.config.editor.hop')
             end,
@@ -109,10 +124,10 @@ packer.startup({
         -- {{{ [git] plugins related to git
         use({
             'lewis6991/gitsigns.nvim',
-            -- opt = true,
-            -- setup = function()
-            --     lazy.gitsigns()
-            -- end,
+            opt = true,
+            setup = function()
+                require('plugins.lazy').gitsigns()
+            end,
             config = function()
                 require('plugins.config.git.gitsigns')
             end,
@@ -131,10 +146,10 @@ packer.startup({
         -- lsp plugins
         use({
             'neovim/nvim-lspconfig',
-            -- opt = true,
-            -- setup = function()
-            --     lazy.on_file_open('nvim-lspconfig')
-            -- end,
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('nvim-lspconfig')
+            end,
             config = function()
                 require('plugins.config.lsp.lspconfig')
             end,
@@ -150,10 +165,10 @@ packer.startup({
         -- debugging
         use({
             'mfussenegger/nvim-dap',
-            -- opt = true,
-            -- setup = function()
-            --     lazy.on_file_open('nvim-dap')
-            -- end,
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('nvim-dap')
+            end,
         })
 
         -- server providers
@@ -205,7 +220,7 @@ packer.startup({
             'nvim-treesitter/nvim-treesitter',
             -- cmd = lazy.treesitter_cmds,
             -- setup = function()
-            --     lazy.on_file_open('nvim-treesitter')
+            --     require('plugins.lazy').on_file_open('nvim-treesitter')
             -- end,
             config = function()
                 require('plugins.config.syntax.treesitter')
@@ -218,13 +233,16 @@ packer.startup({
             'nvim-neorg/neorg',
             ft = 'norg',
             cmd = 'Neorg',
-            after = { 'nvim-treesitter', 'telescope.nvim' },
+            after = { 'nvim-treesitter', 'nvim-cmp', 'telescope.nvim' },
             requires = { 'nvim-neorg/neorg-telescope' },
             config = function()
                 require('plugins.config.syntax.neorg')
             end,
             run = ':Neorg sync-parsers',
         })
+
+        -- literate programming
+        use({ 'jbyuki/ntangle.nvim' })
         -- }}}
 
         -- {{{ [ui] plugins that enhance the user interface
@@ -256,8 +274,9 @@ packer.startup({
         })
         use({
             'nvim-telescope/telescope.nvim',
-            cmd = 'Telescope',
-            after = 'telescope-fzf-native.nvim',
+            -- ft = 'norg',
+            -- cmd = 'Telescope',
+            -- after = 'telescope-fzf-native.nvim',
             config = function()
                 require('plugins.config.util.telescope')
             end,
@@ -274,7 +293,6 @@ packer.startup({
         })
         use({
             'echasnovski/mini.nvim', -- note that modules in other categories are loaded here
-            event = 'VimEnter',
             config = function()
                 require('plugins.config.ui.mini_starter')        -- starter
                 require('plugins.config.ui.mini_tabline')        -- tabline
@@ -282,7 +300,7 @@ packer.startup({
             end,
         })
         use({
-            'jbyuki/quickmath.nvim',
+            'Apeiros-46B/quickmath.nvim',
             cmd = 'Quickmath',
         })
         use({

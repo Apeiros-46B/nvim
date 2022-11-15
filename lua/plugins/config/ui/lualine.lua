@@ -1,4 +1,4 @@
--- configuration for lualine statusline
+-- configuration for lualine statusline and TODO: winbar
 -- {{{ imports
 local vim = vim
 local fn = vim.fn
@@ -12,38 +12,38 @@ local colors = theme.colors
 -- {{{ main style
 local style = {}
 
-style = { '', '' }
+style = { l = '', r = '' }
 -- }}}
 
 -- {{{ separator style
 local sep = {}
 
--- sep = { '│', '│' }
--- sep = { '┃', '┃' }
--- sep = { '⎮', '⎮' }
--- sep = { '|', '|' }
+-- sep = { l = '│', r = '│' }
+-- sep = { l = '┃', r = '┃' }
+-- sep = { l = '⎮', r = '⎮' }
+-- sep = { l = '|', r = '|' }
 
--- sep = { [[\]], [[\]] }
--- sep = { [[/]], [[/]] }
--- sep = { [[/]], [[\]] }
--- sep = { [[\]], [[/]] }
+-- sep = { l = [[\]], r = [[\]] }
+-- sep = { l = [[/]], r = [[/]] }
+-- sep = { l = [[/]], r = [[\]] }
+-- sep = { l = [[\]], r = [[/]] }
 
--- sep = { '>', '<' }
--- sep = { '<', '>' }
--- sep = { '', '' }
--- sep = { '', '' }
--- sep = { '', '' }
--- sep = { '', '' }
--- sep = { '🞂',  '🞀'  }
--- sep = { '🞀',  '🞂'  }
--- sep = { '->', '<-' }
--- sep = { '<-', '->' }
+-- sep = { l = '>', r = '<' }
+-- sep = { l = '<', r = '>' }
+-- sep = { l = '', r = '' }
+-- sep = { l = '', r = '' }
+-- sep = { l = '', r = '' }
+-- sep = { l = '', r = '' }
+-- sep = { l = '🞂', r =  '🞀'  }
+-- sep = { l = '🞀', r =  '🞂'  }
+-- sep = { l = '->', r = '<-' }
+-- sep = { l = '<-', r = '->' }
 
--- sep = { '-', '-' }
-sep = { '~', '~' }
--- sep = { '+', '+' }
--- sep = { '', '' }
--- sep = { '🞙', '🞙' }
+-- sep = { l = '-', r = '-' }
+sep = { l = '~', r = '~' }
+-- sep = { l = '+', r = '+' }
+-- sep = { l = '', r = '' }
+-- sep = { l = '🞙', r = '🞙' }
 -- }}}
 
 -- {{{ theme
@@ -428,8 +428,8 @@ require('lualine').setup({
 	options = {
 		theme = lualine_theme,
 
-		section_separators   = { left = style[1], style[2] },
-		component_separators = { left = sep[1],   sep[2]   },
+		section_separators   = { left = style.l, right = style.r },
+		component_separators = { left = sep.l,   right = sep.r   },
 
         always_divide_middle = true,
         globalstatus = true,
