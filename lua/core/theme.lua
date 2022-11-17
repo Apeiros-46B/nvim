@@ -42,7 +42,7 @@ M.colors = {
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
-if not fn.empty(fn.glob(install_path)) > 0 then
+if fn.empty(fn.glob(install_path)) <= 0 then
     vim.g.everforest_better_performance = 1
     vim.g.everforest_background = 'hard'
     vim.o.background = 'dark'
