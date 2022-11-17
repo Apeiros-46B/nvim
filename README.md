@@ -16,7 +16,7 @@ Only tested on Neovim v0.8.1
 
 1. `cd ~/.config`
 2. `git clone https://github.com/Apeiros-46B/nvim`
-3. Start `nvim` once and wait for the bootstrapping process to finish
+3. Start `nvim` once (ignore the errors) and wait for the bootstrapping process to finish
 4. Start `nvim` again. It should be successfully installed this time
 
 ## Screenshots
