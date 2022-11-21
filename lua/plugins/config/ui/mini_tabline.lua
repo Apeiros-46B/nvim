@@ -19,7 +19,7 @@ tabline.setup({
 
     -- Where to show tabpage section in case of multiple vim tabpages.
     -- One of 'left', 'right', 'none'.
-    tabpage_section = 'left',
+    tabpage_section = 'right',
 })
 -- }}}
 

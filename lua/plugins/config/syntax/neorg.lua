@@ -261,9 +261,9 @@ neorg.setup({
         ['core.norg.dirman'] = {
             config = {
                 workspaces = {
-                    school = '~/notes/school',
-                    home   = '~/notes/home',
-                    gtd    = '~/notes/gtd'
+                    school = '~/org/school',
+                    home   = '~/org/home',
+                    gtd    = '~/org/gtd'
                 },
             },
         },
