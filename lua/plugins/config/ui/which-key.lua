@@ -191,7 +191,8 @@ local spc = {
 
         c = 'Toggle concealer',
         C = 'Refresh concealer',
-        t = 'Three column notes',
+        t = 'Open note for today',
+        T = 'Setup three-column notes',
     },
 
     t = {

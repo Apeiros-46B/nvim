@@ -122,10 +122,13 @@ map('t', '<M-x>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
 map('n', '<leader>nc', ':Neorg toggle-concealer<CR>',                            opt)
 map('n', '<leader>nC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', opt)
 
--- three column notes
+-- open a note for today
+map('n', '<leader>nt', ':lua vim.cmd(os.date("e %d_%m.norg"))<CR>', opt)
+
+-- three-column notes
 vim.api.nvim_create_user_command('ThreeColumn', 'exec "normal a* Keywords\n- "|vs|exec "normal a\n\n* Takeaways\n- "|vs|exec "normal a\n\n* Connections\n- "|silent %s/^- $/  - /|exec "normal $"|wincmd h|exec "normal $"|wincmd h|exec "normal $"', { nargs = 0 })
 
-map('n', '<leader>nt', ':ThreeColumn<CR>', opt)
+map('n', '<leader>nT', ':ThreeColumn<CR>', opt)
 -- }}}
 
 -- {{{ [t] tab
