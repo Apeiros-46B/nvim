@@ -27,16 +27,14 @@ vim.g.maplocalleader = ','
 
 -- {{{ mapping
 -- {{{ misc
-map('n', 'WW', ':w<CR>', opt)
-
-map('n', '<leader><leader><leader>', ':Reload<CR>', opt) -- source config
-map('n', '<leader><leader>f', ':source<CR>', opt) -- source current file
+map('n', 'WW', ':w<CR>', opt) -- write shortcut
 
 map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
 
 map('n', '<leader>s', ':lua MiniStarter.open()<CR>', opt) -- show dashboard
 map('n', '<leader>m', ':vs | enew | Quickmath<CR>', opt) -- open Quickmath in vertical split
+map('n', '<leader>M', ':sp | enew | Quickmath<CR>', opt) -- open Quickmath in vertical split
 -- }}}
 
 -- {{{ [b] buffer
@@ -48,16 +46,16 @@ map('n', '<leader>bl', ':bn<CR>',                opt)
 map('n', '<leader>bp', ':Telescope buffers<CR>', opt)
 -- }}}
 
--- {{{ [F] format
-map('n', '<leader>Fn', ':Neoformat<CR>', opt) -- neoformat current buffer
-map('n', '<leader>Fs', ':lua MiniTrailspace.trim()<CR>', opt) -- trim trailing spaces
--- }}}
-
 -- {{{ [f] find
 map('n', '<leader>fb', ':Telescope marks<CR>', opt)
 map('n', '<leader>ff', ':Telescope find_files<CR>', opt)
 map('n', '<leader>fr', ':Telescope oldfiles<CR>', opt)
 map('n', '<leader>fw', ':Telescope live_grep<CR>', opt)
+-- }}}
+
+-- {{{ [F] format
+map('n', '<leader>Fn', ':Neoformat<CR>', opt) -- neoformat current buffer
+map('n', '<leader>Fs', ':lua MiniTrailspace.trim()<CR>', opt) -- trim trailing spaces
 -- }}}
 
 -- {{{ [g] git
@@ -95,7 +93,7 @@ map('v', '<leader>jem', ':<C-u>lua require("jdtls").extract_method(true)<CR>', o
 map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opt)
 
 -- trouble
-map('n', '<leader>T', ':TroubleToggle<CR>', opt)
+map('n', '<leader>lt', ':TroubleToggle<CR>', opt)
 
 -- {{{ lspsaga
 --- lsp finder
@@ -121,22 +119,36 @@ map('t', '<M-x>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
 -- }}}
 
 -- {{{ [n] neorg
-map('n', '<leader>nc', ':Neorg toggle-concealer<CR>', opt)
+map('n', '<leader>nc', ':Neorg toggle-concealer<CR>',                            opt)
 map('n', '<leader>nC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', opt)
+
+-- three column notes
+vim.api.nvim_create_user_command('ThreeColumn', 'exec "normal a* Keywords\n- "|vs|exec "normal a\n\n* Takeaways\n- "|vs|exec "normal a\n\n* Connections\n- "|silent %s/^- $/  - /|exec "normal $"|wincmd h|exec "normal $"|wincmd h|exec "normal $"', { nargs = 0 })
+
+map('n', '<leader>nt', ':ThreeColumn<CR>', opt)
 -- }}}
 
--- {{{ [t] toggle
-map('n', '<leader>tr', ':set rnu!<CR>', {}) -- relative line numbers
-map('n', '<leader>tW', ':set wrap!<CR>', {}) -- word wrap
+-- {{{ [t] tab
+map('n', '<leader>td', ':tabclose<CR>', opt)
+map('n', '<leader>th', ':tabp<CR>',     opt)
+map('n', '<leader>tj', ':tabfirst<CR>', opt)
+map('n', '<leader>tk', ':tablast<CR>',  opt)
+map('n', '<leader>tl', ':tabn<CR>',     opt)
+map('n', '<leader>tn', ':tabnew<CR>',   opt)
+-- }}}
 
-map('n', '<leader>tn', ':NavicToggle<CR>', {}) -- (lualine) navic
-map('n', '<leader>tw', ':WordCountToggle<CR>', {}) -- (lualine) word counter
+-- {{{ [T] toggle
+map('n', '<leader>Tr', ':set rnu!<CR>', {}) -- relative line numbers
+map('n', '<leader>TW', ':set wrap!<CR>', {}) -- word wrap
+
+map('n', '<leader>Tn', ':NavicToggle<CR>', {}) -- (lualine) navic
+map('n', '<leader>Tw', ':WordCountToggle<CR>', {}) -- (lualine) word counter
 -- }}}
 
 -- {{{ [y] yank
 map('n', '<leader>ya', ':%y+<CR>', opt) -- yank entire buffer to system clipboard
-map('n', '<leader>yl', '"+yy', opt) -- yank current line into system clipboard
 map('', '<leader>ys',  '"+y', opt) -- yank selection into system clipboard
+map('n', '<leader>yy', '"+yy', opt) -- yank current line into system clipboard
 -- }}}
 
 -- {{{ [<CR>] terminal

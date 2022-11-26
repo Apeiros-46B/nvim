@@ -208,6 +208,7 @@ packer.startup({
         use({
             'glepnir/lspsaga.nvim',
             after = 'lsp-colors.nvim',
+            cmd = 'Lspsaga',
             config = function()
                 require('plugins.config.lsp.lspsaga')
             end,

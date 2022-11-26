@@ -250,7 +250,13 @@ neorg.setup({
                 -- }}}
 
                 -- {{{ other options
-                dim_code_blocks = { enabled = false },
+                dim_code_blocks = {
+                    conceal = true,
+                    content_only = false,
+                    enabled = true,
+                    padding = { left = 1, right = 1 },
+                    width = 'content',
+                },
                 folds = true,
                 -- }}}
             },
@@ -320,7 +326,7 @@ local hl = {
 
     -- {{{ tags
     ['@neorg.tags.ranged_verbatim.begin'         ] = { fg = colors.red    },
-    ['@neorg.tags.ranged_verbatim.code_block'    ] = { fg = colors.gray6  },
+    ['@neorg.tags.ranged_verbatim.code_block'    ] = { bg = colors.gray2  },
     ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.red    },
     ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.teal   },
 
@@ -562,8 +568,9 @@ local optl = vim.opt_local
 
 -- {{{ autocmd on opening a norg file
 au({ 'Filetype' }, { pattern = 'norg', callback = function()
-    -- {{{ change indentation width to 1
-    optl.tabstop = 1
+    -- {{{ opts
+    optl.tabstop   = 1 -- change indentation width to 1
+    optl.foldlevel = 7 -- disable automatic folding
     -- }}}
 
     -- {{{ custom comment function

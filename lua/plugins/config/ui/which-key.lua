@@ -81,19 +81,13 @@ local spc = {
 	b = {
 		name = 'Buffer',
 
-		h = 'Focus first',
-		j = 'Focus previous',
-		k = 'Focus next buffer',
-		l = 'Focus last buffer',
+        d = 'Delete current',
+		h = 'Focus previous',
+		j = 'Focus first',
+		k = 'Focus last',
+		l = 'Focus next',
 	    p = 'Picker',
 	},
-
-    F = {
-        name = 'format',
-
-        n = 'Neoformat current buffer',
-        s = 'Trim trailing whitespace',
-    },
 
 	f = {
 		name = 'Find',
@@ -104,6 +98,13 @@ local spc = {
 		w = 'Words',
 	},
 
+    F = {
+        name = 'Format',
+
+        n = 'Neoformat current buffer',
+        s = 'Trim trailing whitespace',
+    },
+
 	g = {
 		name = 'Git',
 
@@ -113,17 +114,17 @@ local spc = {
             c = 'Commits',
         },
 
-        B = 'Blame whole file',
 		b = 'Blame line',
+        B = 'Blame whole file',
         c = 'Commit',
         g = 'Fugitive',
 		p = 'Preview hunk',
-		R = 'Reset buffer',
 		r = 'Reset hunk',
-		S = 'Stage buffer',
+		R = 'Reset buffer',
 		s = 'Stage hunk',
-		U = 'Reset buffer index',
+		S = 'Stage buffer',
 		u = 'Undo stage hunk',
+		U = 'Reset buffer index',
 	},
 
 	h = {
@@ -161,8 +162,8 @@ local spc = {
         g = {
             name = 'Go to',
 
-            D = 'Declaration',
             d = 'Definition',
+            D = 'Declaration',
             i = 'Implementation',
             t = 'Type definition',
         },
@@ -180,8 +181,9 @@ local spc = {
         h = 'Previous diagnostic',
         l = 'Next diagnostic',
         p = 'Open hover doc',
-        R = 'See references',
         r = 'Rename',
+        R = 'See references',
+        t = 'Trouble',
     },
 
     n = {
@@ -189,9 +191,21 @@ local spc = {
 
         c = 'Toggle concealer',
         C = 'Refresh concealer',
+        t = 'Three column notes',
     },
 
     t = {
+        name = 'Tab',
+
+        d = 'Delete current',
+        h = 'Focus previous',
+        j = 'Focus first',
+        k = 'Focus last',
+        l = 'Focus next',
+        n = 'New',
+    },
+
+    T = {
         name = 'Toggle',
 
         n = 'Navic',
@@ -204,8 +218,8 @@ local spc = {
 		name = 'Yank',
 
 		a = 'Yank entire buffer to system clipboard',
-		l = 'Yank line to system clipboard',
         s = 'Yank selection to system clipboard',
+		y = 'Yank line to system clipboard',
 	},
 
 	['<CR>'] = {
@@ -215,19 +229,12 @@ local spc = {
         v = 'Vertical',
         ['<CR>'] = 'In current pane',
     },
-
-    ['<leader>'] = {
-        name = 'Source',
-
-        f = 'Current file',
-        ['<leader>'] = 'Configuration',
-    },
     -- }}}
 
     -- {{{ single
-    d = 'Diagnostic',
-    m = 'Quickmath',
-    T = 'Trouble',
+    d = 'Show diagnostic',
+    m = 'Quickmath [v]',
+    M = 'Quickmath [h]',
     s = 'Starter'
     -- }}}
 }
