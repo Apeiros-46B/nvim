@@ -10,7 +10,7 @@ M.colors = {
     -- gray
     gray0  = '#282c34',
     gray1  = '#2b3339',
-    gray2  = '#323c42',
+    gray2  = '#323c41',
     gray3  = '#3a454a',
     gray4  = '#445055',
     gray5  = '#607279',
