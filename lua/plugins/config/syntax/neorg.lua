@@ -570,7 +570,7 @@ local optl = vim.opt_local
 au({ 'Filetype' }, { pattern = 'norg', callback = function()
     -- {{{ opts
     optl.tabstop   = 1 -- change indentation width to 1
-    optl.foldlevel = 7 -- disable automatic folding
+    -- optl.foldlevel = 7 -- disable automatic folding
     -- }}}
 
     -- {{{ custom comment function

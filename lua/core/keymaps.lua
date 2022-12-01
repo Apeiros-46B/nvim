@@ -126,7 +126,7 @@ map('n', '<leader>nC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>',
 map('n', '<leader>nt', ':lua vim.cmd(os.date("e %d_%m.norg"))<CR>', opt)
 
 -- three-column notes
-vim.api.nvim_create_user_command('ThreeColumn', 'exec "normal a* Keywords\n- "|vs|exec "normal a\n\n* Takeaways\n- "|vs|exec "normal a\n\n* Connections\n- "|silent %s/^- $/  - /|exec "normal $"|wincmd h|exec "normal $"|wincmd h|exec "normal $"', { nargs = 0 })
+vim.api.nvim_create_user_command('ThreeColumn', [[exec "normal! a* Keywords\n- "|vs|exec "normal! a\n\n* Takeaways\n- "|vs|exec "normal! a\n\n* Connections\n- "|silent %s/^- $/  - /|exec "normal! AC\<Esc>zx"|wincmd h|exec "normal! AB\<Esc>zx"|wincmd h|exec "normal! AA\<Esc>zx"|nohlsearch]], { nargs = 0 })
 
 map('n', '<leader>nT', ':ThreeColumn<CR>', opt)
 -- }}}
