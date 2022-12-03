@@ -311,6 +311,12 @@ packer.startup({
                 require('plugins.config.util.calendar')
             end,
         })
+        use {
+            'NFrid/due.nvim',
+            config = function()
+                require('plugins.config.util.due')
+            end
+        }
         -- }}}
 
         -- {{{ bootstrapping
