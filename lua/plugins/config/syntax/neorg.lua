@@ -254,7 +254,7 @@ neorg.setup({
                     conceal = true,
                     content_only = false,
                     enabled = true,
-                    padding = { left = 1, right = 1 },
+                    padding = { left = 0, right = 1 },
                     width = 'content',
                 },
                 folds = true,

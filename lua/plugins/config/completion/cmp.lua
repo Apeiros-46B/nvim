@@ -78,6 +78,7 @@ cmp.setup({
 
     -- {{{ sources
     sources = cmp.config.sources({
+            { name = 'neorg', priority = 0 },
             { name = 'nvim_lsp', priority = 1 },
             { name = 'ultisnips' },
         },
@@ -126,10 +127,10 @@ local hl = {
 
     -- {{{ kinds
     CmpItemKindField         = { fg = colors.gray1,  bg = colors.red   , bold = true },
-    CmpItemKindEvent         = { fg = colors.gray1,  bg = colors.red   , bold = true },
     CmpItemKindKeyword       = { fg = colors.gray1,  bg = colors.red   , bold = true },
 
     CmpItemKindConstant      = { fg = colors.gray1,  bg = colors.orange, bold = true },
+    CmpItemKindEvent         = { fg = colors.gray1,  bg = colors.orange, bold = true },
     CmpItemKindOperator      = { fg = colors.gray1,  bg = colors.orange, bold = true },
     CmpItemKindSnippet       = { fg = colors.gray1,  bg = colors.orange, bold = true },
     CmpItemKindUnit          = { fg = colors.gray1,  bg = colors.orange, bold = true },
