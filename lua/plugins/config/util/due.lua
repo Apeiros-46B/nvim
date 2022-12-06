@@ -28,7 +28,7 @@ config.use_clock_time = false
 config.use_clock_today = false
 config.use_seconds = false
 config.update_rate = config.use_clock_time and (config.use_seconds and 1000 or 60000) or 0
-config.default_due_time = "midnight"
+config.default_due_time = 'midnight'
 
 require('due_nvim').setup(config)
 -- }}}
