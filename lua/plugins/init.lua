@@ -324,6 +324,7 @@ packer.startup({
         })
         use {
             'NFrid/due.nvim',
+            ft = 'norg',
             config = function()
                 require('plugins.config.util.due')
             end
