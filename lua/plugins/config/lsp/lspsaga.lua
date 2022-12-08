@@ -15,7 +15,7 @@ saga.init_lsp_saga({
 })
 
 -- for some reason `diagnostic_header_icon` option won't work, so i have to do this:
-local signs = { Error = ' ', Warn = ' ', Info = ' ', Hint = ' ' }
+local signs = { Error = ' ', Warn = ' ', Info = ' ', Hint = ' ' }
 for type,icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -27,10 +27,10 @@ local set_hl = vim.api.nvim_set_hl
 
 local hl = {
     -- code action
-    LspSagaCodeActionTitle        = { fg = colors.blue , bold = true },
-    LspSagaCodeActionBorder       = { fg = colors.gray5                                    },
-    LspSagaCodeActionTrunCateLine = { link = 'LspSagaCodeActionBorder'                     },
-    LspSagaCodeActionContent      = { fg = colors.gray7,                                   },
+    LspSagaCodeActionTitle        = { fg = colors.blue , bold = true   },
+    LspSagaCodeActionBorder       = { fg = colors.gray5                },
+    LspSagaCodeActionTrunCateLine = { link = 'LspSagaCodeActionBorder' },
+    LspSagaCodeActionContent      = { fg = colors.gray7,               },
 
     -- finder
     LspSagaLspFinderBorder = { fg = colors.gray5                                     },

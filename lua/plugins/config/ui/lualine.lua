@@ -136,9 +136,9 @@ local function word_count_fn()
     local count = fn.wordcount()
 
     if count.visual_bytes ~= nil then
-        return count.visual_chars .. 'c ' .. count.visual_words .. 'w'
+        return table.concat({ count.visual_chars, 'c ', count.visual_words, 'w' }, '')
     else
-        return count.chars        .. 'c ' .. count.words        .. 'w'
+        return table.concat({ count.chars       , 'c ', count.words       , 'w' }, '')
     end
 end
 
@@ -175,13 +175,12 @@ local diff         = { 'diff', symbols = { added = '', modified = '', removed = 
 -- {{{ lsp
 local diagnostics  = {
     'diagnostics',
-    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
     diagnostics_color = {
-        -- i would rather not do this but it seems like i have to (see 'custom highlights' below)
-        error = 'LualineRed',
-        warn  = 'LualineYellow',
-        info  = 'LualineBlue',
-        hint  = 'LualineAqua',
+        error = 'LualineDiagnosticError',
+        warn  = 'LualineDiagnosticWarn',
+        info  = 'LualineDiagnosticInfo',
+        hint  = 'LualineDiagnosticHint',
     }
 }
 
@@ -189,10 +188,10 @@ local diagnostics  = {
 local set_hl = vim.api.nvim_set_hl
 
 local hl = {
-    LualineRed    = { fg = colors.red   , bg = colors.gray3 },
-    LualineYellow = { fg = colors.yellow, bg = colors.gray3 },
-    LualineBlue   = { fg = colors.blue  , bg = colors.gray3 },
-    LualineAqua   = { fg = colors.teal  , bg = colors.gray3 },
+    LualineDiagnosticError = { fg = colors.red   , bg = colors.gray3 },
+    LualineDiagnosticWarn  = { fg = colors.yellow, bg = colors.gray3 },
+    LualineDiagnosticInfo  = { fg = colors.blue  , bg = colors.gray3 },
+    LualineDiagnosticHint  = { fg = colors.teal  , bg = colors.gray3 },
 }
 
 for k, v in pairs(hl) do set_hl(0, k, v) end

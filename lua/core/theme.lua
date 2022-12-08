@@ -5,7 +5,7 @@ local set_hl = vim.api.nvim_set_hl
 -- }}}
 
 -- {{{ colors
--- TODO: get colors from colorscheme or custom highlights instead of hardcoding values
+-- TODO: get colors from colorscheme or highlights instead of hardcoding values
 M.colors = {
     -- gray
     gray0  = '#282c34',
@@ -50,14 +50,30 @@ if fn.empty(fn.glob(install_path)) <= 0 then
 end
 -- }}}
 
--- {{{ custom highlights
+-- {{{ custom highlights & theme overrides
 M.hl = {
     NormalFloat = { bg = M.colors.gray3                      }, -- set background for floating windows
     FloatBorder = { bg = M.colors.gray3, fg = M.colors.gray3 }, -- remove border for floating windows
     EndOfBuffer = { bg = M.colors.gray1, fg = M.colors.gray1 }, -- remove tildes from gutter
+
+    -- diagnostic signs
+    DiagnosticSignError = { fg = M.colors.red    },
+    DiagnosticSignWarn  = { fg = M.colors.yellow },
+    DiagnosticSignInfo  = { fg = M.colors.green  },
+    DiagnosticSignHint  = { fg = M.colors.teal   },
+
+    -- search
+    Search    = { bg = M.colors.diff_add, fg = M.colors.green }
+    -- IncSearch = { bg = M.colors.}
 }
 
 for k,v in pairs(M.hl) do set_hl(0, k, v) end
+
+-- set diagnostic sign icons
+for type, icon in pairs({ Error = ' ', Warn = ' ', Info = ' ', Hint = ' ' }) do
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 -- }}}
 
 -- {{{ return

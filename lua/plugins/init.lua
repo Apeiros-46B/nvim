@@ -30,10 +30,10 @@ packer.startup({
         use({ 'wbthomason/packer.nvim' })
 
         -- other
-        use({ 'nvim-lua/plenary.nvim'        }) -- plenary
-        use({ 'nvim-lua/popup.nvim'          }) -- popup
-        use({ 'kyazdani42/nvim-web-devicons' }) -- devicons
-        use({ 'sainnhe/everforest'           }) -- best theme in existence
+        use({ 'nvim-lua/plenary.nvim'                  }) -- plenary
+        use({ 'nvim-lua/popup.nvim'                    }) -- popup
+        use({ 'kyazdani42/nvim-web-devicons'           }) -- devicons
+        use({ 'sainnhe/everforest', commit = 'd855af5' }) -- best theme in existence
         -- }}}
 
         -- {{{ [completion] plugins related to completion
@@ -84,7 +84,7 @@ packer.startup({
         -- }}}
 
         -- {{{ [editor] utility plugins related to core editor functionality
-        -- text editing and formatting
+        -- text editing
         use({
             'windwp/nvim-autopairs',
             event = 'InsertEnter',
@@ -100,8 +100,10 @@ packer.startup({
             end,
         })
         use({
-            'sbdchd/neoformat',
-            cmd = 'Neoformat',
+            "kylechui/nvim-surround",
+            config = function()
+                require("nvim-surround").setup({})
+            end
         })
 
         -- navigation
@@ -116,8 +118,10 @@ packer.startup({
         -- misc
         use({ 'jghauser/mkdir.nvim' })
         use({
-            'famiu/nvim-reload',
-            cmd = 'Reload',
+            'https://github.com/nat-418/boole.nvim',
+            config = function()
+                require('boole').setup()
+            end
         })
         -- }}}
 
@@ -229,6 +233,8 @@ packer.startup({
             run = ':TSUpdate',
         })
 
+        use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
+
         -- the holy grail
         use({
             'nvim-neorg/neorg',
@@ -241,9 +247,6 @@ packer.startup({
             end,
             run = ':Neorg sync-parsers',
         })
-
-        -- literate programming
-        use({ 'jbyuki/ntangle.nvim' })
         -- }}}
 
         -- {{{ [ui] plugins that enhance the user interface
@@ -262,8 +265,16 @@ packer.startup({
             cmd = 'WhichKey',
             keys = { '<leader>', ',', 'g', 'z', [[']] },
             config = function()
-                require('plugins.config.ui.which-key')
+                require('plugins.config.ui.which_key')
             end,
+        })
+
+        -- scrollbar
+        use({
+            'kensyo/nvim-scrlbkun',
+            config = function()
+                require('plugins.config.ui.scrlbkun')
+            end
         })
         -- }}}
 
@@ -301,7 +312,7 @@ packer.startup({
             end,
         })
         use({
-            'Apeiros-46B/quickmath.nvim',
+            'jbyuki/quickmath.nvim',
             cmd = 'Quickmath',
         })
         use({
