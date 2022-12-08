@@ -330,7 +330,7 @@ local hl = {
     ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.red    },
     ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.teal   },
 
-    ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.white  },
+    ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.red    },
     ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.gray7  },
     ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.red    },
 

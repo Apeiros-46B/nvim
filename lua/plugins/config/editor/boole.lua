@@ -1,9 +1,9 @@
 -- configuration for boole.nvim plugin
 -- {{{ setup
 require('boole').setup({
-    additions = { -- user-defined
-
-    },
+    -- user-defined
+    additions = {},
+    mappings = {},
     allow_caps_additions = {
         { 'enable', 'disable' }
         -- enable -> disable
