@@ -92,44 +92,38 @@ local lualine_theme = {
 -- {{{ functions
 local mode_fmts = {
     -- normal/misc
-    ['NORMAL'] = 'NOR',
+    ['NORMAL'   ] = 'NOR',
     ['O-PENDING'] = 'OPR',
-    ['MORE'] = 'MOR',
-    ['CONFIRM'] = 'CF?',
+    ['MORE'     ] = 'MOR',
+    ['CONFIRM'  ] = 'CF?',
 
     -- insert
     ['INSERT'] = 'INS',
 
     -- visual
-    ['VISUAL'] = 'VIS',
-    ['V-LINE'] = 'V-L',
-    -- ['V-LINE'] = 'VLN',
+    ['VISUAL' ] = 'VIS',
+    ['V-LINE' ] = 'V-L',
     ['V-BLOCK'] = 'V-B',
-    -- ['V-BLOCK'] = 'VBL',
 
     -- select
-    ['SELECT'] = 'SEL',
-    ['S-LINE'] = 'S-L',
-    -- ['S-LINE'] = 'SLN',
+    ['SELECT' ] = 'SEL',
+    ['S-LINE' ] = 'S-L',
     ['S-BLOCK'] = 'S-B',
-    -- ['S-BLOCK'] = 'SBL',
 
     -- replace
-    ['REPLACE'] = 'REP',
-    -- ['REPLACE'] = 'RPL',
+    ['REPLACE'  ] = 'REP',
     ['V-REPLACE'] = 'V-R',
-    -- ['V-REPLACE'] = 'VRP',
 
     -- cmd, terminal, shell, and ex
-    ['COMMAND'] = 'CMD',
-    ['SHELL'] = 'SHL',
+    ['COMMAND' ] = 'CMD',
+    ['SHELL'   ] = 'SHL',
     ['TERMINAL'] = 'TER',
-    ['EX'] = 'EXM', -- M stands for mode, had to add to fit 3 chars
+    ['EX'      ] = 'EXM', -- M stands for mode, had to add to fit 3 chars
 }
 
 local function mode_fmt(str) return mode_fmts[str] end
 
-local function short_cwd() return fn.fnamemodify(fn.getcwd(), ':~') end -- iconless
+local function short_cwd() return vim.fn.pathshorten(fn.fnamemodify(fn.getcwd(), ':~'), 2) end -- iconless
 
 -- {{{ word count function
 local function word_count_fn()
@@ -188,10 +182,10 @@ local diagnostics  = {
 local set_hl = vim.api.nvim_set_hl
 
 local hl = {
-    LualineDiagnosticError = { fg = colors.red   , bg = colors.gray3 },
-    LualineDiagnosticWarn  = { fg = colors.yellow, bg = colors.gray3 },
-    LualineDiagnosticInfo  = { fg = colors.blue  , bg = colors.gray3 },
-    LualineDiagnosticHint  = { fg = colors.teal  , bg = colors.gray3 },
+    LualineDiagnosticError = { fg = colors.red   , bg = lualine_theme.normal.c.bg },
+    LualineDiagnosticWarn  = { fg = colors.yellow, bg = lualine_theme.normal.c.bg },
+    LualineDiagnosticInfo  = { fg = colors.green , bg = lualine_theme.normal.c.bg },
+    LualineDiagnosticHint  = { fg = colors.teal  , bg = lualine_theme.normal.c.bg },
 }
 
 for k, v in pairs(hl) do set_hl(0, k, v) end

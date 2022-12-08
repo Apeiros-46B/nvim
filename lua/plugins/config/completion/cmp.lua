@@ -130,7 +130,6 @@ local hl = {
     CmpItemKindKeyword       = { fg = colors.gray1,  bg = colors.red   , bold = true },
 
     CmpItemKindConstant      = { fg = colors.gray1,  bg = colors.orange, bold = true },
-    CmpItemKindEvent         = { fg = colors.gray1,  bg = colors.orange, bold = true },
     CmpItemKindOperator      = { fg = colors.gray1,  bg = colors.orange, bold = true },
     CmpItemKindSnippet       = { fg = colors.gray1,  bg = colors.orange, bold = true },
     CmpItemKindUnit          = { fg = colors.gray1,  bg = colors.orange, bold = true },
@@ -151,6 +150,7 @@ local hl = {
     CmpItemKindVariable      = { fg = colors.gray1,  bg = colors.blue  , bold = true },
 
     CmpItemKindClass         = { fg = colors.gray1,  bg = colors.purple, bold = true },
+    CmpItemKindEvent         = { fg = colors.gray1,  bg = colors.purple, bold = true },
     CmpItemKindStruct        = { fg = colors.gray1,  bg = colors.purple, bold = true },
     CmpItemKindValue         = { fg = colors.gray1,  bg = colors.purple, bold = true },
 

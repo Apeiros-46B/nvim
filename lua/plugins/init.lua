@@ -102,7 +102,7 @@ packer.startup({
         use({
             "kylechui/nvim-surround",
             config = function()
-                require("nvim-surround").setup({})
+                require("nvim-surround").setup()
             end
         })
 
@@ -118,7 +118,7 @@ packer.startup({
         -- misc
         use({ 'jghauser/mkdir.nvim' })
         use({
-            'https://github.com/nat-418/boole.nvim',
+            'nat-418/boole.nvim',
             config = function()
                 require('boole').setup()
             end
@@ -246,6 +246,22 @@ packer.startup({
                 require('plugins.config.syntax.neorg')
             end,
             run = ':Neorg sync-parsers',
+        })
+
+        -- dimming unused items and highlighting selected ones
+        use({
+            'zbirenbaum/neodim',
+            event = 'LspAttach',
+            config = function()
+                require('plugins.config.syntax.neodim')
+            end,
+        })
+        use({
+            'RRethy/vim-illuminate',
+            event = 'BufRead',
+            config = function()
+                require('plugins.config.syntax.illuminate')
+            end,
         })
         -- }}}
 
