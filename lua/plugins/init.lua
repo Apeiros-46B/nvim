@@ -120,7 +120,7 @@ packer.startup({
         use({
             'nat-418/boole.nvim',
             config = function()
-                require('boole').setup()
+                require('plugins.config.editor.boole')
             end
         })
         -- }}}

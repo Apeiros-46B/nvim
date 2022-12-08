@@ -153,7 +153,7 @@ local hl = {
     ScrlbkunBar              = { bg = colors.gray2                      },
     ScrlbkunCursor           = { bg = colors.diff_mod, fg = colors.blue },
 
-    ScrlbkunSearch           = { fg = colors.diff_add },
+    ScrlbkunSearch           = { fg = colors.green },
 
     ScrlbkunDiagnosticsError = { fg = colors.red    },
     ScrlbkunDiagnosticsWarn  = { fg = colors.yellow },
