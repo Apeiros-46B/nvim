@@ -308,10 +308,6 @@ neorg.setup({
 -- }}}
 
 -- {{{ custom highlights
--- i'm not using core.highlights module because
--- 1. i want to maintain consistency with my other configs
--- 2. i have no idea how it works, so i'm just gonna stick with this
-
 -- import
 local set_hl = api.nvim_set_hl
 
@@ -325,14 +321,14 @@ local hl = {
     -- }}}
 
     -- {{{ tags
-    ['@neorg.tags.ranged_verbatim.begin'         ] = { fg = colors.red    },
+    ['@neorg.tags.ranged_verbatim.begin'         ] = { fg = colors.purple },
     ['@neorg.tags.ranged_verbatim.code_block'    ] = { bg = colors.gray2  },
-    ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.red    },
-    ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.teal   },
+    ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.purple },
+    ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.blue   },
 
-    ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.red    },
+    ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.purple },
     ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.gray7  },
-    ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.red    },
+    ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.purple },
 
     -- {{{ document meta
     ['@neorg.tags.ranged_verbatim.document_meta.authors'       ] = { fg = colors.green               },
@@ -354,7 +350,7 @@ local hl = {
     -- }}}
 
     ['@neorg.tags.carryover.begin'         ] = { fg = colors.orange },
-    ['@neorg.tags.carryover.parameters'    ] = { fg = colors.teal   },
+    ['@neorg.tags.carryover.parameters'    ] = { fg = colors.blue   },
 
     ['@neorg.tags.carryover.name'          ] = { fg = colors.orange },
     ['@neorg.tags.carryover.name.delimiter'] = { fg = colors.gray7  },

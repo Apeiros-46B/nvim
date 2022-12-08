@@ -29,7 +29,7 @@ scrlbkun.setup({
         enable       = true,
 
         -- drawn in these columns (number between 1 and `width` inclusive)
-        draw_columns = { 1 },
+        draw_columns = { 2 },
 
         -- drawn on these events
         draw_events     = { 'WinScrolled', 'BufEnter', 'FocusGained' },
@@ -48,7 +48,7 @@ scrlbkun.setup({
     -- {{{ cursor component
     cursor = {
         enable = true,
-        draw_columns = { 1 },
+        draw_columns = { 2 },
 
         draw_events     = { 'BufEnter', 'FocusGained', 'CursorMoved' },
         draw_events_tab = { 'VimResized', 'TabEnter' },
@@ -67,7 +67,7 @@ scrlbkun.setup({
     -- {{{ search component
     search = {
         enable       = true,
-        draw_columns = { 2 },
+        draw_columns = { 1 },
 
         draw_events     = {},
         draw_events_tab = {
@@ -99,7 +99,7 @@ scrlbkun.setup({
     -- {{{ diagnostics component
     diagnostics = {
         enable       = true,
-        draw_columns = { 1 },
+        draw_columns = { 2 },
 
         draw_events     = {},
         draw_events_tab = { 'BufEnter', 'DiagnosticChanged', 'TabEnter' },
@@ -119,7 +119,7 @@ scrlbkun.setup({
     -- {{{ githunks component
     githunks = {
         enable       = true,
-        draw_columns = { 2 },
+        draw_columns = { 1 },
 
         draw_events     = {},
         draw_events_tab = {

@@ -58,7 +58,7 @@ cmp.setup({
     window = {
         completion = {
             winhighlight = 'Normal:Pmenu,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None',
-            col_offset = -4,
+            col_offset = -3,
             side_padding = 0,
         },
     },
