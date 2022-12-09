@@ -237,7 +237,6 @@ packer.startup({
         use({
             'nvim-neorg/neorg',
             ft = 'norg',
-            cmd = 'Neorg',
             after = { 'nvim-treesitter', 'nvim-cmp', 'telescope.nvim' },
             requires = { 'nvim-neorg/neorg-telescope' },
             config = function()
