@@ -222,6 +222,7 @@ packer.startup({
         })
 
         -- not lazy-loaded because required by lualine
+        -- figure out how to lazy-load later
         use({
             'SmiteshP/nvim-navic',
             config = function()
@@ -269,7 +270,10 @@ packer.startup({
         })
         use({
             'RRethy/vim-illuminate',
-            event = 'BufRead',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('vim-illuminate')
+            end,
             config = function()
                 require('plugins.config.syntax.illuminate')
             end,
@@ -278,7 +282,10 @@ packer.startup({
         -- other
         use({
             'folke/todo-comments.nvim',
-            event = 'BufRead',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('todo-comments.nvim')
+            end,
             config = function()
                 require('plugins.config.syntax.todo_comments')
             end,
@@ -294,6 +301,14 @@ packer.startup({
             end,
         })
 
+        -- scrollbar
+        use({
+            'kensyo/nvim-scrlbkun',
+            config = function()
+                require('plugins.config.ui.scrlbkun')
+            end,
+        })
+
         -- keybind help
         use({
             'folke/which-key.nvim',
@@ -302,14 +317,6 @@ packer.startup({
             keys = { '<leader>', ',', 'g', 'z', [[']] },
             config = function()
                 require('plugins.config.ui.which_key')
-            end,
-        })
-
-        -- scrollbar
-        use({
-            'kensyo/nvim-scrlbkun',
-            config = function()
-                require('plugins.config.ui.scrlbkun')
             end,
         })
         -- }}}

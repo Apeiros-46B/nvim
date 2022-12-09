@@ -10,9 +10,9 @@ local function map(mode, bind, exec, opts)
     vim.api.nvim_set_keymap(mode, bind, exec, opts)
 end
 
-local function unmap(mode, bind)
-    vim.api.nvim_del_keymap(mode, bind)
-end
+-- local function unmap(mode, bind)
+--     vim.api.nvim_del_keymap(mode, bind)
+-- end
 
 local opt = { silent = true } -- default opts
 local M = {}
