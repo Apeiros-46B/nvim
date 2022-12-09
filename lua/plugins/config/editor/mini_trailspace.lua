@@ -1,4 +1,4 @@
--- configuration for trailspace module of mini.nvim
+-- configuration for trailspace module of mini.nvim plugin
 -- {{{ imports
 -- main
 local trailspace = require('mini.trailspace')

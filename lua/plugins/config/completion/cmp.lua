@@ -20,8 +20,8 @@ local keymaps = {
 
     ['<C-Space>'] = cmp.mapping.complete(),
 
-    ['<C-d>']     = cmp.mapping.scroll_docs(-4),
-    ['<C-f>']     = cmp.mapping.scroll_docs(4),
+    ['<C-k>']     = cmp.mapping.scroll_docs(-1),
+    ['<C-j>']     = cmp.mapping.scroll_docs( 1),
 
     ['<C-e>']     = cmp.mapping.close(),
 
@@ -110,6 +110,7 @@ cmp.setup({
 -- {{{ custom highlight
 local set_hl = vim.api.nvim_set_hl
 local none = 'NONE'
+
 local hl = {
     -- {{{ pmenu
     PmenuThumb               = { bg = colors.gray5,    fg = none              },
@@ -122,7 +123,7 @@ local hl = {
     CmpItemAbbrDeprecated    = { fg = colors.gray8,  bg = none, strikethrough = true }, -- strikethrough
     CmpItemAbbrMatch         = { fg = colors.green,  bg = none, bold          = true }, -- bold
     CmpItemAbbrMatchFuzzy    = { fg = colors.green,  bg = none, bold          = true }, -- bold
-    CmpItemMenu              = { fg = colors.green,  bg = none, italic        = true }, -- italic
+    CmpItemMenu              = { fg = colors.green,  bg = none                       }, -- plain
     -- }}}
 
     -- {{{ kinds
@@ -162,5 +163,5 @@ local hl = {
     -- }}}
 }
 
-for k,v in pairs(hl) do set_hl(0, k, v) end
+for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}

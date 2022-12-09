@@ -35,9 +35,11 @@ require('due_nvim').setup({
 
 -- {{{ custom highlights
 local set_hl = vim.api.nvim_set_hl
+
 local hl = {
     DueToday = { fg = colors.purple, bold = true },
     Overdue  = { fg = colors.red,    bold = true },
 }
-for k,v in pairs(hl) do set_hl(0, k, v) end
+
+for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}

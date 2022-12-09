@@ -321,32 +321,32 @@ local hl = {
     -- }}}
 
     -- {{{ tags
-    ['@neorg.tags.ranged_verbatim.begin'         ] = { fg = colors.purple },
-    ['@neorg.tags.ranged_verbatim.code_block'    ] = { bg = colors.gray2  },
-    ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.purple },
-    ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.blue   },
+    ['@neorg.tags.ranged_verbatim.begin'         ] = { fg = colors.purple, italic = true },
+    ['@neorg.tags.ranged_verbatim.code_block'    ] = { bg = colors.gray2                 },
+    ['@neorg.tags.ranged_verbatim.end'           ] = { fg = colors.purple, italic = true },
+    ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.blue                  },
 
-    ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.purple },
-    ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.gray7  },
-    ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.purple },
+    ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.purple, italic = true },
+    ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.gray7 , italic = true },
+    ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.purple, italic = true },
 
     -- {{{ document meta
-    ['@neorg.tags.ranged_verbatim.document_meta.authors'       ] = { fg = colors.green               },
-    ['@neorg.tags.ranged_verbatim.document_meta.description'   ] = { fg = colors.orange              },
-    ['@neorg.tags.ranged_verbatim.document_meta.title'         ] = { fg = colors.red,    bold = true },
+    ['@neorg.tags.ranged_verbatim.document_meta.authors'       ] = { fg = colors.yellow, italic = true },
+    ['@neorg.tags.ranged_verbatim.document_meta.description'   ] = { fg = colors.orange                },
+    ['@neorg.tags.ranged_verbatim.document_meta.title'         ] = { fg = colors.red   , bold = true   },
 
-    ['@neorg.tags.ranged_verbatim.document_meta.categories'    ] = { fg = colors.green               },
-    ['@neorg.tags.ranged_verbatim.document_meta.created'       ] = { fg = colors.teal                },
-    ['@neorg.tags.ranged_verbatim.document_meta.updated'       ] = { fg = colors.teal                },
-    ['@neorg.tags.ranged_verbatim.document_meta.version'       ] = { fg = colors.blue                },
+    ['@neorg.tags.ranged_verbatim.document_meta.categories'    ] = { fg = colors.green                 },
+    ['@neorg.tags.ranged_verbatim.document_meta.created'       ] = { fg = colors.teal                  },
+    ['@neorg.tags.ranged_verbatim.document_meta.updated'       ] = { fg = colors.teal                  },
+    ['@neorg.tags.ranged_verbatim.document_meta.version'       ] = { fg = colors.teal  , italic = true },
 
-    ['@neorg.tags.ranged_verbatim.document_meta.array.bracket' ] = { fg = colors.white               },
-    ['@neorg.tags.ranged_verbatim.document_meta.array.value'   ] = { fg = colors.white               },
-    ['@neorg.tags.ranged_verbatim.document_meta.object.bracket'] = { fg = colors.white               },
-    ['@neorg.tags.ranged_verbatim.document_meta.trailing'      ] = { fg = colors.white               },
+    ['@neorg.tags.ranged_verbatim.document_meta.array.bracket' ] = { fg = colors.white                 },
+    ['@neorg.tags.ranged_verbatim.document_meta.array.value'   ] = { fg = colors.white                 },
+    ['@neorg.tags.ranged_verbatim.document_meta.object.bracket'] = { fg = colors.white                 },
+    ['@neorg.tags.ranged_verbatim.document_meta.trailing'      ] = { fg = colors.white                 },
 
-    ['@neorg.tags.ranged_verbatim.document_meta.key'           ] = { fg = colors.yellow, bold = true },
-    ['@neorg.tags.ranged_verbatim.document_meta.value'         ] = { fg = colors.green               },
+    ['@neorg.tags.ranged_verbatim.document_meta.key'           ] = { fg = colors.blue                  },
+    ['@neorg.tags.ranged_verbatim.document_meta.value'         ] = { fg = colors.yellow                },
     -- }}}
 
     ['@neorg.tags.carryover.begin'         ] = { fg = colors.orange },
@@ -529,8 +529,7 @@ for i = 1, 6 do
 end
 -- }}}
 
--- set highlights
-for k,v in pairs(hl) do set_hl(0, k, v) end
+for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}
 
 -- {{{ neorg-specific keybinds

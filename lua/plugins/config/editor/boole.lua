@@ -1,5 +1,4 @@
 -- configuration for boole.nvim plugin
--- {{{ setup
 require('boole').setup({
     -- user-defined
     additions = {},
@@ -11,4 +10,3 @@ require('boole').setup({
         -- ENABLE -> DISABLE
     }
 })
--- }}}

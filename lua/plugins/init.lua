@@ -43,12 +43,14 @@ packer.startup({
             event = 'InsertEnter',
             config = function()
                 require('plugins.config.completion.ultisnips')
-            end
+            end,
         })
 
         -- cmp
         use({
             'hrsh7th/nvim-cmp',
+            -- this breaks things
+            -- event = 'InsertEnter',
             config = function()
                 require('plugins.config.completion.cmp')
             end,
@@ -96,14 +98,14 @@ packer.startup({
             'terrortylor/nvim-comment',
             cmd = 'CommentToggle',
             config = function()
-                require('plugins.config.editor.nvimcomment')
+                require('plugins.config.editor.comment')
             end,
         })
         use({
-            "kylechui/nvim-surround",
+            'kylechui/nvim-surround',
             config = function()
-                require("nvim-surround").setup()
-            end
+                require('plugins.config.editor.surround')
+            end,
         })
 
         -- navigation
@@ -116,12 +118,16 @@ packer.startup({
         })
 
         -- misc
-        use({ 'jghauser/mkdir.nvim' })
+        use({
+            'jghauser/mkdir.nvim',
+            cmd = { 'w', 'write' },
+        })
         use({
             'nat-418/boole.nvim',
+            cmd = 'Boole',
             config = function()
                 require('plugins.config.editor.boole')
-            end
+            end,
         })
         -- }}}
 
@@ -147,26 +153,19 @@ packer.startup({
         -- }}}
 
         -- {{{ [lsp] plugins related to lsp or debugging
-        -- lsp plugins
+        -- core
+        use({ 'neovim/nvim-lspconfig' })
+
+        -- mason
         use({
-            'neovim/nvim-lspconfig',
-            opt = true,
-            setup = function()
-                require('plugins.lazy').on_file_open('nvim-lspconfig')
-            end,
+            'williamboman/mason.nvim',
             config = function()
-                require('plugins.config.lsp.lspconfig')
+                require('plugins.config.lsp.mason')
             end,
-        })
-        use({
-            'onsails/lspkind-nvim',
-            after = { 'nvim-cmp', 'nvim-lspconfig' },
-            config = function()
-                require('plugins.config.lsp.lspkind')
-            end,
+            requires = { 'williamboman/mason-lspconfig.nvim' }
         })
 
-        -- debugging
+        -- dap
         use({
             'mfussenegger/nvim-dap',
             opt = true,
@@ -175,54 +174,52 @@ packer.startup({
             end,
         })
 
-        -- server providers
-        use({
-            'simrat39/rust-tools.nvim',
-            ft = 'rs',
-            config = function()
-                require('plugins.config.lsp.rust_tools')(vim.g.on_attach)
-            end
-        })
-        use({
-            'mfussenegger/nvim-jdtls',
-            ft = 'java',
-            config = function()
-                require('plugins.config.lsp.jdtls')(vim.g.on_attach)
-            end
-        })
+        -- plugins to enhance specific servers
+        -- `opt = true` because loaded using mason
+        use({ 'simrat39/rust-tools.nvim', opt = true })
 
-        -- other lsp-related utils
+        -- other lsp-related
+        use({
+            'onsails/lspkind-nvim',
+            after = { 'nvim-cmp', 'nvim-lspconfig' },
+            config = function()
+                require('plugins.config.lsp.lspkind')
+            end,
+        })
         use({
             'folke/lsp-colors.nvim',
             after = 'lspkind-nvim',
         })
         use({
             'folke/trouble.nvim',
-            after = 'lsp-colors.nvim',
+            event = 'LspAttach',
             config = function()
                 require('plugins.config.lsp.trouble')
             end,
         })
+        use({
+            'glepnir/lspsaga.nvim',
+            event = 'LspAttach',
+            cmd = 'Lspsaga',
+            config = function()
+                require('plugins.config.lsp.lspsaga')
+            end,
+        })
+
+        -- not lazy-loaded because required by lualine
         use({
             'SmiteshP/nvim-navic',
             config = function()
                 require('plugins.config.lsp.navic')
             end,
         })
-        use({
-            'glepnir/lspsaga.nvim',
-            after = 'lsp-colors.nvim',
-            cmd = 'Lspsaga',
-            config = function()
-                require('plugins.config.lsp.lspsaga')
-            end,
-        })
         -- }}}
 
-        -- {{{ [syntax] plugins that add support for file formats or are related to syntax
+        -- {{{ [syntax] plugins that add support for file formats or are related to syntax (esp. highlighting)
         -- treesitter
         use({
             'nvim-treesitter/nvim-treesitter',
+            -- this breaks things
             -- cmd = lazy.treesitter_cmds,
             -- setup = function()
             --     require('plugins.lazy').on_file_open('nvim-treesitter')
@@ -248,7 +245,7 @@ packer.startup({
             run = ':Neorg sync-parsers',
         })
 
-        -- dimming unused items and highlighting selected ones
+        -- dimming & highlighting items
         use({
             'zbirenbaum/neodim',
             event = 'LspAttach',
@@ -261,6 +258,15 @@ packer.startup({
             event = 'BufRead',
             config = function()
                 require('plugins.config.syntax.illuminate')
+            end,
+        })
+
+        -- other
+        use({
+            'folke/todo-comments.nvim',
+            event = 'BufRead',
+            config = function()
+                require('plugins.config.syntax.todo_comments')
             end,
         })
         -- }}}
@@ -290,7 +296,7 @@ packer.startup({
             'kensyo/nvim-scrlbkun',
             config = function()
                 require('plugins.config.ui.scrlbkun')
-            end
+            end,
         })
         -- }}}
 
@@ -343,7 +349,7 @@ packer.startup({
             ft = 'norg',
             config = function()
                 require('plugins.config.util.due')
-            end
+            end,
         }
         -- }}}
 

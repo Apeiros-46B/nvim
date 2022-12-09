@@ -62,6 +62,11 @@ M.hl = {
     DiagnosticSignInfo  = { fg = M.colors.green  },
     DiagnosticSignHint  = { fg = M.colors.teal   },
 
+    DiagnosticError   = { fg = M.colors.red    },
+    DiagnosticWarning = { fg = M.colors.yellow },
+    DiagnosticInfo    = { fg = M.colors.green  },
+    DiagnosticHint    = { fg = M.colors.teal   },
+
     -- search
     Search    = { bg = M.colors.diff_add, fg = M.colors.green, bold = true },
     IncSearch = { bg = M.colors.green   , fg = M.colors.gray1, bold = true }

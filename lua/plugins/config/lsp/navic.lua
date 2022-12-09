@@ -47,7 +47,9 @@ navic.setup({
 
 -- {{{ custom highlight
 local set_hl = vim.api.nvim_set_hl
+
 local hl = {
+    -- {{{ kind icons
     NavicIconsField         = { default = true, bg = colors.gray3, fg = colors.red    },
     NavicIconsEvent         = { default = true, bg = colors.gray3, fg = colors.red    },
     NavicIconsKey           = { default = true, bg = colors.gray3, fg = colors.red    },
@@ -81,10 +83,12 @@ local hl = {
     NavicIconsNamespace     = { default = true, bg = colors.gray3, fg = colors.white  },
     NavicIconsPackage       = { default = true, bg = colors.gray3, fg = colors.white  },
 
-    NavicText               = { default = true, bg = colors.gray3, fg = colors.gray8  },
     NavicIconsNull          = { default = true, bg = colors.gray3, fg = colors.gray8  },
+    -- }}}
 
+    NavicText               = { default = true, bg = colors.gray3, fg = colors.gray8  },
     NavicSeparator          = { default = true, bg = colors.gray3, fg = colors.gray5  },
 }
-for k,v in pairs(hl) do set_hl(0, k, v) end
+
+for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}
