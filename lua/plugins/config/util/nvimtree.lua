@@ -173,5 +173,5 @@ vim.defer_fn(function()
     for k, v in pairs(hl) do
         set_hl(0, k, v)
     end
-end, 15)
+end, 25)
 -- }}}
