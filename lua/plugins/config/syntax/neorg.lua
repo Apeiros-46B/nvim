@@ -327,7 +327,7 @@ local hl = {
     ['@neorg.tags.ranged_verbatim.parameters'    ] = { fg = colors.blue                  },
 
     ['@neorg.tags.ranged_verbatim.name'          ] = { fg = colors.purple, italic = true },
-    ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.gray7 , italic = true },
+    ['@neorg.tags.ranged_verbatim.name.delimiter'] = { fg = colors.blue  , italic = true },
     ['@neorg.tags.ranged_verbatim.name.word'     ] = { fg = colors.purple, italic = true },
 
     -- {{{ document meta

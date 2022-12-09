@@ -12,11 +12,12 @@ local colors = theme.colors
 scrlbkun.setup({
     -- {{{ options
     single_window = true,
-    zindex = 10,
+
+    zindex   = 10,
     winblend = 0,
 
     excluded_filetypes = { 'NvimTree', 'fugitive', 'gitcommit', 'terminal' },
-    excluded_buftypes = { 'prompt' },
+    excluded_buftypes  = { 'prompt' },
 
     fadeout_time = 0,
 

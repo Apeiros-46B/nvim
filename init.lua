@@ -30,5 +30,5 @@ vim.opt.shadafile = ''
 
 -- {{{ plugins
 --> load all packer plugins and lazy-load their configs
-require('plugins')
+require('plugins.pack')
 -- }}}
