@@ -154,15 +154,29 @@ packer.startup({
 
         -- {{{ [lsp] plugins related to lsp or debugging
         -- core
-        use({ 'neovim/nvim-lspconfig' })
+        use({
+            'neovim/nvim-lspconfig',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('nvim-lspconfig')
+            end,
+        })
 
         -- mason
         use({
+            'williamboman/mason-lspconfig.nvim',
+            after = 'nvim-lspconfig',
+        })
+        use({
             'williamboman/mason.nvim',
+            opt = true,
+            after = 'mason-lspconfig.nvim',
+            setup = function()
+                require('plugins.lazy').on_file_open('mason.nvim')
+            end,
             config = function()
                 require('plugins.config.lsp.mason')
             end,
-            requires = { 'williamboman/mason-lspconfig.nvim' }
         })
 
         -- dap

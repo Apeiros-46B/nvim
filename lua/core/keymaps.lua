@@ -82,13 +82,13 @@ map('n', '<leader>hf', ':HopWordCurrentLine<CR>', {})
 -- }}}
 
 -- {{{ [j] jdtls
-map('n', '<leader>jb', ':vs | terminal<CR>imvn clean package -T 4<CR>', opt)
-map('n', '<leader>jo', ':lua require("jdtls").organize_imports()<CR>', opt)
-map('n', '<leader>jev', ':lua require("jdtls").extract_variable()<CR>', opt)
-map('v', '<leader>jev', ':<C-u>lua require("jdtls").extract_variable(true)<CR>', opt)
-map('n', '<leader>jec', ':lua require("jdtls").exttract_constant()<CR>', opt)
-map('v', '<leader>jec', ':<C-u>lua require("jdtls").extract_constant(true)<CR>', opt)
-map('v', '<leader>jem', ':<C-u>lua require("jdtls").extract_method(true)<CR>', opt)
+-- map('n', '<leader>jb', ':vs | terminal<CR>imvn clean package -T 4<CR>', opt)
+-- map('n', '<leader>jo', ':lua require("jdtls").organize_imports()<CR>', opt)
+-- map('n', '<leader>jev', ':lua require("jdtls").extract_variable()<CR>', opt)
+-- map('v', '<leader>jev', ':<C-u>lua require("jdtls").extract_variable(true)<CR>', opt)
+-- map('n', '<leader>jec', ':lua require("jdtls").exttract_constant()<CR>', opt)
+-- map('v', '<leader>jec', ':<C-u>lua require("jdtls").extract_constant(true)<CR>', opt)
+-- map('v', '<leader>jem', ':<C-u>lua require("jdtls").extract_method(true)<CR>', opt)
 -- }}}
 
 -- {{{ [l] lsp
