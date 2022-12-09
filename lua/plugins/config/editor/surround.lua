@@ -13,12 +13,30 @@ require('nvim-surround').setup({
         change          = 'cs',
     },
     aliases = {
-        ['a'] = '>',
-        ['b'] = ')',
-        ['B'] = '}',
-        ['r'] = ']',
-        ['q'] = { "'", "'", '`' },
-        ['s'] = { '}', ']', ')', '>', "'", "'", '`' },
+        -- {{{ parenthese/brackets
+        ['a'] = '>', -- Angle brackets
+        ['p'] = ')', -- Parentheses
+        ['c'] = '}', -- Curly brackets
+        ['b'] = ']', -- square Brackets
+        -- }}}
+
+        -- {{{ quotes
+        ['d'] = '"',               -- Double quotes
+        ['s'] = "'",               -- Single quotes
+        ['g'] = '`',               -- Grave
+        ['q'] = { "'", "'", '`' }, -- Quotes
+        -- }}}
+
+        -- {{{ norg
+        ['i'] = '/', -- Italic
+        ['u'] = '_', -- Underline
+        ['x'] = '-', -- Strikethrough
+        ['!'] = '|', -- spoiler
+        ['m'] = '$', -- Math
+        ['C'] = '+', -- inline Comment
+
+        ['M'] = { '*', '/', '_', '|', '`', '^', ',', '$', '=', '+' } -- all Markup
+        -- }}}
     },
     highlight = {
         duration = 0,
