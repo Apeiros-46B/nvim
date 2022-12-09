@@ -249,9 +249,9 @@ local file_tree = {}
 
 file_tree.sections = vim.deepcopy(extension_template)
 
-file_tree.sections.lualine_a = { { function() return "FTR" end, color = { bg = colors.red, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
+file_tree.sections.lualine_a = { { function() return "FTR" end, color = { bg = colors.blue, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
 
-file_tree.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'bold' } } }
+file_tree.sections.lualine_z = { { 'location', color = { bg = colors.blue, gui = 'bold' } } }
 
 file_tree.filetypes = { 'CHADTree', 'nerdtree', 'NvimTree' }
 -- }}}
@@ -329,9 +329,9 @@ local trouble = {}
 
 trouble.sections = vim.deepcopy(extension_template)
 
-trouble.sections.lualine_a = { { function() return "TRB" end, color = { bg = colors.blue, gui = 'bold'} } }
+trouble.sections.lualine_a = { { function() return "TRB" end, color = { bg = colors.red, gui = 'bold'} } }
 
-trouble.sections.lualine_z = { { 'location', color = { bg = colors.blue, gui = 'bold' } } }
+trouble.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'bold' } } }
 
 trouble.filetypes = { 'Trouble' }
 -- }}}

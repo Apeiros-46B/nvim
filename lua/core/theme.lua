@@ -35,6 +35,7 @@ M.colors = {
     diff_del  = '#4e3e43',
     diff_add  = '#404d44',
     diff_mod  = '#394f5a',
+    bg_yellow = '#4a4940',
 }
 -- }}}
 
@@ -72,7 +73,7 @@ M.hl = {
     IncSearch = { bg = M.colors.green   , fg = M.colors.gray1, bold = true }
 }
 
-for k,v in pairs(M.hl) do set_hl(0, k, v) end
+for k, v in pairs(M.hl) do set_hl(0, k, v) end
 
 -- set diagnostic sign icons
 for type, icon in pairs({ Error = ' ', Warn = ' ', Info = ' ', Hint = ' ' }) do

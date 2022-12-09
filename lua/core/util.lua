@@ -5,6 +5,7 @@ local disabled_built_ins = {
     "netrwPlugin",
     "netrwSettings",
     "netrwFileHandlers",
+    -- I like the archive plugins
     -- "gzip",
     -- "zip",
     -- "zipPlugin",

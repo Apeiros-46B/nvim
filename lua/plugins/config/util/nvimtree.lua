@@ -1,75 +1,169 @@
-local g = vim.g
+-- configuration for nvim-tree plugin
+-- {{{ imports
+-- main
+local nvim_tree = require('nvim-tree')
 
-g.nvim_tree_auto_ignore_ft = { 'startify', 'dashboard' }
--- g.nvim_tree_git_hl = 1
--- g.nvim_tree_highlight_opened_files = 1
--- g.nvim_tree_root_folder_modifier = ':~'
--- g.nvim_tree_add_trailing = 1
--- g.nvim_tree_group_empty = 1
--- g.nvim_tree_icon_padding = ' '
--- g.nvim_tree_symlink_arrow = ' >> '
--- g.nvim_tree_show_icons = {
--- 	git = 1,
--- 	folders = 1,
--- 	files = 1,
--- }
+-- theme
+local theme = require('core.theme')
+local colors = theme.colors
+-- }}}
 
-require'nvim-tree'.setup {
-  disable_netrw         = true,
-  hijack_netrw          = true,
-  open_on_setup         = false,
-  ignore_ft_on_setup    = {},
-  -- auto_close            = false,
-  open_on_tab           = false,
-  hijack_cursor         = false,
-  update_cwd            = false,
-  -- update_to_buf_dir     = {
-  --   enable = true,
-  --   auto_open = true,
-  -- },
-  diagnostics = {
-    enable = false,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    }
-  },
-  update_focused_file = {
-    enable      = false,
-    update_cwd  = false,
-    ignore_list = {}
-  },
-  system_open = {
-    cmd  = nil,
-    args = {}
-  },
-  filters = {
-    dotfiles = false,
-    custom = {}
-  },
-  git = {
-    enable = true,
-    ignore = false,
-    timeout = 500,
-  },
-  view = {
-    width = 30,
-    -- height = 30,
-    hide_root_folder = false,
-    side = 'left',
-    -- auto_resize = false,
-    mappings = {
-      custom_only = false,
-      list = {}
+-- {{{ setup
+nvim_tree.setup({
+    -- {{{ options
+    disable_netrw = true,
+    hijack_cursor = true,
+    hijack_netrw  = true,
+    -- }}}
+
+    -- {{{ view
+    view = {
+        adaptive_size               = false,
+        centralize_selection        = false,
+        width                       = 30,
+        hide_root_folder            = false,
+        side                        = 'left',
+        preserve_window_proportions = true,
+
+        signcolumn = 'yes',
+        mappings = {
+            custom_only = false,
+            list = {
+                -- user mappings go here
+            },
+        },
     },
-    number = false,
-    relativenumber = false,
-    signcolumn = "yes"
-  },
-  trash = {
-    cmd = "trash",
-    require_confirm = true
-  }
+    -- }}}
+
+    -- {{{ renderer
+    renderer = {
+        add_trailing = true,
+        group_empty = true,
+        highlight_git = false,
+        full_name = false,
+        highlight_opened_files = 'name',
+
+        indent_markers = {
+            enable        = true,
+            inline_arrows = true,
+
+            icons = {
+                corner = '│',
+                edge   = '│',
+                item   = '│',
+                bottom = '─',
+                none   = ' ',
+            },
+        },
+
+        icons = {
+            webdev_colors = true,
+            git_placement = 'before',
+            padding = ' ',
+            symlink_arrow = ' -> ',
+            show = {
+                file = true,
+                folder = true,
+                folder_arrow = true,
+                git = true,
+            },
+            glyphs = {
+                default  = '',
+                symlink  = '',
+                bookmark = '',
+                folder = {
+                    arrow_closed = '│',
+                    arrow_open   = '│',
+                    default      = '',
+                    open         = 'ﱮ',
+                    empty        = '',
+                    empty_open   = '',
+                    symlink      = '',
+                    symlink_open = '',
+                },
+                git = {
+                    unstaged  = '×',
+                    staged    = '',
+                    unmerged  = '-',
+                    renamed   = '',
+                    untracked = '',
+                    deleted   = '',
+                    ignored   = '',
+                },
+            },
+        },
+
+        special_files = { 'Cargo.toml', 'Makefile', 'README.md', 'readme.md' },
+        symlink_destination = true,
+    },
+    -- }}}
+
+    -- {{{ components
+    diagnostics = {
+        enable = true,
+        show_on_dirs = false,
+        show_on_open_dirs = true,
+        debounce_delay = 50,
+        severity = {
+            min = vim.diagnostic.severity.HINT,
+            max = vim.diagnostic.severity.ERROR
+        },
+        icons = { error = '', warning = '', info = '', hint = '' },
+    },
+
+    filesystem_watchers = {
+        enable = true,
+        debounce_delay = 50,
+        ignore_dirs = {},
+    },
+
+    live_filter = {
+        prefix              = 'FLTR: ',
+        always_show_folders = true,
+    },
+
+    tab = {
+        sync = {
+            open   = true,
+            close  = true,
+            ignore = {},
+        },
+    },
+
+    notify = {
+        threshold = vim.log.levels.INFO,
+    },
+    -- }}}
+})
+-- }}}
+
+-- {{{ custom highlights
+local set_hl = vim.api.nvim_set_hl
+
+local hl = {
+    NvimTreeNormal      = { bg = colors.gray1, fg = colors.white },
+    NvimTreeEndOfBuffer = { bg = colors.gray1, fg = colors.gray1 },
+    NvimTreeVertSplit   = { bg = colors.gray1, fg = colors.gray1 },
+    NvimTreeCursorLine  = { bg = colors.gray2, fg = 'NONE'       },
+
+    NvimTreeIndentMarker = { fg = colors.gray5 },
+
+    NvimTreeRootFolder       = { fg = colors.gray7 },
+    NvimTreeFolderName       = { fg = colors.blue  },
+    NvimTreeFolderIcon       = { fg = colors.green },
+    NvimTreeEmptyFolderName  = { fg = colors.blue  },
+    NvimTreeOpenedFolderName = { fg = colors.blue  },
+
+    NvimTreeSymlink     = { fg = colors.teal  , bold = true },
+    NvimTreeExecFile    = { fg = colors.green , bold = true },
+    NvimTreeSpecialFile = { fg = colors.red   , bold = true },
+    NvimTreeImageFile   = { fg = colors.purple, bold = true },
 }
+
+-- TODO: find out why this defer is needed for hl to be applied properly
+vim.defer_fn(function()
+    for k, v in pairs(hl) do
+        set_hl(0, k, v)
+    end
+end, 15)
+-- }}}

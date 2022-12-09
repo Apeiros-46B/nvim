@@ -193,6 +193,7 @@ packer.startup({
         use({
             'folke/trouble.nvim',
             event = 'LspAttach',
+            cmd = { 'Trouble', 'TroubleToggle' },
             config = function()
                 require('plugins.config.lsp.trouble')
             end,
@@ -319,8 +320,7 @@ packer.startup({
         -- other
         use({
             'kyazdani42/nvim-tree.lua',
-            ft = 'starter',
-            cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+            cmd = { 'NvimTreeFocus', 'NvimTreeToggle', 'NvimTreeOpen' },
             config = function()
                 require('plugins.config.util.nvimtree')
             end,
