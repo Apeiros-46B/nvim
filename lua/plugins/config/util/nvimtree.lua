@@ -58,7 +58,7 @@ nvim_tree.setup({
 
         icons = {
             webdev_colors = true,
-            git_placement = 'before',
+            git_placement = 'signcolumn',
             padding = ' ',
             symlink_arrow = ' -> ',
             show = {
