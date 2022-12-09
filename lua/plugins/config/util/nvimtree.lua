@@ -156,7 +156,7 @@ local hl = {
 
     NvimTreeSymlink     = { fg = colors.teal  , bold = true },
     NvimTreeExecFile    = { fg = colors.green , bold = true },
-    NvimTreeSpecialFile = { fg = colors.red   , bold = true },
+    NvimTreeSpecialFile = { fg = colors.purple, bold = true },
     NvimTreeImageFile   = { fg = colors.purple, bold = true },
 }
 
