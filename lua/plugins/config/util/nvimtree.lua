@@ -48,7 +48,7 @@ nvim_tree.setup({
             inline_arrows = true,
 
             icons = {
-                corner = '│',
+                corner = '└',
                 edge   = '│',
                 item   = '│',
                 bottom = '─',
@@ -64,7 +64,7 @@ nvim_tree.setup({
             show = {
                 file = true,
                 folder = true,
-                folder_arrow = true,
+                folder_arrow = false,
                 git = true,
             },
             glyphs = {
@@ -86,7 +86,7 @@ nvim_tree.setup({
                     staged    = '',
                     unmerged  = '-',
                     renamed   = '',
-                    untracked = '',
+                    untracked = '+',
                     deleted   = '',
                     ignored   = '',
                 },
@@ -115,6 +115,14 @@ nvim_tree.setup({
         enable = true,
         debounce_delay = 50,
         ignore_dirs = {},
+    },
+
+    git = {
+        enable = true,
+        ignore = false,
+        show_on_dirs = true,
+        show_on_open_dirs = true,
+        timeout = 400,
     },
 
     live_filter = {

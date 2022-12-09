@@ -21,7 +21,7 @@ Only tested on Neovim v0.8.1
 
 ## Screenshots
 
-![dashboard](assets/main.png)
-![programming](assets/code.png)
-![file picker](assets/pick.png)
-![documents with Neorg](assets/norg.png)
+![dashboard](assets/dash.png)
+![programming w/ code completion](assets/code.png)
+![fuzzy file picker](assets/pick.png)
+![documents using Neorg](assets/norg.png)
