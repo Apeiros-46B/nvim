@@ -195,6 +195,7 @@ packer.startup({
         -- plugins to enhance specific servers
         -- `opt = true` because loaded using mason
         use({ 'simrat39/rust-tools.nvim', opt = true })
+        use({ 'mfussenegger/nvim-jdtls',  opt = true })
 
         -- other lsp-related
         use({

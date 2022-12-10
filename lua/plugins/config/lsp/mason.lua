@@ -80,8 +80,10 @@ end
 
 -- {{{ setup
 -- {{{ main
+local install_root_dir = vim.fn.stdpath('data') .. '/mason'
+
 mason.setup({
-    install_root_dir = table.concat({ vim.fn.stdpath('data'), 'mason' }, '/'),
+    install_root_dir = install_root_dir,
     PATH             = 'prepend',
 
     log_level                 = vim.log.levels.INFO,
@@ -153,6 +155,27 @@ mason_lspconfig.setup_handlers({
         add(lspconfig[server_name])
     end,
 
+    -- {{{ [nvim-jdtls] jdtls
+    ['jdtls'] = function()
+        if vim.bo.filetype ~= 'java' then return end
+
+        -- load plugin
+        require('packer').loader('nvim-jdtls')
+
+        -- start
+        require('jdtls').start_or_attach({
+            cmd = { install_root_dir .. '/bin/jdtls' },
+            root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
+
+            settings = {
+                java = {},
+            },
+
+            on_attach = on_attach,
+        })
+    end,
+    -- }}}
+
     -- {{{ [rust-tools] rust-analyzer
     ['rust_analyzer'] = function()
         -- load plugin
@@ -163,7 +186,7 @@ mason_lspconfig.setup_handlers({
             tools = {
                 autoSetHints = true,
                 inlay_hints = {
-                    right_align = true,
+                    right_align = false,
                     show_parameter_hints = true,
                     parameter_hints_prefix = '',
                     other_hints_prefix = '',
