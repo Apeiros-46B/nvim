@@ -132,13 +132,9 @@ packer.startup({
         use({
             'Ron89/thesaurus_query.vim',
             ft = { 'markdown', 'norg' },
-            cmd = {
-                'Thesaurus',
-                'ThesaurusQueryLookupCurrentWord',
-                'ThesaurusQueryReplace',
-                'ThesaurusQueryReplaceCurrentWord',
-                'ThesaurusQueryReset',
-            },
+            config = function()
+                require('plugins.config.editor.thesaurus.init')
+            end,
         })
         -- }}}
 

@@ -1,4 +1,4 @@
--- configuration for neodim
+-- configuration for neodim plugin
 -- {{{ imports
 -- main
 local neodim = require('neodim')
