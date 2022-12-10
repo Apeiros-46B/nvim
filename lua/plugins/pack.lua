@@ -129,6 +129,17 @@ packer.startup({
                 require('plugins.config.editor.boole')
             end,
         })
+        use({
+            'Ron89/thesaurus_query.vim',
+            ft = { 'markdown', 'norg' },
+            cmd = {
+                'Thesaurus',
+                'ThesaurusQueryLookupCurrentWord',
+                'ThesaurusQueryReplace',
+                'ThesaurusQueryReplaceCurrentWord',
+                'ThesaurusQueryReset',
+            },
+        })
         -- }}}
 
         -- {{{ [git] plugins related to git
@@ -152,7 +163,7 @@ packer.startup({
         })
         -- }}}
 
-        -- {{{ [lsp] plugins related to lsp or debugging
+        -- {{{ [lsp] plugins related to lsp, dap, or linters
         -- core
         use({
             'neovim/nvim-lspconfig',
@@ -231,7 +242,7 @@ packer.startup({
         })
         -- }}}
 
-        -- {{{ [syntax] plugins that add support for file formats or are related to syntax (esp. highlighting)
+        -- {{{ [syntax] plugins for file formats or syntax (esp. highlighting)
         -- treesitter
         use({
             'nvim-treesitter/nvim-treesitter',
@@ -329,6 +340,7 @@ packer.startup({
         })
         use({
             'nvim-telescope/telescope.nvim',
+            -- this breaks things
             -- ft = 'norg',
             -- cmd = 'Telescope',
             -- after = 'telescope-fzf-native.nvim',

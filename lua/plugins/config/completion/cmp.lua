@@ -77,14 +77,16 @@ cmp.setup({
     -- }}}
 
     -- {{{ sources
-    sources = cmp.config.sources({
+    sources = cmp.config.sources(
+        {
             { name = 'neorg', priority = 0 },
             { name = 'nvim_lsp', priority = 1 },
-            { name = 'ultisnips' },
+            { name = 'ultisnips', priority = 1 },
         },
         {
-            { name = 'buffer' },
-            { name = 'path' },
+            { name = 'git', priority = 0 },
+            { name = 'buffer', priority = 1 },
+            { name = 'path', priority = 2 },
         }
     ),
     -- }}}
