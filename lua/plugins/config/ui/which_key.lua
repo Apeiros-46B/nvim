@@ -288,17 +288,6 @@ local g = {
     -- }}}
 
     -- {{{ single
-    -- himalaya
-    a = 'Download attachments',
-    C = 'Copy message',
-    D = 'Delete message',
-    m = 'Change mailbox',
-    M = 'Move message',
-    p = 'Previous inbox page',
-    r = 'Reply',
-    R = 'Reply all',
-    w = 'Write a new message',
-
     -- neorg
     O = 'Show ToC',
     -- }}}

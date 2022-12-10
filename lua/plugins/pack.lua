@@ -395,9 +395,3 @@ packer.startup({
     -- }}}
 })
 -- }}}
-
--- {{{ misc
--- workaround for plugins that need rtp (himalaya)
-local packer_compiled = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua'
-cmd('luafile'  .. packer_compiled)
--- }}}

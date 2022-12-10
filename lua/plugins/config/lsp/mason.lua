@@ -188,7 +188,19 @@ mason_lspconfig.setup_handlers({
                 java = {
                     completion = {
                         importOrder = { '#', 'java', 'javax', 'lombok', 'org', 'com', 'net', 'io', 'me' }
-                    }
+                    },
+
+                    contentProvider = { preferred = 'fernflower' },
+
+                    ['eclipse.downloadSources'] = true,
+                    ['maven.downloadSources'  ] = true,
+
+                    sources = {
+                        organizeImports = {
+                            starThreshold = 9999,
+                            staticStarThreshold = 9999,
+                        },
+                    },
                 },
             },
 
