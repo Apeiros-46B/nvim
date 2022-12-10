@@ -226,10 +226,9 @@ packer.startup({
             end,
         })
 
-        -- not lazy-loaded because required by lualine
-        -- figure out how to lazy-load later
         use({
             'SmiteshP/nvim-navic',
+            event = 'LspAttach',
             config = function()
                 require('plugins.config.lsp.navic')
             end,

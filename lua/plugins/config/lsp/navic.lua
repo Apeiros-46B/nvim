@@ -2,6 +2,7 @@
 -- {{{ imports
 -- main
 local navic = require('nvim-navic')
+local g = vim.g
 
 -- theme
 local theme = require('core.theme')
@@ -91,4 +92,24 @@ local hl = {
 }
 
 for k, v in pairs(hl) do set_hl(0, k, v) end
+-- }}}
+
+-- {{{ add to lualine
+-- {{{ toggle with a command
+g.show_navic = true
+
+local function should_show_navic() return navic.is_available and g.show_navic end
+vim.api.nvim_create_user_command('NavicToggle', function(_) g.show_navic = not g.show_navic end, { nargs = 0 })
+-- }}}
+
+local navic_section = { navic.get_location, cond = should_show_navic, colors = { bg = colors.gray3 } }
+local lualine = require('plugins.config.ui.lualine')
+
+local new_sections = lualine.sections
+
+if new_sections.lualine_x[1] == '' then
+    new_sections.lualine_x[1] = navic_section
+end
+
+lualine.setup(new_sections)
 -- }}}

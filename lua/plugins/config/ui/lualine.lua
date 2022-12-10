@@ -1,9 +1,8 @@
--- configuration for lualine statusline and TODO: winbar
+-- configuration for lualine statusline
 -- {{{ imports
-local vim = vim
+local api = vim.api
 local fn = vim.fn
 local g = vim.g
-local cc = vim.api.nvim_create_user_command -- *c*reate *c*ommand
 
 local theme = require('core.theme')
 local colors = theme.colors
@@ -140,7 +139,7 @@ end
 g.show_word_count = true
 
 local function should_show_word_count() return g.show_word_count end
-cc('WordCountToggle', function() g.show_word_count = not g.show_word_count end, { nargs = 0 })
+api.nvim_create_user_command('WordCountToggle', function() g.show_word_count = not g.show_word_count end, { nargs = 0 })
 -- }}}
 -- }}}
 -- }}}
@@ -179,7 +178,7 @@ local diagnostics  = {
 }
 
 -- {{{ custom highlights
-local set_hl = vim.api.nvim_set_hl
+local set_hl = api.nvim_set_hl
 
 local hl = {
     LualineDiagnosticError = { fg = colors.red   , bg = lualine_theme.normal.c.bg },
@@ -190,32 +189,17 @@ local hl = {
 
 for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}
-
--- {{{ navic
-local navic_plugin = require('nvim-navic')
-
--- {{{ toggle with a command
-g.show_navic = true
-
-local function should_show_navic() return navic_plugin.is_available and g.show_navic end
-cc('NavicToggle', function(_) g.show_navic = not g.show_navic end, { nargs = 0 })
--- }}}
-
-local navic = { navic_plugin.get_location, cond = should_show_navic, colors = { bg = colors.gray3 } }
--- }}}
 -- }}}
 -- }}}
 
--- {{{ main sections
 local sections = {
     lualine_a = { mode },
     lualine_b = { 'filesize', filetype },
     lualine_c = { branch, diff, diagnostics },
-    lualine_x = { navic, filename },
+    lualine_x = { '', filename },
     lualine_y = { fileformat, 'encoding' },
     lualine_z = { 'location' },
 }
--- }}}
 -- }}}
 
 -- {{{ custom extensions
@@ -230,7 +214,6 @@ local extension_template = {
 }
 -- }}}
 
--- {{{ extensions that use the template
 -- {{{ dashboard
 local dashboard = {}
 
@@ -296,6 +279,22 @@ gitblame.sections.lualine_z = { { 'location', color = { bg = colors.orange, gui 
 gitblame.filetypes = { 'fugitiveblame' }
 -- }}}
 
+-- {{{ help/doc
+local help = {}
+
+help.sections = vim.deepcopy(extension_template)
+
+help.sections.lualine_a = { { function() return "DOC" end, color = { bg = colors.yellow, gui = 'bold' } } } -- Same could be said about this
+help.sections.lualine_b = { 'filesize', filename_alt }
+help.sections.lualine_c = { '' }
+
+help.sections.lualine_x = { '' }
+help.sections.lualine_y = { 'progress' }
+help.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'bold' } } }
+
+help.filetypes = { 'help' }
+-- }}}
+
 -- {{{ telescope
 local telescope = {}
 
@@ -335,52 +334,6 @@ trouble.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'b
 
 trouble.filetypes = { 'Trouble' }
 -- }}}
--- }}}
-
--- {{{ extensions that use default sections
--- {{{ help/doc
-local help = {}
-
-help.sections = vim.deepcopy(sections)
-
-help.sections.lualine_a = { { function() return "DOC" end, color = { bg = colors.yellow, gui = 'bold' } } } -- Same could be said about this
-help.sections.lualine_b = { 'filesize', filename_alt }
-help.sections.lualine_c = { '' }
-
-help.sections.lualine_x = { '' }
-help.sections.lualine_y = { 'progress' }
-help.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'bold' } } }
-
-help.filetypes = { 'help' }
--- }}}
-
--- {{{ himalaya
-local himalaya = {}
-
-himalaya.sections = vim.deepcopy(sections)
-
-himalaya.sections.lualine_a = { { function() return "MSG" end, color = { bg = colors.yellow, gui = 'bold' } } } -- Same could be said about this
-himalaya.sections.lualine_b = { filename_alt }
-himalaya.sections.lualine_c = { 'filesize' }
-
-himalaya.sections.lualine_x = { word_count }
-himalaya.sections.lualine_y = { 'progress' }
-himalaya.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'bold' } } }
-
-himalaya.filetypes = { 'himalaya-msg-list', 'himalaya-msg-read' }
-
-local himalaya_write = {}
-
-himalaya_write.sections = vim.deepcopy(sections)
-
-himalaya_write.sections.lualine_b = { filename_alt }
-himalaya_write.sections.lualine_c = { word_count, 'filesize' }
-
-himalaya_write.sections.lualine_x = { fileformat }
-himalaya_write.sections.lualine_y = { 'progress' }
-
-himalaya_write.filetypes = { 'himalaya-msg-write', 'mail' }
--- }}}
 
 -- {{{ word count for documents
 local wc = {}
@@ -393,42 +346,47 @@ wc.sections.lualine_x = { word_count, filename }
 wc.filetypes = { 'markdown', 'adoc',   'norg', 'org', 'text' }
 -- }}}
 -- }}}
--- }}}
 
 -- {{{ setup
-require('lualine').setup({
-    -- {{{ extensions
-    extensions = {
-        -- uses a more minimal template
-        dashboard,      -- dashboard
-        file_tree,      -- file trees (CHADTree, NERDTree, NvimTree)
-        fugitive,       -- fugitive pane
-        gitblame,       -- fugitive blame sidebar
-        gitcommit,      -- editing commit messages
-        telescope,      -- telescope fuzzy finder
-        terminal,       -- terminal
-        trouble,        -- trouble.nvim
+local function setup(new_sections)
+    require('lualine').setup({
+        -- {{{ extensions
+        extensions = {
+            -- uses a more minimal template
+            dashboard,      -- dashboard
+            file_tree,      -- file trees (CHADTree, NERDTree, NvimTree)
+            fugitive,       -- fugitive pane
+            gitblame,       -- fugitive blame sidebar
+            gitcommit,      -- editing commit messages
+            telescope,      -- telescope fuzzy finder
+            terminal,       -- terminal
+            trouble,        -- trouble.nvim
 
-        -- modifies the default sections
-        help,           -- `:help` panel
-        himalaya,       -- inbox list and reading messages in himalaya
-        himalaya_write, -- writing messages in himalaya
-        wc              -- word counter for markdown, norg, and txt files
-    },
-    -- }}}
+            -- modifies the default sections
+            help,           -- `:help` panel
+            himalaya,       -- inbox list and reading messages in himalaya
+            himalaya_write, -- writing messages in himalaya
+            wc              -- word counter for markdown, norg, and txt files
+        },
+        -- }}}
 
-    -- {{{ options
-	options = {
-		theme = lualine_theme,
+        -- {{{ options
+        options = {
+            theme = lualine_theme,
 
-		section_separators   = { left = style.l, right = style.r },
-		component_separators = { left = sep.l,   right = sep.r   },
+            section_separators   = { left = style.l, right = style.r },
+            component_separators = { left = sep.l,   right = sep.r   },
 
-        always_divide_middle = true,
-        globalstatus = true,
-	},
+            always_divide_middle = true,
+            globalstatus = true,
+        },
 
-	sections = sections,
-    -- }}}
-})
+        sections = new_sections,
+        -- }}}
+    })
+end
+
+setup(sections)
 -- }}}
+
+return { setup = setup, sections = sections }
