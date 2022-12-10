@@ -52,34 +52,41 @@ end
 -- }}}
 
 -- {{{ custom highlights & theme overrides
+-- set diagnostic sign icons
+for type, icon in pairs({ Error = '', Warn = '', Info = '', Hint = '' }) do
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- set highlights
 M.hl = {
     NormalFloat = { bg = M.colors.gray3                      }, -- set background for floating windows
     FloatBorder = { bg = M.colors.gray3, fg = M.colors.gray3 }, -- remove border for floating windows
     EndOfBuffer = { bg = M.colors.gray1, fg = M.colors.gray1 }, -- remove tildes from gutter
 
-    -- diagnostic signs
+    -- {{{ diagnostics
     DiagnosticSignError = { fg = M.colors.red    },
     DiagnosticSignWarn  = { fg = M.colors.yellow },
     DiagnosticSignInfo  = { fg = M.colors.green  },
     DiagnosticSignHint  = { fg = M.colors.teal   },
 
-    DiagnosticError   = { fg = M.colors.red    },
-    DiagnosticWarning = { fg = M.colors.yellow },
-    DiagnosticInfo    = { fg = M.colors.green  },
-    DiagnosticHint    = { fg = M.colors.teal   },
+    DiagnosticError = { fg = M.colors.red    },
+    DiagnosticWarn  = { fg = M.colors.yellow },
+    DiagnosticInfo  = { fg = M.colors.green  },
+    DiagnosticHint  = { fg = M.colors.teal   },
+
+    ErrorFloat = { bg = M.colors.gray3, fg = M.colors.red    },
+    WarnFloat  = { bg = M.colors.gray3, fg = M.colors.yellow },
+    InfoFloat  = { bg = M.colors.gray3, fg = M.colors.green  },
+    HintFloat  = { bg = M.colors.gray3, fg = M.colors.teal   },
+    -- }}}
 
     -- search
     Search    = { bg = M.colors.diff_add, fg = M.colors.green, bold = true },
-    IncSearch = { bg = M.colors.green   , fg = M.colors.gray1, bold = true }
+    IncSearch = { bg = M.colors.green   , fg = M.colors.gray1, bold = true },
 }
 
 for k, v in pairs(M.hl) do set_hl(0, k, v) end
-
--- set diagnostic sign icons
-for type, icon in pairs({ Error = ' ', Warn = ' ', Info = ' ', Hint = ' ' }) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 -- }}}
 
 -- {{{ return

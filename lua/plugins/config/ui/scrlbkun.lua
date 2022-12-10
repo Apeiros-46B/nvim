@@ -161,9 +161,9 @@ local hl = {
     ScrlbkunDiagnosticsInfo  = { fg = colors.green  },
     ScrlbkunDiagnosticsHint  = { fg = colors.teal   },
 
-    ScrlbkunGithunksAdd      = { bg = colors.diff_add },
-    ScrlbkunGithunksDelete   = { bg = colors.diff_del },
-    ScrlbkunGithunksChange   = { bg = colors.diff_mod },
+    ScrlbkunGithunksAdd      = { fg = colors.diff_add },
+    ScrlbkunGithunksDelete   = { fg = colors.diff_del },
+    ScrlbkunGithunksChange   = { fg = colors.diff_mod },
 }
 
 for k, v in pairs(hl) do set_hl(0, k, v) end
