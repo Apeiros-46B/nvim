@@ -185,7 +185,11 @@ mason_lspconfig.setup_handlers({
             root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
 
             settings = {
-                java = {},
+                java = {
+                    completion = {
+                        importOrder = { '#', 'java', 'javax', 'lombok', 'org', 'com', 'net', 'io', 'me' }
+                    }
+                },
             },
 
             on_attach = on_attach,
