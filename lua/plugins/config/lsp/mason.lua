@@ -134,7 +134,24 @@ mason.setup({
 -- {{{ lspconfig
 local lspconfig = require('lspconfig')
 
--- {{{ helper function
+-- {{{ setup
+local servers = {
+    'jdtls',
+    'julials',
+    'sumneko_lua',
+    'pyright',
+    'rust_analyzer',
+    'texlab',
+    'zls',
+}
+
+mason_lspconfig.setup({
+    ensure_installed = servers,
+})
+-- }}}
+
+-- {{{ handlers
+-- {{{ helper
 local function add(server, opts)
     local new_opts = { on_attach = on_attach }
 
@@ -147,23 +164,23 @@ local function add(server, opts)
 end
 -- }}}
 
-mason_lspconfig.setup()
-
--- {{{ handlers
+-- {{{ setup
 mason_lspconfig.setup_handlers({
+    -- {{{ default
     function(server_name)
         add(lspconfig[server_name])
     end,
+    -- }}}
 
     -- {{{ [nvim-jdtls] jdtls
     ['jdtls'] = function()
         if vim.bo.filetype ~= 'java' then return end
 
-        -- load plugin
+        -- load nvim-jdtls
         require('packer').loader('nvim-jdtls')
 
         -- start
-        require('jdtls').start_or_attach({
+        local config = {
             cmd = { install_root_dir .. '/bin/jdtls' },
             root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
 
@@ -172,13 +189,25 @@ mason_lspconfig.setup_handlers({
             },
 
             on_attach = on_attach,
+        }
+
+        require('jdtls').start_or_attach(config)
+
+        -- attach to newly opened java buffers
+        vim.api.nvim_create_autocmd('BufEnter', {
+            pattern = '*.java',
+            callback = function()
+                if not vim.lsp.buf_is_attached() then
+                    require('jdtls').start_or_attach(config)
+                end
+            end
         })
     end,
     -- }}}
 
     -- {{{ [rust-tools] rust-analyzer
     ['rust_analyzer'] = function()
-        -- load plugin
+        -- load rust-tools
         require('packer').loader('rust-tools.nvim')
 
         -- setup
@@ -248,6 +277,7 @@ mason_lspconfig.setup_handlers({
     end
     -- }}}
 })
+-- }}}
 -- }}}
 -- }}}
 -- }}}
