@@ -36,18 +36,13 @@ local keymaps = {
 cmp.setup({
     -- {{{ disable completion depending on context
     enabled = function()
-        -- disable completion in telescope
-        if vim.bo.filetype == "TelescopePrompt" then return false end
+        -- ignored filetypes
+        local fts = {
+            TelescopePrompt = false,
+            gitcommit = false,
+        }
 
-        -- disable completion in comments
-        local context = require('cmp.config.context')
-        -- keep command mode completion enabled when cursor is in a comment
-        if vim.api.nvim_get_mode().mode == 'c' then
-            return true
-        else
-            return not context.in_treesitter_capture('comment')
-               and not context.in_syntax_group('Comment')
-        end
+        return fts[vim.bo.filetype] or true
     end,
     -- }}}
 

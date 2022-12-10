@@ -210,8 +210,8 @@ mason_lspconfig.setup_handlers({
         require('jdtls').start_or_attach(config)
 
         -- attach to newly opened java buffers
-        vim.api.nvim_create_autocmd('BufEnter', {
-            pattern = '*.java',
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = 'java',
             callback = function()
                 if not vim.lsp.buf_is_attached() then
                     require('jdtls').start_or_attach(config)
