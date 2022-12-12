@@ -54,7 +54,7 @@ scrlbkun.setup({
         draw_events     = { 'BufEnter', 'FocusGained', 'CursorMoved' },
         draw_events_tab = { 'VimResized', 'TabEnter' },
 
-        priority = 200,
+        priority = 500,
 
         signs = {
             '▔',
@@ -68,7 +68,7 @@ scrlbkun.setup({
     -- {{{ search component
     search = {
         enable       = true,
-        draw_columns = { 1 },
+        draw_columns = { 2 },
 
         draw_events     = {},
         draw_events_tab = {
@@ -86,7 +86,7 @@ scrlbkun.setup({
             },
         },
 
-        priority = 500,
+        priority = 300,
 
         signs = {
             '.',
@@ -105,7 +105,7 @@ scrlbkun.setup({
         draw_events     = {},
         draw_events_tab = { 'BufEnter', 'DiagnosticChanged', 'TabEnter' },
 
-        priority = 400,
+        priority = 500,
 
         signs = {
             ERROR = { '1', '2', '3', '4' },
@@ -161,9 +161,9 @@ local hl = {
     ScrlbkunDiagnosticsInfo  = { fg = colors.green  },
     ScrlbkunDiagnosticsHint  = { fg = colors.teal   },
 
-    ScrlbkunGithunksAdd      = { fg = colors.diff_add },
-    ScrlbkunGithunksDelete   = { fg = colors.diff_del },
-    ScrlbkunGithunksChange   = { fg = colors.diff_mod },
+    ScrlbkunGithunksAdd      = { fg = colors.green },
+    ScrlbkunGithunksDelete   = { fg = colors.red   },
+    ScrlbkunGithunksChange   = { fg = colors.blue  },
 }
 
 for k, v in pairs(hl) do set_hl(0, k, v) end
