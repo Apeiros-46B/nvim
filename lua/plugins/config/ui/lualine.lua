@@ -147,7 +147,7 @@ api.nvim_create_user_command('WordCountToggle', function() g.show_word_count = n
 
 -- {{{ components
 -- {{{ date/time
-local datetime = 'os.date("%d/%m:%u -> %H:%M")'
+local datetime = 'os.date("%d/%m:%u ~ %H:%M")'
 local date     = 'os.date("%d/%m:%u")'
 local time     = 'os.date("%R")'
 -- }}}
