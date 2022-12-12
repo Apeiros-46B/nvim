@@ -46,10 +46,9 @@ packer.startup({
         })
 
         -- cmp
+        -- do not lazy load, starter and neorg break
         use({
             'hrsh7th/nvim-cmp',
-            -- this breaks things
-            -- event = 'InsertEnter',
             config = function()
                 require('plugins.config.completion.cmp')
             end,
@@ -171,21 +170,37 @@ packer.startup({
             end,
         })
 
-        -- mason
+        -- null-ls
         use({
-            'williamboman/mason-lspconfig.nvim',
-            after = 'nvim-lspconfig',
+            'jose-elias-alvarez/null-ls.nvim',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('null-ls.nvim')
+            end,
         })
+
+        -- mason
+        --> main
         use({
             'williamboman/mason.nvim',
             opt = true,
-            after = 'mason-lspconfig.nvim',
+            after = { 'mason-lspconfig.nvim', 'mason-null-ls.nvim' },
             setup = function()
                 require('plugins.lazy').on_file_open('mason.nvim')
             end,
             config = function()
                 require('plugins.config.lsp.mason')
             end,
+        })
+        --> lspconfig
+        use({
+            'williamboman/mason-lspconfig.nvim',
+            after = 'nvim-lspconfig',
+        })
+        --> null-ls
+        use({
+            'jay-babu/mason-null-ls.nvim',
+            after = 'null-ls.nvim',
         })
 
         -- dap
@@ -243,26 +258,20 @@ packer.startup({
 
         -- {{{ [syntax] plugins for file formats or syntax (esp. highlighting)
         -- treesitter
+        -- do not lazy-load, neorg breaks
         use({
             'nvim-treesitter/nvim-treesitter',
-            -- this breaks things
-            -- cmd = lazy.treesitter_cmds,
-            -- setup = function()
-            --     require('plugins.lazy').on_file_open('nvim-treesitter')
-            -- end,
             config = function()
                 require('plugins.config.syntax.treesitter')
             end,
             run = ':TSUpdate',
         })
-
         use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
 
         -- the holy grail
         use({
             'nvim-neorg/neorg',
             ft = 'norg',
-            after = { 'nvim-treesitter', 'nvim-cmp', 'telescope.nvim' },
             requires = { 'nvim-neorg/neorg-telescope' },
             config = function()
                 require('plugins.config.syntax.neorg')
@@ -306,6 +315,7 @@ packer.startup({
         -- devicons
         use({
             'kyazdani42/nvim-web-devicons',
+            ft = 'TelescopePrompt',
             opt = true,
             setup = function()
                 require('plugins.lazy').on_file_open('nvim-web-devicons')
@@ -352,12 +362,9 @@ packer.startup({
             'nvim-telescope/telescope-fzf-native.nvim',
             run = 'make',
         })
+        -- do not lazy load, neorg breaks
         use({
             'nvim-telescope/telescope.nvim',
-            -- this breaks things
-            -- ft = 'norg',
-            -- cmd = 'Telescope',
-            -- after = 'telescope-fzf-native.nvim',
             config = function()
                 require('plugins.config.util.telescope')
             end,

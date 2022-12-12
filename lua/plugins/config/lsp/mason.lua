@@ -1,9 +1,8 @@
 -- configuration for mason.nvim package manager
 -- {{{ imports
 -- main
-local api             = vim.api
-local mason           = require('mason')
-local mason_lspconfig = require('mason-lspconfig')
+local api   = vim.api
+local mason = require('mason')
 
 -- theme
 local theme = require('core.theme')
@@ -132,7 +131,7 @@ mason.setup({
 -- }}}
 
 -- {{{ lspconfig
-local lspconfig = require('lspconfig')
+local mason_lspconfig = require('mason-lspconfig')
 
 -- {{{ setup
 local servers = {
@@ -152,7 +151,9 @@ mason_lspconfig.setup({
 
 -- {{{ handlers
 -- {{{ helper
-local function add(server, opts)
+local lspconfig = require('lspconfig')
+
+local function add_lspconfig(server, opts)
     local new_opts = { on_attach = on_attach }
 
     if opts then
@@ -168,12 +169,12 @@ end
 mason_lspconfig.setup_handlers({
     -- {{{ default
     function(server_name)
-        add(lspconfig[server_name])
+        add_lspconfig(lspconfig[server_name])
     end,
     -- }}}
 
     -- {{{ [nvim-jdtls] jdtls
-    ['jdtls'] = function()
+    jdtls = function()
         if vim.bo.filetype ~= 'java' then return end
 
         -- load nvim-jdtls
@@ -222,7 +223,7 @@ mason_lspconfig.setup_handlers({
     -- }}}
 
     -- {{{ [rust-tools] rust-analyzer
-    ['rust_analyzer'] = function()
+    rust_analyzer = function()
         -- load rust-tools
         require('packer').loader('rust-tools.nvim')
 
@@ -253,9 +254,9 @@ mason_lspconfig.setup_handlers({
     -- }}}
 
     -- {{{ sumneko_lua
-    ['sumneko_lua'] = function()
+    sumneko_lua = function()
         -- lspconfig server, custom configuration
-        add(lspconfig.sumneko_lua, {
+        add_lspconfig(lspconfig.sumneko_lua, {
             settings = {
                 Lua = {
                     runtime = {
@@ -280,9 +281,9 @@ mason_lspconfig.setup_handlers({
     -- }}}
 
     -- {{{ texlab
-    ['texlab'] = function()
+    texlab = function()
         -- lspconfig server, custom configuration
-        add(lspconfig.texlab, {
+        add_lspconfig(lspconfig.texlab, {
             filetypes = {
                 'bib',
                 'norg', -- make it work in Neorg files
@@ -294,6 +295,35 @@ mason_lspconfig.setup_handlers({
     -- }}}
 })
 -- }}}
+-- }}}
+-- }}}
+
+-- {{{ null-ls
+local null_ls = require('null-ls')
+local mason_null_ls = require('mason-null-ls')
+
+-- {{{ null-ls setup
+local builtins = null_ls.builtins
+
+null_ls.setup({
+    sources = {
+        builtins.diagnostics.proselint.with({
+            extra_filetypes = { 'norg' },
+        }),
+        builtins.diagnostics.shellcheck,
+
+        builtins.formatting.shfmt,
+        builtins.formatting.stylua,
+    },
+})
+-- }}}
+
+-- {{{ setup
+mason_null_ls.setup({
+    ensure_installed = nil,
+    automatic_installation = true,
+	automatic_setup = false,
+})
 -- }}}
 -- }}}
 -- }}}

@@ -37,12 +37,15 @@ cmp.setup({
     -- {{{ disable completion depending on context
     enabled = function()
         -- ignored filetypes
-        local fts = {
-            TelescopePrompt = false,
-            gitcommit = false,
+        local ignored = {
+            'TelescopePrompt'
         }
 
-        return fts[vim.bo.filetype] or true
+        if ignored[vim.bo.filetype] == nil then
+            return true
+        else
+            return false
+        end
     end,
     -- }}}
 
