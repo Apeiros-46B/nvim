@@ -146,9 +146,9 @@ api.nvim_create_user_command('WordCountToggle', function() g.show_word_count = n
 
 -- {{{ components
 -- {{{ date/time
-local datetime     = 'os.date("%d/%m:%u -> %R")'
-local date         = 'os.date("%d/%m:%u")'
-local time         = 'os.date("%R")'
+local datetime = 'os.date("%d/%m:%u -> %R")'
+local date     = 'os.date("%d/%m:%u")'
+local time     = 'os.date("%R")'
 -- }}}
 
 -- {{{ editing/files
@@ -156,13 +156,13 @@ local mode         = { 'mode', fmt = mode_fmt }
 local filetype     = { 'filetype', colored = false, icon = { align = 'right' } } -- why won't right align work?
 local fileformat   = { 'fileformat', symbols = { unix = 'u', dos = 'd', mac = 'm' } }
 local filename     = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '+', readonly = '+RO', unnamed = 'No Name' } }
-local filename_alt = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '+', readonly = '', unnamed = 'No Name' }, icon = '' }
+local filename_alt = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '+', readonly = '', unnamed = 'No Name' }, icon = '' }
 local word_count   = { word_count_fn, cond = should_show_word_count }
 -- }}}
 
 -- {{{ git
-local branch       = { 'FugitiveHead', icon = '' }
-local diff         = { 'diff', symbols = { added = '', modified = '', removed = '' } }
+local branch = { 'FugitiveHead', icon = '' }
+local diff   = { 'diff', symbols = { added = '+', modified = '~', removed = '-' } }
 -- }}}
 
 -- {{{ lsp

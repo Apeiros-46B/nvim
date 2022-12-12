@@ -22,7 +22,7 @@ packer.startup({
     -- categories ordered alphabetically (with the exception of core)
     -- plugin within categories ordered by importance
     function(use)
-        -- {{{ [_] plugins that should be loaded before other plugins
+        -- {{{ plugins that should be loaded before other plugins
         -- impatient
         use({ 'lewis6991/impatient.nvim' })
 
@@ -32,7 +32,6 @@ packer.startup({
         -- other
         use({ 'nvim-lua/plenary.nvim'                  }) -- plenary
         use({ 'nvim-lua/popup.nvim'                    }) -- popup
-        use({ 'kyazdani42/nvim-web-devicons'           }) -- devicons
         use({ 'sainnhe/everforest', commit = 'd855af5' }) -- best theme in existence
         -- }}}
 
@@ -140,7 +139,7 @@ packer.startup({
             'lewis6991/gitsigns.nvim',
             opt = true,
             setup = function()
-                require('plugins.lazy').gitsigns()
+                require('plugins.lazy').git('gitsigns.nvim')
             end,
             config = function()
                 require('plugins.config.git.gitsigns')
@@ -149,10 +148,16 @@ packer.startup({
         use({
             'tpope/vim-fugitive',
             cmd = 'Git',
+            setup = function()
+                require('plugins.lazy').git('vim-fugitive')
+            end,
         })
         use({
             'tpope/vim-rhubarb',
-            after = 'vim-fugitive',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').git('vim-rhubarb')
+            end,
         })
         -- }}}
 
@@ -193,7 +198,7 @@ packer.startup({
         })
 
         -- plugins to enhance specific servers
-        -- `opt = true` because loaded using mason
+        -- loaded using mason, no loading or config done here
         use({ 'simrat39/rust-tools.nvim', opt = true })
         use({ 'mfussenegger/nvim-jdtls',  opt = true })
 
@@ -297,6 +302,18 @@ packer.startup({
         -- }}}
 
         -- {{{ [ui] plugins that enhance the user interface
+        -- devicons
+        use({
+            'kyazdani42/nvim-web-devicons',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('nvim-web-devicons')
+            end,
+            config = function()
+                require('plugins.config.ui.devicons')
+            end,
+        })
+
         -- status line
         use({
             'nvim-lualine/lualine.nvim',
@@ -308,6 +325,10 @@ packer.startup({
         -- scrollbar
         use({
             'kensyo/nvim-scrlbkun',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('nvim-scrlbkun')
+            end,
             config = function()
                 require('plugins.config.ui.scrlbkun')
             end,
@@ -316,7 +337,6 @@ packer.startup({
         -- keybind help
         use({
             'folke/which-key.nvim',
-            ft = 'starter',
             cmd = 'WhichKey',
             keys = { '<leader>', ',', 'g', 'z', [[']] },
             config = function()
@@ -348,6 +368,9 @@ packer.startup({
             cmd = { 'NvimTreeFocus', 'NvimTreeToggle', 'NvimTreeOpen' },
             config = function()
                 require('plugins.config.util.nvimtree')
+
+                -- load devicons if not yet loaded
+                require('packer').loader('nvim-web-devicons')
             end,
         })
         use({

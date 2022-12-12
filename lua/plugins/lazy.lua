@@ -39,20 +39,20 @@ M.on_file_open = function(plugin_name)
         plugin = plugin_name,
         condition = function()
             local file = vim.fn.expand '%'
-            return file ~= 'NvimTree_1' and file ~= '[packer]' and file ~= ''
+            return file ~= 'NvimTree_1' and file ~= '[packer]' and file ~= 'Starter' and file ~= ''
         end,
     }
 end
 
-M.gitsigns = function()
+M.git = function(plugin_name)
     vim.api.nvim_create_autocmd({ 'BufRead' }, {
-        group = vim.api.nvim_create_augroup('GitSignsLazyLoad', { clear = true }),
+        group = vim.api.nvim_create_augroup('GitLazyLoad' .. plugin_name, { clear = true }),
         callback = function()
             vim.fn.system('git -C ' .. vim.fn.expand '%:p:h' .. ' rev-parse')
             if vim.v.shell_error == 0 then
-                vim.api.nvim_del_augroup_by_name('GitSignsLazyLoad')
+                vim.api.nvim_del_augroup_by_name('GitLazyLoad' .. plugin_name)
                 vim.schedule(function()
-                    require('packer').loader('gitsigns.nvim')
+                    require('packer').loader(plugin_name)
                 end)
             end
         end,
