@@ -13,11 +13,11 @@ require('nvim-surround').setup({
         change          = 'cs',
     },
     aliases = {
-        -- {{{ parenthese/brackets
+        -- {{{ parentheses/brackets
         ['a'] = '>', -- Angle brackets
-        ['p'] = ')', -- Parentheses
+        ['b'] = ')', -- parentheses
         ['c'] = '}', -- Curly brackets
-        ['b'] = ']', -- square Brackets
+        ['B'] = ']', -- square Brackets
         -- }}}
 
         -- {{{ quotes
