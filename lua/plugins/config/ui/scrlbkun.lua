@@ -135,7 +135,7 @@ scrlbkun.setup({
         -- Signs for githunks.
         signs = {
             add    = { '┃' },
-            delete = { '━' },
+            delete = { '┃' },
             change = { '┃' },
         },
 

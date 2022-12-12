@@ -147,9 +147,8 @@ api.nvim_create_user_command('WordCountToggle', function() g.show_word_count = n
 
 -- {{{ components
 -- {{{ date/time
-local datetime = 'os.date("%d/%m:%u -> %H:%M")'
 local date     = 'os.date("%d/%m:%u")'
-local time     = 'os.date("%R")'
+local time     = 'os.date("%H:%M")'
 -- }}}
 
 -- {{{ editing/files
@@ -223,7 +222,7 @@ dashboard.sections = vim.deepcopy(extension_template)
 dashboard.sections.lualine_a = { function() return 'DSH' end } -- DaSHboard
 
 dashboard.sections.lualine_x = { '' }
-dashboard.sections.lualine_z = { datetime }
+dashboard.sections.lualine_z = { date, time }
 
 dashboard.filetypes = { 'dashboard', 'starter' }
 -- }}}
