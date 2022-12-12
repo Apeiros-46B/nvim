@@ -122,7 +122,8 @@ local mode_fmts = {
 
 local function mode_fmt(str) return mode_fmts[str] end
 
-local function short_cwd() return vim.fn.pathshorten(fn.fnamemodify(fn.getcwd(), ':~'), 2) end -- iconless
+-- short cwd
+local function cwd() return vim.fn.pathshorten(fn.fnamemodify(fn.getcwd(), ':~'), 2) end
 
 -- {{{ word count function
 local function word_count_fn()
@@ -146,7 +147,7 @@ api.nvim_create_user_command('WordCountToggle', function() g.show_word_count = n
 
 -- {{{ components
 -- {{{ date/time
-local datetime = 'os.date("%d/%m:%u -> %R")'
+local datetime = 'os.date("%d/%m:%u -> %H:%M")'
 local date     = 'os.date("%d/%m:%u")'
 local time     = 'os.date("%R")'
 -- }}}
@@ -154,9 +155,9 @@ local time     = 'os.date("%R")'
 -- {{{ editing/files
 local mode         = { 'mode', fmt = mode_fmt }
 local filetype     = { 'filetype', colored = false, icon = { align = 'right' } } -- why won't right align work?
-local fileformat   = { 'fileformat', symbols = { unix = 'u', dos = 'd', mac = 'm' } }
-local filename     = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '+', readonly = '+RO', unnamed = 'No Name' } }
-local filename_alt = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '+', readonly = '', unnamed = 'No Name' }, icon = '' }
+local fileformat   = { 'fileformat', symbols = { unix = 'u', dos = 'w', mac = 'm' } }
+local filename     = { 'filename', path = 0, shorting_target = 40, symbols = { modified = '+', readonly = '[RO]', unnamed = '[no name]', newfile = '[new]' } }
+local filename_alt = { 'filename', path = 0, shorting_target = 40, file_status = false, icon = '' }
 local word_count   = { word_count_fn, cond = should_show_word_count }
 -- }}}
 
@@ -206,9 +207,9 @@ local sections = {
 -- {{{ template
 local extension_template = {
     -- lualine_a not defined because each extension has a different one
-    lualine_b = { short_cwd },
-    lualine_c = { branch }, -- TODO: add latest commit after branch
-    lualine_x = { date },
+    lualine_b = { cwd  },
+    lualine_c = { branch     }, -- TODO: add latest commit after branch
+    lualine_x = { date       },
     lualine_y = { 'hostname' },
     lualine_z = { 'location' },
 }
@@ -219,10 +220,10 @@ local dashboard = {}
 
 dashboard.sections = vim.deepcopy(extension_template)
 
-dashboard.sections.lualine_a = { function() return "DSH" end } -- DaSHboard
+dashboard.sections.lualine_a = { function() return 'DSH' end } -- DaSHboard
 
 dashboard.sections.lualine_x = { '' }
-dashboard.sections.lualine_z = { time }
+dashboard.sections.lualine_z = { datetime }
 
 dashboard.filetypes = { 'dashboard', 'starter' }
 -- }}}
@@ -232,7 +233,7 @@ local file_tree = {}
 
 file_tree.sections = vim.deepcopy(extension_template)
 
-file_tree.sections.lualine_a = { { function() return "FTR" end, color = { bg = colors.blue, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
+file_tree.sections.lualine_a = { { function() return 'FTR' end, color = { bg = colors.blue, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
 
 file_tree.sections.lualine_z = { { 'location', color = { bg = colors.blue, gui = 'bold' } } }
 
@@ -240,7 +241,7 @@ file_tree.filetypes = { 'CHADTree', 'nerdtree', 'NvimTree' }
 -- }}}
 
 -- {{{ git
-local GIT = { function() return "GIT" end, color = { bg = colors.orange, gui = 'bold' } } -- This one is obvious
+local GIT = { function() return 'GIT' end, color = { bg = colors.orange, gui = 'bold' } } -- This one is obvious
 
 -- fugitive panel (:Git)
 local fugitive = {}
@@ -260,7 +261,7 @@ gitcommit.sections = vim.deepcopy(extension_template)
 
 gitcommit.sections.lualine_a = { GIT }
 
-gitcommit.sections.lualine_b = { { function() return "committing @" end, separator = '', padding = { left = 1 } }, short_cwd }
+gitcommit.sections.lualine_b = { { function() return 'committing @' end, separator = '', padding = { left = 1 } }, cwd }
 
 gitcommit.sections.lualine_z = { { 'location', color = { bg = colors.orange, gui = 'bold' } } }
 
@@ -284,7 +285,7 @@ local help = {}
 
 help.sections = vim.deepcopy(extension_template)
 
-help.sections.lualine_a = { { function() return "DOC" end, color = { bg = colors.yellow, gui = 'bold' } } } -- Same could be said about this
+help.sections.lualine_a = { { function() return 'DOC' end, color = { bg = colors.yellow, gui = 'bold' } } } -- Same could be said about this
 help.sections.lualine_b = { 'filesize', filename_alt }
 help.sections.lualine_c = { '' }
 
@@ -295,12 +296,28 @@ help.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'b
 help.filetypes = { 'help' }
 -- }}}
 
+-- {{{ man
+local man = {}
+
+man.sections = vim.deepcopy(extension_template)
+
+man.sections.lualine_a = { { function() return 'MAN' end, color = { bg = colors.yellow, gui = 'bold' } } }
+man.sections.lualine_b = { filename_alt }
+man.sections.lualine_c = { '' }
+
+man.sections.lualine_x = { '' }
+man.sections.lualine_y = { 'progress' }
+man.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'bold' } } }
+
+man.filetypes = { 'man' }
+-- }}}
+
 -- {{{ telescope
 local telescope = {}
 
 telescope.sections = vim.deepcopy(extension_template)
 
-telescope.sections.lualine_a = { { function() return "TSC" end, color = { bg = colors.purple, gui = 'bold' } } } -- TeleSCope (I *really* need better abbreviations)
+telescope.sections.lualine_a = { { function() return 'TSC' end, color = { bg = colors.purple, gui = 'bold' } } } -- TeleSCope (I *really* need better abbreviations)
 
 telescope.sections.lualine_z = { { 'location', color = { bg = colors.purple, gui = 'bold' } } }
 
@@ -312,7 +329,7 @@ local terminal = {}
 
 terminal.sections = vim.deepcopy(extension_template)
 
-terminal.sections.lualine_a = { { function() return "TER" end, color = { bg = colors.teal, gui = 'bold' } } }
+terminal.sections.lualine_a = { { function() return 'TER' end, color = { bg = colors.teal, gui = 'bold' } } }
 terminal.sections.lualine_b = { 'hostname', branch }
 terminal.sections.lualine_c = { '' }
 
@@ -328,7 +345,7 @@ local trouble = {}
 
 trouble.sections = vim.deepcopy(extension_template)
 
-trouble.sections.lualine_a = { { function() return "TRB" end, color = { bg = colors.red, gui = 'bold'} } }
+trouble.sections.lualine_a = { { function() return 'TRB' end, color = { bg = colors.red, gui = 'bold'} } }
 
 trouble.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'bold' } } }
 
@@ -358,14 +375,13 @@ local function setup(new_sections)
             fugitive,       -- fugitive pane
             gitblame,       -- fugitive blame sidebar
             gitcommit,      -- editing commit messages
+            help,           -- `:help` panel
+            man,            -- `:Man` windows
             telescope,      -- telescope fuzzy finder
             terminal,       -- terminal
             trouble,        -- trouble.nvim
 
             -- modifies the default sections
-            help,           -- `:help` panel
-            himalaya,       -- inbox list and reading messages in himalaya
-            himalaya_write, -- writing messages in himalaya
             wc              -- word counter for markdown, norg, and txt files
         },
         -- }}}
