@@ -16,7 +16,7 @@ scrlbkun.setup({
     zindex   = 10,
     winblend = 0,
 
-    excluded_filetypes = { 'NvimTree', 'fugitive', 'gitcommit', 'terminal' },
+    excluded_filetypes = { 'NvimTree', 'fugitive', 'fugitiveblame', 'gitcommit', 'terminal' },
     excluded_buftypes  = { 'prompt' },
 
     fadeout_time = 0,

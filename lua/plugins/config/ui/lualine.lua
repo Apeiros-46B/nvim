@@ -46,7 +46,7 @@ sep = { l = '~', r = '~' }
 -- }}}
 
 -- {{{ theme
-local function a(color)
+local function theme_a_generator(color)
 	return { bg = color, fg = colors.gray1, gui = 'bold' }
 end
 
@@ -55,39 +55,39 @@ local c = { bg = colors.gray3, fg = colors.gray8 }
 
 local lualine_theme = {
 	normal = {
-		a = a(colors.green),
+		a = theme_a_generator(colors.green),
 		b = b,
 		c = c,
 	},
 	insert = {
-		a = a(colors.blue),
+		a = theme_a_generator(colors.blue),
 		b = b,
 		c = c,
 	},
 	visual = {
-		a = a(colors.purple),
+		a = theme_a_generator(colors.purple),
 		b = b,
 		c = c,
 	},
 	replace = {
-		a = a(colors.red),
+		a = theme_a_generator(colors.red),
 		b = b,
 		c = c,
 	},
 	command = {
-		a = a(colors.teal),
+		a = theme_a_generator(colors.teal),
 		b = b,
 		c = c,
 	},
 	inactive = {
-		a = a(colors.gray8),
+		a = theme_a_generator(colors.gray8),
 		b = b,
 		c = c,
 	},
 }
 -- }}}
 
--- {{{ reused functions, components & sections
+-- {{{ reused functions & components
 -- {{{ functions
 local mode_fmts = {
     -- normal/misc
@@ -191,7 +191,9 @@ for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}
 -- }}}
 -- }}}
+-- }}}
 
+-- {{{ sections
 local sections = {
     lualine_a = { mode },
     lualine_b = { 'filesize', filetype },
@@ -202,81 +204,91 @@ local sections = {
 }
 -- }}}
 
--- {{{ custom extensions
--- {{{ template
+-- {{{ extension template
 local extension_template = {
     -- lualine_a not defined because each extension has a different one
-    lualine_b = { cwd  },
+    lualine_b = { cwd        },
     lualine_c = { branch     }, -- TODO: add latest commit after branch
-    lualine_x = { date       },
-    lualine_y = { 'hostname' },
-    lualine_z = { 'location' },
+    lualine_x = { 'hostname' },
+    lualine_y = { date       },
+    lualine_z = { time       },
 }
+
+local function extension_a_generator(name, color)
+    if color ~= nil then
+        return { { function() return name end, color = { bg = color, gui = 'bold' } } }
+    else
+        return { function() return name end }
+    end
+end
+
+local function extension_z_generator(component, color)
+    return { { component, color = { bg = color, gui = 'bold' } } }
+end
 -- }}}
 
+-- {{{ custom extensions
 -- {{{ dashboard
-local dashboard = {}
+local starter = {}
 
-dashboard.sections = vim.deepcopy(extension_template)
+starter.sections = vim.deepcopy(extension_template)
 
-dashboard.sections.lualine_a = { function() return 'DSH' end } -- DaSHboard
+starter.sections.lualine_a = extension_a_generator('DSH')
 
-dashboard.sections.lualine_x = { '' }
-dashboard.sections.lualine_z = { date, time }
-
-dashboard.filetypes = { 'dashboard', 'starter' }
+starter.filetypes = { 'dashboard', 'starter' }
 -- }}}
 
--- {{{ file tree
-local file_tree = {}
+-- {{{ nvimtree
+local nvimtree = {}
 
-file_tree.sections = vim.deepcopy(extension_template)
+nvimtree.sections = vim.deepcopy(extension_template)
 
-file_tree.sections.lualine_a = { { function() return 'FTR' end, color = { bg = colors.blue, gui = 'bold' } } } -- File TRee (I really need better abbrevations)
+nvimtree.sections.lualine_a = extension_a_generator('NVT', colors.blue)
 
-file_tree.sections.lualine_z = { { 'location', color = { bg = colors.blue, gui = 'bold' } } }
+nvimtree.sections.lualine_z = extension_z_generator(time, colors.blue)
 
-file_tree.filetypes = { 'CHADTree', 'nerdtree', 'NvimTree' }
+nvimtree.filetypes = { 'NvimTree' }
 -- }}}
 
 -- {{{ git
-local GIT = { function() return 'GIT' end, color = { bg = colors.orange, gui = 'bold' } } -- This one is obvious
+local git_a = extension_a_generator('GIT', colors.orange)
+local git_z = extension_z_generator(time,  colors.orange)
 
 -- fugitive panel (:Git)
 local fugitive = {}
 
 fugitive.sections = vim.deepcopy(extension_template)
 
-fugitive.sections.lualine_a = { GIT }
+fugitive.sections.lualine_a = git_a
 
-fugitive.sections.lualine_z = { { 'location', color = { bg = colors.orange, gui = 'bold' } } }
+fugitive.sections.lualine_z = git_z
 
 fugitive.filetypes = { 'fugitive' }
 
 -- editing a commit message
-local gitcommit = {}
+local commit = {}
 
-gitcommit.sections = vim.deepcopy(extension_template)
+commit.sections = vim.deepcopy(extension_template)
 
-gitcommit.sections.lualine_a = { GIT }
+commit.sections.lualine_a = git_a
+commit.sections.lualine_b = { { function() return 'committing @' end, separator = '', padding = { left = 1 } }, cwd }
 
-gitcommit.sections.lualine_b = { { function() return 'committing @' end, separator = '', padding = { left = 1 } }, cwd }
+commit.sections.lualine_z = git_z
 
-gitcommit.sections.lualine_z = { { 'location', color = { bg = colors.orange, gui = 'bold' } } }
-
-gitcommit.filetypes = { 'gitcommit' }
+commit.filetypes = { 'gitcommit' }
 
 -- fugitive blame (:Git blame)
-local gitblame = {}
+local blame = {}
 
-gitblame.sections = vim.deepcopy(extension_template)
+blame.sections = vim.deepcopy(extension_template)
 
-gitblame.sections.lualine_a = { GIT }
+blame.sections.lualine_a = git_a
 
-gitblame.sections.lualine_y = { 'progress' }
-gitblame.sections.lualine_z = { { 'location', color = { bg = colors.orange, gui = 'bold' } } }
+blame.sections.lualine_x = { 'progress' }
+blame.sections.lualine_y = { date, time }
+blame.sections.lualine_z = extension_z_generator('location', colors.orange)
 
-gitblame.filetypes = { 'fugitiveblame' }
+blame.filetypes = { 'fugitiveblame' }
 -- }}}
 
 -- {{{ help/doc
@@ -284,13 +296,13 @@ local help = {}
 
 help.sections = vim.deepcopy(extension_template)
 
-help.sections.lualine_a = { { function() return 'DOC' end, color = { bg = colors.yellow, gui = 'bold' } } } -- Same could be said about this
+help.sections.lualine_a = extension_a_generator('DOC', colors.yellow)
 help.sections.lualine_b = { 'filesize', filename_alt }
 help.sections.lualine_c = { '' }
 
 help.sections.lualine_x = { '' }
 help.sections.lualine_y = { 'progress' }
-help.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'bold' } } }
+help.sections.lualine_z = extension_z_generator('location', colors.yellow)
 
 help.filetypes = { 'help' }
 -- }}}
@@ -300,13 +312,13 @@ local man = {}
 
 man.sections = vim.deepcopy(extension_template)
 
-man.sections.lualine_a = { { function() return 'MAN' end, color = { bg = colors.yellow, gui = 'bold' } } }
+man.sections.lualine_a = extension_a_generator('MAN', colors.yellow)
 man.sections.lualine_b = { filename_alt }
 man.sections.lualine_c = { '' }
 
 man.sections.lualine_x = { '' }
 man.sections.lualine_y = { 'progress' }
-man.sections.lualine_z = { { 'location', color = { bg = colors.yellow, gui = 'bold' } } }
+man.sections.lualine_z = extension_z_generator('location', colors.yellow)
 
 man.filetypes = { 'man' }
 -- }}}
@@ -316,9 +328,9 @@ local telescope = {}
 
 telescope.sections = vim.deepcopy(extension_template)
 
-telescope.sections.lualine_a = { { function() return 'TSC' end, color = { bg = colors.purple, gui = 'bold' } } } -- TeleSCope (I *really* need better abbreviations)
+telescope.sections.lualine_a = extension_a_generator('TSC', colors.purple)
 
-telescope.sections.lualine_z = { { 'location', color = { bg = colors.purple, gui = 'bold' } } }
+telescope.sections.lualine_z = extension_z_generator(time, colors.purple)
 
 telescope.filetypes = { 'TelescopePrompt' }
 -- }}}
@@ -328,13 +340,11 @@ local terminal = {}
 
 terminal.sections = vim.deepcopy(extension_template)
 
-terminal.sections.lualine_a = { { function() return 'TER' end, color = { bg = colors.teal, gui = 'bold' } } }
-terminal.sections.lualine_b = { 'hostname', branch }
-terminal.sections.lualine_c = { '' }
+terminal.sections.lualine_a = extension_a_generator('TER', colors.teal)
 
-terminal.sections.lualine_x = { '' }
+terminal.sections.lualine_x = { date }
 terminal.sections.lualine_y = { time }
-terminal.sections.lualine_z = { { date, color = { bg = colors.teal, gui = 'bold' } } }
+terminal.sections.lualine_z = extension_z_generator('hostname', colors.teal)
 
 terminal.filetypes = { 'terminal' }
 -- }}}
@@ -344,9 +354,9 @@ local trouble = {}
 
 trouble.sections = vim.deepcopy(extension_template)
 
-trouble.sections.lualine_a = { { function() return 'TRB' end, color = { bg = colors.red, gui = 'bold'} } }
+trouble.sections.lualine_a = extension_a_generator('LSP', colors.red)
 
-trouble.sections.lualine_z = { { 'location', color = { bg = colors.red, gui = 'bold' } } }
+trouble.sections.lualine_z = extension_z_generator(time, colors.red)
 
 trouble.filetypes = { 'Trouble' }
 -- }}}
@@ -369,11 +379,11 @@ local function setup(new_sections)
         -- {{{ extensions
         extensions = {
             -- uses a more minimal template
-            dashboard,      -- dashboard
-            file_tree,      -- file trees (CHADTree, NERDTree, NvimTree)
+            starter,      -- dashboard
+            nvimtree,      -- file trees (CHADTree, NERDTree, NvimTree)
             fugitive,       -- fugitive pane
-            gitblame,       -- fugitive blame sidebar
-            gitcommit,      -- editing commit messages
+            blame,       -- fugitive blame sidebar
+            commit,      -- editing commit messages
             help,           -- `:help` panel
             man,            -- `:Man` windows
             telescope,      -- telescope fuzzy finder

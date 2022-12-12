@@ -22,9 +22,11 @@ illuminate.configure({
 
     -- overrides allowlist
     filetypes_denylist = {
-        'norg',
         'fugitive',
+        'fugitiveblame',
         'gitcommit',
+        'markdown',
+        'norg',
         'NvimTree',
         'TelescopePrompt'
     },

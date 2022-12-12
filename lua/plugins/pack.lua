@@ -207,6 +207,7 @@ packer.startup({
             'onsails/lspkind-nvim',
             after = { 'nvim-cmp', 'nvim-lspconfig' },
             config = function()
+                ---@diagnostic disable-next-line: different-requires
                 require('plugins.config.lsp.lspkind')
             end,
         })
