@@ -93,7 +93,7 @@ nvim_tree.setup({
             },
         },
 
-        special_files = { 'Cargo.toml', 'Makefile', 'README.md', 'readme.md' },
+        special_files = { 'LICENSE', 'README.md', 'pom.xml', 'Cargo.toml', 'Makefile' },
         symlink_destination = true,
     },
     -- }}}
@@ -165,7 +165,7 @@ local hl = {
     NvimTreeSymlink     = { fg = colors.teal  , bold = true },
     NvimTreeExecFile    = { fg = colors.green , bold = true },
     NvimTreeSpecialFile = { fg = colors.purple, bold = true },
-    NvimTreeImageFile   = { fg = colors.purple, bold = true },
+    NvimTreeImageFile   = { fg = colors.white ,             },
 }
 
 -- TODO: find out why this defer is needed for hl to be applied properly
@@ -173,5 +173,5 @@ vim.defer_fn(function()
     for k, v in pairs(hl) do
         set_hl(0, k, v)
     end
-end, 25)
+end, 30)
 -- }}}
