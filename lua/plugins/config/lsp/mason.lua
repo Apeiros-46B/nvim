@@ -1,8 +1,9 @@
 -- configuration for mason.nvim package manager
 -- {{{ imports
 -- main
-local api   = vim.api
-local mason = require('mason')
+local api    = vim.api
+local mason  = require('mason')
+local packer = require('packer')
 
 -- theme
 local theme = require('core.theme')
@@ -44,9 +45,9 @@ local function on_attach(client, bufnr)
 
     -- {{{ mappings dependent on server capabilities
     if client.server_capabilities.document_formatting then
-        buf_map('n', '<leader>Ff', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+        buf_map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     elseif client.server_capabilities.document_range_formatting then
-        buf_map('n', '<leader>Ff', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+        buf_map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
     end
     -- }}}
 
@@ -68,8 +69,8 @@ local function on_attach(client, bufnr)
     -- omnifunc
     buf_opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- attach navic
-    require('nvim-navic').attach(client, bufnr)
+    -- attach navic if not null-ls
+    if client.name ~= 'null-ls' then require('nvim-navic').attach(client, bufnr) end
 
     -- notify the user that the client has been attached
     vim.notify(string.format([[[LSP] attached client '%s']], client.name), 'INFO')
@@ -77,7 +78,6 @@ local function on_attach(client, bufnr)
 end
 -- }}}
 
--- {{{ setup
 -- {{{ main
 local install_root_dir = vim.fn.stdpath('data') .. '/mason'
 
@@ -131,6 +131,11 @@ mason.setup({
 -- }}}
 
 -- {{{ lspconfig
+-- load lspconfig if it isn't already
+if not packer_plugins['nvim-lspconfig'] then
+    packer.loader('nvim-lspconfig')
+end
+
 local mason_lspconfig = require('mason-lspconfig')
 
 -- {{{ setup
@@ -266,7 +271,7 @@ mason_lspconfig.setup_handlers({
                     diagnostics = {
                         -- recognize globals
                         globals = {
-                            'vim',                                       -- vim-related globals
+                            'vim', 'packer_plugins',                     -- vim-related globals
                             'awesome', 'client', 'root', 'screen', 'tag' -- awesome-related globals
                         },
                     },
@@ -299,32 +304,70 @@ mason_lspconfig.setup_handlers({
 -- }}}
 
 -- {{{ null-ls
+-- load null-ls if it isn't already
+if not packer_plugins['null-ls.nvim'] then
+    packer.loader('null-ls.nvim')
+end
+
 local null_ls = require('null-ls')
 local mason_null_ls = require('mason-null-ls')
 
--- {{{ null-ls setup
+-- {{{ setup null-ls and sources
 local builtins = null_ls.builtins
 
 null_ls.setup({
+    on_attach = on_attach,
+    fallback_severity = vim.diagnostic.severity.ERROR,
     sources = {
+        -- {{{ for documents
+        -- write good
+        builtins.diagnostics.write_good.with({
+            extra_filetypes = { 'norg', 'tex' },
+            -- disable some checks
+            args = { '--no-passive', '--no-adverb', '--text=$TEXT', '--parse' },
+        }),
+
+        -- proselint
         builtins.diagnostics.proselint.with({
             extra_filetypes = { 'norg' },
+            -- custom config file in which some checks are disabled
+            args = { '--json', '--config', vim.fn.stdpath('config') .. '/lua/plugins/config/lsp/sources/proselint.json' },
         }),
-        builtins.diagnostics.shellcheck,
 
+        -- TODO: get textlint working
+        -- builtins.diagnostics.textlint.with({
+        --     extra_filetypes = { 'norg', 'tex' }
+        -- }),
+
+        -- spelling
+        builtins.diagnostics.codespell.with({
+            filetypes = { 'markdown', 'norg', 'tex' }
+        }),
+        builtins.formatting.codespell.with({
+            filetypes = { 'markdown', 'norg', 'tex' }
+        }),
+
+        -- spelling suggestions in completion
+        builtins.completion.spell.with({
+            filetypes = { 'markdown', 'norg', 'tex' }
+        }),
+        -- }}}
+
+        -- {{{ for code
+        builtins.diagnostics.shellcheck,
         builtins.formatting.shfmt,
         builtins.formatting.stylua,
+        -- }}}
     },
 })
 -- }}}
 
--- {{{ setup
+-- {{{ setup automatic installation
 mason_null_ls.setup({
     ensure_installed = nil,
     automatic_installation = true,
 	automatic_setup = false,
 })
--- }}}
 -- }}}
 -- }}}
 
