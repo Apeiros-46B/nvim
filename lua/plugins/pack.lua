@@ -184,6 +184,7 @@ packer.startup({
         use({
             'williamboman/mason.nvim',
             opt = true,
+            cmd = 'Mason',
             after = { 'mason-lspconfig.nvim', 'mason-null-ls.nvim' },
             setup = function()
                 require('plugins.lazy').on_file_open('mason.nvim')
