@@ -55,29 +55,37 @@ packer.startup({
             requires = {
                 -- cmp sources
                 {
-                    'hrsh7th/cmp-nvim-lsp',
-                    event = 'LspAttach',
-                    after = 'nvim-cmp',
-                },
-                {
-                    'hrsh7th/cmp-path',
-                    event = 'InsertEnter',
-                    after = 'nvim-cmp',
-                },
-                {
                     'hrsh7th/cmp-buffer',
-                    event = 'InsertEnter',
                     after = 'nvim-cmp',
+                    event = 'InsertEnter',
+                },
+                {
+                    'uga-rosa/cmp-dictionary',
+                    after = 'nvim-cmp',
+                    ft = 'norg',
+                    config = function()
+                        require('plugins.config.completion.cmp_dictionary')
+                    end,
                 },
                 {
                     'petertriho/cmp-git',
-                    event = 'InsertEnter',
                     after = 'nvim-cmp',
+                    event = 'InsertEnter',
+                },
+                {
+                    'hrsh7th/cmp-nvim-lsp',
+                    after = 'nvim-cmp',
+                    event = 'LspAttach',
                 },
                 {
                     'quangnguyen30192/cmp-nvim-ultisnips',
-                    event = 'InsertEnter',
                     after = 'nvim-cmp',
+                    event = 'InsertEnter',
+                },
+                {
+                    'hrsh7th/cmp-path',
+                    after = 'nvim-cmp',
+                    event = 'InsertEnter',
                 },
             }
         })
@@ -127,10 +135,10 @@ packer.startup({
                 require('plugins.config.editor.boole')
             end,
         })
-        use({
-            'Ron89/thesaurus_query.vim',
-            ft = { 'markdown', 'norg' },
-        })
+        -- use({
+        --     'Ron89/thesaurus_query.vim',
+        --     ft = { 'markdown', 'norg' },
+        -- })
         -- }}}
 
         -- {{{ [git] plugins related to git
@@ -358,17 +366,25 @@ packer.startup({
         -- }}}
 
         -- {{{ [util] miscellaneous utilities/other plugins
-        -- fuzzy finder
-        use({
-            'nvim-telescope/telescope-fzf-native.nvim',
-            run = 'make',
-        })
+        -- telescope & extensions
         -- do not lazy load, neorg breaks
         use({
             'nvim-telescope/telescope.nvim',
             config = function()
                 require('plugins.config.util.telescope')
             end,
+        })
+        use({
+            'nvim-telescope/telescope-fzf-native.nvim',
+            run = 'make',
+        })
+        --> extensions
+        use({
+            'rudism/telescope-dict.nvim',
+            opt = true,
+            setup = function()
+                require('plugins.lazy').on_file_open('telescope-dict.nvim')
+            end
         })
 
         -- other

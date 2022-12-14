@@ -121,7 +121,8 @@ map('t', '<M-x>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
 -- }}}
 -- }}}
 
--- {{{ [n] neorg
+-- {{{ [n] notes
+-- neorg keybinds
 map('n', '<leader>nc', ':Neorg toggle-concealer<CR>',                            opt)
 map('n', '<leader>nC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', opt)
 
@@ -132,6 +133,8 @@ map('n', '<leader>nt', ':lua vim.cmd(os.date("e %d_%m.norg"))<CR>', opt)
 vim.api.nvim_create_user_command('ThreeColumn', [[exec "normal! a* Keywords\n- "|vs|exec "normal! a\n\n* Takeaways\n- "|vs|exec "normal! a\n\n* Connections\n- "|silent %s/^- $/  - /|exec "normal! AC\<Esc>zx"|wincmd h|exec "normal! AB\<Esc>zx"|wincmd h|exec "normal! AA\<Esc>zx"|nohlsearch]], { nargs = 0 })
 
 map('n', '<leader>nT', ':ThreeColumn<CR>', opt)
+
+map('n', '<leader>ns', ':lua require("telescope").extensions.dict.synonyms()<CR>', opt)
 -- }}}
 
 -- {{{ [t] tab
