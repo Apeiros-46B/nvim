@@ -13,7 +13,7 @@ telescope.setup({
 	defaults = {
         -- Prefixes
         prompt_prefix = '   ',
-		selection_caret = '  ',
+		selection_caret = '  ',
 		entry_prefix = '   ',
 
         -- Border

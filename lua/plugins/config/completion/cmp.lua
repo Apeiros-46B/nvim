@@ -41,10 +41,8 @@ cmp.setup({
             'TelescopePrompt'
         }
 
-        if ignored[vim.bo.filetype] == nil then
-            return true
-        else
-            return false
+        for _, v in pairs(ignored) do
+            return v ~= vim.bo.filetype
         end
     end,
     -- }}}
@@ -76,15 +74,16 @@ cmp.setup({
 
     -- {{{ sources
     sources = cmp.config.sources(
+        -- higher number = higher priority
         {
-            { name = 'neorg', priority = 0 },
+            { name = 'neorg', priority = 3 },
+            { name = 'ultisnips', priority = 2 },
             { name = 'nvim_lsp', priority = 1 },
-            { name = 'ultisnips', priority = 1 },
         },
         {
-            { name = 'git', priority = 0 },
-            { name = 'buffer', priority = 1 },
             { name = 'path', priority = 2 },
+            { name = 'buffer', priority = 1 },
+            { name = 'git', priority = 0 },
         }
     ),
     -- }}}

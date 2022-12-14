@@ -15,7 +15,7 @@ navic.setup({
         File          = ' ',
         Module        = ' ',
         Namespace     = ' ',
-        Package       = ' ',
+        Package       = ' ',
         Class         = 'ﴯ ',
         Method        = ' ',
         Property      = 'ﰠ ',
@@ -30,7 +30,7 @@ navic.setup({
         Number        = ' ',
         Boolean       = ' ',
         Array         = ' ',
-        Object        = ' ',
+        Object        = ' ',
         Key           = ' ',
         Null          = 'ﳠ ',
         EnumMember    = ' ',
@@ -40,7 +40,7 @@ navic.setup({
         TypeParameter = ' ',
     },
     highlight = true,
-    separator = '  ',
+    separator = '  ',
     depth_limit = 5,
     depth_limit_indicator = '...',
 })
@@ -88,7 +88,7 @@ local hl = {
     -- }}}
 
     NavicText               = { default = true, bg = colors.gray3, fg = colors.gray8  },
-    NavicSeparator          = { default = true, bg = colors.gray3, fg = colors.gray5  },
+    NavicSeparator          = { default = true, bg = colors.gray3, fg = colors.gray7  },
 }
 
 for k, v in pairs(hl) do set_hl(0, k, v) end
@@ -108,6 +108,7 @@ local lualine = require('plugins.config.ui.lualine')
 local new_sections = lualine.sections
 
 if new_sections.lualine_x[1] == '' then
+---@diagnostic disable-next-line: assign-type-mismatch
     new_sections.lualine_x[1] = navic_section
 end
 

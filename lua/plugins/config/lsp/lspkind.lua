@@ -1,3 +1,4 @@
+-- icon definitions for lspkind
 require('lspkind').init({
     -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
     mode = 'symbol_text',
@@ -17,7 +18,7 @@ require('lspkind').init({
         Module        = '',
         Property      = 'ﰠ',
         Unit          = '',
-        Value         = '',
+        Value         = '',
         Enum          = '',
         Keyword       = '',
         Snippet       = '',
