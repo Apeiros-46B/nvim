@@ -151,7 +151,7 @@ scrlbkun.setup({
 local set_hl = vim.api.nvim_set_hl
 
 local hl = {
-    ScrlbkunBar              = { bg = colors.gray2                      },
+    ScrlbkunBar              = { bg = colors.gray3                      },
     ScrlbkunCursor           = { bg = colors.diff_mod, fg = colors.blue },
 
     ScrlbkunSearch           = { fg = colors.green },
