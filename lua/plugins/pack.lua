@@ -20,9 +20,9 @@ local packer = require('packer')
 
 packer.startup({
     -- categories ordered alphabetically (with the exception of core)
-    -- plugin within categories ordered by importance
+    -- plugin within categories and plugins in `requires` ordered by importance
     function(use)
-        -- {{{ plugins that should be loaded before other plugins
+        -- {{{ [core] plugins that should be loaded before other plugins
         -- impatient
         use({ 'lewis6991/impatient.nvim' })
 
@@ -36,15 +36,6 @@ packer.startup({
         -- }}}
 
         -- {{{ [completion] plugins related to completion
-        -- snippets
-        use({
-            'sirver/ultisnips',
-            event = 'InsertEnter',
-            config = function()
-                require('plugins.config.completion.ultisnips')
-            end,
-        })
-
         -- cmp
         -- do not lazy load, starter and neorg break
         use({
@@ -55,7 +46,12 @@ packer.startup({
             requires = {
                 -- cmp sources
                 {
-                    'hrsh7th/cmp-buffer',
+                    'hrsh7th/cmp-nvim-lsp',
+                    after = 'nvim-cmp',
+                    event = 'LspAttach',
+                },
+                {
+                    'quangnguyen30192/cmp-nvim-ultisnips',
                     after = 'nvim-cmp',
                     event = 'InsertEnter',
                 },
@@ -68,26 +64,30 @@ packer.startup({
                     end,
                 },
                 {
-                    'petertriho/cmp-git',
-                    after = 'nvim-cmp',
-                    event = 'InsertEnter',
-                },
-                {
-                    'hrsh7th/cmp-nvim-lsp',
-                    after = 'nvim-cmp',
-                    event = 'LspAttach',
-                },
-                {
-                    'quangnguyen30192/cmp-nvim-ultisnips',
-                    after = 'nvim-cmp',
-                    event = 'InsertEnter',
-                },
-                {
                     'hrsh7th/cmp-path',
                     after = 'nvim-cmp',
                     event = 'InsertEnter',
                 },
+                {
+                    'hrsh7th/cmp-buffer',
+                    after = 'nvim-cmp',
+                    event = 'InsertEnter',
+                },
+                {
+                    'petertriho/cmp-git',
+                    after = 'nvim-cmp',
+                    event = 'InsertEnter',
+                },
             }
+        })
+
+        -- snippets
+        use({
+            'sirver/ultisnips',
+            event = 'InsertEnter',
+            config = function()
+                require('plugins.config.completion.ultisnips')
+            end,
         })
         -- }}}
 
@@ -135,10 +135,6 @@ packer.startup({
                 require('plugins.config.editor.boole')
             end,
         })
-        -- use({
-        --     'Ron89/thesaurus_query.vim',
-        --     ft = { 'markdown', 'norg' },
-        -- })
         -- }}}
 
         -- {{{ [git] plugins related to git
@@ -231,21 +227,12 @@ packer.startup({
             'onsails/lspkind-nvim',
             after = { 'nvim-cmp', 'nvim-lspconfig' },
             config = function()
-                ---@diagnostic disable-next-line: different-requires
                 require('plugins.config.lsp.lspkind')
             end,
         })
         use({
             'folke/lsp-colors.nvim',
             after = 'lspkind-nvim',
-        })
-        use({
-            'folke/trouble.nvim',
-            event = 'LspAttach',
-            cmd = { 'Trouble', 'TroubleToggle' },
-            config = function()
-                require('plugins.config.lsp.trouble')
-            end,
         })
         use({
             'glepnir/lspsaga.nvim',
@@ -255,7 +242,14 @@ packer.startup({
                 require('plugins.config.lsp.lspsaga')
             end,
         })
-
+        use({
+            'folke/trouble.nvim',
+            event = 'LspAttach',
+            cmd = { 'Trouble', 'TroubleToggle' },
+            config = function()
+                require('plugins.config.lsp.trouble')
+            end,
+        })
         use({
             'SmiteshP/nvim-navic',
             event = 'LspAttach',
@@ -290,13 +284,6 @@ packer.startup({
 
         -- dimming & highlighting items
         use({
-            'zbirenbaum/neodim',
-            event = 'LspAttach',
-            config = function()
-                require('plugins.config.syntax.neodim')
-            end,
-        })
-        use({
             'RRethy/vim-illuminate',
             opt = true,
             setup = function()
@@ -304,6 +291,13 @@ packer.startup({
             end,
             config = function()
                 require('plugins.config.syntax.illuminate')
+            end,
+        })
+        use({
+            'zbirenbaum/neodim',
+            event = 'LspAttach',
+            config = function()
+                require('plugins.config.syntax.neodim')
             end,
         })
 
@@ -406,6 +400,13 @@ packer.startup({
                 require('plugins.config.editor.mini_trailspace') -- trailspace
             end,
         })
+        use {
+            'NFrid/due.nvim',
+            ft = 'norg',
+            config = function()
+                require('plugins.config.util.due')
+            end,
+        }
         use({
             'jbyuki/quickmath.nvim',
             cmd = 'Quickmath',
@@ -417,13 +418,6 @@ packer.startup({
                 require('plugins.config.util.calendar')
             end,
         })
-        use {
-            'NFrid/due.nvim',
-            ft = 'norg',
-            config = function()
-                require('plugins.config.util.due')
-            end,
-        }
         -- }}}
 
         -- {{{ bootstrapping
