@@ -24,7 +24,7 @@ require('core.theme')
 --> miscellaneous utils
 require('core.util')
 
--- re-enable shadafile after core config loading
+--> re-enable shadafile
 vim.opt.shadafile = ''
 -- }}}
 
