@@ -23,7 +23,7 @@ return function(on_attach)
 
     -- {{{ handlers
     -- {{{ helper
-    local function add_lspconfig(server, opts)
+    local function add(server, opts)
         local new_opts = { on_attach = on_attach }
 
         if opts then
@@ -39,7 +39,7 @@ return function(on_attach)
     mason_lspconfig.setup_handlers({
         -- {{{ default
         function(server_name)
-            add_lspconfig(lspconfig[server_name])
+            add(lspconfig[server_name])
         end,
         -- }}}
 
@@ -123,10 +123,27 @@ return function(on_attach)
         end,
         -- }}}
 
+        -- {{{ julials
+        julials = function()
+            add(lspconfig.julials, {
+                on_new_config = function(new_config, _)
+                    -- custom julia executable
+                    local julia = os.getenv('HOME') .. '/.julia/environments/nvim-lspconfig/bin/julia'
+
+                    if lspconfig.util.path.is_file(julia) then
+                        new_config.cmd[1] = julia
+                    else
+                        vim.notify('follow instructions @ https://discourse.julialang.org/t/neovim-languageserver-jl/37286/83 for instant startup')
+                    end
+                end
+            })
+        end,
+        -- }}}
+
         -- {{{ sumneko_lua
         sumneko_lua = function()
             -- lspconfig server, custom configuration
-            add_lspconfig(lspconfig.sumneko_lua, {
+            add(lspconfig.sumneko_lua, {
                 settings = {
                     Lua = {
                         runtime = {
@@ -153,7 +170,7 @@ return function(on_attach)
         -- {{{ texlab
         texlab = function()
             -- lspconfig server, custom configuration
-            add_lspconfig(lspconfig.texlab, {
+            add(lspconfig.texlab, {
                 filetypes = {
                     'bib',
                     'norg', -- make it work in Neorg files

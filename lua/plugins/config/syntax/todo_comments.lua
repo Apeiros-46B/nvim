@@ -39,12 +39,12 @@ todo_comments.setup({
         max_line_len  = 400,
     },
     colors = {
-        error   = { 'DiagnosticError'  , colors.red    },
-        warning = { 'DiagnosticWarning', colors.yellow },
-        info    = { 'DiagnosticInfo'   , colors.green  },
-        hint    = { 'DiagnosticHint'   , colors.teal   },
-        default = { 'Identifier'       , colors.blue   },
-        test    = { 'Purple'           , colors.purple },
+        error   = { 'Red'   , colors.red    },
+        warning = { 'Yellow', colors.yellow },
+        info    = { 'Green' , colors.green  },
+        hint    = { 'Aqua'  , colors.teal   },
+        default = { 'Blue'  , colors.blue   },
+        test    = { 'Purple', colors.purple },
     },
 })
 -- }}}

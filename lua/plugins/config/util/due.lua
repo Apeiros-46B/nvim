@@ -18,12 +18,12 @@ require('due_nvim').setup({
     pattern_start = '#time.due ',
     pattern_end   = '',
 
-    date_pattern           = date_pat,
-    datetime_pattern       = datetime_pat,
-    datetime12_pattern     = datetime_pat     .. ' (%a%a)',
-    fulldate_pattern       = '(%d%d%d%d)%-'   .. date_pat,
-    fulldatetime_pattern   = '(%d%d%d%d)%-'   .. datetime_pat,
-    fulldatetime12_pattern = fulldatetime_pat .. ' (%a%a)',
+    date_pattern           = date_pat .. '$',
+    datetime_pattern       = datetime_pat .. '$',
+    datetime12_pattern     = datetime_pat     .. ' (%a%a)$',
+    fulldate_pattern       = '(%d%d%d%d)%-'   .. date_pat .. '$',
+    fulldatetime_pattern   = '(%d%d%d%d)%-'   .. datetime_pat .. '$',
+    fulldatetime12_pattern = fulldatetime_pat .. ' (%a%a)$',
 
     use_clock_time   = true,
     use_clock_today  = false,

@@ -86,8 +86,8 @@ local function on_attach(client, bufnr)
 
     buf_map('n', '<leader>lR', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
-    buf_map('n', '<leader>lh', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_map('n', '<leader>ll', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_map('n', '<leader>lh', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_map('n', '<leader>ll', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
     buf_map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
