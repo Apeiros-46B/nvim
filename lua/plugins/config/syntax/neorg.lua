@@ -32,50 +32,42 @@ neorg.setup({
                         done = {
                             enabled = true,
                             icon = '',
-                            highlight = 'NeorgTodoItemDoneMark',
                         },
 
                         pending = {
                             enabled = true,
                             icon = '-',
-                            highlight = 'NeorgTodoItemPendingMark',
                         },
 
                         undone = {
                             -- change back to true for x mark on undone
                             enabled = false,
                             icon = '×',
-                            highlight = 'NeorgTodoItemUndoneMark',
                         },
 
                         uncertain = {
                             enabled = true,
                             icon = '?',
-                            highlight = 'NeorgTodoItemUncertainMark',
                         },
 
                         on_hold = {
                             enabled = true,
                             icon = '',
-                            highlight = 'NeorgTodoItemOnHoldMark',
                         },
 
                         cancelled = {
                             enabled = true,
                             icon = '',
-                            highlight = 'NeorgTodoItemCancelledMark',
                         },
 
                         recurring = {
                             enabled = true,
                             icon = '',
-                            highlight = 'NeorgTodoItemRecurringMark',
                         },
 
                         urgent = {
                             enabled = true,
                             icon = '',
-                            highlight = 'NeorgTodoItemUrgentMark',
                         },
                     },
                     -- }}}
@@ -87,37 +79,31 @@ neorg.setup({
                         level_1 = {
                             enabled = true,
                             icon = '┃',
-                            highlight = 'NeorgQuote1',
                         },
 
                         level_2 = {
                             enabled = true,
                             icon = '┃',
-                            highlight = 'NeorgQuote2',
                         },
 
                         level_3 = {
                             enabled = true,
                             icon = '┃',
-                            highlight = 'NeorgQuote3',
                         },
 
                         level_4 = {
                             enabled = true,
                             icon = '┃',
-                            highlight = 'NeorgQuote4',
                         },
 
                         level_5 = {
                             enabled = true,
                             icon = '┃',
-                            highlight = 'NeorgQuote5',
                         },
 
                         level_6 = {
                             enabled = true,
                             icon = '┃',
-                            highlight = 'NeorgQuote6',
                         },
                     },
                     -- }}}
@@ -129,40 +115,34 @@ neorg.setup({
                         level_1 = {
                             enabled = true,
                             icon = '◉ ',
-                            highlight = 'NeorgHeading1',
                         },
 
                         level_2 = {
                             enabled = true,
                             icon = ' ◈ ',
-                            highlight = 'NeorgHeading2',
                         },
 
                         level_3 = {
                             enabled = true,
                             icon = '  ▣ ',
-                            highlight = 'NeorgHeading3',
                         },
 
                         level_4 = {
                             enabled = true,
                             -- icon = '   🞅 ',
                             icon = '   ◉ ',
-                            highlight = 'NeorgHeading4',
                         },
 
                         level_5 = {
                             enabled = true,
                             -- icon = '    🮮 ',
                             icon = '    ◈ ',
-                            highlight = 'NeorgHeading5',
                         },
 
                         level_6 = {
                             enabled = true,
                             -- icon = '     🞏 ',
                             icon = '     ▣ ',
-                            highlight = 'NeorgHeading6',
                         },
                     },
                     -- }}}
@@ -171,7 +151,6 @@ neorg.setup({
                     marker = {
                         enabled = true,
                         icon = '',
-                        highlight = 'NeorgMarker',
                     },
 
                     definition = {
@@ -180,17 +159,14 @@ neorg.setup({
                         single = {
                             enabled = true,
                             icon = '',
-                            highlight = 'NeorgDefinition',
                         },
                         multi_prefix = {
                             enabled = true,
                             icon = '->',
-                            highlight = 'NeorgDefinition',
                         },
                         multi_suffix = {
                             enabled = true,
                             icon = '<-',
-                            highlight = 'NeorgDefinitionEnd',
                         },
                     },
 
@@ -200,17 +176,14 @@ neorg.setup({
                         single = {
                             enabled = true,
                             icon = '⁎',
-                            highlight = 'NeorgFootnote',
                         },
                         multi_prefix = {
                             enabled = true,
                             icon = '⁑ ',
-                            highlight = 'NeorgFootnote',
                         },
                         multi_suffix = {
                             enabled = true,
                             icon = '⁑ ',
-                            highlight = 'NeorgFootnoteEnd',
                         },
                     },
 
@@ -220,19 +193,16 @@ neorg.setup({
                         weak = {
                             enabled = true,
                             icon = '⟨',
-                            highlight = 'NeorgWeakParagraphDelimiter',
                         },
 
                         strong = {
                             enabled = true,
                             icon = '⟪',
-                            highlight = 'NeorgStrongParagraphDelimiter',
                         },
 
                         horizontal_line = {
                             enabled = true,
                             icon = '━',
-                            highlight = 'NeorgHorizontalLine',
                         },
                     },
 
@@ -242,7 +212,6 @@ neorg.setup({
                         spoiler = {
                             enabled = true,
                             icon = '█',
-                            highlight = 'NeorgMarkupSpoiler',
                         },
                     },
                     -- }}}
@@ -290,11 +259,11 @@ neorg.setup({
         -- }}}
 
         -- {{{ gtd
-        ["core.gtd.base"] = {
-            config = {
-                workspace = 'gtd',
-            }
-        },
+        -- ["core.gtd.base"] = {
+        --     config = {
+        --         workspace = 'gtd',
+        --     }
+        -- },
         -- }}}
 
         -- {{{ telescope integration
@@ -308,6 +277,7 @@ neorg.setup({
 -- }}}
 
 -- {{{ custom highlights
+-- TODO: fix highlights for 1.0
 -- import
 local set_hl = api.nvim_set_hl
 

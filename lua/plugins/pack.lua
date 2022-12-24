@@ -408,8 +408,10 @@ packer.startup({
             end,
         }
         use({
-            'jbyuki/quickmath.nvim',
-            cmd = 'Quickmath',
+            'Apeiros-46B/qalc.nvim',
+            config = function()
+                require('plugins.config.util.qalc')
+            end,
         })
         use({
             'itchyny/calendar.vim',
