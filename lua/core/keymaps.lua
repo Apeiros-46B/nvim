@@ -33,8 +33,8 @@ map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or
 map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
 
 map('n', '<leader>s', ':lua MiniStarter.open()<CR>', opt) -- show dashboard
-map('n', '<leader>m', ':vs | enew | Quickmath<CR>', opt) -- open Quickmath in vertical split
-map('n', '<leader>M', ':sp | enew | Quickmath<CR>', opt) -- open Quickmath in vertical split
+map('n', '<leader>m', ':vs | Qalc<CR>', opt) -- open qalc in vertical split
+map('n', '<leader>M', ':sp | Qalc<CR>', opt) -- open qalc in vertical split
 
 -- boole
 map('n', '<C-i>', ':Boole increment<CR>', opt)

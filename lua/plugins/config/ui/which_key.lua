@@ -234,8 +234,8 @@ local spc = {
 
     -- {{{ single
     d = 'Show diagnostic',
-    m = 'Quickmath [v]',
-    M = 'Quickmath [h]',
+    m = 'Qalc [v]',
+    M = 'Qalc [h]',
     s = 'Starter'
     -- }}}
 }
