@@ -12,7 +12,6 @@ return function(on_attach)
         'sumneko_lua',
         'pyright',
         'rust_analyzer',
-        'texlab',
         'zls',
     }
 
@@ -159,20 +158,6 @@ return function(on_attach)
                 },
             })
         end,
-        -- }}}
-
-        -- {{{ texlab
-        texlab = function()
-            -- lspconfig server, custom configuration
-            add(lspconfig.texlab, {
-                filetypes = {
-                    'bib',
-                    'norg', -- make it work in Neorg files
-                    'plaintex',
-                    'tex',
-                }
-            })
-        end
         -- }}}
     })
     -- }}}

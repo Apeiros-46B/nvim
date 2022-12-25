@@ -706,7 +706,7 @@ local hl = {
     LazyHandlerKeys    = { fg = colors.red    },
     LazyHandlerPLugin  = { fg = colors.yellow },
     LazyHandlerRuntime = { fg = colors.orange },
-    LazyHandlerSource  = { fg = colors.green  },
+    LazyHandlerSource  = { fg = colors.teal   },
     LazyHandlerStart   = { fg = colors.blue   },
 }
 
