@@ -1,0 +1,7 @@
+- (x) switch from packer.nvim to lazy.nvim
+- ( ) configure dial and ssr
+- ( ) move all plugin keymaps to lazy.lua
+- ( ) add more plugins
+- ( ) fix neorg highlights
+- ( ) switch from lualine to heirline
+- ( ) switch from mini.tabline to cokeline.nvim

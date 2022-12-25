@@ -228,7 +228,7 @@ end
 -- }}}
 
 -- {{{ custom extensions
--- {{{ dashboard
+-- {{{ starter
 local starter = {}
 
 starter.sections = vim.deepcopy(extension_template)
@@ -307,6 +307,19 @@ help.sections.lualine_z = extension_z_generator('location', colors.yellow)
 help.filetypes = { 'help' }
 -- }}}
 
+-- {{{ lazy
+local lazy = {}
+
+lazy.sections = vim.deepcopy(extension_template)
+
+lazy.sections.lualine_a = extension_a_generator('PKG', colors.teal)
+lazy.sections.lualine_c = { diagnostics }
+
+lazy.sections.lualine_z = extension_z_generator(time,  colors.teal)
+
+lazy.filetypes = { 'lazy' }
+-- }}}
+
 -- {{{ man
 local man = {}
 
@@ -379,12 +392,13 @@ local function setup(new_sections)
         -- {{{ extensions
         extensions = {
             -- uses a more minimal template
-            starter,      -- dashboard
-            nvimtree,      -- file trees (CHADTree, NERDTree, NvimTree)
+            starter,        -- dashboard
+            nvimtree,       -- file trees (CHADTree, NERDTree, NvimTree)
             fugitive,       -- fugitive pane
-            blame,       -- fugitive blame sidebar
-            commit,      -- editing commit messages
+            blame,          -- fugitive blame sidebar
+            commit,         -- editing commit messages
             help,           -- `:help` panel
+            lazy,           -- lazy.nvim
             man,            -- `:Man` windows
             telescope,      -- telescope fuzzy finder
             terminal,       -- terminal

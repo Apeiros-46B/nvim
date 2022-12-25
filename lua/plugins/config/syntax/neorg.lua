@@ -283,8 +283,8 @@ local set_hl = api.nvim_set_hl
 
 local hl = {
     -- {{{ selection window
-    ['@neorg.selection_window.arrow'        ] = { fg = colors.white  },
     ['@neorg.selection_window.heading'      ] = { fg = colors.purple },
+    ['@neorg.selection_window.arrow'        ] = { fg = colors.white  },
     ['@neorg.selection_window.key'          ] = { fg = colors.yellow },
     ['@neorg.selection_window.keyname'      ] = { fg = colors.blue   },
     ['@neorg.selection_window.nestedkeyname'] = { fg = colors.teal   },

@@ -1,8 +1,17 @@
 -- initialize configuration
--- {{{ impatient
-vim.defer_fn(function()
-    pcall(require, 'impatient')
-end, 0)
+-- {{{ bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        '--single-branch',
+        'https://github.com/folke/lazy.nvim.git',
+        lazypath,
+    })
+end
+vim.opt.runtimepath:prepend(lazypath)
 -- }}}
 
 -- {{{ core
@@ -18,17 +27,11 @@ require('core.keymaps')
 --> general vim options
 require('core.options')
 
---> theme/colorscheme
-require('core.theme')
-
---> miscellaneous utils
-require('core.util')
-
 --> re-enable shadafile
 vim.opt.shadafile = ''
 -- }}}
 
 -- {{{ plugins
---> lazy-load plugins and their configs
-require('plugins.pack')
+--> load
+require('plugins.lazy')
 -- }}}

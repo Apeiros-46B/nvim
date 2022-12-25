@@ -1,8 +1,8 @@
 -- configuration for nvim-surround plugin
 require('nvim-surround').setup({
     keymaps = {
-        insert          = '<C-s>s',
-        insert_line     = '<C-s>S',
+        insert          = '<C-g>s',
+        insert_line     = '<C-g>S',
         normal          = 'ys',
         normal_cur      = 'yss',
         normal_line     = 'yS',

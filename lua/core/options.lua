@@ -23,6 +23,7 @@ opt.ignorecase = true
 opt.scrolloff = 4   	-- buffer starts scrolling 4 lines from the end of view
 opt.incsearch = true
 opt.lazyredraw = true   -- lazy redraw
+opt.shortmess = 'filnxtToOFI'
 
 -- diagnostics
 vim.diagnostic.config({

@@ -28,16 +28,6 @@ vim.g.maplocalleader = ','
 -- {{{ mapping
 -- {{{ misc
 map('n', 'WW', ':w<CR>', opt) -- write shortcut
-
-map('', '<C-c>', ':CommentToggle<CR>', opt) -- toggle comment on current line or selection
-map('', '<C-n>', ':NvimTreeToggle<CR>', opt) -- toggle nvimtree
-
-map('n', '<leader>s', ':lua MiniStarter.open()<CR>', opt) -- show dashboard
-map('n', '<leader>m', ':vs | Qalc<CR>', opt) -- open qalc in vertical split
-map('n', '<leader>M', ':sp | Qalc<CR>', opt) -- open qalc in vertical split
-
--- boole
-map('n', '<C-i>', ':Boole increment<CR>', opt)
 -- }}}
 
 -- {{{ [b] buffer

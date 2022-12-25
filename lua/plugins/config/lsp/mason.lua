@@ -3,7 +3,6 @@
 -- main
 local api    = vim.api
 local mason  = require('mason')
-local packer = require('packer')
 
 -- theme
 local theme = require('core.theme')
@@ -66,10 +65,6 @@ local function on_attach(client, bufnr)
     local function buf_map(...)
         api.nvim_buf_set_keymap(bufnr, ...)
     end
-
-    local function buf_opt(...)
-        api.nvim_buf_set_option(bufnr, ...)
-    end
     -- }}}
 
     -- {{{ mappings
@@ -95,48 +90,21 @@ local function on_attach(client, bufnr)
     buf_map('n', '<leader>lF', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
     -- }}}
 
-    -- {{{ autocommands dependent on server capabilities
-    if client.server_capabilities.document_highlight then
-        vim.api.nvim_exec(
-            [[
-                augroup lsp_document_highlight
-                autocmd! * <buffer>
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-                augroup END
-            ]],
-            false
-        )
+    -- {{{ other
+    -- attach navic and notify user if it's not null-ls
+    if client.name ~= 'null-ls' then
+        require('nvim-navic').attach(client, bufnr)
+        vim.notify(string.format([[[LSP] attached client '%s']], client.name), 'INFO')
     end
     -- }}}
-
-    -- {{{ other
-    -- omnifunc
-    buf_opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- attach navic if not null-ls
-    if client.name ~= 'null-ls' then require('nvim-navic').attach(client, bufnr) end
-
-    -- notify the user that the client has been attached
-    vim.notify(string.format([[[LSP] attached client '%s']], client.name), 'INFO')
-    -- }}}
 end
 -- }}}
 
--- {{{ lspconfig
--- load lspconfig if it isn't already
-if not packer_plugins['nvim-lspconfig'] then
-    packer.loader('nvim-lspconfig')
-end
-
+-- {{{ subconfigs
+-- lspconfig
 require('plugins.config.lsp.lspconfig')(on_attach)
--- }}}
 
--- {{{ null-ls
--- load null-ls if it isn't already
-if not packer_plugins['null-ls.nvim'] then
-    packer.loader('null-ls.nvim')
-end
-
+-- null-ls
 require('plugins.config.lsp.null_ls')(on_attach)
 -- }}}
 

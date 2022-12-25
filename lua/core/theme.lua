@@ -4,6 +4,13 @@ local M = {}
 local set_hl = vim.api.nvim_set_hl
 -- }}}
 
+-- {{{ load colorscheme
+vim.g.everforest_better_performance = 1
+vim.g.everforest_background = 'hard'
+vim.o.background = 'dark'
+vim.cmd([[colorscheme everforest]])
+-- }}}
+
 -- {{{ colors
 -- TODO: get colors from colorscheme or highlights instead of hardcoding values
 M.colors = {
@@ -37,18 +44,6 @@ M.colors = {
     diff_mod  = '#394f5a',
     bg_yellow = '#4a4940',
 }
--- }}}
-
--- {{{ load colorscheme
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) <= 0 then
-    vim.g.everforest_better_performance = 1
-    vim.g.everforest_background = 'hard'
-    vim.o.background = 'dark'
-    vim.cmd('colorscheme everforest')
-end
 -- }}}
 
 -- {{{ custom highlights & theme overrides

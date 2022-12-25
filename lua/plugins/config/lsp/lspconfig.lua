@@ -47,9 +47,6 @@ return function(on_attach)
         jdtls = function()
             if vim.bo.filetype ~= 'java' then return end
 
-            -- load nvim-jdtls
-            require('packer').loader('nvim-jdtls')
-
             -- start
             local config = {
                 cmd = { vim.fn.stdpath('data') .. '/mason/bin/jdtls' },
@@ -94,9 +91,6 @@ return function(on_attach)
 
         -- {{{ [rust-tools] rust-analyzer
         rust_analyzer = function()
-            -- load rust-tools
-            require('packer').loader('rust-tools.nvim')
-
             -- setup
             require('rust-tools').setup({
                 tools = {

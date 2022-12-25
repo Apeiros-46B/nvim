@@ -25,8 +25,6 @@ return function(on_attach)
             -- TODO: fix proselint saying resource not available
             -- builtins.diagnostics.proselint.with({
             --     extra_filetypes = { 'norg' },
-            --     -- custom config file in which some checks are disabled
-            --     args = { '--json', '--config', vim.fn.stdpath('config') .. '/lua/plugins/config/lsp/sources/proselint.json' },
             -- }),
 
             -- TODO: get textlint working
