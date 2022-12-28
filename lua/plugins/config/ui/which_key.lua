@@ -95,6 +95,7 @@ local spc = {
         b = 'Marks',
 		f = 'Files',
         r = 'Recent files',
+        s = 'Synonyms',
 		w = 'Words',
 	},
 
@@ -233,10 +234,10 @@ local spc = {
     -- }}}
 
     -- {{{ single
+    c = 'Pick color',
     d = 'Show diagnostic',
-    m = 'Qalc [v]',
-    M = 'Qalc [h]',
-    s = 'Starter'
+    q = 'Open Qalc',
+    s = 'SSR'
     -- }}}
 }
 

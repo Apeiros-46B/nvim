@@ -1,9 +1,6 @@
 -- icon definitions for lspkind
 require('lspkind').init({
-    -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-    mode = 'symbol_text',
-
-    -- options: 'default', 'codicons'
+    mode   = 'symbol_text',
     preset = 'default',
 
     symbol_map = {

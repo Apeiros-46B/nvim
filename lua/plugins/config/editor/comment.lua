@@ -16,22 +16,22 @@ local cc = api.nvim_create_user_command
 
 local function create()
     cc('CommentToggle', function(tbl)
-        -- {{{ +one-line comment+
+        -- {{{ %one-line comment%
         if tbl.range == 0 then
-            -- one-line comment +like this+
+            -- one-line comment %like this%
 
             -- {{{ check if commented
             local current_line = api.nvim_get_current_line()
-            local comment_expr = vim.regex([[^\s*+.*+\s*$]])
+            local comment_expr = vim.regex([[^\s*%.*%\s*$]])
 
             if comment_expr:match_str(current_line) then
             -- }}}
             -- {{{ comment or uncomment
                 -- there is already a comment, so uncomment the line
-                exec([[exec 's/\(^\s*\)+\(.*\)+\(\s*$\)/\1\2\3' | noh]], false)
+                exec([[exec 's/\(^\s*\)%\(.*\)%\(\s*$\)/\1\2\3' | noh]], false)
             else
                 -- there isn't a comment, so comment the line
-                exec([[exec 's/\(^\s*\)\(.*\)\(\s*$\)/\1+\2+\3' | noh]], false)
+                exec([[exec 's/\(^\s*\)\(.*\)\(\s*$\)/\1%\2%\3' | noh]], false)
             end
             -- }}}
         -- }}}

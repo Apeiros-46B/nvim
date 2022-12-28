@@ -1,25 +1,23 @@
 -- configuration for neodim plugin
--- {{{ imports
--- main
-local neodim = require('neodim')
+return function(theme)
+    -- {{{ imports
+    local neodim = require('neodim')
+    local colors = theme.colors
+    -- }}}
 
--- theme
-local theme = require('core.theme')
-local colors = theme.colors
--- }}}
-
--- {{{ setup
-neodim.setup({
-    alpha = 0.8,
-    blend_color = colors.gray3,
-    update_in_insert = {
-        enable = true,
-        delay = 100,
-    },
-    hide = {
-        virtual_text = true,
-        signs = true,
-        underline = false,
-    }
-})
--- }}}
+    -- {{{ setup
+    neodim.setup({
+        alpha = 1.0,
+        blend_color = colors.gray2,
+        update_in_insert = {
+            enable = true,
+            delay = 100,
+        },
+        hide = {
+            virtual_text = true,
+            signs = true,
+            underline = false,
+        }
+    })
+    -- }}}
+end

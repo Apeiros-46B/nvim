@@ -1,10 +1,11 @@
+---@diagnostic disable: param-type-mismatch
 -- load plugins
 
 -- {{{ helpers
 -- {{{ create keymaps
 -- create a full mapping
-local function key(lhs, rhs, mode, desc, additional_opts)
-    local opts = { lhs, rhs, mode = mode, desc = desc, noremap = true, silent = true }
+local function key(lhs, rhs, mode, additional_opts)
+    local opts = { lhs, rhs, mode = mode, desc = nil, noremap = true, silent = true }
 
     if additional_opts then
         opts = vim.tbl_extend('force', opts, additional_opts)
@@ -19,9 +20,23 @@ local function lkey(mode, lhs)
 end
 -- }}}
 
+-- {{{ call a config
+local theme
+
+local function call(module)
+    return function()
+        local ret = require(module)
+
+        if type(ret) == 'function' then
+            ret(theme)
+        end
+    end
+end
+-- }}}
+
 -- {{{ NvChad's lazy loading helpers (slightly modified for lazy.nvim)
 -- {{{ main loader function
-local function load(tbl)
+local function loader(tbl)
     vim.api.nvim_create_autocmd(tbl.events, {
         group = vim.api.nvim_create_augroup(tbl.augroup_name, {}),
         callback = function()
@@ -46,34 +61,38 @@ end
 -- }}}
 
 -- {{{ load plugins only if there's a file opened in the buffer
-local function load_on_file(plugin)
-    load({
-        events = { 'BufRead', 'BufWinEnter', 'BufNewFile' },
-        augroup_name = 'BeLazyOnFileOpen' .. plugin,
-        plugin = plugin,
-        condition = function()
-            local file = vim.fn.expand '%'
-            return file ~= 'NvimTree_1' and file ~= '[packer]' and file ~= 'Starter' and file ~= ''
-        end,
-        reason = 'FileOpenLoader'
-    })
+local function fileloader(plugin)
+    return function()
+        loader({
+            events = { 'BufRead', 'BufWinEnter', 'BufNewFile' },
+            augroup_name = 'FileOpenLazy' .. plugin,
+            plugin = plugin,
+            condition = function()
+                local file = vim.fn.expand '%'
+                return file ~= 'NvimTree_1' and file ~= ''
+            end,
+            reason = 'BufRead'
+        })
+    end
 end
 -- }}}
 
--- {{{ load files only if cwd is a git repo
-local function load_on_git(plugin)
-    vim.api.nvim_create_autocmd({ 'BufRead' }, {
-        group = vim.api.nvim_create_augroup('GitLazyLoad' .. plugin, { clear = true }),
-        callback = function()
-            vim.fn.system('git -C ' .. vim.fn.expand '%:p:h' .. ' rev-parse')
-            if vim.v.shell_error == 0 then
-                vim.api.nvim_del_augroup_by_name('GitLazyLoad' .. plugin)
-                vim.schedule(function()
-                    require('lazy.core.loader').load(plugin, { event = 'GitLoader' })
-                end)
-            end
-        end,
-    })
+-- {{{ load files only if cwd is in a git repo
+local function gitloader(plugin)
+    return function()
+        vim.api.nvim_create_autocmd({ 'VimEnter' }, {
+            group = vim.api.nvim_create_augroup('GitBufEnterLazy' .. plugin, { clear = true }),
+            callback = function()
+                vim.fn.system('git -C ' .. vim.fn.getcwd(0) .. ' rev-parse')
+                if vim.v.shell_error == 0 then
+                    vim.api.nvim_del_augroup_by_name('GitBufEnterLazy' .. plugin)
+                    vim.schedule(function()
+                        require('lazy.core.loader').load(plugin, { event = 'GitBufEnter' })
+                    end)
+                end
+            end,
+        })
+    end
 end
 -- }}}
 -- }}}
@@ -84,11 +103,11 @@ local specs =  {
     -- {{{ base
     {
         'sainnhe/everforest',
-        lazy = true,
+        -- old palette >> new
         commit = 'd855af5',
+        pin = true,
         init = function()
-            -- load theme here
-            require('core.theme')
+            theme = require('plugins.theme')
         end,
     },
     'nvim-lua/plenary.nvim',
@@ -99,16 +118,14 @@ local specs =  {
     -- {{{ cmp
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
-        config = function()
-            require('plugins.config.completion.cmp')
-        end,
         dependencies = {
             -- lsp, dictionary aren't needed for core cmp to function; they can load later
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
             'quangnguyen30192/cmp-nvim-ultisnips',
-        }
+        },
+        event = 'InsertEnter',
+        config = call('plugins.config.completion.cmp'),
     },
     -- }}}
 
@@ -120,19 +137,16 @@ local specs =  {
     {
         'uga-rosa/cmp-dictionary',
         ft = { 'norg', 'markdown' },
-        config = function()
-            require('plugins.config.completion.cmp_dictionary')
-        end,
+        config = call('plugins.config.completion.cmp_dictionary'),
     },
     -- }}}
 
     -- {{{ ultisnips
     {
         'SirVer/ultisnips',
+        ft = 'snippets',
         event = 'InsertEnter',
-        config = function()
-            require('plugins.config.completion.ultisnips')
-        end,
+        config = call('plugins.config.completion.ultisnips'),
     },
     -- }}}
     -- }}}
@@ -142,38 +156,33 @@ local specs =  {
     {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
-        config = function()
-            require('plugins.config.editor.autopairs')
-        end,
+        config = call('plugins.config.editor.autopairs'),
     },
     {
         'terrortylor/nvim-comment',
         keys = {
             key('<C-c>', '<cmd>CommentToggle<CR>', 'n'),
-            key('<C-c>', ':CommentToggle<CR>', 'v'),
+            key('<C-c>', ':CommentToggle<CR>'    , 'v'),
         },
         cmd = 'CommentToggle',
-        config = function()
-            require('plugins.config.editor.comment')
-        end,
+        config = call('plugins.config.editor.comment'),
     },
     {
         'kylechui/nvim-surround',
         keys = {
             -- {{{ surround keys
+            -- actual bindings are set in the config file
             lkey('i', '<C-g>s'), -- insert
             lkey('i', '<C-g>S'), -- insert line
-            lkey('n', 'ys'),     -- normal
-            lkey('n', 'yS'),     -- normal line
-            lkey('v', 'S'),      -- visual
-            lkey('v', 'gS'),     -- visual line
-            lkey('n', 'ds'),     -- delete
-            lkey('n', 'cs'),     -- change
+            lkey('n', 'ys'    ), -- normal
+            lkey('n', 'yS'    ), -- normal line
+            lkey('v', 'S'     ), -- visual
+            lkey('v', 'gS'    ), -- visual line
+            lkey('n', 'ds'    ), -- delete
+            lkey('n', 'cs'    ), -- change
             -- }}}
         },
-        config = function()
-            require('plugins.config.editor.surround')
-        end,
+        config = call('plugins.config.editor.surround'),
     },
     -- }}}
 
@@ -231,9 +240,20 @@ local specs =  {
             'HopWordMW',
             -- }}}
         },
-        config = function()
-            require('plugins.config.editor.hop')
-        end,
+        keys = {
+            -- {{{ hop keys
+            key('<leader>hh', ':HopWord<CR>'           , 'n', { silent = false }),
+            key('<leader>hk', ':HopWordBC<CR>'         , 'n', { silent = false }),
+            key('<leader>hj', ':HopWordAC<CR>'         , 'n', { silent = false }),
+            key('<leader>hl', ':HopWordMW<CR>'         , 'n', { silent = false }),
+            key('<leader>hc', ':HopChar1<CR>'          , 'n', { silent = false }),
+            key('<leader>hC', ':HopChar2<CR>'          , 'n', { silent = false }),
+            key('<leader>hg', ':HopPattern<CR>'        , 'n', { silent = false }),
+            key('<leader>hn', ':HopLineStart<CR>'      , 'n', { silent = false }),
+            key('<leader>hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
+            -- }}}
+        },
+        config = call('plugins.config.editor.hop'),
     },
     -- }}}
 
@@ -244,9 +264,10 @@ local specs =  {
     },
     {
         'cshuaimin/ssr.nvim',
-        config = function()
-            require('plugins.config.editor.ssr')
-        end,
+        keys = {
+            key('<leader>s', '<cmd>lua require("ssr").open()<CR>', 'n'),
+        },
+        config = call('plugins.config.editor.ssr'),
     },
     {
         'monaqa/dial.nvim',
@@ -257,9 +278,7 @@ local specs =  {
             lkey('v', 'g<C-a>'),
             lkey('v', 'g<C-x>'),
         },
-        config = function()
-            require('plugins.config.editor.dial')
-        end,
+        config = call('plugins.config.editor.dial'),
     },
     -- }}}
     -- }}}
@@ -267,19 +286,18 @@ local specs =  {
     -- {{{ [git] plugins related to git
     {
         'lewis6991/gitsigns.nvim',
-        init = function()
-            load_on_git('gitsigns.nvim')
-        end,
-        config = function()
-            require('plugins.config.git.gitsigns')
-        end,
+        init = gitloader('gitsigns.nvim'),
+        config = call('plugins.config.git.gitsigns'),
     },
     {
         'tpope/vim-fugitive',
         cmd = 'Git',
-        init = function()
-            load_on_git('vim-fugitive')
-        end,
+        init = gitloader('vim-fugitive'),
+        keys = {
+            key('<leader>gg', '<cmd>Git<CR>'       , 'n'),
+            key('<leader>gB', '<cmd>Git blame<CR>' , 'n'),
+            key('<leader>gc', '<cmd>Git commit<CR>', 'n'),
+        },
     },
     -- }}}
 
@@ -288,54 +306,35 @@ local specs =  {
     -- mason
     {
         'williamboman/mason.nvim',
-        cmd = 'Mason',
         dependencies = {
-            -- {{{ lspconfig
+            -- lspconfig
             {
                 'williamboman/mason-lspconfig.nvim',
                 dependencies = {
                     {
                         'neovim/nvim-lspconfig',
-                        init = function()
-                            load_on_file('nvim-lspconfig')
-                        end,
-                    },
-                }
-            },
-            -- }}}
-            -- {{{ null-ls
-            {
-                'jay-babu/mason-null-ls.nvim',
-                dependencies = {
-                    {
-                        'jose-elias-alvarez/null-ls.nvim',
-                        init = function()
-                            load_on_file('null-ls.nvim')
-                        end,
+                        dependencies = {
+                            'folke/neodev.nvim', -- configured in mason config file to ensure load order (must be setup before lspconfig)
+                        },
                     },
                 },
             },
-            -- }}}
+            -- null-ls
+            {
+                'jay-babu/mason-null-ls.nvim',
+                dependencies = { 'jose-elias-alvarez/null-ls.nvim' },
+            },
         },
-        init = function()
-            load_on_file('mason.nvim')
-        end,
-        config = function()
-            require('plugins.config.lsp.mason')
-        end,
+        cmd = 'Mason',
+        init = fileloader('mason.nvim'),
+        config = call('plugins.config.lsp.mason'),
     },
 
     -- dap
     {
         'mfussenegger/nvim-dap',
-        init = function()
-            load_on_file('nvim-dap')
-        end,
+        init = fileloader('nvim-dap'),
     },
-
-    -- enhancements for specific servers
-    'simrat39/rust-tools.nvim',
-    'mfussenegger/nvim-jdtls',
     -- }}}
 
     -- {{{ other lsp-related plugins
@@ -346,17 +345,24 @@ local specs =  {
     {
         'onsails/lspkind-nvim',
         event = 'LspAttach',
-        config = function()
-            require('plugins.config.lsp.lspkind')
-        end,
+        config = call('plugins.config.lsp.lspkind'),
     },
     {
         'glepnir/lspsaga.nvim',
         event = 'LspAttach',
         cmd = 'Lspsaga',
-        config = function()
-            require('plugins.config.lsp.lspsaga')
-        end,
+        keys = {
+            -- {{{ lspsaga keys
+            key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'               , 'n'),
+            key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'                , 'n'),
+            key('<leader>lr', '<cmd>Lspsaga rename<CR>'                   , 'n'),
+            key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'          , 'n'),
+            key('<M-CR>'    , '<cmd>Lspsaga code_action<CR>'              , 'n'),
+            key('<M-d>'     , '<cmd>Lspsaga open_floaterm<CR>'            , 'n'),
+            key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>', 't'),
+            -- }}}
+        },
+        config = call('plugins.config.lsp.lspsaga'),
     },
     {
         'folke/trouble.nvim',
@@ -367,23 +373,62 @@ local specs =  {
             'TroubleRefresh',
             'TroubleToggle',
         },
-        config = function()
-            require('plugins.config.lsp.trouble')
-        end,
+        keys = {
+            key('<leader>lt', '<cmd>TroubleToggle<CR>', 'n'),
+        },
+        config = call('plugins.config.lsp.trouble'),
     },
-    {
-        'SmiteshP/nvim-navic',
-        event = 'LspAttach',
-        config = function()
-            require('plugins.config.lsp.navic')
-        end,
-    },
+    'SmiteshP/nvim-navic',
     {
         'zbirenbaum/neodim',
         event = 'LspAttach',
-        config = function()
-            require('plugins.config.lsp.neodim')
-        end,
+        keys = {
+            key('<leader>Tn', '<cmd>NavicToggle<CR>', 'n'),
+        },
+        config = call('plugins.config.lsp.neodim'),
+    },
+    -- }}}
+    -- }}}
+
+    -- {{{ [langs] language support
+    -- the following two are setup with mason
+    'simrat39/rust-tools.nvim', -- rust
+
+    -- java
+    {
+        'mfussenegger/nvim-jdtls',
+        keys = {
+            -- {{{ jdtls keys
+            key('<leader>jb',  '<cmd>vs | terminal<CR>imvn clean package -T 4<CR>'   , 'n'),
+            key('<leader>jo',  '<cmd>lua require("jdtls").organize_imports()<CR>'    , 'n'),
+            key('<leader>jev', '<cmd>lua require("jdtls").extract_variable()<CR>'    , 'n'),
+            key('<leader>jev', '<cmd>lua require("jdtls").extract_variable(true)<CR>', 'v'),
+            key('<leader>jec', '<cmd>lua require("jdtls").exttract_constant()<CR>'   , 'n'),
+            key('<leader>jec', '<cmd>lua require("jdtls").extract_constant(true)<CR>', 'v'),
+            key('<leader>jem', '<cmd>lua require("jdtls").extract_method(true)<CR>'  , 'v'),
+            -- }}}
+        },
+    },
+
+    -- haxe
+    {
+        'jdonaldson/vaxe',
+        ft = 'haxe'
+    },
+
+    -- {{{ neorg
+    {
+        'nvim-neorg/neorg',
+        build = ':Neorg sync-parsers',
+        dependencies = {
+            'nvim-neorg/neorg-telescope'
+        },
+        ft = 'norg',
+        keys = {
+            key('<leader>nc', '<cmd>Neorg toggle-concealer<CR>'                           , 'n'),
+            key('<leader>nC', '<cmd>Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', 'n'),
+        },
+        config = call('plugins.config.lang.neorg'),
     },
     -- }}}
     -- }}}
@@ -392,85 +437,77 @@ local specs =  {
     -- {{{ treesitter
     {
         'nvim-treesitter/nvim-treesitter',
-        config = function()
-            require('plugins.config.syntax.treesitter')
-        end,
         build = ':TSUpdate',
-    },
-    -- }}}
-
-    -- {{{ neorg
-    {
-        'nvim-neorg/neorg',
-        ft = 'norg',
-        dependencies = {
-            'nvim-neorg/neorg-telescope'
-        },
-        config = function()
-            require('plugins.config.syntax.neorg')
-        end,
-        build = ':Neorg sync-parsers',
+        init = fileloader('nvim-treesitter'),
+        config = call('plugins.config.syntax.treesitter'),
     },
     -- }}}
 
     -- {{{ other
     {
         'RRethy/vim-illuminate',
-        init = function()
-            load_on_file('vim-illuminate')
-        end,
-        config = function()
-            require('plugins.config.syntax.illuminate')
-        end,
+        init = fileloader('vim-illuminate'),
+        config = call('plugins.config.syntax.illuminate'),
     },
     {
         'folke/todo-comments.nvim',
-        init = function()
-            load_on_file('todo-comments.nvim')
-        end,
-        config = function()
-            require('plugins.config.syntax.todo_comments')
-        end,
+        init = fileloader('todo-comments.nvim'),
+        config = call('plugins.config.syntax.todo_comments'),
     },
     -- }}}
     -- }}}
 
     -- {{{ [ui] plugins that enhance the user interface
-    -- devicons
     {
         'kyazdani42/nvim-web-devicons',
-        config = function()
-            require('plugins.config.ui.devicons')
-        end,
+        config = call('plugins.config.ui.devicons'),
     },
 
-    -- status line
+    -- dashboard/greeter
+    {
+        'goolord/alpha-nvim',
+        lazy = false,
+        config = call('plugins.config.ui.alpha')
+    },
+
+    -- cmdline and notification ui enhancements
+    'folke/noice.nvim',
+
+    -- statusline, tabline, and winbar
+    {
+        'rebelot/heirline.nvim',
+        lazy = false,
+        config = call('plugins.config.ui.heirline')
+    },
+
+    -- {{{ not needed for now
+    {
+        'noib3/nvim-cokeline',
+        enabled = false,
+    },
     {
         'nvim-lualine/lualine.nvim',
-        lazy = false,
-        config = function()
-            require('plugins.config.ui.lualine')
-        end,
+        enabled = false,
+        -- lazy = false,
+        keys = {
+            key('<leader>Tw', '<cmd>WordCountToggle<CR>', 'n'),
+        },
+        config = call('plugins.config.ui.lualine'),
     },
+    -- }}}
 
     -- scrollbar
     {
-        'kensyo/nvim-scrlbkun',
-        init = function()
-            load_on_file('nvim-scrlbkun')
-        end,
-        config = function()
-            require('plugins.config.ui.scrlbkun')
-        end,
+        'Apeiros-46B/nvim-scrlbkun',
+        init = fileloader('nvim-scrlbkun'),
+        config = call('plugins.config.ui.scrlbkun'),
     },
 
     -- keybind help
     {
         'folke/which-key.nvim',
         lazy = false,
-        config = function()
-            require('plugins.config.ui.which_key')
-        end,
+        config = call('plugins.config.ui.which_key'),
     },
     -- }}}
 
@@ -478,7 +515,6 @@ local specs =  {
     -- {{{ telescope
     {
         'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
         dependencies = {
             -- fzf native
             {
@@ -486,16 +522,32 @@ local specs =  {
                 build = 'make',
             },
         },
-        config = function()
-            require('plugins.config.util.telescope')
-        end,
+        cmd = 'Telescope',
+        keys = {
+            key('<leader>bp', '<cmd>Telescope buffers<CR>', 'n'),
+
+            key('<leader>fb', '<cmd>Telescope marks<CR>'     , 'n'),
+            key('<leader>ff', '<cmd>Telescope find_files<CR>', 'n'),
+            key('<leader>fr', '<cmd>Telescope oldfiles<CR>'  , 'n'),
+            key('<leader>fw', '<cmd>Telescope live_grep<CR>' , 'n'),
+
+            key('<leader>gfc', '<cmd>Telescope git_commits<CR>' , 'n'),
+            key('<leader>gfb', '<cmd>Telescope git_branches<CR>', 'n'),
+        },
+
+        config = call('plugins.config.util.telescope'),
     },
 
     -- extensions
-    { url = 'https://code.sitosis.com/rudism/telescope-dict.nvim.git' },
+    {
+        url = 'https://code.sitosis.com/rudism/telescope-dict.nvim.git',
+        keys = {
+            key('<leader>fs', '<cmd>lua require("telescope").extensions.dict.synonyms()<CR>', 'n')
+        },
+    },
     -- }}}
 
-    -- {{{ major utilities
+    -- {{{ other important utilities
     {
         'kyazdani42/nvim-tree.lua',
         cmd = {
@@ -504,43 +556,50 @@ local specs =  {
             'NvimTreeOpen',
         },
         keys = {
-            key('<C-n>', '<cmd>NvimTreeToggle<CR>', 'n', 'Toggle NvimTree'),
+            key('<C-n>', '<cmd>NvimTreeToggle<CR>', 'n'),
         },
-        config = function()
-            require('plugins.config.util.nvimtree')
-        end,
+        config = call('plugins.config.util.nvimtree'),
     },
     {
         'echasnovski/mini.nvim',
-        lazy = false,
+        keys = {
+            key('<leader>Fs', '<cmd>lua MiniTrailspace.trim()<CR>', 'n') -- trim trailing spaces
+        },
+        init = fileloader('mini.nvim'),
         config = function()
-            require('plugins.config.ui.mini_tabline') -- TODO: replace with cokeline
-            require('plugins.config.editor.mini_trailspace')
+            require('plugins.config.ui.mini_tabline')(theme)
+            require('plugins.config.editor.mini_trailspace')(theme)
         end,
     },
     -- }}}
 
-    -- {{{ small utilities
+    -- {{{ non-essentialsutilities
+    {
+        'uga-rosa/ccc.nvim',
+        init = fileloader('ccc.nvim'),
+        keys = {
+            key('<leader>c',  '<cmd>CccPick<CR>',              'n'),
+            key('<leader>Tc', '<cmd>CccHighlighterToggle<CR>', 'n')
+        },
+        cmd = {
+            'CccPick',
+            'CccConvert',
+            'CccHighlighterToggle',
+            'CccHighlighterEnable',
+            'CccHighlighterDisable',
+        },
+        config = call('plugins.config.util.ccc')
+    },
     {
         'NFrid/due.nvim',
         ft = 'norg',
-        config = function()
-            require('plugins.config.util.due')
-        end,
-    },
-    {
-        'itchyny/calendar.vim',
-        cmd = 'Calendar',
-        config = function()
-            require('plugins.config.util.calendar')
-        end,
+        config = call('plugins.config.util.due'),
     },
     {
         -- 'Apeiros-46B/qalc.nvim',
         dir = '/home/apeiros/code/projects/qalc.nvim/',
         keys = {
-            key('<leader>m', '<cmd>vs | Qalc<CR>', 'n', 'Open qalc in a vertical split'), -- open qalc in vertical split
-            key('<leader>M', '<cmd>sp | Qalc<CR>', 'n', 'Open qalc in a horizontal split'), -- open qalc in horizontal split
+            key('<leader>q', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
         },
         cmd = {
             'Qalc',
@@ -552,9 +611,7 @@ local specs =  {
                 pattern = { '*.qalc' }, command = 'QalcAttach'
             })
         end,
-        config = function()
-            require('plugins.config.util.qalc')
-        end,
+        config = call('plugins.config.util.qalc'),
     },
     -- }}}
     -- }}}
@@ -569,7 +626,7 @@ local config = {
         lazy = true,
         version = '*', -- enable this to try installing the latest stable versions of plugins
     },
-    lockfile = vim.fn.stdpath('config') .. '/lazy-lock.json',
+    lockfile = vim.fn.stdpath('config') .. '/lock.json',
     concurrency = nil,
     -- }}}
 
@@ -635,25 +692,22 @@ local config = {
             reset = true,
             paths = {},
             disabled_plugins = {
+                'tohtml',
+                'getscript',
+                'getscriptPlugin',
+                'logipat',
+                'man',
+                'matchit',
                 'netrw',
                 'netrwPlugin',
                 'netrwSettings',
                 'netrwFileHandlers',
-                -- I like the archive plugins
-                -- 'gzip',
-                -- 'zip',
-                -- 'zipPlugin',
-                -- 'tar',
-                -- 'tarPlugin',
-                'getscript',
-                'getscriptPlugin',
+                'rplugin',
+                'rrhelper',
+                'spellfile',
+                'tutor',
                 'vimball',
                 'vimballPlugin',
-                '2html_plugin',
-                'logipat',
-                'rrhelper',
-                'spellfile_plugin',
-                'matchit'
             },
         },
     },
@@ -669,46 +723,49 @@ local config = {
 }
 -- }}}
 
+-- {{{ custom highlights
+-- set before setup because installation of plugins looks nice this way
+do
+    local theme = require('plugins.theme')
+    local colors = theme.colors
+    local set_hl = vim.api.nvim_set_hl
+
+    local hl = {
+        -- normal & buttons
+        LazyNormal         = { bg = colors.gray3, fg = colors.white              },
+        LazyButton         = { bg = colors.gray4, fg = colors.white              },
+        LazyButtonActive   = { bg = colors.teal,  fg = colors.gray1, bold = true },
+
+        -- headers
+        LazyH1             = { bg = colors.teal,  fg = colors.gray1, bold = true },
+        LazyH2             = {                    fg = colors.white, bold = true },
+
+        -- progress bar
+        LazyProgressDone   = { fg = colors.teal  },
+        LazyProgressTodo   = { fg = colors.gray8 },
+
+        -- text
+        LazyKey            = { fg = colors.blue                  },
+        LazyValue          = { fg = colors.teal                  },
+        LazyMuted          = { fg = colors.gray7                 },
+        LazyCommit         = { fg = colors.purple                },
+        LazySpecial        = { fg = colors.teal,   bold   = true },
+        LazyError          = { fg = colors.red,    italic = true },
+
+        -- handlers
+        LazyHandlerCmd     = { fg = colors.teal   },
+        LazyHandlerEvent   = { fg = colors.purple },
+        LazyHandlerFt      = { fg = colors.green  },
+        LazyHandlerKeys    = { fg = colors.red    },
+        LazyHandlerPLugin  = { fg = colors.yellow },
+        LazyHandlerRuntime = { fg = colors.orange },
+        LazyHandlerSource  = { fg = colors.teal   },
+        LazyHandlerStart   = { fg = colors.blue   },
+    }
+
+    for k, v in pairs(hl) do set_hl(0, k, v) end
+end
+-- }}}
+
 -- setup
 require('lazy').setup(specs, config)
-
--- {{{ custom highlights
-local theme = require('core.theme')
-local colors = theme.colors
-local set_hl = vim.api.nvim_set_hl
-
-local hl = {
-    -- normal & buttons
-    LazyNormal         = { bg = colors.gray3, fg = colors.white              },
-    LazyButton         = { bg = colors.gray4, fg = colors.white              },
-    LazyButtonActive   = { bg = colors.teal,  fg = colors.gray1, bold = true },
-
-    -- headers
-    LazyH1             = { bg = colors.teal,  fg = colors.gray1, bold = true },
-    LazyH2             = {                    fg = colors.white, bold = true },
-
-    -- progress bar
-    LazyProgressDone   = { fg = colors.teal  },
-    LazyProgressTodo   = { fg = colors.gray8 },
-
-    -- text
-    LazyKey            = { fg = colors.blue                  },
-    LazyValue          = { fg = colors.teal                  },
-    LazyMuted          = { fg = colors.gray7                 },
-    LazyCommit         = { fg = colors.purple                },
-    LazySpecial        = { fg = colors.teal,   bold   = true },
-    LazyError          = { fg = colors.red,    italic = true },
-
-    -- handlers
-    LazyHandlerCmd     = { fg = colors.teal   },
-    LazyHandlerEvent   = { fg = colors.purple },
-    LazyHandlerFt      = { fg = colors.green  },
-    LazyHandlerKeys    = { fg = colors.red    },
-    LazyHandlerPLugin  = { fg = colors.yellow },
-    LazyHandlerRuntime = { fg = colors.orange },
-    LazyHandlerSource  = { fg = colors.teal   },
-    LazyHandlerStart   = { fg = colors.blue   },
-}
-
-for k, v in pairs(hl) do set_hl(0, k, v) end
--- }}}

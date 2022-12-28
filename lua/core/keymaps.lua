@@ -26,6 +26,7 @@ vim.g.maplocalleader = ','
 -- }}}
 
 -- {{{ mapping
+-- note that these are only vanilla vim keymaps, all plugin keymaps are handled in `plugins.lazy`
 -- {{{ misc
 map('n', 'WW', ':w<CR>', opt) -- write shortcut
 -- }}}
@@ -36,95 +37,11 @@ map('n', '<leader>bh', ':bp<CR>',                opt)
 map('n', '<leader>bj', ':bf<CR>',                opt)
 map('n', '<leader>bk', ':bl<CR>',                opt)
 map('n', '<leader>bl', ':bn<CR>',                opt)
-map('n', '<leader>bp', ':Telescope buffers<CR>', opt)
--- }}}
-
--- {{{ [f] find
-map('n', '<leader>fb', ':Telescope marks<CR>', opt)
-map('n', '<leader>ff', ':Telescope find_files<CR>', opt)
-map('n', '<leader>fr', ':Telescope oldfiles<CR>', opt)
-map('n', '<leader>fw', ':Telescope live_grep<CR>', opt)
--- }}}
-
--- {{{ [F] format
-map('n', '<leader>Fn', ':Neoformat<CR>', opt) -- neoformat current buffer
-map('n', '<leader>Fs', ':lua MiniTrailspace.trim()<CR>', opt) -- trim trailing spaces
--- }}}
-
--- {{{ [g] git
-map('n', '<leader>gg', ':Git<CR>', opt)
-map('n', '<leader>gB', ':Git blame<CR>', opt)
-map('n', '<leader>gc', ':Git commit<CR>', opt)
-map('n', '<leader>gfc', ':Telescope git_commits<CR>', opt)
-map('n', '<leader>gfb', ':Telescope git_branches<CR>', opt)
--- }}}
-
--- {{{ [h] hop
-map('n', '<leader>hh', ':HopWord<CR>', {})
-map('n', '<leader>hk', ':HopWordBC<CR>', {})
-map('n', '<leader>hj', ':HopWordAC<CR>', {})
-map('n', '<leader>hl', ':HopWordMW<CR>', {})
-map('n', '<leader>hc', ':HopChar1<CR>', {})
-map('n', '<leader>hC', ':HopChar2<CR>', {})
-map('n', '<leader>hg', ':HopPattern<CR>', {})
-map('n', '<leader>hn', ':HopLineStart<CR>', {})
-map('n', '<leader>hf', ':HopWordCurrentLine<CR>', {})
--- }}}
-
--- {{{ [j] jdtls
-map('n', '<leader>jb', ':vs | terminal<CR>imvn clean package -T 4<CR>', opt)
-map('n', '<leader>jo', ':lua require("jdtls").organize_imports()<CR>', opt)
-map('n', '<leader>jev', ':lua require("jdtls").extract_variable()<CR>', opt)
-map('v', '<leader>jev', ':<C-u>lua require("jdtls").extract_variable(true)<CR>', opt)
-map('n', '<leader>jec', ':lua require("jdtls").exttract_constant()<CR>', opt)
-map('v', '<leader>jec', ':<C-u>lua require("jdtls").extract_constant(true)<CR>', opt)
-map('v', '<leader>jem', ':<C-u>lua require("jdtls").extract_method(true)<CR>', opt)
 -- }}}
 
 -- {{{ [l] lsp
 -- show floating diagnostic
 map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opt)
-
--- trouble
-map('n', '<leader>lt', ':TroubleToggle<CR>', opt)
-
--- {{{ lspsaga
---- lsp finder
-map('n', '<leader>lf', ':Lspsaga lsp_finder<CR>', opt)
-
---- code actions
-map('n', '<M-CR>', ':Lspsaga code_action<CR>', opt)
-
---- hover doc
-map('n', '<leader>lp', ':Lspsaga hover_doc<CR>', opt)
-
---- rename
-map('n', '<leader>lr', ':Lspsaga rename<CR>', opt)
-
---- peek definition
-map('n', '<leader>ld', ':Lspsaga peek_definition<CR>', opt)
-
---- floating term
-map('n', '<M-d>', ':Lspsaga open_floaterm<CR>', opt)
-map('t', '<M-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
-map('t', '<M-x>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>', opt)
--- }}}
--- }}}
-
--- {{{ [n] notes
--- neorg keybinds
-map('n', '<leader>nc', ':Neorg toggle-concealer<CR>',                            opt)
-map('n', '<leader>nC', ':Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', opt)
-
--- open a note for today
-map('n', '<leader>nt', ':lua vim.cmd(os.date("e %d_%m.norg"))<CR>', opt)
-
--- three-column notes
-vim.api.nvim_create_user_command('ThreeColumn', [[exec "normal! a* Keywords\n- "|vs|exec "normal! a\n\n* Takeaways\n- "|vs|exec "normal! a\n\n* Connections\n- "|silent %s/^- $/  - /|exec "normal! AC\<Esc>zx"|wincmd h|exec "normal! AB\<Esc>zx"|wincmd h|exec "normal! AA\<Esc>zx"|nohlsearch]], { nargs = 0 })
-
-map('n', '<leader>nT', ':ThreeColumn<CR>', opt)
-
-map('n', '<leader>ns', ':lua require("telescope").extensions.dict.synonyms()<CR>', opt)
 -- }}}
 
 -- {{{ [t] tab
@@ -139,9 +56,6 @@ map('n', '<leader>tn', ':tabnew<CR>',   opt)
 -- {{{ [T] toggle
 map('n', '<leader>Tr', ':set rnu!<CR>', {}) -- relative line numbers
 map('n', '<leader>TW', ':set wrap!<CR>', {}) -- word wrap
-
-map('n', '<leader>Tn', ':NavicToggle<CR>', {}) -- (lualine) navic
-map('n', '<leader>Tw', ':WordCountToggle<CR>', {}) -- (lualine) word counter
 -- }}}
 
 -- {{{ [y] yank

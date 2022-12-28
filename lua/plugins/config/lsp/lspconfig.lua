@@ -7,6 +7,7 @@ local mason_lspconfig = require('mason-lspconfig')
 return function(on_attach)
     -- {{{ setup
     local servers = {
+        'haxe_language_server',
         'jdtls',
         'julials',
         'sumneko_lua',
@@ -80,9 +81,7 @@ return function(on_attach)
             vim.api.nvim_create_autocmd('FileType', {
                 pattern = 'java',
                 callback = function()
-                    if not vim.lsp.buf_is_attached() then
-                        require('jdtls').start_or_attach(config)
-                    end
+                    require('jdtls').start_or_attach(config)
                 end
             })
         end,
@@ -141,17 +140,16 @@ return function(on_attach)
                     Lua = {
                         runtime = {
                             version = 'LuaJIT',
-                            -- path = runtime_path,
                         },
                         diagnostics = {
                             -- recognize globals
                             globals = {
-                                'vim', 'packer_plugins',                     -- vim-related globals
+                                'vim',                                       -- vim-related globals
                                 'awesome', 'client', 'root', 'screen', 'tag' -- awesome-related globals
                             },
                         },
                         workspace = {
-                            -- library = vim.api.nvim_get_runtime_file('', true),
+                            checkThirdParty = false,
                         },
                         telemetry = { enable = false },
                     },

@@ -1,0 +1,18 @@
+# vim:foldmethod=marker
+
+# {{{ nvim plugin setup
+snippet psetup "require('plugin').setup({ ... })"
+require('${1:plugin}').setup(${2:options})
+endsnippet
+
+snippet lpsetup "local_plugin.setup({ ... })"
+${1:plugin}.setup(${2:options})
+endsnippet
+# }}}
+
+# anonymous func
+snippet afunction "function() ... end"
+function($1)
+	$0
+end
+endsnippet

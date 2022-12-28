@@ -1,0 +1,74 @@
+# vim:foldmethod=marker
+
+# {{{ class with BufferedReader and main method
+snippet rclass "class ... BufferedReader br = ..."
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class `!p snip.rv = snip.basename` {
+	private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+	public static void main(String[] args) throws Exception {
+		${0:// method body}
+	}
+}
+endsnippet
+# }}}
+
+# {{{ classes
+snippet class "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename` {
+	${0:// class body}
+}
+endsnippet
+
+# extends
+snippet eclass "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename` extends ${3:superclass} {
+	${0:// class body}
+}
+endsnippet
+
+# implements
+snippet iclass "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename` implements ${2:interface} {
+	${0:// class body}
+}
+endsnippet
+
+# extends + implements
+snippet eiclass "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename` extends ${2:superclass} implements ${3:interface} {
+	${0:// class body}
+}
+endsnippet
+# }}}
+
+# {{{ parameterized classes
+snippet tclass "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename`<${2:type parameters}> {
+	${0:// class body}
+}
+endsnippet
+
+# extends
+snippet etclass "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename`<${2:type parameters}> extends ${3:superclass} {
+	${0:// class body}
+}
+endsnippet
+
+# implements
+snippet itclass "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename`<${2:type parameters}> implements ${3:interface} {
+	${0:// class body}
+}
+endsnippet
+
+# extends + implements
+snippet eitclass "class ..."
+${1:modifiers }class `!p snip.rv = snip.basename`<${2:type parameters}> extends ${3:superclass} implements ${4:interface} {
+	${0:// class body}
+}
+endsnippet
+# }}}

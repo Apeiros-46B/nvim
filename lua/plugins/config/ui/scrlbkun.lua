@@ -1,170 +1,168 @@
 -- config file for nvim-scrlbkun
--- {{{ imports
--- main
-local scrlbkun = require('scrlbkun')
-
--- theme
-local theme = require('core.theme')
-local colors = theme.colors
--- }}}
-
--- {{{ setup
-scrlbkun.setup({
-    -- {{{ options
-    single_window = true,
-
-    zindex   = 10,
-    winblend = 0,
-
-    excluded_filetypes = { 'NvimTree', 'fugitive', 'fugitiveblame', 'gitcommit', 'terminal' },
-    excluded_buftypes  = { 'prompt' },
-
-    fadeout_time = 0,
-
-    width = 2,
+return function(theme)
+    -- {{{ imports
+    local colors   = theme.colors
+    local scrlbkun = require('scrlbkun')
     -- }}}
 
-    -- {{{ components
-    -- {{{ bar component
-    bar = {
-        enable       = true,
+    -- {{{ setup
+    scrlbkun.setup({
+        -- {{{ options
+        single_window = true,
 
-        -- drawn in these columns (number between 1 and `width` inclusive)
-        draw_columns = { 2 },
+        zindex   = 10,
+        winblend = 0,
 
-        -- drawn on these events
-        draw_events     = { 'WinScrolled', 'BufEnter', 'FocusGained' },
+        excluded_filetypes = { 'NvimTree', 'fugitive', 'fugitiveblame', 'gitcommit', 'terminal' },
+        excluded_buftypes  = { 'prompt' },
 
-        -- drawn on all windows in the current tabpage on these events (same as `draw_events` if `single_window` true)
-        draw_events_tab = { 'VimResized', 'TabEnter' },
+        fadeout_time = 0,
 
-        -- priority for overlaps
-        priority = 100,
+        width = 2,
+        -- }}}
 
-        -- sign
-        sign = ' ',
-    },
-    -- }}}
+        -- {{{ components
+        -- {{{ bar component
+        bar = {
+            enable       = true,
 
-    -- {{{ cursor component
-    cursor = {
-        enable = true,
-        draw_columns = { 2 },
+            -- drawn in these columns (number between 1 and `width` inclusive)
+            draw_columns = { 2 },
 
-        draw_events     = { 'BufEnter', 'FocusGained', 'CursorMoved' },
-        draw_events_tab = { 'VimResized', 'TabEnter' },
+            -- drawn on these events
+            draw_events     = { 'WinScrolled', 'BufEnter', 'FocusGained' },
 
-        priority = 500,
+            -- drawn on all windows in the current tabpage on these events (same as `draw_events` if `single_window` true)
+            draw_events_tab = { 'VimResized', 'TabEnter' },
 
-        signs = {
-            '▔',
-            '━',
-            '▁',
+            -- priority for overlaps
+            priority = 100,
+
+            -- sign
+            sign = ' ',
         },
-        sign_arrangement = 'skip_first'
-    },
-    -- }}}
+        -- }}}
 
-    -- {{{ search component
-    search = {
-        enable       = true,
-        draw_columns = { 2 },
+        -- {{{ cursor component
+        cursor = {
+            enable = true,
+            draw_columns = { 2 },
 
-        draw_events     = {},
-        draw_events_tab = {
-            'TextChanged',
-            'TextChangedI',
-            'TextChangedP',
-            'TabEnter',
-            {
-                'CmdlineLeave',
-                { '/', '\\?', ':' }
+            draw_events     = { 'BufEnter', 'FocusGained', 'CursorMoved' },
+            draw_events_tab = { 'VimResized', 'TabEnter' },
+
+            priority = 500,
+
+            signs = {
+                '▔',
+                '━',
+                '▁',
             },
-            {
-                'CmdlineChanged',
-                { '/', '\\?' }
+            sign_arrangement = 'skip_first'
+        },
+        -- }}}
+
+        -- {{{ search component
+        search = {
+            enable       = true,
+            draw_columns = { 2 },
+
+            draw_events     = {},
+            draw_events_tab = {
+                'TextChanged',
+                'TextChangedI',
+                'TextChangedP',
+                'TabEnter',
+                {
+                    'CmdlineLeave',
+                    { '/', '\\?', ':' }
+                },
+                {
+                    'CmdlineChanged',
+                    { '/', '\\?' }
+                },
             },
-        },
 
-        priority = 300,
+            priority = 300,
 
-        signs = {
-            '.',
-            ':',
+            signs = {
+                '.',
+                ':',
+            },
+            -- true = `signs` field ignored and plugin uses more advanced drawing algorithm for detail
+            use_built_in_signs = true,
         },
-        -- true = `signs` field ignored and plugin uses more advanced drawing algorithm for detail
-        use_built_in_signs = true,
-    },
+        -- }}}
+
+        -- {{{ diagnostics component
+        diagnostics = {
+            enable       = true,
+            draw_columns = { 2 },
+
+            draw_events     = {},
+            draw_events_tab = { 'BufEnter', 'DiagnosticChanged', 'TabEnter' },
+
+            priority = 500,
+
+            signs = {
+                ERROR = { '1', '2', '3', '4' },
+                WARN  = { '1', '2', '3', '4' },
+                INFO  = { '1', '2', '3', '4' },
+                HINT  = { '1', '2', '3', '4' },
+            },
+            use_built_in_signs = true,
+        },
+        -- }}}
+
+        -- {{{ githunks component
+        githunks = {
+            enable       = true,
+            draw_columns = { 1 },
+
+            draw_events     = {},
+            draw_events_tab = {
+                {
+                    'User',
+                    'GitSignsUpdate'
+                }
+            },
+
+            priority = 300,
+
+            -- Signs for githunks.
+            signs = {
+                add    = { '┃' },
+                delete = { '┃' },
+                change = { '┃' },
+            },
+
+            -- The same as that of the search component
+            use_built_in_signs = false,
+        },
+        -- }}}
+        -- }}}
+    })
     -- }}}
 
-    -- {{{ diagnostics component
-    diagnostics = {
-        enable       = true,
-        draw_columns = { 2 },
+    -- {{{ custom highlights
+    local set_hl = vim.api.nvim_set_hl
 
-        draw_events     = {},
-        draw_events_tab = { 'BufEnter', 'DiagnosticChanged', 'TabEnter' },
+    local hl = {
+        ScrlbkunBar              = { bg = colors.gray2                      },
+        ScrlbkunCursor           = { bg = colors.diff_mod, fg = colors.blue },
 
-        priority = 500,
+        ScrlbkunSearch           = { fg = colors.green },
 
-        signs = {
-            ERROR = { '1', '2', '3', '4' },
-            WARN  = { '1', '2', '3', '4' },
-            INFO  = { '1', '2', '3', '4' },
-            HINT  = { '1', '2', '3', '4' },
-        },
-        use_built_in_signs = true,
-    },
+        ScrlbkunDiagnosticsError = { fg = colors.red    },
+        ScrlbkunDiagnosticsWarn  = { fg = colors.yellow },
+        ScrlbkunDiagnosticsInfo  = { fg = colors.green  },
+        ScrlbkunDiagnosticsHint  = { fg = colors.teal   },
+
+        ScrlbkunGithunksAdd      = { fg = colors.green },
+        ScrlbkunGithunksDelete   = { fg = colors.red   },
+        ScrlbkunGithunksChange   = { fg = colors.blue  },
+    }
+
+    for k, v in pairs(hl) do set_hl(0, k, v) end
     -- }}}
-
-    -- {{{ githunks component
-    githunks = {
-        enable       = true,
-        draw_columns = { 1 },
-
-        draw_events     = {},
-        draw_events_tab = {
-            {
-                'User',
-                'GitSignsUpdate'
-            }
-        },
-
-        priority = 300,
-
-        -- Signs for githunks.
-        signs = {
-            add    = { '┃' },
-            delete = { '┃' },
-            change = { '┃' },
-        },
-
-        -- The same as that of the search component
-        use_built_in_signs = false,
-    },
-    -- }}}
-    -- }}}
-})
--- }}}
-
--- {{{ custom highlights
-local set_hl = vim.api.nvim_set_hl
-
-local hl = {
-    ScrlbkunBar              = { bg = colors.gray3                      },
-    ScrlbkunCursor           = { bg = colors.diff_mod, fg = colors.blue },
-
-    ScrlbkunSearch           = { fg = colors.green },
-
-    ScrlbkunDiagnosticsError = { fg = colors.red    },
-    ScrlbkunDiagnosticsWarn  = { fg = colors.yellow },
-    ScrlbkunDiagnosticsInfo  = { fg = colors.green  },
-    ScrlbkunDiagnosticsHint  = { fg = colors.teal   },
-
-    ScrlbkunGithunksAdd      = { fg = colors.green },
-    ScrlbkunGithunksDelete   = { fg = colors.red   },
-    ScrlbkunGithunksChange   = { fg = colors.blue  },
-}
-
-for k, v in pairs(hl) do set_hl(0, k, v) end
--- }}}
+end

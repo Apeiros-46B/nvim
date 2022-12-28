@@ -1,10 +1,9 @@
 -- configuration for starter module of mini.nvim
 -- {{{ imports
--- main
 local starter = require('mini.starter')
 
 -- theme
-local theme = require('core.theme')
+local theme = require('plugins.theme')
 local colors = theme.colors
 -- }}}
 

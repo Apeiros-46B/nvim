@@ -44,7 +44,6 @@ return function(on_attach)
             -- {{{ for code
             builtins.diagnostics.shellcheck,
             builtins.formatting.shfmt,
-            builtins.formatting.stylua,
             -- }}}
         },
     })

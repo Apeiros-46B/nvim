@@ -11,7 +11,7 @@ cmd('syntax enable') 	-- syntax highlighting
 o.rnu = false         	-- relative line numbers
 o.nu = true         	-- line numbers
 o.mouse = 'a'       	-- mouse controls
-o.cursorline = true 	-- highlight line cursor is in
+o.cursorline = false	-- highlight line cursor is in
 o.modeline = true   	-- enable modlines for files
 o.modelines = 5			-- number of modelines
 
@@ -22,8 +22,11 @@ opt.hidden = true 		-- keeps buffers loaded in the background
 opt.ignorecase = true
 opt.scrolloff = 4   	-- buffer starts scrolling 4 lines from the end of view
 opt.incsearch = true
-opt.lazyredraw = true   -- lazy redraw
+
 opt.shortmess = 'filnxtToOFI'
+opt.showmode = false
+
+opt.laststatus = 3
 
 -- diagnostics
 vim.diagnostic.config({

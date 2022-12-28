@@ -1,48 +1,14 @@
 -- configuration for lualine statusline
+-- PERF: optimize this entire config, it takes a whole 11 ms
 -- {{{ imports
+local lualine = require('lualine')
 local api = vim.api
 local fn = vim.fn
 local g = vim.g
 
-local theme = require('core.theme')
+-- theme
+local theme = require('plugins.theme')
 local colors = theme.colors
--- }}}
-
--- {{{ main style
-local style = {}
-
-style = { l = '', r = '' }
--- }}}
-
--- {{{ separator style
-local sep = {}
-
--- sep = { l = '│', r = '│' }
--- sep = { l = '┃', r = '┃' }
--- sep = { l = '⎮', r = '⎮' }
--- sep = { l = '|', r = '|' }
-
--- sep = { l = [[\]], r = [[\]] }
--- sep = { l = [[/]], r = [[/]] }
--- sep = { l = [[/]], r = [[\]] }
--- sep = { l = [[\]], r = [[/]] }
-
--- sep = { l = '>', r = '<' }
--- sep = { l = '<', r = '>' }
--- sep = { l = '', r = '' }
--- sep = { l = '', r = '' }
--- sep = { l = '', r = '' }
--- sep = { l = '', r = '' }
--- sep = { l = '🞂', r =  '🞀'  }
--- sep = { l = '🞀', r =  '🞂'  }
--- sep = { l = '->', r = '<-' }
--- sep = { l = '<-', r = '->' }
-
--- sep = { l = '-', r = '-' }
-sep = { l = '~', r = '~' }
--- sep = { l = '+', r = '+' }
--- sep = { l = '', r = '' }
--- sep = { l = '🞙', r = '🞙' }
 -- }}}
 
 -- {{{ theme
@@ -50,8 +16,8 @@ local function theme_a_generator(color)
 	return { bg = color, fg = colors.gray1, gui = 'bold' }
 end
 
-local b = { bg = colors.gray4, fg = colors.gray8 }
-local c = { bg = colors.gray3, fg = colors.gray8 }
+local b = { bg = colors.gray3, fg = colors.gray8 }
+local c = { bg = colors.gray2, fg = colors.gray8 }
 
 local lualine_theme = {
 	normal = {
@@ -87,6 +53,7 @@ local lualine_theme = {
 }
 -- }}}
 
+-- {{{ statusline
 -- {{{ reused functions & components
 -- {{{ functions
 local mode_fmts = {
@@ -120,10 +87,41 @@ local mode_fmts = {
     ['EX'      ] = 'EXM', -- M stands for mode, had to add to fit 3 chars
 }
 
+-- local mode_fmts = {
+--     -- normal/misc
+--     ['NORMAL'   ] = 'N',
+--     ['O-PENDING'] = 'O',
+--     ['MORE'     ] = 'M',
+--     ['CONFIRM'  ] = 'C',
+
+--     -- insert
+--     ['INSERT'] = 'I',
+
+--     -- visual
+--     ['VISUAL' ] = 'V',
+--     ['V-LINE' ] = 'L',
+--     ['V-BLOCK'] = 'B',
+
+--     -- select
+--     ['SELECT' ] = 'S',
+--     ['S-LINE' ] = 'L',
+--     ['S-BLOCK'] = 'B',
+
+--     -- replace
+--     ['REPLACE'  ] = 'R',
+--     ['V-REPLACE'] = 'R',
+
+--     -- cmd, terminal, shell, and ex
+--     ['COMMAND' ] = 'CMD',
+--     ['SHELL'   ] = 'SHL',
+--     ['TERMINAL'] = 'T',
+--     ['EX'      ] = 'E', -- M stands for mode, had to add to fit 3 chars
+-- }
+
 local function mode_fmt(str) return mode_fmts[str] end
 
 -- short cwd
-local function cwd() return vim.fn.pathshorten(fn.fnamemodify(fn.getcwd(), ':~'), 2) end
+local function cwd() return fn.pathshorten(fn.fnamemodify(fn.getcwd(), ':~'), 2) end
 
 -- {{{ word count function
 local function word_count_fn()
@@ -194,7 +192,7 @@ for k, v in pairs(hl) do set_hl(0, k, v) end
 -- }}}
 
 -- {{{ sections
-local sections = {
+local statusline = {
     lualine_a = { mode },
     lualine_b = { 'filesize', filetype },
     lualine_c = { branch, diff, diagnostics },
@@ -377,7 +375,7 @@ trouble.filetypes = { 'Trouble' }
 -- {{{ word count for documents
 local wc = {}
 
-wc.sections = vim.deepcopy(sections)
+wc.sections = vim.deepcopy(statusline)
 
 wc.sections.lualine_x = { word_count, filename }
 
@@ -385,47 +383,92 @@ wc.sections.lualine_x = { word_count, filename }
 wc.filetypes = { 'markdown', 'adoc',   'norg', 'org', 'text' }
 -- }}}
 -- }}}
-
--- {{{ setup
-local function setup(new_sections)
-    require('lualine').setup({
-        -- {{{ extensions
-        extensions = {
-            -- uses a more minimal template
-            starter,        -- dashboard
-            nvimtree,       -- file trees (CHADTree, NERDTree, NvimTree)
-            fugitive,       -- fugitive pane
-            blame,          -- fugitive blame sidebar
-            commit,         -- editing commit messages
-            help,           -- `:help` panel
-            lazy,           -- lazy.nvim
-            man,            -- `:Man` windows
-            telescope,      -- telescope fuzzy finder
-            terminal,       -- terminal
-            trouble,        -- trouble.nvim
-
-            -- modifies the default sections
-            wc              -- word counter for markdown, norg, and txt files
-        },
-        -- }}}
-
-        -- {{{ options
-        options = {
-            theme = lualine_theme,
-
-            section_separators   = { left = style.l, right = style.r },
-            component_separators = { left = sep.l,   right = sep.r   },
-
-            always_divide_middle = true,
-            globalstatus = true,
-        },
-
-        sections = new_sections,
-        -- }}}
-    })
-end
-
-setup(sections)
 -- }}}
 
-return { setup = setup, sections = sections }
+-- {{{ TODO: tabline
+-- }}}
+
+-- {{{ winbar
+-- {{{ navic
+local nvim_navic = require('nvim-navic')
+
+-- {{{ create command
+local function should_show_navic()
+    return nvim_navic.is_available and g.show_navic
+end
+
+g.show_navic = true
+
+api.nvim_create_user_command('NavicToggle',
+    function()
+        g.show_navic = not g.show_navic
+    end,
+    { nargs = 0 }
+)
+-- }}}
+
+-- navic config
+require('plugins.config.lsp.navic')
+
+-- lualine component
+local navic = {
+    function()
+        return should_show_navic() and nvim_navic.get_location() or ' '
+    end,
+}
+-- }}}
+
+local winbar_filename = vim.deepcopy(filename)
+winbar_filename.path = 3
+winbar_filename.fmt = function(path)
+    return fn.pathshorten(path, 2)
+end
+
+local winbar = {
+    lualine_c = { winbar_filename, navic },
+}
+
+local inactive_winbar = {
+    lualine_c = { winbar_filename },
+}
+-- }}}
+
+-- {{{ setup
+lualine.setup({
+    -- {{{ extensions
+    extensions = {
+        -- uses a more minimal template
+        starter,        -- dashboard
+        nvimtree,       -- file trees (CHADTree, NERDTree, NvimTree)
+        fugitive,       -- fugitive pane
+        blame,          -- fugitive blame sidebar
+        commit,         -- editing commit messages
+        help,           -- `:help` panel
+        lazy,           -- lazy.nvim
+        man,            -- `:Man` windows
+        telescope,      -- telescope fuzzy finder
+        terminal,       -- terminal
+        trouble,        -- trouble.nvim
+
+        -- modifies the default sections
+        wc              -- word counter for markdown, norg, and txt files
+    },
+    -- }}}
+
+    -- {{{ options
+    options = {
+        theme = lualine_theme,
+
+        section_separators   = { left = '',  right = ''  },
+        component_separators = { left = '~', right = '~' },
+
+        always_divide_middle = true,
+        globalstatus = true,
+    },
+    -- }}}
+
+    sections = statusline,
+    winbar = winbar,
+    inactive_winbar = inactive_winbar,
+})
+-- }}}
