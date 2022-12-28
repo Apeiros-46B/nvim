@@ -98,10 +98,9 @@ return function(theme)
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        AlphaHeader  = { fg = colors.gray7 },
-        AlphaItem    = { fg = colors.blue },
-
-        AlphaButtons = { bg = colors.green, fg = colors.gray1, bold = true },
+        AlphaHeader  = { bg = colors.gray1, fg = colors.gray7 },
+        AlphaItem    = { bg = colors.gray1, fg = colors.green },
+        AlphaButtons = { bg = colors.gray2, fg = colors.gray7 },
     }
 
     for k, v in pairs(hl) do set_hl(0, k, v) end
