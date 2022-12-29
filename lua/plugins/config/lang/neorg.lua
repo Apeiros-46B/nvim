@@ -111,35 +111,38 @@ return function(theme)
 
                             level_1 = {
                                 enabled = true,
-                                icon = '◉ ',
+                                -- icon = '◉ ',
+                                icon = '━ ',
                             },
 
                             level_2 = {
                                 enabled = true,
-                                icon = ' ◈ ',
+                                -- icon = ' ◈ ',
+                                icon = '━━ ',
                             },
 
                             level_3 = {
                                 enabled = true,
-                                icon = '  ▣ ',
+                                -- icon = '  ▣ ',
+                                icon = '━━━ ',
                             },
 
                             level_4 = {
                                 enabled = true,
-                                -- icon = '   🞅 ',
-                                icon = '   ◉ ',
+                                -- icon = '   ◉ ',
+                                icon = '━━━━ ',
                             },
 
                             level_5 = {
                                 enabled = true,
-                                -- icon = '    🮮 ',
-                                icon = '    ◈ ',
+                                -- icon = '    ◈ ',
+                                icon = '━━━━━ ',
                             },
 
                             level_6 = {
                                 enabled = true,
-                                -- icon = '     🞏 ',
-                                icon = '     ▣ ',
+                                -- icon = '     ▣ ',
+                                icon = '━━━━━━ ',
                             },
                         },
                         -- }}}
@@ -326,17 +329,17 @@ return function(theme)
 
         -- {{{ headings
         ['@neorg.headings.1.title' ] = { fg = colors.red   , bold = true },
-        ['@neorg.headings.1.prefix'] = { fg = colors.red   , bold = true },
+        ['@neorg.headings.1.prefix'] = { fg = colors.gray7 , bold = true },
         ['@neorg.headings.2.title' ] = { fg = colors.orange, bold = true },
-        ['@neorg.headings.2.prefix'] = { fg = colors.orange, bold = true },
+        ['@neorg.headings.2.prefix'] = { fg = colors.gray7 , bold = true },
         ['@neorg.headings.3.title' ] = { fg = colors.yellow, bold = true },
-        ['@neorg.headings.3.prefix'] = { fg = colors.yellow, bold = true },
+        ['@neorg.headings.3.prefix'] = { fg = colors.gray7 , bold = true },
         ['@neorg.headings.4.title' ] = { fg = colors.green , bold = true },
-        ['@neorg.headings.4.prefix'] = { fg = colors.green , bold = true },
+        ['@neorg.headings.4.prefix'] = { fg = colors.gray7 , bold = true },
         ['@neorg.headings.5.title' ] = { fg = colors.blue  , bold = true },
-        ['@neorg.headings.5.prefix'] = { fg = colors.blue  , bold = true },
+        ['@neorg.headings.5.prefix'] = { fg = colors.gray7 , bold = true },
         ['@neorg.headings.6.title' ] = { fg = colors.purple, bold = true },
-        ['@neorg.headings.6.prefix'] = { fg = colors.purple, bold = true },
+        ['@neorg.headings.6.prefix'] = { fg = colors.gray7 , bold = true },
         -- }}}
 
         -- {{{ quotes

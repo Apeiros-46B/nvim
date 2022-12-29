@@ -38,7 +38,7 @@ local function setup(theme, stats)
 
     -- {{{ setup
     -- header padding
-    local marginTopPercent = 0.3
+    local marginTopPercent = 0.27
     local headerPadding = math.max(2, math.floor(vim.fn.winheight(0) * marginTopPercent))
 
     local options = {

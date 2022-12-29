@@ -23,9 +23,9 @@ end
 -- {{{ call a config
 local theme
 
-local function call(module)
+local function cfg(module)
     return function()
-        local ret = require(module)
+        local ret = require('plugins.config.' .. module)
 
         if type(ret) == 'function' then
             ret(theme)
@@ -125,7 +125,7 @@ local specs =  {
             'quangnguyen30192/cmp-nvim-ultisnips',
         },
         event = 'InsertEnter',
-        config = call('plugins.config.completion.cmp'),
+        config = cfg('completion.cmp'),
     },
     -- }}}
 
@@ -136,8 +136,9 @@ local specs =  {
     },
     {
         'uga-rosa/cmp-dictionary',
+        enabled = false,
         ft = { 'norg', 'markdown' },
-        config = call('plugins.config.completion.cmp_dictionary'),
+        config = cfg('completion.cmp_dictionary'),
     },
     -- }}}
 
@@ -146,7 +147,7 @@ local specs =  {
         'SirVer/ultisnips',
         ft = 'snippets',
         event = 'InsertEnter',
-        config = call('plugins.config.completion.ultisnips'),
+        config = cfg('completion.ultisnips'),
     },
     -- }}}
     -- }}}
@@ -156,7 +157,7 @@ local specs =  {
     {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
-        config = call('plugins.config.editor.autopairs'),
+        config = cfg('editor.autopairs'),
     },
     {
         'terrortylor/nvim-comment',
@@ -165,7 +166,7 @@ local specs =  {
             key('<C-c>', ':CommentToggle<CR>'    , 'v'),
         },
         cmd = 'CommentToggle',
-        config = call('plugins.config.editor.comment'),
+        config = cfg('editor.comment'),
     },
     {
         'kylechui/nvim-surround',
@@ -182,7 +183,7 @@ local specs =  {
             lkey('n', 'cs'    ), -- change
             -- }}}
         },
-        config = call('plugins.config.editor.surround'),
+        config = cfg('editor.surround'),
     },
     -- }}}
 
@@ -253,7 +254,7 @@ local specs =  {
             key('<leader>hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
             -- }}}
         },
-        config = call('plugins.config.editor.hop'),
+        config = cfg('editor.hop'),
     },
     -- }}}
 
@@ -267,7 +268,7 @@ local specs =  {
         keys = {
             key('<leader>s', '<cmd>lua require("ssr").open()<CR>', 'n'),
         },
-        config = call('plugins.config.editor.ssr'),
+        config = cfg('editor.ssr'),
     },
     {
         'monaqa/dial.nvim',
@@ -278,7 +279,7 @@ local specs =  {
             lkey('v', 'g<C-a>'),
             lkey('v', 'g<C-x>'),
         },
-        config = call('plugins.config.editor.dial'),
+        config = cfg('editor.dial'),
     },
     -- }}}
     -- }}}
@@ -288,7 +289,7 @@ local specs =  {
     {
         'lewis6991/gitsigns.nvim',
         init = gitloader('gitsigns.nvim'),
-        config = call('plugins.config.git.gitsigns'),
+        config = cfg('git.gitsigns'),
     },
     -- }}}
 
@@ -333,7 +334,7 @@ local specs =  {
         },
         cmd = 'Mason',
         init = fileloader('mason.nvim'),
-        config = call('plugins.config.lsp.mason'),
+        config = cfg('lsp.mason'),
     },
 
     -- dap
@@ -351,7 +352,7 @@ local specs =  {
     {
         'onsails/lspkind-nvim',
         event = 'LspAttach',
-        config = call('plugins.config.lsp.lspkind'),
+        config = cfg('lsp.lspkind'),
     },
     {
         'glepnir/lspsaga.nvim',
@@ -368,7 +369,7 @@ local specs =  {
             key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>', 't'),
             -- }}}
         },
-        config = call('plugins.config.lsp.lspsaga'),
+        config = cfg('lsp.lspsaga'),
     },
     {
         'folke/trouble.nvim',
@@ -382,7 +383,7 @@ local specs =  {
         keys = {
             key('<leader>lt', '<cmd>TroubleToggle<CR>', 'n'),
         },
-        config = call('plugins.config.lsp.trouble'),
+        config = cfg('lsp.trouble'),
     },
     'SmiteshP/nvim-navic',
     {
@@ -391,7 +392,7 @@ local specs =  {
         keys = {
             key('<leader>Tn', '<cmd>NavicToggle<CR>', 'n'),
         },
-        config = call('plugins.config.lsp.neodim'),
+        config = cfg('lsp.neodim'),
     },
     -- }}}
     -- }}}
@@ -436,7 +437,7 @@ local specs =  {
             key('<leader>nc', '<cmd>Neorg toggle-concealer<CR>'                               , 'n'),
             key('<leader>nC', '<cmd>Neorg toggle-concealer<CR><cmd>Neorg toggle-concealer<CR>', 'n'),
         },
-        config = call('plugins.config.lang.neorg'),
+        config = cfg('lang.neorg'),
     },
     -- }}}
     -- }}}
@@ -447,7 +448,7 @@ local specs =  {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         init = fileloader('nvim-treesitter'),
-        config = call('plugins.config.syntax.treesitter'),
+        config = cfg('syntax.treesitter'),
     },
     -- }}}
 
@@ -455,12 +456,12 @@ local specs =  {
     {
         'RRethy/vim-illuminate',
         init = fileloader('vim-illuminate'),
-        config = call('plugins.config.syntax.illuminate'),
+        config = cfg('syntax.illuminate'),
     },
     {
         'folke/todo-comments.nvim',
         init = fileloader('todo-comments.nvim'),
-        config = call('plugins.config.syntax.todo_comments'),
+        config = cfg('syntax.todo_comments'),
     },
     -- }}}
     -- }}}
@@ -469,7 +470,7 @@ local specs =  {
     -- {{{ utils
     {
         'kyazdani42/nvim-web-devicons',
-        config = call('plugins.config.ui.devicons'),
+        config = cfg('ui.devicons'),
     },
     -- }}}
 
@@ -477,7 +478,7 @@ local specs =  {
     {
         'rebelot/heirline.nvim',
         lazy = false,
-        config = call('plugins.config.ui.heirline')
+        config = cfg('ui.heirline')
     },
     -- }}}
 
@@ -485,7 +486,7 @@ local specs =  {
     {
         'goolord/alpha-nvim',
         lazy = false,
-        config = call('plugins.config.ui.alpha')
+        config = cfg('ui.alpha')
     },
     -- }}}
 
@@ -493,7 +494,7 @@ local specs =  {
     {
         'Apeiros-46B/nvim-scrlbkun',
         init = fileloader('nvim-scrlbkun'),
-        config = call('plugins.config.ui.scrlbkun'),
+        config = cfg('ui.scrlbkun'),
     },
     -- }}}
 
@@ -501,12 +502,16 @@ local specs =  {
     {
         'folke/which-key.nvim',
         lazy = false,
-        config = call('plugins.config.ui.which_key'),
+        config = cfg('ui.which_key'),
     },
     -- }}}
 
     -- {{{ others
-    'folke/noice.nvim',
+    {
+        'folke/noice.nvim',
+        event = 'VeryLazy',
+        config = cfg('ui.noice')
+    },
     -- }}}
 
     -- {{{ not needed for now
@@ -521,7 +526,7 @@ local specs =  {
         keys = {
             key('<leader>Tw', '<cmd>WordCountToggle<CR>', 'n'),
         },
-        config = call('plugins.config.ui.lualine'),
+        config = cfg('ui.lualine'),
     },
     -- }}}
     -- }}}
@@ -539,7 +544,7 @@ local specs =  {
         },
         cmd = 'Telescope',
         keys = {
-            key('<leader>bp', '<cmd>Telescope buffers<CR>', 'n'),
+            key('<leader>bf', '<cmd>Telescope buffers<CR>', 'n'),
 
             key('<leader>fb', '<cmd>Telescope marks<CR>'     , 'n'),
             key('<leader>ff', '<cmd>Telescope find_files<CR>', 'n'),
@@ -550,7 +555,7 @@ local specs =  {
             key('<leader>gfb', '<cmd>Telescope git_branches<CR>', 'n'),
         },
 
-        config = call('plugins.config.util.telescope'),
+        config = cfg('util.telescope'),
     },
 
     -- extensions
@@ -573,7 +578,7 @@ local specs =  {
         keys = {
             key('<C-n>', '<cmd>NvimTreeToggle<CR>', 'n'),
         },
-        config = call('plugins.config.util.nvimtree'),
+        config = cfg('util.nvimtree'),
     },
     {
         'echasnovski/mini.nvim',
@@ -603,12 +608,12 @@ local specs =  {
             'CccHighlighterEnable',
             'CccHighlighterDisable',
         },
-        config = call('plugins.config.util.ccc')
+        config = cfg('util.ccc')
     },
     {
         'NFrid/due.nvim',
         ft = 'norg',
-        config = call('plugins.config.util.due'),
+        config = cfg('util.due'),
     },
     {
         -- 'Apeiros-46B/qalc.nvim',
@@ -626,7 +631,7 @@ local specs =  {
                 pattern = { '*.qalc' }, command = 'QalcAttach'
             })
         end,
-        config = call('plugins.config.util.qalc'),
+        config = cfg('util.qalc'),
     },
     -- }}}
     -- }}}
@@ -666,7 +671,7 @@ local config = {
         size = { width = 0.8, height = 0.8 },
         border = 'none',
         icons = {
-            loaded     = '🞙',
+            loaded     = '+',
             not_loaded = '',
             cmd        = 'ﲵ',
             config     = '',

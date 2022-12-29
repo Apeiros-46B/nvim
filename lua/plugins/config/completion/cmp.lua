@@ -94,8 +94,8 @@ return function(theme)
         sources = cmp.config.sources(
             -- higher number = higher priority
             {
-                { name = 'neorg', priority = 4 },
-                { name = 'dictionary', keyword_length = 5, priority = 3 },
+                -- { name = 'neorg', priority = 4 },
+                -- { name = 'dictionary', keyword_length = 5, priority = 3 },
                 { name = 'ultisnips', priority = 2 },
                 { name = 'nvim_lsp', priority = 1 },
             },

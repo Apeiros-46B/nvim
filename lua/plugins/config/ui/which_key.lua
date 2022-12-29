@@ -82,6 +82,7 @@ local spc = {
 		name = 'Buffer',
 
         d = 'Delete current',
+        f = 'Find',
 		h = 'Focus previous',
 		j = 'Focus first',
 		k = 'Focus last',

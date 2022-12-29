@@ -9,7 +9,7 @@ local o = vim.o
 -- {{{ options
 cmd('syntax enable')
 
-o.rnu = false
+o.rnu = true
 o.nu = true
 o.mouse = 'a'
 o.mousemodel = 'extend'
@@ -37,9 +37,8 @@ vim.diagnostic.config({
     signs = true,
     virtual_text = false,
     float = {
-        show_header = true,
+        header = 'Diagnostics',
         source = 'always',
-        -- border = 'rounded',
         focusable = true,
     },
     update_in_insert = true, -- default to false

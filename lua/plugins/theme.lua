@@ -79,10 +79,6 @@ M.hl = {
     -- search
     Search    = { bg = M.colors.diff_add, fg = M.colors.green, bold = true },
     IncSearch = { bg = M.colors.green   , fg = M.colors.gray1, bold = true },
-
-    -- winbar and statusline
-    WinBar     = { bg = M.colors.gray2 },
-    StatusLine = { bg = M.colors.gray2 },
 }
 
 for k, v in pairs(M.hl) do set_hl(0, k, v) end

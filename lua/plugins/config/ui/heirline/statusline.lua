@@ -1,25 +1,10 @@
 -- statusline made with heirline
-return function(theme)
-    -- {{{ imports
-    local heirline = require('heirline')
-    -- local utils    = require('heirline.utils')
-    local conds    = require('heirline.conditions')
-
-    heirline.load_colors(theme.colors)
-    -- }}}
-
-    --> separators & padding
-
-    local sp    = { provider = '%1( %)'   }
-    local sep   = { provider = '%3( ~ %)' }
-    local sepl  = { provider = '%2( ~%)'  }
-    local sepr  = { provider = '%2(~ %)'  }
-    local align = { provider = '%='       }
-
+return function(conds, utils, sp, sep, sepl, sepr, align)
+    align = vim.fn.copy(align)
+    align.hl = { bg = 'gray2' }
     local components = {}
 
     --> relatively complex components
-
     -- {{{ vi mode
     components.vimode = {
         -- {{{ make o-pending work
@@ -146,25 +131,25 @@ return function(theme)
 
         sep,
 
-        -- {{{ type
+        -- {{{ icon
         {
+            init = function(self)
+                local extension = vim.fn.fnamemodify(self.name, ':e')
+                self.icon = require('nvim-web-devicons').get_icon(self.name, extension, { default = true })
+            end,
+
             provider = function(self)
-                return string.lower(self.type)
+                return self.icon
             end,
         },
         -- }}}
 
         sp,
 
-        -- {{{ icon
+        -- {{{ type
         {
-            init = function(self)
-                local extension = vim.fn.fnamemodify(self.name, ':e')
-                self.icon = require('nvim-web-devicons').get_icon_color(self.name, extension, { default = true })
-            end,
-
             provider = function(self)
-                return self.icon
+                return string.lower(self.type)
             end,
         },
         -- }}}
@@ -369,7 +354,6 @@ return function(theme)
     -- }}}
 
     --> simpler components
-
     -- {{{ ruler
     components.ruler = { provider = '%4( %l%):%-3(%v %)' }
     -- }}}
@@ -397,7 +381,6 @@ return function(theme)
     -- }}}
 
     --> statusline definitions
-
     -- {{{ standard statusline
     -- {{{ [abc] left
     local a = {
@@ -485,8 +468,6 @@ return function(theme)
         z,
     }
     -- }}}
-
-    ---
 
     -- {{{ helper section makers
     local make_a = function(tbl, defined_color)
@@ -596,10 +577,8 @@ return function(theme)
     }
     -- }}}
 
-    --> finish
-
-    -- {{{ setup
-    heirline.setup({
+    --> return finished statusline
+    return {
         static = {
             -- {{{ mode colors
             mode_colors = {
@@ -628,6 +607,5 @@ return function(theme)
         fallthrough = false,
 
         dashboard, standard
-    })
-    -- }}}
+    }
 end
