@@ -486,7 +486,8 @@ return function(theme)
     }
     -- }}}
 
-    -- TODO: port all my custom lualine extensions
+    ---
+
     -- {{{ helper section makers
     local make_a = function(tbl, defined_color)
         local hl
