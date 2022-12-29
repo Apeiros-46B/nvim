@@ -64,14 +64,14 @@ end
 local function fileloader(plugin)
     return function()
         loader({
-            events = { 'BufRead', 'BufWinEnter', 'BufNewFile' },
+            events = { 'BufEnter', 'BufWinEnter', 'BufNewFile', 'BufRead' },
             augroup_name = 'FileOpenLazy' .. plugin,
             plugin = plugin,
             condition = function()
-                local file = vim.fn.expand '%'
+                local file = vim.api.nvim_buf_get_name(0)
                 return file ~= 'NvimTree_1' and file ~= ''
             end,
-            reason = 'BufRead'
+            reason = 'BufEnter'
         })
     end
 end
@@ -284,21 +284,27 @@ local specs =  {
     -- }}}
 
     -- {{{ [git] plugins related to git
+    -- {{{ gitsigns
     {
         'lewis6991/gitsigns.nvim',
         init = gitloader('gitsigns.nvim'),
         config = call('plugins.config.git.gitsigns'),
     },
+    -- }}}
+
+    -- {{{ fugitive
     {
         'tpope/vim-fugitive',
         cmd = 'Git',
         init = gitloader('vim-fugitive'),
         keys = {
             key('<leader>gg', '<cmd>Git<CR>'       , 'n'),
+            key('<leader>ga', '<cmd>Git add .<CR>' , 'n'),
             key('<leader>gB', '<cmd>Git blame<CR>' , 'n'),
             key('<leader>gc', '<cmd>Git commit<CR>', 'n'),
         },
     },
+    -- }}}
     -- }}}
 
     -- {{{ [lsp] plugins related to lsp, dap, or linters
@@ -391,6 +397,7 @@ local specs =  {
     -- }}}
 
     -- {{{ [langs] language support
+    -- {{{ programming
     -- the following two are setup with mason
     'simrat39/rust-tools.nvim', -- rust
 
@@ -415,6 +422,7 @@ local specs =  {
         'jdonaldson/vaxe',
         ft = 'haxe'
     },
+    -- }}}
 
     -- {{{ neorg
     {
@@ -425,8 +433,8 @@ local specs =  {
         },
         ft = 'norg',
         keys = {
-            key('<leader>nc', '<cmd>Neorg toggle-concealer<CR>'                           , 'n'),
-            key('<leader>nC', '<cmd>Neorg toggle-concealer<CR>:Neorg toggle-concealer<CR>', 'n'),
+            key('<leader>nc', '<cmd>Neorg toggle-concealer<CR>'                               , 'n'),
+            key('<leader>nC', '<cmd>Neorg toggle-concealer<CR><cmd>Neorg toggle-concealer<CR>', 'n'),
         },
         config = call('plugins.config.lang.neorg'),
     },
@@ -458,27 +466,48 @@ local specs =  {
     -- }}}
 
     -- {{{ [ui] plugins that enhance the user interface
+    -- {{{ utils
     {
         'kyazdani42/nvim-web-devicons',
         config = call('plugins.config.ui.devicons'),
     },
+    -- }}}
 
-    -- dashboard/greeter
-    {
-        'goolord/alpha-nvim',
-        lazy = false,
-        config = call('plugins.config.ui.alpha')
-    },
-
-    -- cmdline and notification ui enhancements
-    'folke/noice.nvim',
-
-    -- statusline, tabline, and winbar
+    -- {{{ statusline, tabline, and winbar
     {
         'rebelot/heirline.nvim',
         lazy = false,
         config = call('plugins.config.ui.heirline')
     },
+    -- }}}
+
+    -- {{{ greeter
+    {
+        'goolord/alpha-nvim',
+        lazy = false,
+        config = call('plugins.config.ui.alpha')
+    },
+    -- }}}
+
+    -- {{{ scrollbar
+    {
+        'Apeiros-46B/nvim-scrlbkun',
+        init = fileloader('nvim-scrlbkun'),
+        config = call('plugins.config.ui.scrlbkun'),
+    },
+    -- }}}
+
+    -- {{{ keybind help
+    {
+        'folke/which-key.nvim',
+        lazy = false,
+        config = call('plugins.config.ui.which_key'),
+    },
+    -- }}}
+
+    -- {{{ others
+    'folke/noice.nvim',
+    -- }}}
 
     -- {{{ not needed for now
     {
@@ -495,20 +524,6 @@ local specs =  {
         config = call('plugins.config.ui.lualine'),
     },
     -- }}}
-
-    -- scrollbar
-    {
-        'Apeiros-46B/nvim-scrlbkun',
-        init = fileloader('nvim-scrlbkun'),
-        config = call('plugins.config.ui.scrlbkun'),
-    },
-
-    -- keybind help
-    {
-        'folke/which-key.nvim',
-        lazy = false,
-        config = call('plugins.config.ui.which_key'),
-    },
     -- }}}
 
     -- {{{ [util] other utilities
@@ -547,7 +562,7 @@ local specs =  {
     },
     -- }}}
 
-    -- {{{ other important utilities
+    -- {{{ important utilities
     {
         'kyazdani42/nvim-tree.lua',
         cmd = {
@@ -573,7 +588,7 @@ local specs =  {
     },
     -- }}}
 
-    -- {{{ non-essentialsutilities
+    -- {{{ non-essentials
     {
         'uga-rosa/ccc.nvim',
         init = fileloader('ccc.nvim'),
@@ -627,12 +642,12 @@ local config = {
         version = '*', -- enable this to try installing the latest stable versions of plugins
     },
     lockfile = vim.fn.stdpath('config') .. '/lock.json',
-    concurrency = nil,
+    concurrency = 5,
     -- }}}
 
     -- {{{ installation
     git = {
-        log = { '--since=3 days ago' },
+        log = { '-10' },
         timeout = 120, -- seconds
         url_format = 'https://github.com/%s.git',
     },
@@ -651,17 +666,27 @@ local config = {
         size = { width = 0.8, height = 0.8 },
         border = 'none',
         icons = {
-            cmd     = 'ﲵ',
-            config  = '',
-            event   = '',
-            ft      = '',
-            init    = '',
-            keys    = '',
-            plugin  = '',
-            runtime = '',
-            source  = '',
-            start   = '',
-            task    = '',
+            loaded     = '🞙',
+            not_loaded = '',
+            cmd        = 'ﲵ',
+            config     = '',
+            event      = '',
+            ft         = '',
+            init       = '',
+            keys       = '',
+            plugin     = '',
+            runtime    = '',
+            source     = '',
+            start      = '',
+            task       = '',
+            lazy       = '   ',
+
+            list = {
+                '->',
+                '->',
+                '->',
+                '->',
+            },
         },
         throttle = 20, -- how frequently should the ui process render events
     },
@@ -726,41 +751,57 @@ local config = {
 -- {{{ custom highlights
 -- set before setup because installation of plugins looks nice this way
 do
+    ---@diagnostic disable-next-line: redefined-local
     local theme = require('plugins.theme')
     local colors = theme.colors
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        -- normal & buttons
-        LazyNormal         = { bg = colors.gray3, fg = colors.white              },
-        LazyButton         = { bg = colors.gray4, fg = colors.white              },
-        LazyButtonActive   = { bg = colors.teal,  fg = colors.gray1, bold = true },
+        -- {{{ main ui elements
+        LazyH1            = { bg = colors.teal,  fg = colors.gray1, bold = true },
+        LazyH2            = {                    fg = colors.white, bold = true },
 
-        -- headers
-        LazyH1             = { bg = colors.teal,  fg = colors.gray1, bold = true },
-        LazyH2             = {                    fg = colors.white, bold = true },
+        LazyNormal        = { bg = colors.gray2, fg = colors.white              },
+        LazyButton        = { bg = colors.gray3, fg = colors.white              },
+        LazyButtonActive  = { bg = colors.teal,  fg = colors.gray1, bold = true },
 
-        -- progress bar
-        LazyProgressDone   = { fg = colors.teal  },
-        LazyProgressTodo   = { fg = colors.gray8 },
+        LazySpecial       = { fg = colors.teal, bold = true },
+        -- }}}
 
-        -- text
-        LazyKey            = { fg = colors.blue                  },
-        LazyValue          = { fg = colors.teal                  },
-        LazyMuted          = { fg = colors.gray7                 },
-        LazyCommit         = { fg = colors.purple                },
-        LazySpecial        = { fg = colors.teal,   bold   = true },
-        LazyError          = { fg = colors.red,    italic = true },
+        -- {{{ commit
+        LazyCommit        = { fg = colors.purple                },
+        LazyCommitIssue   = { fg = colors.blue,   italic = true },
+        LazyCommitScope   = { fg = colors.white,  bold   = true },
+        LazyCommitType    = { fg = colors.red,    bold   = true },
+        -- }}}
 
-        -- handlers
-        LazyHandlerCmd     = { fg = colors.teal   },
-        LazyHandlerEvent   = { fg = colors.purple },
-        LazyHandlerFt      = { fg = colors.green  },
-        LazyHandlerKeys    = { fg = colors.red    },
-        LazyHandlerPLugin  = { fg = colors.yellow },
-        LazyHandlerRuntime = { fg = colors.orange },
-        LazyHandlerSource  = { fg = colors.teal   },
-        LazyHandlerStart   = { fg = colors.blue   },
+        -- {{{ properties
+        LazyProp          = { fg = colors.gray7,  italic    = true },
+        LazyValue         = { fg = colors.green                    },
+
+        LazyComment       = { fg = colors.gray7,  italic    = true },
+        LazyDir           = { fg = colors.blue,   bold      = true },
+        LazyUrl           = { fg = colors.teal,   underline = true },
+        -- }}}
+
+        -- {{{ reasons/handlers
+        LazyReasonCmd     = { fg = colors.teal   },
+        LazyReasonEvent   = { fg = colors.purple },
+        LazyReasonFt      = { fg = colors.green  },
+        LazyReasonKeys    = { fg = colors.red    },
+        LazyReasonPlugin  = { fg = colors.yellow },
+        LazyReasonRuntime = { fg = colors.orange },
+        LazyReasonSource  = { fg = colors.teal   },
+        LazyReasonStart   = { fg = colors.blue   },
+        -- }}}
+
+        -- {{{ misc
+        LazyNoCond        = { fg = colors.yellow },
+        LazyTaskError     = { fg = colors.red    },
+        LazyTaskOutput    = { fg = colors.gray7  },
+        LazyProgressDone  = { fg = colors.teal   },
+        LazyProgressTodo  = { fg = colors.gray8  },
+        -- }}}
     }
 
     for k, v in pairs(hl) do set_hl(0, k, v) end

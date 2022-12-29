@@ -1,5 +1,5 @@
 -- configuration for alpha.nvim greeter
-return function(theme)
+local function setup(theme, stats)
     -- {{{ imports
     local colors = theme.colors
     local alpha  = require('alpha')
@@ -42,10 +42,24 @@ return function(theme)
     local headerPadding = math.max(2, math.floor(vim.fn.winheight(0) * marginTopPercent))
 
     local options = {
+        padding = { type = 'padding', val = 2 },
+
         -- {{{ header
         header = {
             type = 'text',
             val = {
+                -- '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ', -- original art
+                -- '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
+                -- '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
+                -- '           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
+                -- '          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
+                -- '   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
+                -- '  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
+                -- ' ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
+                -- ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
+                -- '      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
+                -- '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+
                 '   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ',
                 '    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
                 '          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ',
@@ -56,7 +70,7 @@ return function(theme)
                 ' ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
                 ' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ',
                 '      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
-                '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+                '       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣤⣾⡿⠃     ', -- slight modifications here
             },
             opts = {
                 position = 'center',
@@ -64,8 +78,18 @@ return function(theme)
             },
         },
 
-        headerPaddingTop = { type = 'padding', val = headerPadding },
-        headerPaddingBottom = { type = 'padding', val = 3 },
+        headerPaddingTop    = { type = 'padding', val = headerPadding },
+        -- }}}
+
+        -- {{{ plugin info
+        plugins = {
+            type = 'text',
+            val = string.format('loaded %d/%d plugins', stats.loaded, stats.count),
+            opts = {
+                position = 'center',
+                hl = 'AlphaInfo',
+            },
+        },
         -- }}}
 
         -- {{{ buttons
@@ -73,8 +97,8 @@ return function(theme)
             type = 'group',
             val = {
                 button(' SPC f f ', 'find file  ', ':Telescope find_files<CR>'),
-                button(' SPC f r ', 'find recent', ':Telescope oldfiles<CR>'),
-                button(' SPC f w ', 'find word  ', ':Telescope live_grep<CR>'),
+                button(' SPC f r ', 'find recent', ':Telescope oldfiles<CR>'  ),
+                button(' SPC f w ', 'find word  ', ':Telescope live_grep<CR>' ),
             },
             opts = {
                 spacing = 1,
@@ -87,7 +111,9 @@ return function(theme)
         layout = {
             options.headerPaddingTop,
             options.header,
-            options.headerPaddingBottom,
+            options.padding,
+            options.plugins,
+            options.padding,
             options.buttons,
         },
         opts = {},
@@ -98,11 +124,27 @@ return function(theme)
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        AlphaHeader  = { bg = colors.gray1, fg = colors.gray7 },
-        AlphaItem    = { bg = colors.gray1, fg = colors.green },
-        AlphaButtons = { bg = colors.gray2, fg = colors.gray7 },
+        AlphaHeader  = { bg = colors.gray1, fg = colors.gray4                },
+        AlphaGreet   = { bg = colors.gray1, fg = colors.gray8,               },
+        AlphaInfo    = { bg = colors.gray1, fg = colors.gray7, italic = true },
+        AlphaItem    = { bg = colors.gray1, fg = colors.green                },
+        AlphaButtons = { bg = colors.gray2, fg = colors.gray7                },
     }
 
     for k, v in pairs(hl) do set_hl(0, k, v) end
     -- }}}
 end
+
+-- {{{ setup after loading finished to show plugin count correctly
+return function(theme)
+    local au
+    au = vim.api.nvim_create_autocmd('User LazyVimStarted', {
+        callback = function()
+            setup(theme, require('lazy.stats').stats())
+
+            -- delete the autocmd after we're done setting up
+            vim.api.nvim_del_autocmd(au)
+        end
+    })
+end
+-- }}}

@@ -8,7 +8,7 @@ return function(theme)
     heirline.load_colors(theme.colors)
     -- }}}
 
-    --> utils
+    --> separators & padding
 
     local sp    = { provider = '%1( %)'   }
     local sep   = { provider = '%3( ~ %)' }
@@ -18,7 +18,7 @@ return function(theme)
 
     local components = {}
 
-    --> complex
+    --> relatively complex components
 
     -- {{{ vi mode
     components.vimode = {
@@ -87,14 +87,16 @@ return function(theme)
     }
     -- }}}
 
-    -- {{{ file info
-    -- {{{ flags
+    -- {{{ file flags
     components.file_flags = {
         {
             condition = function()
                 return vim.bo.modified
             end,
-            provider = '🞙',
+
+            provider = '+',
+
+            hl = { bold = true },
 
             sp,
         },
@@ -102,6 +104,7 @@ return function(theme)
             condition = function()
                 return not vim.bo.modifiable or vim.bo.readonly
             end,
+
             provider = '',
 
             sp,
@@ -109,27 +112,30 @@ return function(theme)
     }
     -- }}}
 
-    -- {{{ size
+    -- {{{ file size
     components.file_size = {
         provider = function(self)
             -- {{{ human-readable size
             -- stackoverflow moment
             local suffix = { 'b', 'k', 'm', 'g', 't', 'p', 'e' }
-            local fsize = vim.fn.getfsize(self.name)
-            fsize = (fsize < 0 and 0) or fsize
-            if fsize < 1024 then
-                return fsize..suffix[1]
+            local size = vim.fn.getfsize(self.name)
+
+            size = (size < 0 and 0) or size
+
+            if size < 1024 then
+                return size .. suffix[1]
             end
-            local i = math.floor((math.log(fsize) / math.log(1024)))
+
+            local i = math.floor((math.log(size) / math.log(1024)))
             -- }}}
 
-            return string.format('%.2f%s', fsize / math.pow(1024, i), suffix[i + 1])
+            return string.format('%.2f%s', size / math.pow(1024, i), suffix[i + 1])
         end
     }
     -- }}}
 
-    -- {{{ type & icon
-    components.ft = {
+    -- {{{ file type + icon
+    components.file_type = {
         condition = function(self)
             return self.type ~= ''
         end,
@@ -153,9 +159,8 @@ return function(theme)
         -- {{{ icon
         {
             init = function(self)
-                local filename = self.name
-                local extension = vim.fn.fnamemodify(filename, ':e')
-                self.icon = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+                local extension = vim.fn.fnamemodify(self.name, ':e')
+                self.icon = require('nvim-web-devicons').get_icon_color(self.name, extension, { default = true })
             end,
 
             provider = function(self)
@@ -166,7 +171,8 @@ return function(theme)
     }
     -- }}}
 
-    -- {{{ format
+    -- {{{ file format
+    -- only shows when format is not unix
     components.file_format = {
         condition = function()
             return vim.bo.fileformat ~= 'unix'
@@ -183,21 +189,17 @@ return function(theme)
     }
     -- }}}
 
-    components.file_info = {
-        condition = function()
-            return vim.api.nvim_buf_get_name(0) ~= ''
-        end,
+    -- {{{ file encoding
+    components.file_enc = {
+        sp,
 
-        init = function(self)
-            self.name = vim.api.nvim_buf_get_name(0)
-        end,
+        {
+            provider = function()
+                return (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
+            end,
+        },
 
         sp,
-        components.file_flags,
-        components.file_size,
-        components.ft,
-        components.file_format,
-        sp
     }
     -- }}}
 
@@ -347,20 +349,6 @@ return function(theme)
     }
     -- }}}
 
-    -- {{{ file encoding
-    components.file_enc = {
-        sp,
-
-        {
-            provider = function()
-                return (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
-            end,
-        },
-
-        sp,
-    }
-    -- }}}
-
     -- {{{ search count
     components.search = {
         condition = function()
@@ -380,10 +368,10 @@ return function(theme)
     }
     -- }}}
 
-    --> simple
+    --> simpler components
 
     -- {{{ ruler
-    components.ruler = { provider = '%4( %l%):%-3(%c %)' }
+    components.ruler = { provider = '%4( %l%):%-3(%v %)' }
     -- }}}
 
     -- {{{ hostname
@@ -423,7 +411,22 @@ return function(theme)
     local b = {
         hl = { bg = 'gray3', fg = 'gray8' },
 
-        components.file_info,
+        {
+            condition = function()
+                return vim.api.nvim_buf_get_name(0) ~= ''
+            end,
+
+            init = function(self)
+                self.name = vim.api.nvim_buf_get_name(0)
+            end,
+
+            sp,
+            components.file_flags,
+            components.file_size,
+            components.file_type,
+            components.file_format,
+            sp
+        },
     }
 
     local c = {
@@ -483,7 +486,6 @@ return function(theme)
     }
     -- }}}
 
-    -- {{{ ft-specific statuslines
     -- TODO: port all my custom lualine extensions
     -- {{{ helper section makers
     local make_a = function(tbl, defined_color)
@@ -525,7 +527,7 @@ return function(theme)
     end
     -- }}}
 
-    -- {{{ dashboard-only statusline
+    -- {{{ dashboard statusline
     -- {{{ [abc] left
     local dashboard_a = make_a({ provider = '%5( DSH %)' }, false)
 
@@ -591,7 +593,6 @@ return function(theme)
         dashboard_y,
         dashboard_z,
     }
-    -- }}}
     -- }}}
 
     --> finish
