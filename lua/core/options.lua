@@ -71,4 +71,18 @@ o.termguicolors = true
 
 o.titleold = 'st'
 o.title = true
+
+-- {{{ neovide
+if vim.fn.exists('neovide') == 1 then
+    o.guifont = 'JetBrainsMono Nerd Font Mono:h13'
+
+    o.neovide_refresh_rate = 75
+    o.neovide_refresh_rate_idle = 5
+
+    g.neovide_padding_top    = 20
+    g.neovide_padding_left   = 20
+    g.neovide_padding_right  = 20
+    g.neovide_padding_bottom = 20
+end
+-- }}}
 -- }}}

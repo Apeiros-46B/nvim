@@ -8,11 +8,17 @@ local au = api.nvim_create_autocmd
 au('TermOpen', { pattern = 'term://*', command = 'setlocal nonumber norelativenumber ft=terminal' })
 
 -- {{{ title
-au({ 'BufEnter', 'BufWinEnter' }, {
+au({ 'VimEnter', 'BufEnter' }, {
     callback = function()
-        -- 'nvim - ' . (expand('%:h') == '/' ? '' : pathshorten(expand('%:h'))) . '/' .  expand('%:t')
-        local expanded = vim.fn.expand('%:h')
-        local titlestring = 'nvim - ' .. (expanded == '/' and '' or vim.fn.pathshorten(expanded)) .. '/' .. vim.fn.expand('%:t')
+        local cwd = vim.fn.getcwd(0)
+        cwd = vim.fn.fnamemodify(cwd, ':~')
+        cwd = vim.fn.pathshorten(cwd, 2)
+
+        local file = vim.fn.expand('%')
+        file = vim.fn.pathshorten(file, 2)
+
+        local titlestring = 'nvim' .. (cwd ~= '~' and ' ' .. cwd or '') .. (file ~= '' and ' -> ' .. file or '')
+
         vim.cmd(([[let &titlestring = '%s']]):format(titlestring))
     end
 })

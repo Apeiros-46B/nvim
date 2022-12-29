@@ -124,12 +124,17 @@ local function setup(theme, stats)
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        AlphaHeader  = { bg = colors.gray1, fg = colors.gray4                },
         AlphaGreet   = { bg = colors.gray1, fg = colors.gray8,               },
         AlphaInfo    = { bg = colors.gray1, fg = colors.gray7, italic = true },
         AlphaItem    = { bg = colors.gray1, fg = colors.green                },
         AlphaButtons = { bg = colors.gray2, fg = colors.gray7                },
     }
+
+    if vim.fn.exists('g:neovide') == 1 then
+        hl.AlphaHeader = { bg = colors.gray1, fg = colors.gray7 }
+    else
+        hl.AlphaHeader = { bg = colors.gray1, fg = colors.gray4 }
+    end
 
     for k, v in pairs(hl) do set_hl(0, k, v) end
     -- }}}

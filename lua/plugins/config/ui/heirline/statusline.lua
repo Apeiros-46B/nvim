@@ -337,7 +337,7 @@ return function(theme)
     -- {{{ cwd
     components.cwd = {
         provider = function()
-            local icon = (vim.fn.haslocaldir(0) == 1 and 'l' or '') .. ' ' .. ' '
+            local icon = (vim.fn.haslocaldir(0) == 1 and ' l ' or ' ')
 
             local cwd = vim.fn.getcwd(0)
             cwd = vim.fn.fnamemodify(cwd, ':~')
