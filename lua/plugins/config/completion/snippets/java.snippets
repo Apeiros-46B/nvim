@@ -1,9 +1,24 @@
 # vim:foldmethod=marker
 
-# {{{ util
-snippet sout "System.out.println(...);"
+# {{{ misc
+snippet "sout" "System.out.println(...);" rbA
 System.out.println($0);
 endsnippet
+# }}}
+
+# {{{ main method
+snippet main "public static void main ..."
+public static void main(String[] args) {
+	${0:// method body}
+}
+endsnippet
+
+snippet emain "public static void main ..."
+public static void main(String[] args) throws ${1:Exception} {
+	${0:// method body}
+}
+endsnippet
+
 # }}}
 
 # {{{ class with BufferedReader and main method

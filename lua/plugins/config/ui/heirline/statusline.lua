@@ -344,12 +344,16 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
 
         {
             provider = function()
-                local result = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
-                local denominator = math.min(result.total, result.maxcount)
+                local _, result = pcall(vim.fn.searchcount, { maxcount = 999, timeout = 500 })
 
-                return string.format('%d/%d%s%%1( %%)', result.current, denominator, denominator == 999 and '+' or '')
+                local total    = (result and result.total   ) or 0
+                local current  = (result and result.current ) or 0
+                local maxcount = (result and result.maxcount) or 999
+
+                local denominator = math.min(total, maxcount)
+                return string.format('%d/%d%s%%1( %%)', current, denominator, denominator == maxcount and '+' or '')
             end,
-        }
+        },
     }
     -- }}}
 

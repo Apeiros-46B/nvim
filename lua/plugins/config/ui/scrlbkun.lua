@@ -131,9 +131,9 @@ return function(theme)
 
             -- Signs for githunks.
             signs = {
-                add    = { '┃' },
-                delete = { '┃' },
-                change = { '┃' },
+                add    = { '│' },
+                delete = { '│' },
+                change = { '│' },
             },
 
             -- The same as that of the search component

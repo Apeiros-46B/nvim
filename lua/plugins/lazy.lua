@@ -515,19 +515,6 @@ local specs =  {
     -- }}}
 
     -- {{{ not needed for now
-    {
-        'noib3/nvim-cokeline',
-        enabled = false,
-    },
-    {
-        'nvim-lualine/lualine.nvim',
-        enabled = false,
-        -- lazy = false,
-        keys = {
-            key('<leader>Tw', '<cmd>WordCountToggle<CR>', 'n'),
-        },
-        config = cfg('ui.lualine'),
-    },
     -- }}}
     -- }}}
 
@@ -586,10 +573,11 @@ local specs =  {
             key('<leader>Fs', '<cmd>lua MiniTrailspace.trim()<CR>', 'n') -- trim trailing spaces
         },
         init = fileloader('mini.nvim'),
-        config = function()
-            require('plugins.config.ui.mini_tabline')(theme)
-            require('plugins.config.editor.mini_trailspace')(theme)
-        end,
+        config = cfg('editor.mini_trailspace'),
+    },
+    {
+        'ervandew/regex',
+        cmd = 'Regex',
     },
     -- }}}
 

@@ -131,7 +131,14 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
 
     components.buflist.buffer = {
         init = function(self)
-            self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+            local name = vim.api.nvim_buf_get_name(self.bufnr)
+
+            -- fix illegal characters in jdtls buffers
+            if string.find(name, '^jdt://') then
+                self.filename = string.match(name, '%%3C(.+).class$'):gsub('%(', '.')
+            else
+                self.filename = name
+            end
             self.is_term  = vim.api.nvim_buf_get_option(self.bufnr, 'buftype') == 'terminal'
         end,
 

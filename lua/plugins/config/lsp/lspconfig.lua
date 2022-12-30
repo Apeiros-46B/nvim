@@ -50,7 +50,7 @@ return function(on_attach)
             -- start
             local config = {
                 cmd = { vim.fn.stdpath('data') .. '/mason/bin/jdtls' },
-                root_dir = require('jdtls.setup').find_root({'.git', 'mvnw', 'gradlew'}),
+                root_dir = require('jdtls.setup').find_root({ '.git', '.idea', '.jdtlsroot', 'mvnw', 'gradlew', 'pom.xml' }),
 
                 settings = {
                     java = {
@@ -69,6 +69,23 @@ return function(on_attach)
                                 staticStarThreshold = 9999,
                             },
                         },
+
+                        configuration = {
+                            runtimes = {
+                                {
+                                    name = 'JavaSE-1.8',
+                                    path = '/usr/lib/jvm/java-8-amazon-corretto/',
+                                },
+                                {
+                                    name = 'JavaSE-16',
+                                    path = '/usr/lib/jvm/java-16-amazon-corretto/',
+                                },
+                                {
+                                    name = 'JavaSE-17',
+                                    path = '/usr/lib/jvm/java-17-amazon-corretto/',
+                                },
+                            }
+                        }
                     },
                 },
 

@@ -1,8 +1,13 @@
-- (x) switch from packer.nvim to lazy.nvim
-- ( ) configure dial and ssr
-- (!) fix neorg highlights
-- ( ) move all plugin keymaps to lazy.lua
-- ( ) configure ultisnips
-- ( ) add more plugins
-- ( ) switch from lualine to heirline
-- ( ) switch from mini.tabline to cokeline.nvim
+* Neovim Ricing To-do List
+  - (x) switch from packer.nvim to lazy.nvim
+  - (x) move all plugin keymaps to lazy.lua
+  - (x) configure ultisnips
+  - ( ) configure dial and ssr
+  - (x) switch from lualine to heirline
+  - (x) switch from mini.tabline to heirline
+  - ( ) make a heirline winbar
+  - ( ) fix neorg highlights
+  -- don't want to have to prevent treesitter lazy loading though
+  - (-) add & configure more plugins
+  -- ( ) noice.nvim
+  -- ( ) symbols-outline.nvim
