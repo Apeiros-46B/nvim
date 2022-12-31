@@ -31,19 +31,7 @@ o.showmode = false
 
 o.laststatus = 3
 
--- diagnostics
-vim.diagnostic.config({
-    underline = true,
-    signs = true,
-    virtual_text = false,
-    float = {
-        header = 'Diagnostics',
-        source = 'always',
-        focusable = true,
-    },
-    update_in_insert = true, -- default to false
-    severity_sort = true, -- default to false
-})
+o.tildeop = true
 
 -- tab settings
 o.tabstop = 4
@@ -68,11 +56,26 @@ o.completeopt = 'menuone,noselect'
 -- truecolor
 o.termguicolors = true
 
+-- window title
 o.titleold = 'st'
 o.title = true
 
+-- diagnostics
+vim.diagnostic.config({
+    underline = true,
+    signs = true,
+    virtual_text = false,
+    float = {
+        header = 'Diagnostics',
+        source = 'always',
+        focusable = true,
+    },
+    update_in_insert = true, -- default to false
+    severity_sort = true, -- default to false
+})
+
 -- {{{ neovide
-if vim.fn.exists('neovide') == 1 then
+if vim.g.neovide then
     o.guifont = 'JetBrainsMono Nerd Font Mono:h13'
 
     o.neovide_refresh_rate = 75

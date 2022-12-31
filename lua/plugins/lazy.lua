@@ -411,7 +411,7 @@ local specs =  {
             key('<leader>jo',  '<cmd>lua require("jdtls").organize_imports()<CR>'    , 'n'),
             key('<leader>jev', '<cmd>lua require("jdtls").extract_variable()<CR>'    , 'n'),
             key('<leader>jev', '<cmd>lua require("jdtls").extract_variable(true)<CR>', 'v'),
-            key('<leader>jec', '<cmd>lua require("jdtls").exttract_constant()<CR>'   , 'n'),
+            key('<leader>jec', '<cmd>lua require("jdtls").extract_constant()<CR>'    , 'n'),
             key('<leader>jec', '<cmd>lua require("jdtls").extract_constant(true)<CR>', 'v'),
             key('<leader>jem', '<cmd>lua require("jdtls").extract_method(true)<CR>'  , 'v'),
             -- }}}
