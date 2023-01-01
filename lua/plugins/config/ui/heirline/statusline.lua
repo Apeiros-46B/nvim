@@ -67,8 +67,6 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
         provider = function(self)
             return '%5( ' .. self.mode_names[self.mode] .. ' %)'
         end,
-
-        update = { 'ModeChanged' },
     }
     -- }}}
 
@@ -134,8 +132,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
         -- {{{ icon
         {
             init = function(self)
-                local extension = vim.fn.fnamemodify(self.name, ':e')
-                self.icon = require('nvim-web-devicons').get_icon(self.name, extension, { default = true })
+                self.icon = require('nvim-web-devicons').get_icon_by_filetype(self.type, { default = true })
             end,
 
             provider = function(self)

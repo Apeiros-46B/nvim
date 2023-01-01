@@ -75,32 +75,32 @@ return function(theme)
 
                             level_1 = {
                                 enabled = true,
-                                icon = '┃',
+                                icon = '│',
                             },
 
                             level_2 = {
                                 enabled = true,
-                                icon = '┃',
+                                icon = '│',
                             },
 
                             level_3 = {
                                 enabled = true,
-                                icon = '┃',
+                                icon = '│',
                             },
 
                             level_4 = {
                                 enabled = true,
-                                icon = '┃',
+                                icon = '│',
                             },
 
                             level_5 = {
                                 enabled = true,
-                                icon = '┃',
+                                icon = '│',
                             },
 
                             level_6 = {
                                 enabled = true,
-                                icon = '┃',
+                                icon = '│',
                             },
                         },
                         -- }}}
@@ -191,18 +191,18 @@ return function(theme)
                             enabled = true,
 
                             weak = {
-                                enabled = true,
+                                enabled = false,
                                 icon = '⟨',
                             },
 
                             strong = {
-                                enabled = true,
+                                enabled = false,
                                 icon = '⟪',
                             },
 
                             horizontal_line = {
                                 enabled = true,
-                                icon = '━',
+                                icon = '─',
                             },
                         },
 
@@ -347,14 +347,14 @@ return function(theme)
         ['@neorg.quotes.1.content'] = { fg = colors.gray7, italic = true },
         ['@neorg.quotes.2.prefix' ] = { fg = colors.gray7                },
         ['@neorg.quotes.2.content'] = { fg = colors.gray7, italic = true },
-        ['@neorg.quotes.3.prefix' ] = { fg = colors.gray8                },
-        ['@neorg.quotes.3.content'] = { fg = colors.gray8, italic = true },
-        ['@neorg.quotes.4.prefix' ] = { fg = colors.gray8                },
-        ['@neorg.quotes.4.content'] = { fg = colors.gray8, italic = true },
-        ['@neorg.quotes.5.prefix' ] = { fg = colors.gray9                },
-        ['@neorg.quotes.5.content'] = { fg = colors.gray9, italic = true },
-        ['@neorg.quotes.6.prefix' ] = { fg = colors.gray9                },
-        ['@neorg.quotes.6.content'] = { fg = colors.gray9, italic = true },
+        ['@neorg.quotes.3.prefix' ] = { fg = colors.gray7                },
+        ['@neorg.quotes.3.content'] = { fg = colors.gray7, italic = true },
+        ['@neorg.quotes.4.prefix' ] = { fg = colors.gray7                },
+        ['@neorg.quotes.4.content'] = { fg = colors.gray7, italic = true },
+        ['@neorg.quotes.5.prefix' ] = { fg = colors.gray7                },
+        ['@neorg.quotes.5.content'] = { fg = colors.gray7, italic = true },
+        ['@neorg.quotes.6.prefix' ] = { fg = colors.gray7                },
+        ['@neorg.quotes.6.content'] = { fg = colors.gray7, italic = true },
         -- }}}
 
         -- {{{ links

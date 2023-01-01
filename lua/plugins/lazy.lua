@@ -509,8 +509,22 @@ local specs =  {
     -- {{{ others
     {
         'folke/noice.nvim',
+        enabled = false,
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+        },
         event = 'VeryLazy',
         config = cfg('ui.noice')
+    },
+
+    {
+        'stevearc/dressing.nvim',
+        event = 'VeryLazy',
+    },
+
+    {
+        'nvim-telescope/telescope-ui-select.nvim',
+        event = 'VeryLazy',
     },
     -- }}}
 

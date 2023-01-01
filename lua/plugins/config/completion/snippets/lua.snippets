@@ -16,3 +16,13 @@ function($1)
 	$0
 end
 endsnippet
+
+# new object
+snippet objectnew "function ...:new(obj)"
+function ${1:object}:new(o)
+	o = o or {}
+	setmetatable(o, self)
+	self.__index = self
+	return o
+end
+endsnippet

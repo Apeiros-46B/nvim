@@ -15,8 +15,8 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
             if self.is_term then
                 self.icon = 'ﲵ'
             else
-                local extension = vim.fn.fnamemodify(self.filename, ':e')
-                self.icon = require('nvim-web-devicons').get_icon(self.filename, extension, { default = true })
+                local filetype = vim.api.nvim_buf_get_option(self.bufnr, 'filetype')
+                self.icon = require('nvim-web-devicons').get_icon_by_filetype(filetype, { default = true })
             end
         end,
 
