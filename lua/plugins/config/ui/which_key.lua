@@ -3,37 +3,39 @@ local wk = require('which-key')
 
 wk.setup({
     plugins = {
-        marks = true, -- shows a list of your marks on ' and `
+        marks     = false, -- shows a list of your marks on ' and `
         registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+
         spelling = {
-            enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+            enabled     = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
             suggestions = 40, -- how many suggestions should be shown in the list?
         },
+
         presets = {
-            operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-            motions = true, -- adds help for motions
+            operators    = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+            motions      = true, -- adds help for motions
             text_objects = true, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
-            nav = true, -- misc bindings to work with windows
-            z = true, -- bindings for folds, spelling and others prefixed with z
-            g = true, -- bindings for prefixed with g
+            windows      = true, -- default bindings on <c-w>
+            nav          = true, -- misc bindings to work with windows
+            z            = true, -- bindings for folds, spelling and others prefixed with z
+            g            = true, -- bindings for prefixed with g
         },
     },
 
-    operators = { gc = 'Comments' },
+    operators = {},
 
     key_labels = {
-		['<localleader>'] = '.LCL',
-		['<leader>'] = '.SPC',
-		['<Space>'] = '.SPC',
-		['<CR>'] = '.RET',
-		['<Tab>'] = '.TAB',
-		['<BS>'] = '.BSP',
+		['<localleader>'] = '+LCL',
+		['<leader>'     ] = '+SPC',
+		['<Space>'      ] = '+SPC',
+		['<CR>'         ] = '+RET',
+		['<Tab>'        ] = '+TAB',
+		['<BS>'         ] = '+BSP',
     },
 
     icons = {
         breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
-        separator = '-', -- symbol used between a key and it's label
+        separator = '~', -- symbol used between a key and it's label
         group = '', -- symbol prepended to a group
     },
 
@@ -43,34 +45,31 @@ wk.setup({
     },
 
     window = {
-        border = 'none', -- none, single, double, shadow
+        border   = 'none', -- none, single, double, shadow
         position = 'bottom', -- bottom, top
-        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-        padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+        margin   = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+        padding  = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
         winblend = 0
     },
 
     layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 8, -- spacing between columns
-        align = 'center', -- align columns left, center or right
+        height  = { min = 4,  max = 25 },
+        width   = { min = 20, max = 50 },
+        spacing = 8,
+        align   = 'center',
     },
 
-    ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
+    ignore_missing = false,
 
-    hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ '}, -- hide mapping boilerplate
+    hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ '},
 
-    show_help = true, -- show help message on the command line when the popup is visible
+    show_help = false,
 
-    triggers = 'auto', -- automatically setup triggers
+    triggers = 'auto',
 
     triggers_blacklist = {
-      -- list of mode / prefixes that should never be hooked by WhichKey
-      -- this is mostly relevant for key maps that start with a native binding
-      -- most people should not need to change this
-      i = { 'j', 'k' },
-      v = { 'j', 'k' },
+        i = { 'j', 'k' },
+        v = { 'j', 'k' },
     },
 })
 -- }}}

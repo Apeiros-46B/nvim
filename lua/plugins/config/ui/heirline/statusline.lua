@@ -57,7 +57,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
                 cv        = 'EXM', -- Ex *M*ode
                 r         = 'RET',
                 rm        = 'MOR',
-                ['r?']    = 'CF?',
+                ['r?']    = 'CNF',
                 ['!']     = 'SHL',
                 t         = 'TER',
             },
@@ -84,8 +84,8 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
             sp,
         },
         {
-            condition = function()
-                return not vim.bo.modifiable or vim.bo.readonly
+            condition = function(self)
+                return not self.is_term and (not vim.bo.modifiable or vim.bo.readonly)
             end,
 
             provider = '',
@@ -97,11 +97,15 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
 
     -- {{{ file size
     components.file_size = {
+        condition = function(self)
+            return not self.is_term
+        end,
+
         provider = function(self)
             -- {{{ human-readable size
             -- stackoverflow moment
             local suffix = { 'b', 'k', 'm', 'g', 't', 'p', 'e' }
-            local size = vim.fn.getfsize(self.name)
+            local size = vim.fn.getfsize(self.filename)
 
             size = (size < 0 and 0) or size
 
@@ -127,12 +131,15 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
             self.type = vim.bo.filetype
         end,
 
-        sep,
-
         -- {{{ icon
         {
             init = function(self)
-                self.icon = require('nvim-web-devicons').get_icon_by_filetype(self.type, { default = true })
+                if self.is_term then
+                    self.icon = 'ﲵ'
+                else
+                    local ext = vim.fn.fnamemodify(self.filename, ':e')
+                    self.icon = require('nvim-web-devicons').get_icon(self.filename, ext, { default = true })
+                end
             end,
 
             provider = function(self)
@@ -156,8 +163,8 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
     -- {{{ file format
     -- only shows when format is not unix
     components.file_format = {
-        condition = function()
-            return vim.bo.fileformat ~= 'unix'
+        condition = function(self)
+            return (not self.is_term) and vim.bo.fileformat ~= 'unix'
         end,
 
         sep,
@@ -401,12 +408,20 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
             end,
 
             init = function(self)
-                self.name = vim.api.nvim_buf_get_name(0)
+                self.filename = vim.api.nvim_buf_get_name(0)
+                self.is_term  = vim.api.nvim_buf_get_option(0, 'buftype') == 'terminal'
             end,
 
             sp,
             components.file_flags,
             components.file_size,
+            {
+                condition = function(self)
+                    return (not self.is_term) and self.type ~= ''
+                end,
+
+                sep,
+            },
             components.file_type,
             components.file_format,
             sp

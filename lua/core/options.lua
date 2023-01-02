@@ -26,7 +26,7 @@ o.ignorecase = true
 o.scrolloff = 2
 o.incsearch = true
 
-o.shortmess = 'aoOstTIcFS'
+o.shortmess = 'aoOstTcFS'
 o.showmode = false
 
 o.laststatus = 3

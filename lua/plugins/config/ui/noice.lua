@@ -5,18 +5,22 @@ return function(theme)
     local noice = require('noice')
 
     noice.setup({
+        -- {{{ config
         cmdline = {
             enabled = true,
             view    = 'cmdline_popup',
             opts    = {},
-            format = {
-                cmdline     = {                  pattern = '^:',              icon = ' ﲵ ', lang = 'vim',   title = '' },
-                search_down = { kind = 'search', pattern = '^/',              icon = '  ', lang = 'regex', title = '' },
-                search_up   = { kind = 'search', pattern = '^%?',             icon = '  ', lang = 'regex', title = '' },
-                filter      = {                  pattern = '^:%s*!',          icon = ' $ ', lang = 'bash',  title = '' },
-                lua         = {                  pattern = '^:%s*lua%s+',     icon = '  ', lang = 'lua',   title = '' },
-                help        = {                  pattern = '^:%s*he?l?p?%s+', icon = '  ',                 title = '' },
-                input       = {                                                                                        },
+            format  = {
+                cmdline     = {                  pattern = '^:',                        icon = ' ﲵ ', lang = 'vim',       title = '' },
+                search_down = { kind = 'search', pattern = '^/',                        icon = '  ', lang = 'regex',     title = '' },
+                search_up   = { kind = 'search', pattern = '^%?',                       icon = '  ', lang = 'regex',     title = '' },
+                filter      = {                  pattern = '^:%s*!',                    icon = ' $ ', lang = 'bash',      title = '' },
+                lua         = {                  pattern = '^:%s*lua%s+',               icon = '  ', lang = 'lua',       title = '' },
+                luaInspect  = {                  pattern = '^:%s*lua%s*=%s*',           icon = '  ', lang = 'lua',       title = '' },
+                highlight   = {                  pattern = '^:%s*hig?h?l?i?g?h?t?%s+',  icon = '  ',                     title = '' },
+                calculator  = {                  pattern = '^=',                        icon = ' % ', lang = 'vimnormal', title = '' },
+                help        = {                  pattern = '^:%s*he?l?p?%s+',           icon = '  ',                     title = '' },
+                input       = {                                                                                           title = '' },
             },
         },
         messages = {
@@ -42,33 +46,33 @@ return function(theme)
                 opts = { enter = true, format = 'details' },
                 filter = {
                     any = {
-                        { event = 'notify' },
-                        { error = true },
-                        { warning = true },
-                        { event = 'msg_show', kind = { '' } },
-                        { event = 'lsp', kind = 'message' },
+                        { event   = 'notify'                     },
+                        { error   = true                         },
+                        { warning = true                         },
+                        { event   = 'msg_show', kind = { '' }    },
+                        { event   = 'lsp',      kind = 'message' },
                     },
                 },
             },
             last = {
-                view = 'popup',
-                opts = { enter = true, format = 'details' },
+                view = 'mini',
+                opts = { enter = false, format = 'details' },
                 filter = {
                     any = {
-                        { event = 'notify' },
-                        { error = true },
-                        { warning = true },
-                        { event = 'msg_show', kind = { '' } },
-                        { event = 'lsp', kind = 'message' },
+                        { event   = 'notify'                     },
+                        { error   = true                         },
+                        { warning = true                         },
+                        { event   = 'msg_show', kind = { '' }    },
+                        { event   = 'lsp',      kind = 'message' },
                     },
                 },
                 filter_opts = { count = 1 },
             },
             errors = {
-                view = 'popup',
-                opts = { enter = true, format = 'details' },
-                filter = { error = true },
-                filter_opts = { reverse = true },
+                view        = 'popup',
+                opts        = { enter   = true, format = 'details' },
+                filter      = { error   = true                     },
+                filter_opts = { reverse = true                     },
             },
         },
         notify = {
@@ -80,13 +84,13 @@ return function(theme)
                 enabled     = true,
                 format      = 'lsp_progress',
                 format_done = 'lsp_progress_done',
-                throttle    = 1000 / 30, -- frequency to update lsp progress message
+                throttle    = 1000 / 30,
                 view        = 'mini',
             },
             override = {
-                ['vim.lsp.util.convert_input_to_markdown_lines'] = false,
-                ['vim.lsp.util.stylize_markdown']                = false,
-                ['cmp.entry.get_documentation']                  = false,
+                ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+                ['vim.lsp.util.stylize_markdown']                = true,
+                ['cmp.entry.get_documentation']                  = true,
             },
             hover = {
                 enabled = true,
@@ -94,7 +98,7 @@ return function(theme)
                 opts    = {},
             },
             signature = {
-                enabled = true,
+                enabled   = true,
                 auto_open = {
                     enabled  = true,
                     trigger  = true,
@@ -112,10 +116,10 @@ return function(theme)
             documentation = {
                 view = 'hover',
                 opts = {
-                    lang = 'markdown',
-                    replace = true,
-                    render = 'plain',
-                    format = { '{message}' },
+                    lang        = 'markdown',
+                    replace     = true,
+                    render      = 'plain',
+                    format      = { '{message}' },
                     win_options = { concealcursor = 'n', conceallevel = 3 },
                 },
             },
@@ -134,9 +138,9 @@ return function(theme)
                 ['{%S-}'           ] = '@parameter',
             },
         },
-        health = { checker = true },
+        health     = { checker = true },
         smart_move = {
-            enabled = true,
+            enabled            = true,
             excluded_filetypes = { 'cmp_menu', 'cmp_docs', 'notify' },
         },
         presets = {
@@ -147,67 +151,166 @@ return function(theme)
             lsp_doc_border        = false,
         },
         throttle = 1000 / 30,
-        views  = {},
-        routes = {},
-        status = {},
-        format = {},
+        routes   = {},
+        status   = {},
+        -- }}}
+
+        -- {{{ views
+        views = {
+            mini = {
+                backend   = 'mini',
+                relative  = 'editor',
+                align     = 'message-right',
+
+                timeout   = 3000,
+                reverse   = false,
+                focusable = false,
+
+                position = {
+                    row  =   1,
+                    col  =   '100%',
+                },
+
+                size      = 'auto',
+                border    = {
+                    style = 'none',
+                },
+
+                zindex            = 60,
+                win_options       = {
+                    winblend      = 0,
+                    winhighlight  = {
+                        Normal    = 'NoiceMini',
+                        IncSearch = 'NoiceMini',
+                        Search    = 'NoiceMini',
+                    },
+                },
+            },
+        },
+        -- }}}
+
+        -- {{{ formats
+        format = {
+            debug = { enabled = true },
+            cmdline = {},
+            level = {
+                hl_group = {
+                    trace = 'NoiceFormatLevelTrace',
+                    debug = 'NoiceFormatLevelDebug',
+                    info  = 'NoiceFormatLevelInfo',
+                    warn  = 'NoiceFormatLevelWarn',
+                    error = 'NoiceFormatLevelError',
+                    off   = 'NoiceFormatLevelOff',
+                },
+                icons = { error = '', warn = '', info = '' },
+            },
+            progress = {
+                contents = {},
+                width    = 20,
+                align    = 'right',
+                key      = 'progress',
+
+                hl_group      = 'NoiceFormatProgressTodo',
+                hl_group_done = 'NoiceFormatProgressDone',
+            },
+            text = {
+                text     = nil,
+                hl_group = nil,
+            },
+            spinner = {
+                name     = 'dots',
+                hl_group = nil,
+            },
+            data = {
+                key      = nil,
+                hl_group = nil,
+            },
+            title = {
+                hl_group = 'NoiceFormatTitle',
+            },
+            event = {
+                hl_group = 'NoiceFormatEvent',
+            },
+            kind = {
+                hl_group = 'NoiceFormatKind',
+            },
+            date = {
+                format   = '%X',
+                hl_group = 'NoiceFormatDate',
+            },
+            message = {
+                hl_group = nil,
+            },
+            confirm = {
+                hl_group = {
+                    choice         = 'NoiceFormatConfirm',
+                    default_choice = 'NoiceFormatConfirmDefault',
+                },
+            },
+        }
+        -- }}}
     })
 
+    -- {{{ custom highlights
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        NoiceCmdline                       = { bg = colors.gray2 , fg = colors.white  },
-        NoiceCmdlinePopup                  = { bg = colors.gray2 , fg = colors.white  },
-        NoiceCmdlinePrompt                 = { bg = colors.gray2 , fg = colors.green  },
-        NoiceCmdlinePopupBorder            = { bg = colors.gray2 , fg = colors.gray2  },
-        NoiceCmdlinePopupBorderCmdline     = { bg = colors.gray2 , fg = colors.gray2  },
-        NoiceCmdlinePopupBorderFilter      = { bg = colors.gray2 , fg = colors.gray2  },
-        NoiceCmdlinePopupBorderHelp        = { bg = colors.gray2 , fg = colors.gray2  },
-        NoiceCmdlinePopupBorderIncRename   = { bg = colors.gray2 , fg = colors.gray2  },
-        NoiceCmdlinePopupBorderInput       = { bg = colors.gray2 , fg = colors.gray2  },
-        NoiceCmdlinePopupBorderLua         = { bg = colors.gray2 , fg = colors.gray2  },
-        NoiceCmdlinePopupBorderSearch      = { bg = colors.gray2 , fg = colors.gray2  },
+        NoiceCmdline                       = { bg = colors.gray2    , fg = colors.white ,                },
+        NoiceCmdlinePopup                  = { bg = colors.gray2    , fg = colors.white ,                },
+        NoiceCmdlinePopupBorder            = { bg = colors.gray2    , fg = colors.gray2 ,                },
+        NoiceCmdlinePopupBorderSearch      = { bg = colors.gray2    , fg = colors.gray2 ,                },
+        NoiceCmdlinePrompt                 = { bg = colors.gray2    , fg = colors.green ,                },
 
-        NoiceCmdlineIcon                   = { bg = colors.teal  , fg = colors.gray1  },
-        NoiceCmdlineIconCmdline            = { bg = colors.teal  , fg = colors.gray1  },
-        NoiceCmdlineIconFilter             = { bg = colors.blue  , fg = colors.gray1  },
-        NoiceCmdlineIconHelp               = { bg = colors.yellow, fg = colors.gray1  },
-        NoiceCmdlineIconIncRename          = { bg = colors.red   , fg = colors.gray1  },
-        NoiceCmdlineIconInput              = { bg = colors.green , fg = colors.gray1  },
-        NoiceCmdlineIconLua                = { bg = colors.green , fg = colors.gray1  },
-        NoiceCmdlineIconSearch             = { bg = colors.orange, fg = colors.gray1  },
+        NoiceCmdlineIcon                   = { bg = colors.teal     , fg = colors.gray1 ,                },
+        NoiceCmdlineIconCalculator         = { bg = colors.green    , fg = colors.gray1 ,                },
+        NoiceCmdlineIconCmdline            = { bg = colors.teal     , fg = colors.gray1 ,                },
+        NoiceCmdlineIconFilter             = { bg = colors.blue     , fg = colors.gray1 ,                },
+        NoiceCmdlineIconHelp               = { bg = colors.yellow   , fg = colors.gray1 ,                },
+        NoiceCmdlineIconHighlight          = { bg = colors.red      , fg = colors.gray1 ,                }, -- custom
+        NoiceCmdlineIconIncRename          = { bg = colors.red      , fg = colors.gray1 ,                },
+        NoiceCmdlineIconInput              = { bg = colors.purple   , fg = colors.gray1 ,                },
+        NoiceCmdlineIconLua                = { bg = colors.blue     , fg = colors.gray1 ,                },
+        NoiceCmdlineIconLuaInspect         = { bg = colors.orange   , fg = colors.gray1 ,                }, -- custom
+        NoiceCmdlineIconSearch             = { bg = colors.purple   , fg = colors.gray1 ,                },
 
-        -- NoiceConfirm                       = { bg = colors.      , fg = colors.       },
-        -- NoiceConfirmBorder                 = { bg = colors.      , fg = colors.       },
-        -- NoiceCursor                        = { bg = colors.white , fg = colors.gray1  },
-        -- NoiceFormatDate                    = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatEvent                   = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatKind                    = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatLevelDebug              = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatLevelError              = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatLevelInfo               = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatLevelOff                = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatLevelTrace              = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatLevelWarn               = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatProgressDone            = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatProgressTodo            = { bg = colors.      , fg = colors.       },
-        -- NoiceFormatTitle                   = { bg = colors.      , fg = colors.       },
-        -- NoiceLspProgressClient             = { bg = colors.      , fg = colors.       },
-        -- NoiceLspProgressSpinner            = { bg = colors.      , fg = colors.       },
-        -- NoiceLspProgressTitle              = { bg = colors.      , fg = colors.       },
-        -- NoiceMini                          = { bg = colors.      , fg = colors.       },
-        -- NoicePopup                         = { bg = colors.      , fg = colors.       },
-        -- NoicePopupBorder                   = { bg = colors.      , fg = colors.       },
-        -- NoicePopupmenu                     = { bg = colors.      , fg = colors.       },
-        -- NoicePopupmenuBorder               = { bg = colors.      , fg = colors.       },
-        -- NoicePopupmenuMatch                = { bg = colors.      , fg = colors.       },
-        -- NoicePopupmenuSelected             = { bg = colors.      , fg = colors.       },
-        NoiceScrollbar                     = { bg = colors.gray3 , fg = 'none'        },
-        NoiceScrollbarThumb                = { bg = colors.gray4 , fg = 'none'        },
-        -- NoiceSplit                         = { bg = colors.      , fg = colors.       },
-        -- NoiceSplitBorder                   = { bg = colors.      , fg = colors.       },
-        -- NoiceVirtualText                   = { bg = colors.      , fg = colors.       },
+        NoiceConfirm                       = { bg = colors.gray2    , fg = colors.white ,                },
+        NoiceConfirmBorder                 = { bg = colors.gray2    , fg = colors.gray2 ,                },
+        NoiceCursor                        = {                                            reverse = true },
+
+        NoiceFormatConfirm                 = { bg = colors.gray3    , fg = colors.white ,                },
+        NoiceFormatConfirmDefault          = { bg = colors.diff_del , fg = colors.red   , italic  = true },
+        NoiceFormatDate                    = { bg = colors.gray2    , fg = colors.blue  ,                },
+        NoiceFormatEvent                   = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoiceFormatKind                    = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoiceFormatLevelDebug              = { bg = colors.gray2    , fg = colors.teal  ,                },
+        NoiceFormatLevelError              = { bg = colors.gray2    , fg = colors.red   ,                },
+        NoiceFormatLevelInfo               = { bg = colors.gray2    , fg = colors.green ,                },
+        NoiceFormatLevelOff                = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoiceFormatLevelTrace              = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoiceFormatLevelWarn               = { bg = colors.gray2    , fg = colors.yellow,                },
+        NoiceFormatProgressDone            = { bg = colors.diff_add , fg = colors.gray7 , bold    = true },
+        NoiceFormatProgressTodo            = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoiceFormatTitle                   = { bg = colors.gray2    , fg = colors.green , bold    = true },
+
+        NoiceLspProgressClient             = { bg = colors.gray2    , fg = colors.green ,                },
+        NoiceLspProgressSpinner            = { bg = colors.gray2    , fg = colors.blue  ,                },
+        NoiceLspProgressTitle              = { bg = colors.gray2    , fg = colors.blue  ,                },
+
+        NoiceMini                          = { bg = colors.gray2    , fg = colors.white ,                },
+        NoicePopup                         = { bg = colors.gray2    , fg = colors.white ,                },
+        NoicePopupBorder                   = { bg = colors.gray2    , fg = colors.gray2 ,                },
+        NoicePopupmenu                     = { bg = colors.gray2    , fg = colors.white ,                },
+        NoicePopupmenuBorder               = { bg = colors.gray2    , fg = colors.gray2 ,                },
+        NoicePopupmenuMatch                = { bg = colors.gray2    , fg = colors.green , bold    = true },
+        NoicePopupmenuSelected             = { bg = colors.diff_add , fg = colors.white , bold    = true },
+        NoiceScrollbar                     = { bg = colors.gray3    , fg = 'none'       ,                },
+        NoiceScrollbarThumb                = { bg = colors.gray4    , fg = 'none'       ,                },
+
+        NoiceSplit                         = { bg = colors.gray1    , fg = colors.white ,                },
+        NoiceSplitBorder                   = { bg = colors.gray1    , fg = colors.gray3 ,                },
+        NoiceVirtualText                   = { bg = colors.gray1    , fg = colors.gray7 ,                },
     }
 
     for k, v in pairs(hl) do set_hl(0, k, v) end
+    -- }}}
 end

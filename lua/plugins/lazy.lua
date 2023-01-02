@@ -509,7 +509,7 @@ local specs =  {
     -- {{{ others
     {
         'folke/noice.nvim',
-        enabled = false,
+        -- enabled = false,
         dependencies = {
             'MunifTanjim/nui.nvim',
         },
@@ -807,7 +807,7 @@ do
         LazyTaskError     = { fg = colors.red    },
         LazyTaskOutput    = { fg = colors.gray7  },
         LazyProgressDone  = { fg = colors.teal   },
-        LazyProgressTodo  = { fg = colors.gray8  },
+        LazyProgressTodo  = { fg = colors.gray7  },
         -- }}}
     }
 

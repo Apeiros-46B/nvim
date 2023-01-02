@@ -88,10 +88,9 @@ return function(theme)
         -- }}}
 
         -- {{{ other
-        -- attach navic and notify user if it's not null-ls
+        -- attach navic if it's not null-ls
         if client.name ~= 'null-ls' then
             require('nvim-navic').attach(client, bufnr)
-            vim.notify(string.format([[[LSP] attached client '%s']], client.name), 'INFO')
         end
         -- }}}
     end
