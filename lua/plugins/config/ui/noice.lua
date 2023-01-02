@@ -1,4 +1,3 @@
--- TODO: rice noice
 return function(theme)
     -- imports
     local colors = theme.colors
