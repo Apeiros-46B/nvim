@@ -21,6 +21,9 @@ return function(theme)
                 search_down = { kind = 'search', pattern = '^/',                        icon = '  ', lang = 'regex', title = '' },
                 search_up   = { kind = 'search', pattern = '^%?',                       icon = '  ', lang = 'regex', title = '' },
                 set         = {                  pattern = '^:%s*set?%s+',              icon = '  ', lang = 'vim',   title = '' }, -- custom
+
+                -- hide ultisnips function triggers
+                ultisnips = { view = false, pattern = '^=UltiSnips#.*' }
             },
         },
         messages = {
@@ -85,7 +88,7 @@ return function(theme)
                 format      = 'lsp_progress',
                 format_done = 'lsp_progress_done',
                 throttle    = 1000 / 30,
-                view        = 'mini',
+                view        = 'mini_transient',
             },
             override = {
                 ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
@@ -177,6 +180,36 @@ return function(theme)
                 },
 
                 zindex            = 60,
+                win_options       = {
+                    winblend      = 0,
+                    winhighlight  = {
+                        Normal    = 'NoiceMini',
+                        IncSearch = 'NoiceMini',
+                        Search    = 'NoiceMini',
+                    },
+                },
+            },
+
+            mini_transient = {
+                backend   = 'mini',
+                relative  = 'editor',
+                align     = 'message-right',
+
+                timeout   = 400,
+                reverse   = true,
+                focusable = false,
+
+                position = {
+                    row  =   -1,
+                    col  =   '100%',
+                },
+
+                size      = 'auto',
+                border    = {
+                    style = 'none',
+                },
+
+                zindex            = 20,
                 win_options       = {
                     winblend      = 0,
                     winhighlight  = {
