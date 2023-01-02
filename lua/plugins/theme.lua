@@ -43,6 +43,8 @@ M.colors = {
     diff_add  = '#404d44',
     diff_mod  = '#394f5a',
     bg_yellow = '#4a4940',
+
+    none = 'none',
 }
 -- }}}
 

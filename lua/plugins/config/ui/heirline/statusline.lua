@@ -124,11 +124,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
     -- {{{ file type + icon
     components.file_type = {
         condition = function(self)
-            return self.type ~= ''
-        end,
-
-        init = function(self)
-            self.type = vim.bo.filetype
+            return self.filetype ~= ''
         end,
 
         -- {{{ icon
@@ -153,7 +149,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
         -- {{{ type
         {
             provider = function(self)
-                return string.lower(self.type)
+                return string.lower(self.filetype)
             end,
         },
         -- }}}
@@ -194,9 +190,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
 
     -- {{{ git
     components.git = {
-        condition = function(self)
-            return self.git_cond() -- defined in `c` object
-        end,
+        condition = conds.is_git_repo,
 
         init = function(self)
             ---@diagnostic disable-next-line: undefined-field
@@ -204,11 +198,11 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
 
             if self.status_dict ~= nil then
                 self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+                self.head = self.status_dict.head ~= '' and self.status_dict.head or vim.fn.FugitiveHead(7)
             else
                 self.has_changes = false
+                self.head = ''
             end
-
-            self.head = vim.fn.FugitiveHead()
         end,
 
         on_click = {
@@ -409,7 +403,8 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
 
             init = function(self)
                 self.filename = vim.api.nvim_buf_get_name(0)
-                self.is_term  = vim.api.nvim_buf_get_option(0, 'buftype') == 'terminal'
+                self.is_term  = vim.bo.buftype == 'terminal'
+                self.filetype = vim.bo.filetype
             end,
 
             sp,
@@ -417,7 +412,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
             components.file_size,
             {
                 condition = function(self)
-                    return (not self.is_term) and self.type ~= ''
+                    return (not self.is_term) and self.filetype ~= ''
                 end,
 
                 sep,
@@ -429,19 +424,12 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
     }
 
     local c = {
-        static = {
-            git_cond = function()
-                local ok, head = pcall(vim.fn.FugitiveHead)
-                return ok and head ~= ''
-            end,
-        },
-
         hl = { bg = 'gray2', fg = 'gray7' },
 
         components.git,
         {
-            provider = function(self)
-                if self.git_cond() and conds.has_diagnostics() then return sep.provider else return sp.provider end
+            provider = function()
+                if conds.is_git_repo() and conds.has_diagnostics() then return sep.provider else return sp.provider end
             end,
         },
         components.diag,
@@ -537,19 +525,12 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
     }
 
     local dashboard_c = {
-        static = {
-            git_cond = function()
-                local ok, head = pcall(vim.fn.FugitiveHead)
-                return ok and head ~= ''
-            end,
-        },
-
         hl = { bg = 'gray2', fg = 'gray7' },
 
         components.git,
         {
-            provider = function(self)
-                if self.git_cond() and conds.has_diagnostics() then return sep.provider else return sp.provider end
+            provider = function()
+                if conds.is_git_repo() and conds.has_diagnostics() then return sep.provider else return sp.provider end
             end,
         },
         components.diag,

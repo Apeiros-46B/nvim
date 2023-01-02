@@ -23,7 +23,19 @@ return function(theme)
                 set         = {                  pattern = '^:%s*set?%s+',              icon = '  ', lang = 'vim',   title = '' }, -- custom
 
                 -- hide ultisnips function triggers
-                ultisnips = { view = false, pattern = '^=UltiSnips#.*' }
+                ultisnips = { view = false, pattern = '^=UltiSnips#.*' },
+
+                -- inc rename
+                IncRename = {
+                    pattern = '^:%s*IncRename%s+',
+                    icon    = '  ',
+                    title   = '',
+                    opts    = {
+                        relative = 'cursor',
+                        size     = { min_width = 20 },
+                        position = { row = 2, col = 2 },
+                    }
+                }, -- custom
             },
         },
         messages = {
@@ -160,6 +172,7 @@ return function(theme)
 
         -- {{{ views
         views = {
+            -- {{{ mini
             mini = {
                 backend   = 'mini',
                 relative  = 'editor',
@@ -169,9 +182,9 @@ return function(theme)
                 reverse   = false,
                 focusable = false,
 
-                position = {
-                    row  =   1,
-                    col  =   '100%',
+                position  = {
+                    row   =   1,
+                    col   =   '100%',
                 },
 
                 size      = 'auto',
@@ -189,7 +202,10 @@ return function(theme)
                     },
                 },
             },
+            -- }}}
 
+            -- {{{ mini (transient)
+            -- in the bottom right instead of top, timeout much shorter
             mini_transient = {
                 backend   = 'mini',
                 relative  = 'editor',
@@ -199,9 +215,9 @@ return function(theme)
                 reverse   = true,
                 focusable = false,
 
-                position = {
-                    row  =   -1,
-                    col  =   '100%',
+                position  = {
+                    row   =   -1,
+                    col   =   '100%',
                 },
 
                 size      = 'auto',
@@ -213,12 +229,46 @@ return function(theme)
                 win_options       = {
                     winblend      = 0,
                     winhighlight  = {
-                        Normal    = 'NoiceMini',
-                        IncSearch = 'NoiceMini',
-                        Search    = 'NoiceMini',
+                        Normal    = 'NoiceMiniTransient',
+                        IncSearch = 'NoiceMiniTransient',
+                        Search    = 'NoiceMiniTransient',
                     },
                 },
             },
+            -- }}}
+
+            -- {{{ command palette
+            cmdline_popup = {
+                position = {
+                    row = 6,
+                    col = '50%',
+                },
+                size = {
+                    min_width = 60,
+                    width = 'auto',
+                    height = 'auto',
+                },
+            },
+            popupmenu = {
+                relative = 'editor',
+                position = {
+                    row = 8,
+                    col = '50%',
+                },
+                size = {
+                    width      = 60,
+                    height     = 'auto',
+                    max_height = 30,
+                },
+                border = {
+                    style   = 'single',
+                    padding = { 0, 1 },
+                },
+                win_options = {
+                    winhighlight = { Normal = 'NoiceCmdlinePopup', FloatBorder = 'NoiceCmdlinePopupBorder' },
+                },
+            },
+            -- }}}
         },
         -- }}}
 
@@ -311,10 +361,10 @@ return function(theme)
         NoiceConfirmBorder                 = { bg = colors.gray2    , fg = colors.gray2 ,                },
         NoiceCursor                        = {                                            reverse = true },
 
-        NoiceFormatConfirm                 = { bg = colors.gray3    , fg = colors.white ,                },
+        NoiceFormatConfirm                 = { bg = colors.gray2    , fg = colors.white ,                },
         NoiceFormatConfirmDefault          = { bg = colors.diff_del , fg = colors.red   , italic  = true },
-        NoiceFormatDate                    = { bg = colors.gray2    , fg = colors.blue  ,                },
-        NoiceFormatEvent                   = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoiceFormatDate                    = { bg = colors.none     , fg = colors.blue  ,                },
+        NoiceFormatEvent                   = { bg = colors.none     , fg = colors.gray7 ,                },
         NoiceFormatKind                    = { bg = colors.gray2    , fg = colors.gray7 ,                },
         NoiceFormatLevelDebug              = { bg = colors.gray2    , fg = colors.teal  ,                },
         NoiceFormatLevelError              = { bg = colors.gray2    , fg = colors.red   ,                },
@@ -322,23 +372,24 @@ return function(theme)
         NoiceFormatLevelOff                = { bg = colors.gray2    , fg = colors.gray7 ,                },
         NoiceFormatLevelTrace              = { bg = colors.gray2    , fg = colors.gray7 ,                },
         NoiceFormatLevelWarn               = { bg = colors.gray2    , fg = colors.yellow,                },
-        NoiceFormatProgressDone            = { bg = colors.diff_add , fg = colors.gray7 , bold    = true },
-        NoiceFormatProgressTodo            = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoiceFormatProgressDone            = { bg = colors.diff_add , fg = colors.white , bold    = true },
+        NoiceFormatProgressTodo            = { bg = colors.gray3    , fg = colors.gray7 , bold    = true },
         NoiceFormatTitle                   = { bg = colors.gray2    , fg = colors.green , bold    = true },
 
-        NoiceLspProgressClient             = { bg = colors.gray2    , fg = colors.green ,                },
-        NoiceLspProgressSpinner            = { bg = colors.gray2    , fg = colors.blue  ,                },
-        NoiceLspProgressTitle              = { bg = colors.gray2    , fg = colors.blue  ,                },
+        NoiceLspProgressClient             = { bg = colors.gray1    , fg = colors.green ,                },
+        NoiceLspProgressSpinner            = { bg = colors.gray1    , fg = colors.blue  ,                },
+        NoiceLspProgressTitle              = { bg = colors.gray1    , fg = colors.gray7 ,                },
 
         NoiceMini                          = { bg = colors.gray2    , fg = colors.white ,                },
-        NoicePopup                         = { bg = colors.gray2    , fg = colors.white ,                },
+        NoiceMiniTransient                 = { bg = colors.gray2    , fg = colors.gray7 ,                },
+        NoicePopup                         = { bg = colors.gray2    , fg = colors.white ,                }, -- custom
         NoicePopupBorder                   = { bg = colors.gray2    , fg = colors.gray2 ,                },
         NoicePopupmenu                     = { bg = colors.gray2    , fg = colors.white ,                },
         NoicePopupmenuBorder               = { bg = colors.gray2    , fg = colors.gray2 ,                },
         NoicePopupmenuMatch                = { bg = colors.gray2    , fg = colors.green , bold    = true },
         NoicePopupmenuSelected             = { bg = colors.diff_add , fg = colors.white , bold    = true },
-        NoiceScrollbar                     = { bg = colors.gray3    , fg = 'none'       ,                },
-        NoiceScrollbarThumb                = { bg = colors.gray4    , fg = 'none'       ,                },
+        NoiceScrollbar                     = { bg = colors.gray3    , fg = colors.none  ,                },
+        NoiceScrollbarThumb                = { bg = colors.gray4    , fg = colors.none  ,                },
 
         NoiceSplit                         = { bg = colors.gray1    , fg = colors.white ,                },
         NoiceSplitBorder                   = { bg = colors.gray1    , fg = colors.gray3 ,                },

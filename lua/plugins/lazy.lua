@@ -362,7 +362,6 @@ local specs =  {
             -- {{{ lspsaga keys
             key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'               , 'n'),
             key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'                , 'n'),
-            key('<leader>lr', '<cmd>Lspsaga rename<CR>'                   , 'n'),
             key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'          , 'n'),
             key('<M-CR>'    , '<cmd>Lspsaga code_action<CR>'              , 'n'),
             key('<M-d>'     , '<cmd>Lspsaga open_floaterm<CR>'            , 'n'),
@@ -370,6 +369,15 @@ local specs =  {
             -- }}}
         },
         config = cfg('lsp.lspsaga'),
+    },
+    {
+        'smjonas/inc-rename.nvim',
+        event = 'LspAttach',
+        cmd = 'IncRename',
+        keys = {
+            key('<leader>lr', ':IncRename ', 'n'),
+        },
+        config = function() require('inc_rename').setup() end,
     },
     {
         'folke/trouble.nvim',
@@ -385,14 +393,17 @@ local specs =  {
         },
         config = cfg('lsp.trouble'),
     },
-    'SmiteshP/nvim-navic',
     {
         'zbirenbaum/neodim',
+        event = 'LspAttach',
+        config = cfg('lsp.neodim'),
+    },
+    {
+        'SmiteshP/nvim-navic',
         event = 'LspAttach',
         keys = {
             key('<leader>Tn', '<cmd>NavicToggle<CR>', 'n'),
         },
-        config = cfg('lsp.neodim'),
     },
     -- }}}
     -- }}}
