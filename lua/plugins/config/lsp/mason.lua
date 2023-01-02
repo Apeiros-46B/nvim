@@ -92,6 +92,9 @@ return function(theme)
         if client.name ~= 'null-ls' then
             require('nvim-navic').attach(client, bufnr)
         end
+
+        -- disable semantic token highlighting (because I'm too lazy to rice it)
+        client.server_capabilities.semanticTokensProvider = nil
         -- }}}
     end
     -- }}}

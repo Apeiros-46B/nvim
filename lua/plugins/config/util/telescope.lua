@@ -9,12 +9,9 @@ return function(theme)
     telescope.setup({
     	defaults = {
             -- Prefixes
-            prompt_prefix = '   ',
+            prompt_prefix   = '   ',
     		selection_caret = '  ',
-    		entry_prefix = '   ',
-
-            -- Border
-    		borderchars = { '━', '┃', '━', '┃', '┏', '┓', '┛', '┗' },
+    		entry_prefix    = '   ',
 
             -- Ascending sort
     		sorting_strategy = 'ascending',

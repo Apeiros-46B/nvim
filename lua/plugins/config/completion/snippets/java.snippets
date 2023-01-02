@@ -4,6 +4,14 @@
 snippet "sout" "System.out.println(...);" rbA
 System.out.println($0);
 endsnippet
+
+snippet "read" "String ... = in.readLine()" A
+String ${0:str} = in.readLine();
+endsnippet
+
+snippet "readint" "int ... = Integer.parseInt(in.readLine())" A
+int ${0:n} = Integer.parseInt(in.readLine());
+endsnippet
 # }}}
 
 # {{{ main method
@@ -23,13 +31,13 @@ endsnippet
 
 # {{{ class with BufferedReader and main method
 # r for reader
-snippet rclass "class ... BufferedReader br = ..."
+snippet rclass "class ... BufferedReader in = ..."
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class `!p snip.rv = snip.basename` {
 	public static void main(String[] args) throws Exception {
-		final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		${0:// method body}
 	}
 }
