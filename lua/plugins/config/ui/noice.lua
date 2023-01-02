@@ -376,9 +376,9 @@ return function(theme)
         NoiceFormatProgressTodo            = { bg = colors.gray3    , fg = colors.gray7 , bold    = true },
         NoiceFormatTitle                   = { bg = colors.gray2    , fg = colors.green , bold    = true },
 
-        NoiceLspProgressClient             = { bg = colors.gray1    , fg = colors.green ,                },
-        NoiceLspProgressSpinner            = { bg = colors.gray1    , fg = colors.blue  ,                },
-        NoiceLspProgressTitle              = { bg = colors.gray1    , fg = colors.gray7 ,                },
+        NoiceLspProgressClient             = { bg = colors.gray2    , fg = colors.green ,                },
+        NoiceLspProgressSpinner            = { bg = colors.gray2    , fg = colors.blue  ,                },
+        NoiceLspProgressTitle              = { bg = colors.gray2    , fg = colors.gray7 ,                },
 
         NoiceMini                          = { bg = colors.gray2    , fg = colors.white ,                },
         NoiceMiniTransient                 = { bg = colors.gray2    , fg = colors.gray7 ,                },
