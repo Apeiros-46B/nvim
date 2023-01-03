@@ -15,7 +15,6 @@ return function(theme)
                 filter      = {                  pattern = '^:%s*!',                    icon = ' $ ', lang = 'bash',  title = '' },
                 help        = {                  pattern = '^:%s*he?l?p?%s+',           icon = '  ',                 title = '' },
                 highlight   = {                  pattern = '^:%s*hig?h?l?i?g?h?t?%s+',  icon = '  ',                 title = '' }, -- custom
-                input       = {                                                                                       title = '' },
                 lua         = {                  pattern = '^:%s*lua%s+',               icon = '  ', lang = 'lua',   title = '' },
                 luaInspect  = {                  pattern = '^:%s*lua%s*=%s*',           icon = '  ', lang = 'lua',   title = '' }, -- custom
                 search_down = { kind = 'search', pattern = '^/',                        icon = '  ', lang = 'regex', title = '' },
@@ -35,7 +34,10 @@ return function(theme)
                         size     = { min_width = 20 },
                         position = { row = 2, col = 2 },
                     }
-                }, -- custom
+                },
+
+                -- input
+                input = {},
             },
         },
         messages = {
@@ -161,7 +163,7 @@ return function(theme)
         presets = {
             bottom_search         = false,
             command_palette       = false,
-            long_message_to_split = false,
+            long_message_to_split = true,
             inc_rename            = false,
             lsp_doc_border        = false,
         },

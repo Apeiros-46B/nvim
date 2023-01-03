@@ -363,7 +363,7 @@ local specs =  {
             key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'               , 'n'),
             key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'                , 'n'),
             key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'          , 'n'),
-            key('<M-CR>'    , '<cmd>Lspsaga code_action<CR>'              , 'n'),
+            key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>'    , 'n'),
             key('<M-d>'     , '<cmd>Lspsaga open_floaterm<CR>'            , 'n'),
             key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>', 't'),
             -- }}}
@@ -536,6 +536,7 @@ local specs =  {
     {
         'nvim-telescope/telescope-ui-select.nvim',
         event = 'VeryLazy',
+        config = cfg('ui.telescope_ui_select'),
     },
     -- }}}
 

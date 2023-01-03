@@ -3,17 +3,19 @@ return function(theme)
     -- {{{ imports
     local colors    = theme.colors
     local telescope = require('telescope')
+    local actions   = require('telescope.actions')
     -- }}}
 
     -- {{{ setup
     telescope.setup({
     	defaults = {
-            -- Prefixes
+            -- prefixes
             prompt_prefix   = '   ',
     		selection_caret = '  ',
     		entry_prefix    = '   ',
+            multi_icon      = '*',
 
-            -- Ascending sort
+            -- ascending sort
     		sorting_strategy = 'ascending',
 
             -- Layout
@@ -26,8 +28,37 @@ return function(theme)
             },
             mappings = {
                 i = {
-                    ["<C-o>"] = function(prompt_bufnr) require("telescope.actions").select_default(prompt_bufnr) require("telescope.builtin").resume() end,
+                    ['<C-o>'] = function(prompt_bufnr)
+                        actions.select_default(prompt_bufnr)
+                        require('telescope.builtin').resume()
+                    end,
+
+                    -- scroll preview with ctrl j and ctrl k
+                    ['<C-j>'] = actions.preview_scrolling_down,
+                    ['<C-k>'] = actions.preview_scrolling_up,
+
+                    -- close with ctrl d
+                    ['<C-d>'] = actions.close,
+
+                    ['<Esc>'] = function(_)
+                        -- go to normal mode
+                        vim.api.nvim_input('<C-\\><C-n>')
+
+                        -- disable line numbers in normal mode
+                        vim.defer_fn(function()
+                            vim.wo.number = false
+                            vim.wo.relativenumber = false
+                        end, 0)
+                    end,
                 },
+                n = {
+                    -- scroll preview with ctrl j and ctrl k
+                    ['<C-j>'] = actions.preview_scrolling_down,
+                    ['<C-k>'] = actions.preview_scrolling_up,
+
+                    -- close with ctrl d
+                    ['<C-d>'] = actions.close,
+                }
             },
     	},
     	extensions = {
@@ -37,6 +68,23 @@ return function(theme)
     			override_file_sorter = true,
     			case_mode = 'smart_case',
     		},
+            ['ui-select'] = {
+                require('telescope.themes').get_cursor()
+
+                -- pseudo code / specification for writing custom displays, like the one
+                -- for 'codeactions'
+                -- specific_opts = {
+                --   [kind] = {
+                --     make_indexed = function(items) -> indexed_items, width,
+                --     make_displayer = function(widths) -> displayer
+                --     make_display = function(displayer) -> function(e)
+                --     make_ordinal = function(e) -> string
+                --   },
+                --   -- for example to disable the custom builtin 'codeactions' display
+                --      do the following
+                --   codeactions = false,
+                -- }
+            }
     	},
     })
 
@@ -75,11 +123,14 @@ return function(theme)
 
     local hl = {
         -- {{{ general
-        TelescopeNormal    = { bg = colors.gray2                         },
-        TelescopeSelection = { bg = colors.visual_bg, bold = true        },
+        TelescopeNormal         = { bg = colors.gray2,     fg = colors.gray7               },
+        TelescopeSelection      = { bg = colors.visual_bg, fg = colors.white,  bold = true },
 
-        TelescopeMatching  = { fg = colors.purple,    bold = true        },
-        TelescopeBorder    = { fg = colors.gray2,     bg = colors.gray2  },
+        TelescopeMultiIcon      = { bg = colors.gray2,     fg = colors.purple              },
+        TelescopeMultiSelection = { bg = colors.gray2,     fg = colors.white               },
+
+        TelescopeMatching       = {                        fg = colors.purple, bold = true },
+        TelescopeBorder         = { bg = colors.gray2,     fg = colors.gray2               },
         -- }}}
 
         -- {{{ prompt

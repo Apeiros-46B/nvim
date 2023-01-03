@@ -8,9 +8,10 @@ return function(theme)
     -- {{{ setup
     nvim_tree.setup({
         -- {{{ options
-        disable_netrw = true,
-        hijack_cursor = true,
-        hijack_netrw  = true,
+        disable_netrw  = true,
+        hijack_cursor  = true,
+        hijack_netrw   = true,
+        select_prompts = false,
         -- }}}
 
         -- {{{ view
