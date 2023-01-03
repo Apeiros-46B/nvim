@@ -1,0 +1,5 @@
+# reading arbitrary length string
+snippet readstr "char *input; ..."
+char *${1:input};
+scanf ("%m[^\n]%*c", &$1);
+endsnippet

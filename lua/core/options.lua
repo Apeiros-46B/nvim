@@ -76,7 +76,7 @@ vim.diagnostic.config({
 
 -- {{{ neovide
 if vim.g.neovide then
-    o.guifont = 'JetBrainsMono Nerd Font Mono:h13'
+    o.guifont = 'JetBrainsMono Nerd Font Mono:h7.5'
 
     o.neovide_refresh_rate = 75
     o.neovide_refresh_rate_idle = 5
