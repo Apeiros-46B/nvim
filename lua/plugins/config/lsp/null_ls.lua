@@ -14,37 +14,12 @@ return function(on_attach)
         on_attach = on_attach,
         fallback_severity = vim.diagnostic.severity.ERROR,
         sources = {
-            -- {{{ for documents
-            -- write good
-            builtins.diagnostics.write_good.with({
-                extra_filetypes = { 'norg', 'tex' },
-                -- disable some checks
-                args = { '--no-passive', '--no-adverb', '--text=$TEXT', '--parse' },
-            }),
-
-            -- TODO: fix proselint saying resource not available
-            -- builtins.diagnostics.proselint.with({
-            --     extra_filetypes = { 'norg' },
-            -- }),
-
-            -- TODO: get textlint working
-            -- builtins.diagnostics.textlint.with({
-            --     extra_filetypes = { 'norg', 'tex' }
-            -- }),
-
             -- spelling
-            builtins.diagnostics.codespell.with({
-                filetypes = { 'markdown', 'norg', 'tex' }
-            }),
-            builtins.formatting.codespell.with({
-                filetypes = { 'markdown', 'norg', 'tex' }
-            }),
-            -- }}}
+            builtins.diagnostics.codespell.with({ filetypes = { 'markdown', 'norg', 'tex' } }),
+            builtins.formatting .codespell.with({ filetypes = { 'markdown', 'norg', 'tex' } }),
 
-            -- {{{ for code
             builtins.diagnostics.shellcheck,
             builtins.formatting.shfmt,
-            -- }}}
         },
     })
     -- }}}
