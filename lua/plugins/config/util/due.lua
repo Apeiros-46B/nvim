@@ -5,9 +5,9 @@ return function(theme)
     -- }}}
 
     -- {{{ setup
-    local date_pat         = '(%d%d)%-(%d%d)'
+    local date_pat         = '(%d%d)%.(%d%d)'
     local datetime_pat     = date_pat .. ' (%d+):(%d%d)'
-    local fulldatetime_pat = '(%d%d%d%d)%-' .. datetime_pat
+    local fulldatetime_pat = '(%d%d%d%d)%.' .. datetime_pat
 
     require('due_nvim').setup({
         ft           = '*.norg',
@@ -20,8 +20,8 @@ return function(theme)
         date_pattern           = date_pat .. '$',
         datetime_pattern       = datetime_pat .. '$',
         datetime12_pattern     = datetime_pat     .. ' (%a%a)$',
-        fulldate_pattern       = '(%d%d%d%d)%-'   .. date_pat .. '$',
-        fulldatetime_pattern   = '(%d%d%d%d)%-'   .. datetime_pat .. '$',
+        fulldate_pattern       = '(%d%d%d%d)%.'   .. date_pat .. '$',
+        fulldatetime_pattern   = '(%d%d%d%d)%.'   .. datetime_pat .. '$',
         fulldatetime12_pattern = fulldatetime_pat .. ' (%a%a)$',
 
         use_clock_time   = true,
