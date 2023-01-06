@@ -55,7 +55,7 @@ return function(theme)
 
             signs = {
                 '▔',
-                '━',
+                '─',
                 '▁',
             },
             sign_arrangement = 'skip_first'
