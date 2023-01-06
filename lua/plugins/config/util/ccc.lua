@@ -43,8 +43,5 @@ return function(theme)
             output = true,
         },
     })
-
-    -- enable highlighter
-    vim.cmd('CccHighlighterEnable')
     -- }}}
 end
