@@ -36,17 +36,21 @@ au('InsertLeave', {
 })
 -- }}}
 
--- {{{ autocmd on first insertenter to fix lsp not autostarting
-local lsp_au
-lsp_au = au('InsertEnter', {
+-- {{{ autocmd on first InsertEnter to fix lsp not autostarting
+local lsp_ins_start
+lsp_ins_start = au('InsertEnter', {
     pattern = '*',
     callback = function()
         vim.cmd('do FileType')
 
         -- remove after first run
         if vim.bo.filetype ~= 'TelescopePrompt' then
-            vim.api.nvim_del_autocmd(lsp_au)
+            vim.api.nvim_del_autocmd(lsp_ins_start)
         end
     end,
 })
+-- }}}
+
+-- {{{ set wrapmargin in norg files
+au('BufEnter', { pattern = '*.norg', command = 'setlocal wrapmargin=16' })
 -- }}}

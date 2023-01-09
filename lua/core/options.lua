@@ -57,7 +57,7 @@ o.completeopt = 'menuone,noselect'
 o.termguicolors = true
 
 -- window title
--- o.titleold = 'st'
+o.titleold = 'st'
 o.title = true
 
 -- diagnostics

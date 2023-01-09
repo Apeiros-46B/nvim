@@ -8,7 +8,7 @@ wk.setup({
 
         spelling = {
             enabled     = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-            suggestions = 40, -- how many suggestions should be shown in the list?
+            suggestions = 40,   -- how many suggestions should be shown in the list?
         },
 
         presets = {
