@@ -63,7 +63,7 @@ wk.setup({
 
     hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ '},
 
-    show_help = false,
+    show_help = true,
 
     triggers = 'auto',
 
