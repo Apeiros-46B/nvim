@@ -647,6 +647,10 @@ local specs =  {
         end,
         config = cfg('util.qalc'),
     },
+    {
+        'jbyuki/venn.nvim',
+        event = 'BufEnter',
+    },
     -- }}}
     -- }}}
 }
