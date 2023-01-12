@@ -11,18 +11,20 @@ return function(theme)
 
     require('due_nvim').setup({
         ft           = '*.norg',
+        prescript    = '~ ',
+        prescript_hi = 'DuePrescript',
         today_hi     = 'DueToday',
         overdue_hi   = 'Overdue',
 
-        pattern_start = '%time.due ',
-        pattern_end   = '%',
+        pattern_start = '%due ',
+        pattern_end   = '',
 
-        date_pattern           = date_pat .. '$',
-        datetime_pattern       = datetime_pat .. '$',
-        datetime12_pattern     = datetime_pat     .. ' (%a%a)$',
-        fulldate_pattern       = '(%d%d%d%d)%.'   .. date_pat .. '$',
-        fulldatetime_pattern   = '(%d%d%d%d)%.'   .. datetime_pat .. '$',
-        fulldatetime12_pattern = fulldatetime_pat .. ' (%a%a)$',
+        date_pattern           = date_pat         .. '%%$',
+        datetime_pattern       = datetime_pat     .. '%%$',
+        datetime12_pattern     = datetime_pat     .. ' (%a%a)%%$',
+        fulldate_pattern       = '(%d%d%d%d)%.'   .. date_pat .. '%%$',
+        fulldatetime_pattern   = '(%d%d%d%d)%.'   .. datetime_pat .. '%%$',
+        fulldatetime12_pattern = fulldatetime_pat .. ' (%a%a)%%$',
 
         use_clock_time   = true,
         use_clock_today  = false,
@@ -36,8 +38,9 @@ return function(theme)
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        DueToday = { fg = colors.purple, bold = true },
-        Overdue  = { fg = colors.red,    bold = true },
+        DuePrescript = { fg = colors.gray7,  bold = true },
+        DueToday     = { fg = colors.purple, bold = true },
+        Overdue      = { fg = colors.red,    bold = true },
     }
 
     for k, v in pairs(hl) do set_hl(0, k, v) end
