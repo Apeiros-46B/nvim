@@ -14,8 +14,8 @@ return function(theme)
         today_hi     = 'DueToday',
         overdue_hi   = 'Overdue',
 
-        pattern_start = '#time.due ',
-        pattern_end   = '',
+        pattern_start = '%time.due ',
+        pattern_end   = '%',
 
         date_pattern           = date_pat .. '$',
         datetime_pattern       = datetime_pat .. '$',
