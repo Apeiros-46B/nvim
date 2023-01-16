@@ -333,7 +333,24 @@ local specs =  {
             },
         },
         cmd = 'Mason',
-        init = fileloader('mason.nvim'),
+        init = function()
+            fileloader('mason.nvim')()
+
+            -- start lsp on InsertEnter
+            -- hacky fix for lsp not starting
+            local lsp_ins_start
+            lsp_ins_start = vim.api.nvim_create_autocmd('InsertEnter', {
+                pattern = '*',
+                callback = function()
+                    vim.cmd('do FileType')
+
+                    if vim.bo.filetype ~= 'TelescopePrompt' then
+                        -- remove after first run
+                        vim.api.nvim_del_autocmd(lsp_ins_start)
+                    end
+                end,
+            })
+        end,
         config = cfg('lsp.mason'),
     },
 
@@ -448,6 +465,10 @@ local specs =  {
             key('<leader>nc', '<cmd>Neorg toggle-concealer<CR>'                               , 'n'),
             key('<leader>nC', '<cmd>Neorg toggle-concealer<CR><cmd>Neorg toggle-concealer<CR>', 'n'),
         },
+        init = function()
+            -- set wrapmargin in norg files
+            vim.api.nvim_create_autocmd('BufEnter', { pattern = '*.norg', command = 'setlocal wrapmargin=16' })
+        end,
         config = cfg('lang.neorg'),
     },
     -- }}}
@@ -650,6 +671,13 @@ local specs =  {
     {
         'jbyuki/venn.nvim',
         event = 'BufEnter',
+        keys = {
+            key('<leader>v', ':VBox<CR>', 'v'),
+        },
+        init = function()
+            -- set virtualedit and no wrap in files with .venn extension
+            vim.api.nvim_create_autocmd('BufEnter', { pattern = '*.venn', command = 'setlocal nowrap ve=all ft=venn' })
+        end,
     },
     -- }}}
     -- }}}
