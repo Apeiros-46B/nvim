@@ -17,11 +17,13 @@ return function(theme)
     -- }}}
 
     -- {{{ setup
-    heirline.setup(
-        require('plugins.config.ui.heirline.statusline')(conds, utils, sp, sep, sepl, sepr, align),
-        -- require('plugins.config.ui.heirline.winbar'    )(conds, utils, sp, sep, sepl, sepr, align),
-        nil,
-        require('plugins.config.ui.heirline.tabline'   )(conds, utils, sp, sep, sepl, sepr, align)
-    )
+    local function cfg(module)
+        return require('plugins.config.ui.heirline.' .. module)(conds, utils, sp, sep, sepl, sepr, align)
+    end
+
+    heirline.setup({
+        statusline = cfg('statusline'),
+        tabline = cfg('tabline'),
+    })
     -- }}}
 end

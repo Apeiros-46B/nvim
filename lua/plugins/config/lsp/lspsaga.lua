@@ -6,9 +6,40 @@ return function(theme)
     -- }}}
 
     -- {{{ setup
-    saga.init_lsp_saga({
+    saga.setup({
         -- border_style           = 'bold',
         code_action_lightbulb  = { enable = false, },
+        ui = {
+            theme = 'round',
+            -- border type can be single,double,rounded,solid,shadow.
+            border = 'solid',
+            winblend = 0,
+            expand = '',
+            collapse = '',
+            preview = ' ',
+            code_action = '💡',
+            diagnostic = '🐞',
+            incoming = ' ',
+            outgoing = ' ',
+            colors = {
+                --float window normal background color
+                normal_bg = colors.gray2,
+                --title background color
+                title_bg = colors.gray3,
+                red = colors.red,
+                magenta = colors.purple,
+                orange = colors.orange,
+                yellow = colors.yellow,
+                green = colors.green,
+                cyan = colors.teal,
+                blue = colors.blue,
+                purple = colors.purple,
+                white = colors.white,
+                black = colors.gray1,
+            },
+            kind = {},
+        },
+        symbol_in_winbar = { enable = false },
     })
 
     -- for some reason `diagnostic_header_icon` option won't work, so i have to do this:
