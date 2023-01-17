@@ -377,12 +377,12 @@ local specs =  {
         cmd = 'Lspsaga',
         keys = {
             -- {{{ lspsaga keys
-            key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'               , 'n'),
-            key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'                , 'n'),
-            key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'          , 'n'),
-            key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>'    , 'n'),
-            key('<M-d>'     , '<cmd>Lspsaga open_floaterm<CR>'            , 'n'),
-            key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>', 't'),
+            key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'            , 'n'),
+            key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
+            key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
+            key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>' , 'n'),
+            key('<M-d>'     , '<cmd>Lspsaga term_toggle<CR>'           , 'n'),
+            key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga term_toggle<CR>', 't'),
             -- }}}
         },
         config = cfg('lsp.lspsaga'),
