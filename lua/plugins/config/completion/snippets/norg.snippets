@@ -25,3 +25,36 @@ snippet h6 "****** ..." bA
 ****** $0
 endsnippet
 # }}}
+
+# {{{ latex-related
+snippet beg "begin{} / end{}" bA
+@embed latex
+\begin{${1:align*}}
+$0
+\end{$1}
+@end
+endsnippet
+
+snippet mk "math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+snippet dm "display math" wA
+@math
+$1
+@end
+$0
+endsnippet
+
+snippet em "embedded math" wA
+@embed latex
+$1
+@end
+$0
+endsnippet
+# }}}
