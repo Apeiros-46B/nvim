@@ -7,7 +7,6 @@ return function(theme)
 
     -- {{{ setup
     saga.setup({
-        -- border_style           = 'bold',
         code_action_lightbulb  = { enable = false, },
         ui = {
             theme = 'round',
