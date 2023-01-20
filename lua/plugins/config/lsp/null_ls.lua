@@ -14,10 +14,6 @@ return function(on_attach)
         on_attach = on_attach,
         fallback_severity = vim.diagnostic.severity.ERROR,
         sources = {
-            -- spelling
-            builtins.diagnostics.codespell.with({ filetypes = { 'markdown', 'norg', 'tex' } }),
-            builtins.formatting .codespell.with({ filetypes = { 'markdown', 'norg', 'tex' } }),
-
             builtins.diagnostics.shellcheck,
             builtins.formatting.shfmt,
         },
