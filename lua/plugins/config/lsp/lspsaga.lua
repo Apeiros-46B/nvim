@@ -7,7 +7,7 @@ return function(theme)
 
     -- {{{ setup
     saga.setup({
-        code_action_lightbulb  = { enable = false, },
+        lightbulb  = { enable = false },
         ui = {
             theme = 'round',
             -- border type can be single,double,rounded,solid,shadow.

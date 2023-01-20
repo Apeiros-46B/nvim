@@ -671,6 +671,7 @@ local specs =  {
     {
         'jbyuki/venn.nvim',
         event = 'BufEnter',
+        cmd = { 'VBox' },
         keys = {
             key('<leader>v', ':VBox<CR>', 'v'),
         },
