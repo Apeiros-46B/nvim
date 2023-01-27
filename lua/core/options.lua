@@ -14,7 +14,8 @@ o.nu = true
 o.mouse = 'a'
 o.mousemodel = 'extend'
 
-o.cursorline = false
+o.cursorline = true
+o.cursorlineopt = 'line'
 o.modeline = true
 o.modelines = 5
 

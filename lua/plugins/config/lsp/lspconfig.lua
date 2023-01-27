@@ -7,11 +7,12 @@ local mason_lspconfig = require('mason-lspconfig')
 return function(on_attach)
     -- {{{ setup
     local servers = {
-        'haxe_language_server',
+        'awk_ls',
         'jdtls',
         'julials',
-        'sumneko_lua',
         'pyright',
+        'sumneko_lua',
+        'tsserver',
         'rust_analyzer',
         'zls',
     }

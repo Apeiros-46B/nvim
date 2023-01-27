@@ -16,9 +16,9 @@ return function(theme)
         excluded_filetypes = { 'NvimTree', 'fugitive', 'fugitiveblame', 'gitcommit', 'terminal' },
         excluded_buftypes  = { 'prompt' },
 
-        fadeout_time = 0,
+        fadeout_time = 5000,
 
-        width = 2,
+        width = 1,
         -- }}}
 
         -- {{{ components
@@ -27,7 +27,7 @@ return function(theme)
             enable       = true,
 
             -- drawn in these columns (number between 1 and `width` inclusive)
-            draw_columns = { 2 },
+            draw_columns = { 1 },
 
             -- drawn on these events
             draw_events     = { 'WinScrolled', 'BufEnter', 'FocusGained' },
@@ -46,7 +46,7 @@ return function(theme)
         -- {{{ cursor component
         cursor = {
             enable = true,
-            draw_columns = { 2 },
+            draw_columns = { 1 },
 
             draw_events     = { 'BufEnter', 'FocusGained', 'CursorMoved' },
             draw_events_tab = { 'VimResized', 'TabEnter' },
@@ -65,7 +65,7 @@ return function(theme)
         -- {{{ search component
         search = {
             enable       = true,
-            draw_columns = { 2 },
+            draw_columns = { 1 },
 
             draw_events     = {},
             draw_events_tab = {
@@ -97,7 +97,7 @@ return function(theme)
         -- {{{ diagnostics component
         diagnostics = {
             enable       = true,
-            draw_columns = { 2 },
+            draw_columns = { 1 },
 
             draw_events     = {},
             draw_events_tab = { 'BufEnter', 'DiagnosticChanged', 'TabEnter' },
@@ -116,7 +116,7 @@ return function(theme)
 
         -- {{{ githunks component
         githunks = {
-            enable       = true,
+            enable       = false,
             draw_columns = { 1 },
 
             draw_events     = {},
@@ -148,7 +148,7 @@ return function(theme)
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        ScrlbkunBar              = { bg = colors.gray2                      },
+        ScrlbkunBar              = { bg = colors.gray3                      },
         ScrlbkunCursor           = { bg = colors.diff_mod, fg = colors.blue },
 
         ScrlbkunSearch           = { fg = colors.green },
