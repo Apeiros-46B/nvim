@@ -94,7 +94,7 @@ return function(theme)
         end
 
         -- disable semantic token highlighting (because I'm too lazy to rice it)
-        client.server_capabilities.semanticTokensProvider = nil
+        client.server_capabilities.semanticTokensProvider = {}
         -- }}}
     end
     -- }}}
