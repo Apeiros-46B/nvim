@@ -12,6 +12,7 @@ return function(on_attach)
         'julials',
         'pyright',
         'sumneko_lua',
+        'svelte',
         'tsserver',
         'rust_analyzer',
         'zls',
