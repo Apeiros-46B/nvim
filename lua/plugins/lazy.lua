@@ -466,8 +466,8 @@ local specs =  {
             key('<leader>nC', '<cmd>Neorg toggle-concealer<CR><cmd>Neorg toggle-concealer<CR>', 'n'),
         },
         init = function()
-            -- set wrapmargin in norg files
-            vim.api.nvim_create_autocmd('BufEnter', { pattern = '*.norg', command = 'setlocal wrapmargin=16' })
+            -- set textwidth in norg files
+            vim.api.nvim_create_autocmd('BufEnter', { pattern = '*.norg', command = 'setlocal textwidth=80' })
         end,
         config = cfg('lang.neorg'),
     },
@@ -670,7 +670,7 @@ local specs =  {
     },
     {
         'jbyuki/venn.nvim',
-        event = 'BufEnter',
+        event = 'VeryLazy',
         cmd = { 'VBox' },
         keys = {
             key('<leader>v', ':VBox<CR>', 'v'),
@@ -680,6 +680,13 @@ local specs =  {
             vim.api.nvim_create_autocmd('BufEnter', { pattern = '*.venn', command = 'setlocal nowrap ve=all ft=venn' })
         end,
     },
+    {
+        'jbyuki/instant.nvim',
+        event = 'VeryLazy',
+        config = function()
+            vim.g.instant_username = 'apeiros'
+        end
+    }
     -- }}}
     -- }}}
 }
