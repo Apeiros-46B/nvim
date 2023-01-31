@@ -117,7 +117,7 @@ return function(theme)
         AlphaButtons = { bg = colors.gray2, fg = colors.gray7                },
     }
 
-    if vim.fn.exists('g:neovide') == 1 then
+    if os.getenv('TERM') ~= 'st-256color' then
         hl.AlphaHeader = { bg = colors.gray1, fg = colors.gray7 }
     else
         hl.AlphaHeader = { bg = colors.gray1, fg = colors.gray4 }
