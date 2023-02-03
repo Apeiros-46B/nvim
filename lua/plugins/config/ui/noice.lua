@@ -218,7 +218,7 @@ return function(theme)
                 focusable = false,
 
                 position  = {
-                    row   =   -1,
+                    row   =   -2,
                     col   =   '100%',
                 },
 

@@ -8,6 +8,7 @@ return function(on_attach)
     -- {{{ setup
     local servers = {
         'awk_ls',
+        'gopls',
         'jdtls',
         'julials',
         'pyright',
