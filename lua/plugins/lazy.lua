@@ -106,8 +106,9 @@ local specs =  {
         -- old palette >> new
         commit = 'd855af5',
         pin = true,
-        event = 'VimEnter',
-        init = function()
+        lazy = false,
+        priority = 1000,
+        config = function()
             theme = require('plugins.theme')
         end,
     },
