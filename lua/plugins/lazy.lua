@@ -1,6 +1,8 @@
 ---@diagnostic disable: param-type-mismatch
 -- load plugins
 
+local theme
+
 -- {{{ helpers
 -- {{{ create keymaps
 -- create a full mapping
@@ -21,8 +23,6 @@ end
 -- }}}
 
 -- {{{ call a config
-local theme
-
 local function cfg(module)
     return function()
         local ret = require('plugins.config.' .. module)
@@ -98,6 +98,63 @@ end
 -- }}}
 -- }}}
 
+-- {{{ custom highlights
+local function highlights()
+    local colors = theme.colors
+    local set_hl = vim.api.nvim_set_hl
+
+    local hl = {
+        -- {{{ main ui elements
+        LazyH1            = { bg = colors.teal,  fg = colors.gray1, bold = true },
+        LazyH2            = {                    fg = colors.white, bold = true },
+
+        LazyNormal        = { bg = colors.gray2, fg = colors.white              },
+        LazyButton        = { bg = colors.gray3, fg = colors.white              },
+        LazyButtonActive  = { bg = colors.teal,  fg = colors.gray1, bold = true },
+
+        LazySpecial       = { fg = colors.teal, bold = true },
+        -- }}}
+
+        -- {{{ commit
+        LazyCommit        = { fg = colors.purple                },
+        LazyCommitIssue   = { fg = colors.blue,   italic = true },
+        LazyCommitScope   = { fg = colors.white,  bold   = true },
+        LazyCommitType    = { fg = colors.red,    bold   = true },
+        -- }}}
+
+        -- {{{ properties
+        LazyProp          = { fg = colors.gray7,  italic    = true },
+        LazyValue         = { fg = colors.green                    },
+
+        LazyComment       = { fg = colors.gray7,  italic    = true },
+        LazyDir           = { fg = colors.blue,   bold      = true },
+        LazyUrl           = { fg = colors.teal,   underline = true },
+        -- }}}
+
+        -- {{{ reasons/handlers
+        LazyReasonCmd     = { fg = colors.teal   },
+        LazyReasonEvent   = { fg = colors.purple },
+        LazyReasonFt      = { fg = colors.green  },
+        LazyReasonKeys    = { fg = colors.red    },
+        LazyReasonPlugin  = { fg = colors.yellow },
+        LazyReasonRuntime = { fg = colors.orange },
+        LazyReasonSource  = { fg = colors.teal   },
+        LazyReasonStart   = { fg = colors.blue   },
+        -- }}}
+
+        -- {{{ misc
+        LazyNoCond        = { fg = colors.yellow },
+        LazyTaskError     = { fg = colors.red    },
+        LazyTaskOutput    = { fg = colors.gray7  },
+        LazyProgressDone  = { fg = colors.teal   },
+        LazyProgressTodo  = { fg = colors.gray7  },
+        -- }}}
+    }
+
+    for k, v in pairs(hl) do set_hl(0, k, v) end
+end
+-- }}}
+
 -- {{{ plugin specs
 local specs =  {
     -- {{{ base
@@ -110,6 +167,7 @@ local specs =  {
         priority = 1000,
         config = function()
             theme = require('plugins.theme')
+            highlights()
         end,
     },
     'nvim-lua/plenary.nvim',
@@ -807,66 +865,6 @@ local config = {
     },
     -- }}}
 }
--- }}}
-
--- {{{ custom highlights
--- set before setup because installation of plugins looks nice this way
-do
-    ---@diagnostic disable-next-line: redefined-local
-    local theme = require('plugins.theme')
-    local colors = theme.colors
-    local set_hl = vim.api.nvim_set_hl
-
-    local hl = {
-        -- {{{ main ui elements
-        LazyH1            = { bg = colors.teal,  fg = colors.gray1, bold = true },
-        LazyH2            = {                    fg = colors.white, bold = true },
-
-        LazyNormal        = { bg = colors.gray2, fg = colors.white              },
-        LazyButton        = { bg = colors.gray3, fg = colors.white              },
-        LazyButtonActive  = { bg = colors.teal,  fg = colors.gray1, bold = true },
-
-        LazySpecial       = { fg = colors.teal, bold = true },
-        -- }}}
-
-        -- {{{ commit
-        LazyCommit        = { fg = colors.purple                },
-        LazyCommitIssue   = { fg = colors.blue,   italic = true },
-        LazyCommitScope   = { fg = colors.white,  bold   = true },
-        LazyCommitType    = { fg = colors.red,    bold   = true },
-        -- }}}
-
-        -- {{{ properties
-        LazyProp          = { fg = colors.gray7,  italic    = true },
-        LazyValue         = { fg = colors.green                    },
-
-        LazyComment       = { fg = colors.gray7,  italic    = true },
-        LazyDir           = { fg = colors.blue,   bold      = true },
-        LazyUrl           = { fg = colors.teal,   underline = true },
-        -- }}}
-
-        -- {{{ reasons/handlers
-        LazyReasonCmd     = { fg = colors.teal   },
-        LazyReasonEvent   = { fg = colors.purple },
-        LazyReasonFt      = { fg = colors.green  },
-        LazyReasonKeys    = { fg = colors.red    },
-        LazyReasonPlugin  = { fg = colors.yellow },
-        LazyReasonRuntime = { fg = colors.orange },
-        LazyReasonSource  = { fg = colors.teal   },
-        LazyReasonStart   = { fg = colors.blue   },
-        -- }}}
-
-        -- {{{ misc
-        LazyNoCond        = { fg = colors.yellow },
-        LazyTaskError     = { fg = colors.red    },
-        LazyTaskOutput    = { fg = colors.gray7  },
-        LazyProgressDone  = { fg = colors.teal   },
-        LazyProgressTodo  = { fg = colors.gray7  },
-        -- }}}
-    }
-
-    for k, v in pairs(hl) do set_hl(0, k, v) end
-end
 -- }}}
 
 -- setup
