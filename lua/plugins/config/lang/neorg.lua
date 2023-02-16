@@ -464,11 +464,11 @@ return function(theme)
     -- {{{ same value for 6 highlights
     for i = 1, 6 do
         -- {{{ lists
-        -- ordered lists
-        hl['@neorg.lists.unordered.' .. i .. '.prefix'] = { fg = colors.gray7 }
-
         -- unordered lists
-        hl['@neorg.lists.ordered.'   .. i .. '.prefix'] = { fg = colors.gray7 }
+        hl['@neorg.lists.unordered.' .. i .. '.prefix'] = { fg = colors.gray7, bold = true }
+
+        -- ordered lists
+        hl['@neorg.lists.ordered.'   .. i .. '.prefix'] = { fg = colors.gray7, bold = true }
         -- }}}
 
         -- {{{ todos
