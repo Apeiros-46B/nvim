@@ -12,7 +12,7 @@ return function(on_attach)
         'jdtls',
         'julials',
         'pyright',
-        'sumneko_lua',
+        'lua_ls',
         'svelte',
         'tsserver',
         'rust_analyzer',
@@ -153,7 +153,7 @@ return function(on_attach)
         -- }}}
 
         -- {{{ sumneko_lua
-        sumneko_lua = function()
+        lua_ls = function()
             -- lspconfig server, custom configuration
             add(lspconfig.sumneko_lua, {
                 settings = {
