@@ -127,7 +127,7 @@ return function(theme)
             },
             message = {
                 enabled = true,
-                view    = 'mini',
+                view    = 'mini_transient',
                 opts    = {},
             },
             documentation = {

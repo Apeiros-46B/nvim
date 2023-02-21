@@ -33,7 +33,7 @@ require('nvim-surround').setup({
         ['x'] = '-', -- Strikethrough
         ['!'] = '|', -- spoiler
         ['m'] = '$', -- Math
-        ['C'] = '+', -- inline Comment
+        ['C'] = '%', -- inline Comment
 
         ['M'] = { '*', '/', '_', '|', '`', '^', ',', '$', '=', '+' } -- all Markup
         -- }}}

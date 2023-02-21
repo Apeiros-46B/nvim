@@ -30,7 +30,7 @@ return function(theme)
         use_clock_today  = false,
         use_seconds      = false,
         update_rate      = 1000, -- 1 second
-        default_due_time = '09:00:00',
+        default_due_time = 'midnight',
     })
     -- }}}
 
