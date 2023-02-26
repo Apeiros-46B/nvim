@@ -32,8 +32,6 @@ o.showmode = false
 
 o.laststatus = 3
 
-o.tildeop = true
-
 -- tab settings
 o.tabstop = 4
 o.softtabstop = -1
