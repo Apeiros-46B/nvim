@@ -78,7 +78,7 @@ wk.setup({
 local spc = {
     -- {{{ multi
 	b = {
-		name = 'Buffer',
+		name = 'buffer',
 
         d = 'Delete current',
         f = 'Find',
@@ -96,13 +96,13 @@ local spc = {
 		f = 'Files',
         r = 'Recent files',
         s = 'Synonyms',
-		w = 'Words',
+		w = 'Live grep',
 	},
 
     F = {
         name = 'Format',
 
-        n = 'Neoformat current buffer',
+        c = 'Remove curly quotes',
         s = 'Trim trailing whitespace',
     },
 
@@ -241,7 +241,7 @@ local spc = {
     -- }}}
 }
 
-wk.register(spc, { prefix = '<leader>', })
+wk.register(spc, { prefix = '<leader>' })
 -- }}}
 
 -- {{{ local leader

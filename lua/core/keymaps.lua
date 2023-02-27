@@ -43,6 +43,11 @@ map('n', '<leader>bk', '<Cmd>bl<CR>', opt)
 map('n', '<leader>bl', '<Cmd>bn<CR>', opt)
 -- }}}
 
+-- {{{ [F] format
+-- get rid of annoying curly quotation marks and apostrophes
+map('n', '<leader>Fc', [[<Cmd>%s/[“”‟]/"/g | %s/[‘’‛]/'/g<CR>]], opt)
+-- }}}
+
 -- {{{ [l] lsp
 -- show floating diagnostic
 map('n', '<leader>d', '<Cmd>lua vim.diagnostic.open_float()<CR>', opt)
