@@ -81,8 +81,8 @@ return function(theme)
         buf_map('n', '<leader>lh', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
         buf_map('n', '<leader>ll', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
-        buf_map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-        buf_map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        buf_map('n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+        buf_map('n', '<C-k>', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
         buf_map('n', '<leader>lF', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
         -- }}}

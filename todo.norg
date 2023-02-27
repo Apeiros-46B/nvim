@@ -5,9 +5,9 @@
   - ( ) configure dial and ssr
   - (x) switch from lualine to heirline
   - (x) switch from mini.tabline to heirline
-  - ( ) make a heirline winbar
-  - ( ) fix neorg highlights
+  - (-) make a heirline winbar %maybe not needed? look into lspsaga navic winbar%
+  - (_) fix neorg highlights
   -- don't want to have to prevent treesitter lazy loading though
   - (-) add & configure more plugins
-  -- ( ) noice.nvim
+  -- (x) noice.nvim
   -- ( ) symbols-outline.nvim
