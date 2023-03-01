@@ -676,6 +676,7 @@ local specs =  {
     },
     {
         'echasnovski/mini.nvim',
+        event = 'VeryLazy',
         keys = {
             key('<leader>Fs', '<cmd>lua MiniTrailspace.trim()<CR>', 'n') -- trim trailing spaces
         },
