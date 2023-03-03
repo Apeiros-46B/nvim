@@ -102,8 +102,8 @@ local spc = {
     F = {
         name = 'Format',
 
-        c = 'Remove curly quotes',
         s = 'Trim trailing whitespace',
+        w = 'Remove word processor oddities',
     },
 
 	g = {
