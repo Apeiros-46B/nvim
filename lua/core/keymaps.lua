@@ -72,9 +72,12 @@ map('n', '<leader><CR>h',    '<Cmd>sp | terminal<CR>i')
 -- }}}
 
 -- {{{ misc
--- write shortcuts
+-- exit shortcuts
 map('n', 'WW',    '<Cmd>w<CR>')
+map('n', 'WQ',    '<Cmd>wq<CR>')
 map('n', '<M-w>', '<Cmd>w<CR>')
+map('n', '<M-q>', '<Cmd>wq<CR>')
+map('n', '<M-Q>', '<Cmd>q!<CR>')
 
 map('', '<C-j>', 'J')
 -- }}}
