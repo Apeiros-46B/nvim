@@ -177,8 +177,9 @@ return function(on_attach)
                         diagnostics = {
                             -- recognize globals
                             globals = {
-                                'vim',                                       -- vim-related globals
-                                'awesome', 'client', 'root', 'screen', 'tag' -- awesome-related globals
+                                'vim',                                        -- vim-related globals
+                                'awesome', 'client', 'root', 'screen', 'tag', -- awesome-related globals
+                                'ipe',
                             },
                         },
                         workspace = {
