@@ -9,6 +9,7 @@ return function(on_attach)
     local servers = {
         'awk_ls',
         'gopls',
+        'html',
         'jdtls',
         'julials',
         'pyright',
@@ -130,6 +131,31 @@ return function(on_attach)
                             },
                         }
                     }
+                },
+            })
+        end,
+        -- }}}
+
+        -- {{{ html
+        html = function()
+            -- broadcast snippet capabilities for completion
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+            add(lspconfig.html, {
+                capabilities = capabilities,
+                settings = {
+                    html = {
+                        format = {
+                            templating = true,
+                            wrapLineLength = 120,
+                            wrapAttributes = 'auto',
+                        },
+                        hover = {
+                            documentation = true,
+                            references = true,
+                        },
+                    },
                 },
             })
         end,

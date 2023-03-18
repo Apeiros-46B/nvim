@@ -36,8 +36,8 @@ map('n', '<leader>bl', '<Cmd>bn<CR>')
 -- }}}
 
 -- {{{ [F] format
--- get rid of annoying curly quotation marks and apostrophes
-map('n', '<leader>Fw', [[<Cmd>silent! %s/[“”‟]/"/g | silent! %s/[‘’‛]/'/g<CR>]])
+-- get rid of stuff from word processors                                                                    nbsp
+map('n', '<leader>Fw', [[<Cmd>silent! %s/[“”‟]/"/g | silent! %s/[‘’‛]/'/g | silent! %s/…/.../g | silent! %s/ / /g<CR>]])
 -- }}}
 
 -- {{{ [l] lsp
