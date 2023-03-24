@@ -220,6 +220,11 @@ local specs =  {
         config = cfg('editor.autopairs'),
     },
     {
+        'windwp/nvim-ts-autotag',
+        event = 'InsertEnter',
+        config = {},
+    },
+    {
         'terrortylor/nvim-comment',
         keys = {
             key('<C-c>', '<cmd>CommentToggle<CR>', 'n'),
@@ -506,10 +511,10 @@ local specs =  {
         },
     },
 
-    -- haxe
+    -- pest
     {
-        'jdonaldson/vaxe',
-        ft = 'haxe'
+        'pest-parser/pest.vim',
+        ft = 'pest',
     },
     -- }}}
 

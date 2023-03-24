@@ -115,7 +115,9 @@ return function(on_attach)
                 tools = {
                     autoSetHints = true,
                     inlay_hints = {
+                        auto = false,
                         right_align = false,
+                        only_current_line = true,
                         show_parameter_hints = true,
                         parameter_hints_prefix = '',
                         other_hints_prefix = '',
@@ -146,7 +148,11 @@ return function(on_attach)
                 capabilities = capabilities,
                 settings = {
                     html = {
+                        completion = {
+                            attributeDefaultValue = 'singlequotes'
+                        },
                         format = {
+                            indentInnerHtml = true,
                             templating = true,
                             wrapLineLength = 120,
                             wrapAttributes = 'auto',
@@ -155,6 +161,7 @@ return function(on_attach)
                             documentation = true,
                             references = true,
                         },
+                        mirrorCursorOnMatchingTag = true,
                     },
                 },
             })

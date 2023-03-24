@@ -28,10 +28,10 @@ local function create()
             -- }}}
             -- {{{ comment or uncomment
                 -- there is already a comment, so uncomment the line
-                exec([[exec 's/\(^\s*\)%\(.*\)%\(\s*$\)/\1\2\3' | noh]], false)
+                exec([[exec 'silent! keepp s/\(^\s*\)%\(.*\)%\(\s*$\)/\1\2\3' | noh]], false)
             else
                 -- there isn't a comment, so comment the line
-                exec([[exec 's/\(^\s*\)\(.*\)\(\s*$\)/\1%\2%\3' | noh]], false)
+                exec([[exec 'silent! keepp s/\(^\s*\)\(.*\)\(\s*$\)/\1%\2%\3' | noh]], false)
             end
             -- }}}
         -- }}}
