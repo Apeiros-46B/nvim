@@ -236,9 +236,7 @@ return function(theme)
             ['core.norg.dirman'] = {
                 config = {
                     workspaces = {
-                        school = '~/org/school',
-                        home   = '~/org/home',
-                        gtd    = '~/org/gtd'
+                        org = '~/norg',
                     },
                 },
             },

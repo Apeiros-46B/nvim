@@ -222,7 +222,7 @@ local specs =  {
     {
         'windwp/nvim-ts-autotag',
         event = 'InsertEnter',
-        config = {},
+        opts = {},
     },
     {
         'terrortylor/nvim-comment',
@@ -324,10 +324,6 @@ local specs =  {
     -- }}}
 
     -- {{{ other editing-related embellishments
-    {
-        'jghauser/mkdir.nvim',
-        lazy = false,
-    },
     {
         'cshuaimin/ssr.nvim',
         keys = {
@@ -459,7 +455,7 @@ local specs =  {
         keys = {
             key('<leader>lr', ':IncRename ', 'n'),
         },
-        config = function() require('inc_rename').setup() end,
+        opts = {},
     },
     {
         'folke/trouble.nvim',
@@ -482,9 +478,17 @@ local specs =  {
     },
     {
         'SmiteshP/nvim-navic',
-        event = 'LspAttach',
         keys = {
             key('<leader>Tn', '<cmd>NavicToggle<CR>', 'n'),
+        },
+        cmd = {
+            'NavicToggle',
+        },
+    },
+    {
+        'SmiteshP/nvim-navbuddy',
+        cmd = {
+            'Navbuddy',
         },
     },
     -- }}}
@@ -666,7 +670,26 @@ local specs =  {
     },
     -- }}}
 
-    -- {{{ important utilities
+    -- {{{ other
+    {
+        'mickael-menu/zk-nvim',
+        ft = 'norg',
+        cmd = {
+            'ZkBacklinks',
+            'ZkCd',
+            'ZkIndex',
+            'ZkInsertLink',
+            'ZkInsertLinkAtSelection',
+            'ZkLinks',
+            'ZkMatch',
+            'ZkNew',
+            'ZkNewFromContentSelection',
+            'ZkNewFromTitleSelection',
+            'ZkNotes',
+            'ZkTags',
+        },
+        config = cfg('util.zk'),
+    },
     {
         'kyazdani42/nvim-tree.lua',
         cmd = {
@@ -675,7 +698,7 @@ local specs =  {
             'NvimTreeOpen',
         },
         keys = {
-            key('<C-n>', '<cmd>NvimTreeToggle<CR>', 'n'),
+            key('<M-n>', '<cmd>NvimTreeToggle<CR>', 'n'),
         },
         config = cfg('util.nvimtree'),
     },
@@ -683,7 +706,7 @@ local specs =  {
         'echasnovski/mini.nvim',
         event = 'VeryLazy',
         keys = {
-            key('<leader>Fs', '<cmd>lua MiniTrailspace.trim()<CR>', 'n') -- trim trailing spaces
+            key('<leader>Fs', '<cmd>lua MiniTrailspace.trim()<CR>', 'n')
         },
         init = fileloader('mini.nvim'),
         config = cfg('editor.mini_trailspace'),
@@ -692,9 +715,10 @@ local specs =  {
         'ervandew/regex',
         cmd = 'Regex',
     },
-    -- }}}
-
-    -- {{{ non-essentials
+    {
+        'jghauser/mkdir.nvim',
+        lazy = false,
+    },
     {
         'uga-rosa/ccc.nvim',
         init = fileloader('ccc.nvim'),
