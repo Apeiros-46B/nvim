@@ -16,4 +16,3 @@ npairs.setup({
 })
 
 npairs.get_rule("'")[1].not_filetypes = { 'lisp' }
-npairs.get_rule("`")[1].not_filetypes = { 'lisp' }
