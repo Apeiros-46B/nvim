@@ -10,7 +10,7 @@ return function(theme)
     neorg.setup({
         load = {
             -- {{{ completion
-            ['core.norg.completion'] = {
+            ['core.completion'] = {
                 config = {
                     engine = 'nvim-cmp',
                 },
@@ -18,7 +18,7 @@ return function(theme)
             -- }}}
 
             -- {{{ concealer
-            ['core.norg.concealer'] = {
+            ['core.concealer'] = {
                 config = {
                     -- {{{ icons
                     icons = {
@@ -233,7 +233,7 @@ return function(theme)
             -- }}}
 
             -- {{{ directory manager
-            ['core.norg.dirman'] = {
+            ['core.dirman'] = {
                 config = {
                     workspaces = {
                         org = '~/norg',
