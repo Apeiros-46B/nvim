@@ -15,4 +15,5 @@ npairs.setup({
     },
 })
 
-npairs.get_rule("'")[1].not_filetypes = { 'lisp' }
+-- this doesn't work anymore
+-- require('nvim-autopairs').get_rules("'")[1].not_filetypes = { 'lisp' }

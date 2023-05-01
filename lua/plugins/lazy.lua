@@ -550,6 +550,9 @@ local specs =  {
         build = ':TSUpdate',
         init = fileloader('nvim-treesitter'),
         config = cfg('syntax.treesitter'),
+        dependencies = {
+            'RRethy/nvim-treesitter-endwise'
+        }
     },
     -- }}}
 
