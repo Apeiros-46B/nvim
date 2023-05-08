@@ -41,6 +41,7 @@ o.smartindent = true
 
 -- folding
 o.foldmethod = 'marker'
+o.foldexpr = 'nvim_treesitter#foldexpr()'
 g.markdown_folding = false
 
 -- backup/swap files
