@@ -131,7 +131,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
         {
             init = function(self)
                 if self.is_term then
-                    self.icon = 'ﲵ'
+                    self.icon = '󰞷'
                 else
                     local ext = vim.fn.fnamemodify(self.filename, ':e')
                     self.icon = require('nvim-web-devicons').get_icon(self.filename, ext, { default = true })

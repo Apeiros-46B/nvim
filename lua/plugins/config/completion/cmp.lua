@@ -1,3 +1,5 @@
+-- define a fibonacci function
+
 -- configuration for cmp completion engine
 return function(theme)
     -- {{{ imports
@@ -64,7 +66,7 @@ return function(theme)
                     -- {{{ path
                     local label = entry:get_completion_item().label
 
-                    local icon = (string.find(label, '/$') and '') or require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+                    local icon = (string.find(label, '/$') and '') or require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
 
                     if icon then
                         vim_item.kind = ' ' .. icon .. ' '
@@ -94,8 +96,7 @@ return function(theme)
         sources = cmp.config.sources(
             -- higher number = higher priority
             {
-                -- { name = 'neorg', priority = 4 },
-                -- { name = 'dictionary', keyword_length = 5, priority = 3 },
+                { name = 'codeium', priority = 3 },
                 { name = 'ultisnips', priority = 2 },
                 { name = 'nvim_lsp', priority = 1 },
             },
@@ -176,6 +177,7 @@ return function(theme)
         CmpItemKindVariable      = { fg = colors.gray1,  bg = colors.blue  , bold = true },
 
         CmpItemKindClass         = { fg = colors.gray1,  bg = colors.purple, bold = true },
+        CmpItemKindCodeium       = { fg = colors.gray1,  bg = colors.purple, bold = true },
         CmpItemKindEvent         = { fg = colors.gray1,  bg = colors.purple, bold = true },
         CmpItemKindStruct        = { fg = colors.gray1,  bg = colors.purple, bold = true },
         CmpItemKindValue         = { fg = colors.gray1,  bg = colors.purple, bold = true },

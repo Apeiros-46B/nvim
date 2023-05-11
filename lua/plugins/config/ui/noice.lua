@@ -11,10 +11,10 @@ return function(theme)
             opts    = {},
             format  = {
                 calculator  = {                  pattern = '^=',                        icon = ' % ', lang = 'vim',   title = '' },
-                cmdline     = {                  pattern = '^:',                        icon = ' ﲵ ', lang = 'vim',   title = '' },
+                cmdline     = {                  pattern = '^:',                        icon = ' 󰞷 ', lang = 'vim',   title = '' },
                 filter      = {                  pattern = '^:%s*!',                    icon = ' $ ', lang = 'bash',  title = '' },
                 help        = {                  pattern = '^:%s*he?l?p?%s+',           icon = '  ',                 title = '' },
-                highlight   = {                  pattern = '^:%s*hig?h?l?i?g?h?t?%s+',  icon = '  ',                 title = '' }, -- custom
+                highlight   = {                  pattern = '^:%s*hig?h?l?i?g?h?t?%s+',  icon = ' 󰏘 ',                 title = '' }, -- custom
                 lua         = {                  pattern = '^:%s*lua%s+',               icon = '  ', lang = 'lua',   title = '' },
                 luaInspect  = {                  pattern = '^:%s*lua%s*=%s*',           icon = '  ', lang = 'lua',   title = '' }, -- custom
                 search_down = { kind = 'search', pattern = '^/',                        icon = '  ', lang = 'regex', title = '' },
@@ -27,7 +27,7 @@ return function(theme)
                 -- inc rename
                 IncRename = {
                     pattern = '^:%s*IncRename%s+',
-                    icon    = '  ',
+                    icon    = ' 󰏫 ',
                     title   = '',
                     opts    = {
                         relative = 'cursor',

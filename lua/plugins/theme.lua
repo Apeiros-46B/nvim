@@ -50,7 +50,7 @@ M.colors = {
 
 -- {{{ custom highlights & theme overrides
 -- set diagnostic sign icons
-for type, icon in pairs({ Error = '', Warn = '', Info = '', Hint = '' }) do
+for type, icon in pairs({ Error = '', Warn = '', Info = '', Hint = '' }) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end

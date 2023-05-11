@@ -28,7 +28,7 @@ return function(theme)
 
                             done = {
                                 enabled = true,
-                                icon = '',
+                                icon = '󰄬',
                             },
 
                             pending = {
@@ -150,7 +150,7 @@ return function(theme)
                         -- {{{ others
                         marker = {
                             enabled = true,
-                            icon = '',
+                            icon = '󰀱',
                         },
 
                         definition = {

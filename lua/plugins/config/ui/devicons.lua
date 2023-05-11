@@ -14,7 +14,7 @@ return function(theme)
 
     -- {{{ set icons
     -- default
-    devicons.set_default_icon('', colors.white)
+    devicons.set_default_icon('󰈙', colors.white)
 
     -- overrides
     local function media(type, name)
@@ -23,9 +23,9 @@ return function(theme)
         if type == 'image' then
             icon = ''
         elseif type == 'audio' then
-            icon = ''
+            icon = '󰎈'
         elseif type == 'video' then
-            icon = 'ﳜ'
+            icon = '󰟞'
         end
 
         return {
@@ -66,19 +66,19 @@ return function(theme)
 
         -- {{{ other documents
         pdf = {
-            icon = '',
+            icon = '󰈦',
             color = colors.red,
             cterm_color = '1',
             name = 'PDF'
         },
         xls = {
-            icon = '',
+            icon = '󰈛',
             color = colors.green,
             cterm_color = '2',
             name = 'ExcelLegacy',
         },
         xlsx = {
-            icon = '',
+            icon = '󰈛',
             color = colors.green,
             cterm_color = '2',
             name = 'Excel',
@@ -107,7 +107,7 @@ return function(theme)
 
         -- {{{ other files
         zip = {
-            icon = '',
+            icon = '󰀼',
             color = colors.red,
             cterm_color = '1',
             name = 'Zip',

@@ -66,24 +66,24 @@ return function(theme)
                     git = true,
                 },
                 glyphs = {
-                    default  = '',
-                    symlink  = '',
+                    default  = '󰈙',
+                    symlink  = '󰌹',
                     bookmark = '',
                     folder = {
                         arrow_closed = '│',
                         arrow_open   = '│',
-                        default      = '',
-                        open         = 'ﱮ',
-                        empty        = '',
-                        empty_open   = '',
-                        symlink      = '',
-                        symlink_open = '',
+                        default      = '',
+                        open         = '󰝰',
+                        empty        = '󰉖',
+                        empty_open   = '󰉖',
+                        symlink      = '󰌹',
+                        symlink_open = '󰌹',
                     },
                     git = {
                         unstaged  = '×',
-                        staged    = '',
+                        staged    = '󰄬',
                         unmerged  = '-',
-                        renamed   = '',
+                        renamed   = '󰏫',
                         untracked = '+',
                         deleted   = '',
                         ignored   = '',
@@ -106,7 +106,7 @@ return function(theme)
                 min = vim.diagnostic.severity.HINT,
                 max = vim.diagnostic.severity.ERROR
             },
-            icons = { error = '', warning = '', info = '', hint = '' },
+            icons = { error = '', warning = '', info = '', hint = '' },
         },
 
         filesystem_watchers = {

@@ -166,7 +166,7 @@ local diff   = { 'diff', symbols = { added = '+', modified = '~', removed = '-' 
 -- {{{ lsp
 local diagnostics  = {
     'diagnostics',
-    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+    symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
     diagnostics_color = {
         error = 'LualineDiagnosticError',
         warn  = 'LualineDiagnosticWarn',

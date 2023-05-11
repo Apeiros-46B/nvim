@@ -195,10 +195,14 @@ local specs =  {
         event = 'LspAttach',
     },
     {
-        'uga-rosa/cmp-dictionary',
-        enabled = false,
-        ft = { 'norg', 'markdown' },
-        config = cfg('completion.cmp_dictionary'),
+        'jcdickinson/codeium.nvim',
+        event = 'InsertEnter',
+        cmd = 'Codeium',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'hrsh7th/nvim-cmp',
+        },
+        opts = {}
     },
     -- }}}
 
@@ -820,17 +824,17 @@ local config = {
         icons = {
             loaded     = '+',
             not_loaded = '',
-            cmd        = 'ﲵ',
-            config     = '',
+            cmd        = '󰞷',
+            config     = '󰊕',
             event      = '',
-            ft         = '',
+            ft         = '󰈙',
             init       = '',
-            keys       = '',
-            plugin     = '',
-            runtime    = '',
+            keys       = '󰌋',
+            plugin     = '󰏓',
+            runtime    = '󰆧',
             source     = '',
             start      = '',
-            task       = '',
+            task       = '󰄬',
             lazy       = '   ',
 
             list = {
