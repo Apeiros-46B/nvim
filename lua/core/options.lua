@@ -21,6 +21,7 @@ o.modelines = 5
 
 o.errorbells = false
 
+o.signcolumn = 'yes'
 o.ruler = false
 o.hidden = true
 o.ignorecase = true
