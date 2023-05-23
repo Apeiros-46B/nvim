@@ -195,6 +195,7 @@ local specs =  {
         event = 'LspAttach',
     },
     {
+        enabled = false,
         'jcdickinson/codeium.nvim',
         event = 'InsertEnter',
         cmd = 'Codeium',
@@ -519,10 +520,10 @@ local specs =  {
         },
     },
 
-    -- pest
+    -- flutter
     {
-        'pest-parser/pest.vim',
-        ft = 'pest',
+        'akinsho/flutter-tools.nvim',
+        init = fileloader('flutter-tools.nvim'),
     },
     -- }}}
 
