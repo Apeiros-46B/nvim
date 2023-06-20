@@ -37,7 +37,7 @@ o.laststatus = 3
 o.tabstop = 2
 o.softtabstop = -1
 o.shiftwidth = 0
-o.expandtab = true
+o.expandtab = false
 o.smartindent = true
 
 -- folding
