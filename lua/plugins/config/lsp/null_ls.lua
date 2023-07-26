@@ -14,7 +14,6 @@ null_ls.setup({
     fallback_severity = vim.diagnostic.severity.ERROR,
     sources = {
         builtins.diagnostics.shellcheck,
-        builtins.formatting.shfmt,
     },
 })
 -- }}}

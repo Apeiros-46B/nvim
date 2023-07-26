@@ -35,3 +35,9 @@ au('InsertLeave', {
     command = 'set rnu',
 })
 -- }}}
+
+-- antlr syntax highlighting
+au('BufEnter', {
+	pattern = '*.g4',
+	command = 'set ft=antlr4',
+})

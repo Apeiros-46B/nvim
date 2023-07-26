@@ -196,6 +196,7 @@ local specs =  {
     },
     {
         'jcdickinson/codeium.nvim',
+				enabled = false,
         event = 'InsertEnter',
         cmd = 'Codeium',
         dependencies = {
@@ -749,7 +750,9 @@ local specs =  {
     },
     {
         -- 'Apeiros-46B/qalc.nvim',
-        dir = '/home/apeiros/code/projects/qalc.nvim/',
+        -- dir = '/home/apeiros/code/projects/qalc.nvim/',
+        dir = '/home/apeiros/code/projects/qalc+/',
+				-- enabled = false,
         keys = {
             key('<leader>q', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
         },
@@ -886,7 +889,7 @@ local config = {
                 'rplugin',
                 'rrhelper',
                 'spellfile',
-                'tutor',
+                -- 'tutor',
                 'vimball',
                 'vimballPlugin',
             },

@@ -33,12 +33,13 @@ o.showmode = false
 
 o.laststatus = 3
 
--- tab settings
+-- indent
 o.tabstop = 2
 o.softtabstop = -1
 o.shiftwidth = 0
 o.expandtab = false
 o.smartindent = true
+o.cinoptions = ':0=sl1g0N-sE-s'
 
 -- folding
 o.foldmethod = 'marker'
