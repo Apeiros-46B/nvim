@@ -750,11 +750,10 @@ local specs =  {
     },
     {
         -- 'Apeiros-46B/qalc.nvim',
-        -- dir = '/home/apeiros/code/projects/qalc.nvim/',
-        dir = '/home/apeiros/code/projects/qalc+/',
-				-- enabled = false,
+				dir = '/home/apeiros/code/projects/qalc.nvim/',
         keys = {
-            key('<leader>q', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
+            key('<leader>qn', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
+            key('<leader>qy', '<cmd>QalcYank<CR>', 'n'),  -- yank result
         },
         cmd = {
             'Qalc',

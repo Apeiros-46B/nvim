@@ -1,25 +1,27 @@
 -- configuration for qalc.nvim plugin
--- require('qalc').setup({
---     -- cmd_args = {},
+require('qalc').setup({
+    cmd_args = {},
 
---     -- bufname = '',
---     -- set_ft = 'config', -- config ft for nice highlighting
---     attach_extension = nil, -- autocommand created during lazy loading
+    bufname = '',
+    set_ft = 'config', -- config ft for nice highlighting
+    attach_extension = nil, -- autocommand created during lazy loading
 
---     -- sign = '=',
---     -- show_sign = true,
---     -- right_align = false,
+		yank_default_register = '+',
 
---     -- highlights = {
---     --     sign     = '@conceal',
---     --     result   = '@string',
---     -- },
+    sign = '=',
+    show_sign = true,
+    right_align = false,
 
---     -- diagnostics = {
---     --     underline = true,
---     --     virtual_text = false,
---     --     signs = true,
---     --     update_in_insert = true,
---     --     severity_sort = true,
---     -- }
--- })
+    highlights = {
+        sign     = '@conceal',
+        result   = '@string',
+    },
+
+    diagnostics = {
+        underline = true,
+        virtual_text = false,
+        signs = true,
+        update_in_insert = true,
+        severity_sort = true,
+    }
+})
