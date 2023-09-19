@@ -22,20 +22,17 @@ vim.g.maplocalleader = ','
 
 -- {{{ mapping
 -- note that these are only vanilla nvim keymaps, all plugin keymaps are handled in `plugins.lazy`
--- {{{ [b] buffer
-map('n', '<M-x>', '<Cmd>bd!<CR>')
-map('n', 'X',     '<Cmd>bd<CR>')
-map('n', 'J',     '<Cmd>bp<CR>')
-map('n', 'K',     '<Cmd>bn<CR>')
-
-map('n', '<leader>bd', '<Cmd>bd<CR>')
-map('n', '<leader>bh', '<Cmd>bp<CR>')
-map('n', '<leader>bj', '<Cmd>bf<CR>')
-map('n', '<leader>bk', '<Cmd>bl<CR>')
-map('n', '<leader>bl', '<Cmd>bn<CR>')
+-- {{{ buffer
+map('n', '<leader>x', '<Cmd>bdelete<CR>')
+map('n', '<leader>X', '<Cmd>bdelete!<CR>')
+map('n', '<leader>h', '<Cmd>bfirst<CR>')
+map('n', '<leader>j', '<Cmd>bprevious<CR>')
+map('n', '<leader>k', '<Cmd>bnext<CR>')
+map('n', '<leader>l', '<Cmd>blast<CR>')
 -- }}}
 
 -- {{{ [F] format
+map('n', '<M-q>', 'gwip')
 -- get rid of stuff from word processors                                                                                            nbsp
 map('n', '<leader>Fw', [[<Cmd>silent! keepp %s/[“”‟]/"/g | silent! keepp %s/[‘’‛]/'/g | silent! keepp %s/…/.../g | silent! keepp %s/ / /g<CR>]])
 -- }}}
@@ -47,15 +44,14 @@ map('n', '<leader>d', '<Cmd>lua vim.diagnostic.open_float()<CR>')
 
 -- {{{ [t] tab
 map('n', '<leader>td', '<Cmd>tabclose<CR>')
-map('n', '<leader>th', '<Cmd>tabp<CR>'    )
-map('n', '<leader>tj', '<Cmd>tabfirst<CR>')
-map('n', '<leader>tk', '<Cmd>tablast<CR>' )
-map('n', '<leader>tl', '<Cmd>tabn<CR>'    )
+map('n', '<leader>th', '<Cmd>tabfirst<CR>')
+map('n', '<leader>tj', '<Cmd>tabp<CR>'    )
+map('n', '<leader>tk', '<Cmd>tabn<CR>'    )
+map('n', '<leader>tl', '<Cmd>tablast<CR>' )
 map('n', '<leader>tn', '<Cmd>tabnew<CR>'  )
 -- }}}
 
 -- {{{ [T] toggle
-map('n', '<leader>Tr', '<Cmd>set rnu!<CR>',  {}) -- relative line numbers
 map('n', '<leader>TW', '<Cmd>set wrap!<CR>', {}) -- word wrap
 -- }}}
 
@@ -71,15 +67,8 @@ map('n', '<leader><CR>v',    '<Cmd>vs | terminal<CR>i')
 map('n', '<leader><CR>h',    '<Cmd>sp | terminal<CR>i')
 -- }}}
 
--- {{{ misc
--- exit shortcuts
+-- {{{ other
 map('n', 'WW',    '<Cmd>w<CR>')
-map('n', 'WQ',    '<Cmd>wq<CR>')
-map('n', '<M-w>', '<Cmd>w<CR>')
-map('n', '<M-q>', '<Cmd>wq<CR>')
-map('n', '<M-Q>', '<Cmd>q!<CR>')
-
-map('', '<C-j>', 'J')
 -- }}}
 -- }}}
 

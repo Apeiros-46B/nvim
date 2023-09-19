@@ -8,6 +8,7 @@ local mason_lspconfig = require('mason-lspconfig')
 local servers = {
     'awk_ls',
     'gopls',
+    'hls',
     'html',
     'jdtls',
     'julials',

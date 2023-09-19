@@ -313,15 +313,15 @@ local specs =  {
         },
         keys = {
             -- {{{ hop keys
-            key('<leader>hh', ':HopWord<CR>'           , 'n', { silent = false }),
-            key('<leader>hk', ':HopWordBC<CR>'         , 'n', { silent = false }),
-            key('<leader>hj', ':HopWordAC<CR>'         , 'n', { silent = false }),
-            key('<leader>hl', ':HopWordMW<CR>'         , 'n', { silent = false }),
-            key('<leader>hc', ':HopChar1<CR>'          , 'n', { silent = false }),
-            key('<leader>hC', ':HopChar2<CR>'          , 'n', { silent = false }),
-            key('<leader>hg', ':HopPattern<CR>'        , 'n', { silent = false }),
-            key('<leader>hn', ':HopLineStart<CR>'      , 'n', { silent = false }),
-            key('<leader>hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
+            key('<leader>Hh', ':HopWord<CR>'           , 'n', { silent = false }),
+            key('<leader>Hk', ':HopWordBC<CR>'         , 'n', { silent = false }),
+            key('<leader>Hj', ':HopWordAC<CR>'         , 'n', { silent = false }),
+            key('<leader>Hl', ':HopWordMW<CR>'         , 'n', { silent = false }),
+            key('<leader>Hc', ':HopChar1<CR>'          , 'n', { silent = false }),
+            key('<leader>HC', ':HopChar2<CR>'          , 'n', { silent = false }),
+            key('<leader>Hg', ':HopPattern<CR>'        , 'n', { silent = false }),
+            key('<leader>Hn', ':HopLineStart<CR>'      , 'n', { silent = false }),
+            key('<leader>Hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
             -- }}}
         },
         config = cfg('editor.hop'),
@@ -332,7 +332,7 @@ local specs =  {
     {
         'cshuaimin/ssr.nvim',
         keys = {
-            key('<leader>s', '<cmd>lua require("ssr").open()<CR>', 'n'),
+            key('<leader>FS', '<cmd>lua require("ssr").open()<CR>', 'n'),
         },
         config = cfg('editor.ssr'),
     },
@@ -443,9 +443,9 @@ local specs =  {
         cmd = 'Lspsaga',
         keys = {
             -- {{{ lspsaga keys
-            key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'            , 'n'),
-            key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
-            key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
+            key('<leader>Lf', '<cmd>Lspsaga lsp_finder<CR>'            , 'n'),
+            key('<leader>Lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
+            key('<leader>Ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
             key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>' , 'n'),
             key('<M-d>'     , '<cmd>Lspsaga term_toggle<CR>'           , 'n'),
             key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga term_toggle<CR>', 't'),
@@ -509,13 +509,13 @@ local specs =  {
         'mfussenegger/nvim-jdtls',
         keys = {
             -- {{{ jdtls keys
-            key('<leader>jb',  '<cmd>vs | terminal<CR>imvn clean package -T 4<CR>'   , 'n'),
-            key('<leader>jo',  '<cmd>lua require("jdtls").organize_imports()<CR>'    , 'n'),
-            key('<leader>jev', '<cmd>lua require("jdtls").extract_variable()<CR>'    , 'n'),
-            key('<leader>jev', '<cmd>lua require("jdtls").extract_variable(true)<CR>', 'v'),
-            key('<leader>jec', '<cmd>lua require("jdtls").extract_constant()<CR>'    , 'n'),
-            key('<leader>jec', '<cmd>lua require("jdtls").extract_constant(true)<CR>', 'v'),
-            key('<leader>jem', '<cmd>lua require("jdtls").extract_method(true)<CR>'  , 'v'),
+            key('<leader>Jb',  '<cmd>vs | terminal<CR>imvn clean package -T 4<CR>'   , 'n'),
+            key('<leader>Jo',  '<cmd>lua require("jdtls").organize_imports()<CR>'    , 'n'),
+            key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable()<CR>'    , 'n'),
+            key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable(true)<CR>', 'v'),
+            key('<leader>Jec', '<cmd>lua require("jdtls").extract_constant()<CR>'    , 'n'),
+            key('<leader>Jec', '<cmd>lua require("jdtls").extract_constant(true)<CR>', 'v'),
+            key('<leader>Jem', '<cmd>lua require("jdtls").extract_method(true)<CR>'  , 'v'),
             -- }}}
         },
     },
@@ -728,29 +728,13 @@ local specs =  {
         lazy = false,
     },
     {
-        'uga-rosa/ccc.nvim',
-        init = fileloader('ccc.nvim'),
-        keys = {
-            key('<leader>c',  '<cmd>CccPick<CR>',              'n'),
-            key('<leader>Tc', '<cmd>CccHighlighterToggle<CR>', 'n')
-        },
-        cmd = {
-            'CccPick',
-            'CccConvert',
-            'CccHighlighterToggle',
-            'CccHighlighterEnable',
-            'CccHighlighterDisable',
-        },
-        config = cfg('util.ccc')
-    },
-    {
         'NFrid/due.nvim',
         ft = 'norg',
         config = cfg('util.due'),
     },
     {
         -- 'Apeiros-46B/qalc.nvim',
-				dir = '/home/apeiros/code/projects/qalc.nvim/',
+	    dir = '/home/apeiros/code/projects/qalc.nvim/',
         keys = {
             key('<leader>qn', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
             key('<leader>qy', '<cmd>QalcYank<CR>', 'n'),  -- yank result

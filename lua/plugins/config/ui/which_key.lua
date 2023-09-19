@@ -80,12 +80,7 @@ local spc = {
 	b = {
 		name = 'buffer',
 
-        d = 'Delete current',
         f = 'Find',
-		h = 'Focus previous',
-		j = 'Focus first',
-		k = 'Focus last',
-		l = 'Focus next',
 	    p = 'Picker',
 	},
 
@@ -103,7 +98,8 @@ local spc = {
         name = 'Format',
 
         s = 'Trim trailing whitespace',
-        w = 'Remove word processor oddities',
+        S = 'SSR',
+        w = 'Remove word processor junk',
     },
 
 	g = {
@@ -128,7 +124,7 @@ local spc = {
 		U = 'Reset buffer index',
 	},
 
-	h = {
+	H = {
 		name = 'Hop',
 
 		h = 'Hop by word',
@@ -142,7 +138,7 @@ local spc = {
 		n = 'Hop by line start',
 	},
 
-    j = {
+    J = {
         name = 'JDTLS',
 
         e = {
@@ -157,7 +153,7 @@ local spc = {
         o = 'Organize imports',
     },
 
-    l = {
+    L = {
         name = 'LSP',
 
         g = {
@@ -194,6 +190,13 @@ local spc = {
         C = 'Refresh concealer',
         t = 'Open note for today',
         T = 'Setup three-column notes',
+    },
+
+    q = {
+        name = 'Qalc',
+
+        n = 'Open',
+        y = 'Yank result',
     },
 
     t = {
@@ -234,10 +237,14 @@ local spc = {
     -- }}}
 
     -- {{{ single
-    c = 'Pick color',
     d = 'Show diagnostic',
-    q = 'Open Qalc',
-    s = 'SSR'
+
+    x = 'Kill buffer',
+    X = 'Kill buffer (forcefully)',
+    h = 'First buffer',
+    j = 'Previous buffer',
+    k = 'Next buffer',
+    l = 'Last buffer',
     -- }}}
 }
 

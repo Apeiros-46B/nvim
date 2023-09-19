@@ -6,7 +6,7 @@ require('qalc').setup({
     set_ft = 'config', -- config ft for nice highlighting
     attach_extension = nil, -- autocommand created during lazy loading
 
-		yank_default_register = '+',
+    yank_default_register = '+',
 
     sign = '=',
     show_sign = true,
