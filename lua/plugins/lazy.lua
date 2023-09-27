@@ -572,6 +572,10 @@ local specs =  {
         init = fileloader('todo-comments.nvim'),
         config = cfg('syntax.todo_comments'),
     },
+    {
+        'norcalli/nvim-colorizer.lua',
+        init = fileloader('nvim-colorizer.lua'),
+    },
     -- }}}
     -- }}}
 
