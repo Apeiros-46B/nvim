@@ -196,7 +196,7 @@ local specs =  {
     },
     {
         'jcdickinson/codeium.nvim',
-				enabled = false,
+        enabled = false,
         event = 'InsertEnter',
         cmd = 'Codeium',
         dependencies = {
@@ -439,6 +439,7 @@ local specs =  {
     },
     {
         'glepnir/lspsaga.nvim',
+        enabled = false,
         event = 'LspAttach',
         cmd = 'Lspsaga',
         keys = {

@@ -57,6 +57,9 @@ end
 
 -- set highlights
 M.hl = {
+    -- non-TS highlighting
+    String = { link = '@string' },
+
     NormalFloat = { bg = M.colors.gray2                      }, -- set background for floating windows
     FloatBorder = { bg = M.colors.gray2, fg = M.colors.gray2 }, -- remove border for floating windows
     EndOfBuffer = { bg = M.colors.gray1, fg = M.colors.gray1 }, -- remove tildes from gutter

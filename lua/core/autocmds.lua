@@ -36,8 +36,20 @@ au('InsertLeave', {
 })
 -- }}}
 
--- antlr syntax highlighting
-au('BufEnter', {
-	pattern = '*.g4',
-	command = 'set ft=antlr4',
+-- antlr4
+vim.filetype.add({ extension = { g4 = 'antlr4' } })
+
+-- uiua
+vim.filetype.add({ extension = { ua = 'uiua' } })
+--> format on save
+vim.api.nvim_create_autocmd('BufWritePost', {
+    pattern = '*.ua',
+    callback = function(_)
+        vim.cmd(([[
+            silent! !uiua fmt %s
+            mkview
+            e
+            loadview
+        ]]):format(vim.fn.expand('<amatch>')))
+    end,
 })
