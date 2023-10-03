@@ -15,5 +15,7 @@ npairs.setup({
     },
 })
 
--- this doesn't work anymore
--- require('nvim-autopairs').get_rules("'")[1].not_filetypes = { 'lisp' }
+local sq_not_ft = npairs.get_rule("'")[1].not_filetypes
+
+sq_not_ft[#sq_not_ft+1] = 'lisp'
+sq_not_ft[#sq_not_ft+1] = 'uiua'
