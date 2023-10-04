@@ -69,7 +69,7 @@ syn region  uiuaStr start='\$ ' end='$' contains=uiuaEsc,uiuaFmt
 syn match   uiuaSignature '|\d\+\(\.\d\+\)\?'
 
 " scopes, debug, <- assignments, and stranded arrays
-syn keyword uiuaFaded dum[p]
+syn keyword uiuaFaded dump
 syn match   uiuaFaded '^---$\|[←~_]'
 
 " comments
