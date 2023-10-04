@@ -5,12 +5,12 @@ endif
 let b:current_syntax = "uiua"
 syn iskeyword a-z,A-Z
 
-syn keyword uiuaIdentifier tag e os family arch ExeExt DllExt sep
+syn keyword uiuaIdentifier e os family arch ExeExt DllExt sep
 syn match   uiuaIdentifier '[a-zA-Z]\+'
 
 " {{{ functions and modifiers
 " constants
-syn keyword uiuaNoadic eta pi tau inf[inity] rand[om]
+syn keyword uiuaNoadic eta pi tau inf[inity] rand[om] tag
 syn match   uiuaNoadic '[ηπ∞τ⚂]'
 
 " monadic and dyadic pervasive functions
@@ -18,20 +18,20 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠]'
 
 " monadic array functions
-syn keyword uiuaMonadic len[gth] shap[e] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] gra[de] cla[ssify] ded[uplicate] con[stant] bre[ak] rec[ur] wai[t] pars[e] gen typ[e]
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] gra[de] cla[ssify] ded[uplicate] con[stant] bre[ak] rec[ur] wai[t] parse gen type
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⌂⊛⊝□!⎋↬↲]'
 
 " dyadic array functions
-syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] resh[ape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] dea[l]
+syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] resh[ape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] deal
 syn match   uiuaDyadic '[⊂⊟≅⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
-syn keyword uiuaMonadicMod dip eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[eat] red[uce] fol[d] sca[n] gro[up] part[ition] inv[ert] bot[h] spa[wn]
-syn match   uiuaMonadicMod '[→∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∷↰]'
+syn keyword uiuaMonadicMod dip eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[eat] red[uce] fol[d] sca[n] gro[up] par[tition] inv[ert] bot[h] spa[wn]
+syn match   uiuaMonadicMod '[⊙∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∩↰]'
 
 " dyadic and triadic modifiers
-syn keyword uiuaOtherMod lev[el] und[er] fil[e] bin[d] for[k] tri[dent] shar[e] try
-syn match   uiuaOtherMod /[⍚⍜⍛'⊃∋⇉⍣?]/
+syn keyword uiuaOtherMod lev[el] und[er] fil[l] for[k] tri[dent] try
+syn match   uiuaOtherMod /[⍚⍜⬚'⊃∋⍣?]/
 " }}}
 
 " {{{ system functions
