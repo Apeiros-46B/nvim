@@ -39,7 +39,7 @@ syn match   uiuaOtherMod /[⍚⍜⬚'⊃∋⍣?]/
 " &i and &ime, &s and &sc, etc. is correct
 
 " modules
-syn keyword uiuaModuleSF us[e]
+syn keyword uiuaModuleSF use
 syn match   uiuaModuleSF '&i'
 
 syn match   uiuaDyadicSF  '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt)'
