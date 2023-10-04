@@ -35,14 +35,16 @@ syn match   uiuaOtherMod /[⍚⍜⍛'⊃∋⇉⍣?]/
 " }}}
 
 " {{{ system functions
-" defined in inverse order so &sc and &s precedence is correct
-syn match   uiuaDyadicSF  '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt)'
-syn match   uiuaMonadicSF '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fe|fld|fif|fras|frab|fwa|imd|ims|ad|ap|ast|tcpl|tcpa|tcpc|tcpsnb|tcpaddr)'
-syn match   uiuaNoadicSF  '\v\&(sc|ts|args|n|asr)'
+" defined in inverse order so precedence for e.g.
+" &i and &ime, &s and &sc, etc. is correct
 
 " modules
 syn keyword uiuaModuleSF us[e]
 syn match   uiuaModuleSF '&i'
+
+syn match   uiuaDyadicSF  '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt)'
+syn match   uiuaMonadicSF '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fe|fld|fif|fras|frab|fwa|imd|ims|ad|ap|ast|tcpl|tcpa|tcpc|tcpsnb|tcpaddr)'
+syn match   uiuaNoadicSF  '\v\&(sc|ts|args|n|asr)'
 " }}}
 
 " {{{ literals
