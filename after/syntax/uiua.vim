@@ -10,23 +10,23 @@ syn match   uiuaIdentifier '[a-zA-Z]\+'
 
 " {{{ functions and modifiers
 " constants
-syn keyword uiuaNoadic et[a] pi tau inf[inity] rand[om]
+syn keyword uiuaNoadic eta pi tau inf[inity] rand[om]
 syn match   uiuaNoadic '[ηπ∞τ⚂]'
 
 " monadic and dyadic pervasive functions
-syn keyword uiuaPervasive not sig[n] ab[solute] sq[rt] sin[e] flo[or] ce[iling] rou[nd] mo[dulus] pow[er] lo[garithm] mi[nimum] max[imum] at[angent]
+syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] rou[nd] mod[ulus] pow[er] log[arithm] min[imum] max[imum] ata[ngent]
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠]'
 
 " monadic array functions
-syn keyword uiuaMonadic len[gth] shap[e] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] gra[de] cl[assify] ded[uplicate] con[stant] br[eak] rec[ur] wa[it] pars[e] ge[n] ty[pe]
+syn keyword uiuaMonadic len[gth] shap[e] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] gra[de] cla[ssify] ded[uplicate] con[stant] bre[ak] rec[ur] wai[t] pars[e] gen typ[e]
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⌂⊛⊝□!⎋↬↲]'
 
 " dyadic array functions
-syn keyword uiuaDyadic j[oin] cou[ple] mat[ch] pic[k] se[lect] resh[ape] tak[e] dr[op] rot[ate] wi[ndows] k[eep] fin[d] me[mber] ind[exof] as[sert] dea[l]
+syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] resh[ape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] dea[l]
 syn match   uiuaDyadic '[⊂⊟≅⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
-syn keyword uiuaMonadicMod dip ea[ch] row[s] dis[tribute] tab[le] cr[oss] rep[eat] red[uce] fol[d] sc[an] gro[up] part[ition] inv[ert] bo[th] sp[awn]
+syn keyword uiuaMonadicMod dip eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[eat] red[uce] fol[d] sca[n] gro[up] part[ition] inv[ert] bot[h] spa[wn]
 syn match   uiuaMonadicMod '[→∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∷↰]'
 
 " dyadic and triadic modifiers
