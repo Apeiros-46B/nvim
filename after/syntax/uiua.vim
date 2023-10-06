@@ -30,8 +30,8 @@ syn keyword uiuaMonadicMod dip eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[ea
 syn match   uiuaMonadicMod '[⊙∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∩↰]'
 
 " dyadic and triadic modifiers
-syn keyword uiuaOtherMod lev[el] und[er] fil[l] for[k] try
-syn match   uiuaOtherMod /[⍚⍜⬚'⊃⍣?]/
+syn keyword uiuaOtherMod lev[el] und[er] fil[l] bra[cket] for[k] try
+syn match   uiuaOtherMod /[⍚⍜⬚'⊓⊃⍣?]/
 " }}}
 
 " {{{ system functions
