@@ -26,8 +26,8 @@ syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] resh[ape] tak[e] 
 syn match   uiuaDyadic '[⊂⊟≅⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
-syn keyword uiuaMonadicMod dip eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[eat] red[uce] fol[d] sca[n] gro[up] par[tition] inv[ert] bot[h] spa[wn]
-syn match   uiuaMonadicMod '[⊙∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∩↰]'
+syn keyword uiuaMonadicMod di[p] ga[p] eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[eat] red[uce] fol[d] sca[n] gro[up] par[tition] inv[ert] bot[h] spa[wn]
+syn match   uiuaMonadicMod '[⊙⋅∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∩↰]'
 
 " dyadic and triadic modifiers
 syn keyword uiuaOtherMod lev[el] und[er] fil[l] bra[cket] for[k] try
