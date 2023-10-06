@@ -30,8 +30,8 @@ syn keyword uiuaMonadicMod dip eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[ea
 syn match   uiuaMonadicMod '[⊙∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∩↰]'
 
 " dyadic and triadic modifiers
-syn keyword uiuaOtherMod lev[el] und[er] fil[l] for[k] tri[dent] try
-syn match   uiuaOtherMod /[⍚⍜⬚'⊃∋⍣?]/
+syn keyword uiuaOtherMod lev[el] und[er] fil[l] for[k] try
+syn match   uiuaOtherMod /[⍚⍜⬚'⊃⍣?]/
 " }}}
 
 " {{{ system functions
@@ -42,7 +42,7 @@ syn match   uiuaOtherMod /[⍚⍜⬚'⊃∋⍣?]/
 syn keyword uiuaModuleSF use
 syn match   uiuaModuleSF '&i'
 
-syn match   uiuaDyadicSF  '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt)'
+syn match   uiuaDyadicSF  '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw)'
 syn match   uiuaMonadicSF '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fe|fld|fif|fras|frab|fwa|imd|ims|ad|ap|ast|tcpl|tcpa|tcpc|tcpsnb|tcpaddr)'
 syn match   uiuaNoadicSF  '\v\&(sc|ts|args|n|asr)'
 " }}}
