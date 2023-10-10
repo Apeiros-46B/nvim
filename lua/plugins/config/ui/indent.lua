@@ -18,7 +18,7 @@ return function(theme)
 
     -- {{{ setup
     ibl.setup({
-        debounce = 100,
+        debounce = 200,
         indent = {
             char = '│',
             highlight = 'IblIndent',
