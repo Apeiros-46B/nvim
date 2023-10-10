@@ -18,8 +18,8 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠]'
 
 " monadic array functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] ris[e] fal[e] cla[ssify] ded[uplicate] box unb[ox] bre[ak] rec[ur] wait call parse gen type sig
-syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⍏⍖⊛⊝□⊔!⎋↬]'
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] rec[ur] wait call parse gen type sig
+syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⍏⍖⊚⊛⊝□⊔!⎋↬]'
 
 " dyadic array functions
 syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] resh[ape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] deal
