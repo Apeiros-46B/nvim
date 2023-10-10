@@ -15,7 +15,9 @@ npairs.setup({
     },
 })
 
-local sq_not_ft = npairs.get_rule("'")[1].not_filetypes
+local noquote = npairs.get_rule("'")[1].not_filetypes
 
-sq_not_ft[#sq_not_ft+1] = 'lisp'
-sq_not_ft[#sq_not_ft+1] = 'uiua'
+noquote[#noquote+1] = 'lisp'
+noquote[#noquote+1] = 'uiua'
+
+npairs.get_rule("`").not_filetypes = { 'uiua' }

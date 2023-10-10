@@ -641,6 +641,12 @@ local specs =  {
         event = 'VeryLazy',
         config = cfg('ui.telescope_ui_select'),
     },
+
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        init = fileloader('indent-blankline.nvim'),
+        config = cfg('ui.indent')
+    },
     -- }}}
 
     -- {{{ not needed for now
