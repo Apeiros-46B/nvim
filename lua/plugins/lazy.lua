@@ -313,15 +313,15 @@ local specs =  {
         },
         keys = {
             -- {{{ hop keys
-            key('<leader>Hh', ':HopWord<CR>'           , 'n', { silent = false }),
-            key('<leader>Hk', ':HopWordBC<CR>'         , 'n', { silent = false }),
-            key('<leader>Hj', ':HopWordAC<CR>'         , 'n', { silent = false }),
-            key('<leader>Hl', ':HopWordMW<CR>'         , 'n', { silent = false }),
-            key('<leader>Hc', ':HopChar1<CR>'          , 'n', { silent = false }),
-            key('<leader>HC', ':HopChar2<CR>'          , 'n', { silent = false }),
-            key('<leader>Hg', ':HopPattern<CR>'        , 'n', { silent = false }),
-            key('<leader>Hn', ':HopLineStart<CR>'      , 'n', { silent = false }),
-            key('<leader>Hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
+            key('<leader>hh', ':HopWord<CR>'           , 'n', { silent = false }),
+            key('<leader>hk', ':HopWordBC<CR>'         , 'n', { silent = false }),
+            key('<leader>hj', ':HopWordAC<CR>'         , 'n', { silent = false }),
+            key('<leader>hl', ':HopWordMW<CR>'         , 'n', { silent = false }),
+            key('<leader>hc', ':HopChar1<CR>'          , 'n', { silent = false }),
+            key('<leader>hC', ':HopChar2<CR>'          , 'n', { silent = false }),
+            key('<leader>hg', ':HopPattern<CR>'        , 'n', { silent = false }),
+            key('<leader>hn', ':HopLineStart<CR>'      , 'n', { silent = false }),
+            key('<leader>hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
             -- }}}
         },
         config = cfg('editor.hop'),
@@ -444,9 +444,9 @@ local specs =  {
         cmd = 'Lspsaga',
         keys = {
             -- {{{ lspsaga keys
-            key('<leader>Lf', '<cmd>Lspsaga lsp_finder<CR>'            , 'n'),
-            key('<leader>Lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
-            key('<leader>Ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
+            key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'            , 'n'),
+            key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
+            key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
             key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>' , 'n'),
             key('<M-d>'     , '<cmd>Lspsaga term_toggle<CR>'           , 'n'),
             key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga term_toggle<CR>', 't'),

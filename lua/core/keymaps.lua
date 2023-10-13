@@ -25,10 +25,8 @@ vim.g.maplocalleader = ','
 -- {{{ buffer
 map('n', '<leader>x', '<Cmd>bdelete<CR>')
 map('n', '<leader>X', '<Cmd>bdelete!<CR>')
-map('n', '<leader>h', '<Cmd>bfirst<CR>')
 map('n', '<leader>j', '<Cmd>bprevious<CR>')
 map('n', '<leader>k', '<Cmd>bnext<CR>')
-map('n', '<leader>l', '<Cmd>blast<CR>')
 -- }}}
 
 -- {{{ [F] format

@@ -124,7 +124,7 @@ local spc = {
 		U = 'Reset buffer index',
 	},
 
-	H = {
+	h = {
 		name = 'Hop',
 
 		h = 'Hop by word',
@@ -138,86 +138,86 @@ local spc = {
 		n = 'Hop by line start',
 	},
 
-    J = {
-        name = 'JDTLS',
+  J = {
+      name = 'JDTLS',
 
-        e = {
-            name = 'Extract',
+      e = {
+          name = 'Extract',
 
-            v = 'Variable',
-            c = 'Constant',
-            m = 'Method',
-        },
+          v = 'Variable',
+          c = 'Constant',
+          m = 'Method',
+      },
 
-        b = 'Build project with Maven',
-        o = 'Organize imports',
-    },
+      b = 'Build project with Maven',
+      o = 'Organize imports',
+  },
 
-    L = {
-        name = 'LSP',
+  l = {
+      name = 'LSP',
 
-        g = {
-            name = 'Go to',
+      g = {
+          name = 'Go to',
 
-            d = 'Definition',
-            D = 'Declaration',
-            i = 'Implementation',
-            t = 'Type definition',
-        },
+          d = 'Definition',
+          D = 'Declaration',
+          i = 'Implementation',
+          t = 'Type definition',
+      },
 
-        w = {
-            name = 'Workspace',
+      w = {
+          name = 'Workspace',
 
-            a = 'Add folder',
-            l = 'List folders',
-            r = 'Remove folder',
-        },
+          a = 'Add folder',
+          l = 'List folders',
+          r = 'Remove folder',
+      },
 
-        d = 'Peek definition',
-        f = 'Find defs and refs',
-        h = 'Previous diagnostic',
-        l = 'Next diagnostic',
-        p = 'Open hover doc',
-        r = 'Rename',
-        R = 'See references',
-        t = 'Trouble',
-    },
+      d = 'Peek definition',
+      f = 'Find defs and refs',
+      h = 'Previous diagnostic',
+      l = 'Next diagnostic',
+      p = 'Open hover doc',
+      r = 'Rename',
+      R = 'See references',
+      t = 'Trouble',
+  },
 
-    n = {
-        name = 'Neorg',
+  n = {
+      name = 'Neorg',
 
-        c = 'Toggle concealer',
-        C = 'Refresh concealer',
-        t = 'Open note for today',
-        T = 'Setup three-column notes',
-    },
+      c = 'Toggle concealer',
+      C = 'Refresh concealer',
+      t = 'Open note for today',
+      T = 'Setup three-column notes',
+  },
 
-    q = {
-        name = 'Qalc',
+  q = {
+      name = 'Qalc',
 
-        n = 'Open',
-        y = 'Yank result',
-    },
+      n = 'Open',
+      y = 'Yank result',
+  },
 
-    t = {
-        name = 'Tab',
+  t = {
+      name = 'Tab',
 
-        d = 'Delete current',
-        h = 'Focus previous',
-        j = 'Focus first',
-        k = 'Focus last',
-        l = 'Focus next',
-        n = 'New',
-    },
+      d = 'Delete current',
+      h = 'Focus previous',
+      j = 'Focus first',
+      k = 'Focus last',
+      l = 'Focus next',
+      n = 'New',
+  },
 
-    T = {
-        name = 'Toggle',
+  T = {
+      name = 'Toggle',
 
-        n = 'Navic',
-        r = 'Relative line numbers',
-        W = 'Word wrap',
-        w = 'Word counter',
-    },
+      n = 'Navic',
+      r = 'Relative line numbers',
+      W = 'Word wrap',
+      w = 'Word counter',
+  },
 
 	y = {
 		name = 'Yank',
@@ -241,10 +241,8 @@ local spc = {
 
     x = 'Kill buffer',
     X = 'Kill buffer (forcefully)',
-    h = 'First buffer',
     j = 'Previous buffer',
     k = 'Next buffer',
-    l = 'Last buffer',
     -- }}}
 }
 
