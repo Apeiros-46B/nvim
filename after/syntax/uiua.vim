@@ -5,8 +5,8 @@ endif
 let b:current_syntax = "uiua"
 syn iskeyword a-z
 
-syn keyword uiuaIdentifier e os family arch ExeExt DllExt sep
-syn match   uiuaIdentifier '[a-zA-Z]\+'
+syn keyword uiuaIdentifier e os Family Arch ExeExt DllExt Sep NumProcs
+syn match   uiuaIdentifier '[a-zA-Z]\+!*'
 
 " {{{ functions and modifiers
 " constants
@@ -18,20 +18,24 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠]'
 
 " monadic array functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] rec[ur] wait call parse gen type sig utf
-syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⍏⍖⊚⊛⊝□⊔!⎋↬]'
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] rec[ur] wait call parse gen type utf
+syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⍏⍖⊚⊛⊝□⊔⎋↬]'
 
 " dyadic array functions
-syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] resh[ape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] deal regex
-syn match   uiuaDyadic '[⊂⊟≅⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
+syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] deal regex
+syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
-syn keyword uiuaMonadicMod di[p] ga[p] eac[h] row[s] dis[tribute] tab[le] cro[ss] rep[eat] reduce fol[d] scan gro[up] par[tition] inv[ert] bot[h] spawn
-syn match   uiuaMonadicMod '[⊙⋅∵≡∺⊞⊠⍥/∧⊕⊜\\⍘∩]'
+syn keyword uiuaMonadicMod di[p] ga[p] eac[h] row[s] dis[tribute] tri[bute] tab[le] cro[ss] rep[eat] reduce scan gro[up] par[tition] inv[ert] bot[h] pac[k] spawn
+syn match   uiuaMonadicMod '[⊙⋅∵≡∺≐⊞⊠⍥/⊕⊜\\⍘∩⊐]'
 
-" dyadic and triadic modifiers
-syn keyword uiuaOtherMod lev[el] und[er] fil[l] bind bra[cket] for[k] try if
-syn match   uiuaOtherMod /[⍚⍜⬚'⊓⊃⍣?]/
+" non-monadic modifiers
+syn keyword uiuaOtherMod lev[el] com[binate] und[er] fil[l] bind fol[d] bra[cket] for[k] try if
+syn match   uiuaOtherMod /[≑◳⍜⬚'∧⊓⊃⍣?]/
+
+" ocean notation
+syn keyword uiuaOcean roc[k] surface dee[p] aby[ss] sea[bed]
+syn match   uiuaOcean /[⋄~≊≃∸]/
 " }}}
 
 " {{{ system functions
@@ -39,17 +43,17 @@ syn match   uiuaOtherMod /[⍚⍜⬚'⊓⊃⍣?]/
 " &i and &ime, &s and &sc, etc. is correct
 
 " modules
-syn keyword uiuaModuleSF use
-syn match   uiuaModuleSF '&i'
+syn match   uiuaModuleSF   '&i'
 
-syn match   uiuaDyadicSF  '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw)'
-syn match   uiuaMonadicSF '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fe|fld|fif|fras|frab|fwa|imd|ims|gife|ad|ap|ast|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
-syn match   uiuaNoadicSF  '\v\&(sc|ts|args|asr)'
+syn match   uiuaDyadicSF   '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw)'
+syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fe|fld|fif|fras|frab|fwa|imd|ims|gife|ad|ap|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
+syn match   uiuaNoadicSF   '\v\&(sc|ts|args|asr)'
+syn match   uiuaModifierSF '&ast'
 " }}}
 
 " {{{ literals
 " numeric literal
-syn match   uiuaNum '[¯`]\?\d\+\(\.\d\+\)\?\(e[¯`]\?\d\+\)\?'
+syn match   uiuaNum 'NaN\|[¯`]\?\d\+\(\.\d\+\)\?\(e[¯`]\?\d\+\)\?'
 
 " escape sequence and format placeholder
 syn match   uiuaEsc contained /\\[\\'"_0nrt]/
@@ -68,12 +72,12 @@ syn region  uiuaStr start='\$ ' end='$' contains=uiuaEsc,uiuaFmt
 " function signatures
 syn match   uiuaSignature '|\d\+\(\.\d\+\)\?'
 
-" scopes, <- assignments, and stranded arrays
+" test scopes, <- assignments, and stranded arrays
 syn match   uiuaFaded '^---$\|[←_]'
 
 " debug functions
-syn keyword uiuaDebug dump
-syn match   uiuaDebug '[~]'
+syn keyword uiuaDebug dump tra[ce]
+syn match   uiuaDebug '⸮'
 
 " comments
 syn match   uiuaComment '#.*$'
@@ -89,6 +93,8 @@ hi def link uiuaDyadic     Identifier
 hi def link uiuaDyadicSF   Identifier
 hi def link uiuaMonadicMod Type
 hi def link uiuaOtherMod   Number
+hi def link uiuaModifierSF Type
+hi def link uiuaOcean      String
 hi def link uiuaModuleSF   Keyword
 
 hi def link uiuaNum        Number
