@@ -6,7 +6,7 @@ let b:current_syntax = "uiua"
 syn iskeyword a-z
 
 syn keyword uiuaIdentifier e os Family Arch ExeExt DllExt Sep NumProcs
-syn match   uiuaIdentifier '[a-zA-Z]\+!*'
+syn match   uiuaIdentifier '\a\+!*'
 
 " {{{ functions and modifiers
 " constants
@@ -18,7 +18,7 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠]'
 
 " monadic array functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tra[nspose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] rec[ur] wait call parse gen type utf
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] rec[ur] wait call parse gen type utf
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⍏⍖⊚⊛⊝□⊔⎋↬]'
 
 " dyadic array functions
@@ -72,11 +72,14 @@ syn region  uiuaStr start='\$ ' end='$' contains=uiuaEsc,uiuaFmt
 " function signatures
 syn match   uiuaSignature '|\d\+\(\.\d\+\)\?'
 
+" function placeholders in custom modifiers
+syn match   uiuaFunctionPlaceholder '\^\d\+\(\.\d\+\)\?'
+
 " test scopes, <- assignments, and stranded arrays
 syn match   uiuaFaded '^---$\|[←_]'
 
 " debug functions
-syn keyword uiuaDebug dump tra[ce]
+syn keyword uiuaDebug dump trac[e]
 syn match   uiuaDebug '⸮'
 
 " comments
@@ -84,27 +87,28 @@ syn match   uiuaComment '#.*$'
 " }}}
 
 " {{{ highlight groups
-hi def link uiuaNoadic     Keyword
-hi def link uiuaNoadicSF   Keyword
-hi def link uiuaPervasive  Operator
-hi def link uiuaMonadic    Function
-hi def link uiuaMonadicSF  Function
-hi def link uiuaDyadic     Identifier
-hi def link uiuaDyadicSF   Identifier
-hi def link uiuaMonadicMod Type
-hi def link uiuaOtherMod   Number
-hi def link uiuaModifierSF Type
-hi def link uiuaOcean      String
-hi def link uiuaModuleSF   Keyword
+hi def link uiuaNoadic              Keyword
+hi def link uiuaNoadicSF            Keyword
+hi def link uiuaPervasive           Operator
+hi def link uiuaMonadic             Function
+hi def link uiuaMonadicSF           Function
+hi def link uiuaDyadic              Identifier
+hi def link uiuaDyadicSF            Identifier
+hi def link uiuaMonadicMod          Type
+hi def link uiuaOtherMod            Number
+hi def link uiuaModifierSF          Type
+hi def link uiuaOcean               String
+hi def link uiuaModuleSF            Keyword
 
-hi def link uiuaNum        Number
-hi def link uiuaEsc        SpecialChar
-hi def link uiuaChar       String
-hi def link uiuaFmt        Operator
-hi def link uiuaStr        String
+hi def link uiuaNum                 Number
+hi def link uiuaEsc                 SpecialChar
+hi def link uiuaChar                String
+hi def link uiuaFmt                 Operator
+hi def link uiuaStr                 String
 
-hi def link uiuaSignature  Type
-hi def link uiuaDebug      Operator
-hi def link uiuaFaded      Comment
-hi def link uiuaComment    Comment
+hi def link uiuaSignature           Type
+hi def link uiuaFunctionPlaceholder Keyword
+hi def link uiuaDebug               Operator
+hi def link uiuaFaded               Comment
+hi def link uiuaComment             Comment
 " }}}
