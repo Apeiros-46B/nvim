@@ -5,7 +5,7 @@ endif
 let b:current_syntax = "uiua"
 syn iskeyword a-z
 
-syn keyword uiuaIdentifier e os Family Arch ExeExt DllExt Sep NumProcs
+syn keyword uiuaIdentifier e os Family Arch ExeExt DllExt Sep NumProcs MaxInt
 syn match   uiuaIdentifier '\a\+!*'
 
 " {{{ functions and modifiers
@@ -17,12 +17,12 @@ syn match   uiuaNoadic '[ηπ∞τ⚂]'
 syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] rou[nd] add subtract multiply divide mod[ulus] pow[er] log[arithm] min[imum] max[imum] ata[ngent]
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠]'
 
-" monadic array functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] rec[ur] wait call parse gen type utf
+" monadic non-pervasive functions
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] wait recv tryrecv gen parse utf type
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⍏⍖⊚⊛⊝□⊔⎋↬]'
 
-" dyadic array functions
-syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] deal regex
+" dyadic non-pervasive functions
+syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] send deal regex
 syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
@@ -46,7 +46,7 @@ syn match   uiuaOcean /[⋄~≊≃∸]/
 syn match   uiuaModuleSF   '&i'
 
 syn match   uiuaDyadicSF   '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw)'
-syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fe|fld|fif|fras|frab|fwa|imd|ims|gife|ad|ap|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
+syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fd|ftr|fe|fld|fif|fras|frab|fwa|imd|ims|gife|ad|ap|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
 syn match   uiuaNoadicSF   '\v\&(sc|ts|args|asr)'
 syn match   uiuaModifierSF '&ast'
 " }}}
