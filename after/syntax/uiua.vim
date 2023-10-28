@@ -46,7 +46,7 @@ syn match   uiuaOcean /[⋄~≊≃∸]/
 syn match   uiuaModuleSF   '&i'
 
 syn match   uiuaDyadicSF   '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw)'
-syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|var|runi|runc|cd|cl|fo|fc|fd|ftr|fe|fld|fif|fras|frab|fwa|imd|ims|gife|ad|ap|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
+syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|raw|var|runi|runc|cd|cl|fo|fc|fde|ftr|fe|fld|fif|fras|frab|fwa|imd|ims|gifd|gife|ad|ap|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
 syn match   uiuaNoadicSF   '\v\&(sc|ts|args|asr)'
 syn match   uiuaModifierSF '&ast'
 " }}}
