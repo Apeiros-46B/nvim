@@ -26,15 +26,18 @@ syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] tak[e] 
 syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
-syn keyword uiuaMonadicMod di[p] ga[p] eac[h] row[s] dis[tribute] tri[bute] tab[le] cro[ss] rep[eat] reduce scan gro[up] par[tition] inv[ert] bot[h] pac[k] spawn
-syn match   uiuaMonadicMod '[⊙⋅∵≡∺≐⊞⊠⍥/⊕⊜\\⍘∩⊐]'
+" gap, reach, and dip single-letter spellings aren't accounted for
+" 1. it's not very useful since adjacent ones won't be highlighted
+" 2. it'll get formatted anyways
+syn keyword uiuaMonadicMod gap rea[ch] dip eac[h] row[s] dis[tribute] tri[bute] tab[le] cro[ss] rep[eat] reduce scan gro[up] par[tition] inv[ert] bot[h] pac[k] spawn
+syn match   uiuaMonadicMod '[⋅⟜⊙∵≡∺≐⊞⊠⍥/⊕⊜\\⍘∩⊐]'
 
 " non-monadic modifiers
 syn keyword uiuaOtherMod lev[el] com[binate] und[er] fil[l] bind fol[d] bra[cket] for[k] try if
 syn match   uiuaOtherMod /[≑◳⍜⬚'∧⊓⊃⍣?]/
 
 " ocean notation
-syn keyword uiuaOcean roc[k] surface dee[p] aby[ss] sea[bed]
+syn keyword uiuaOcean ro[ck] surface de[ep] ab[yss] se[abed]
 syn match   uiuaOcean /[⋄~≊≃∸]/
 " }}}
 
