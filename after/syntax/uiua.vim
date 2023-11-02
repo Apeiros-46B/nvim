@@ -33,8 +33,8 @@ syn keyword uiuaMonadicMod gap rea[ch] dip eac[h] row[s] dis[tribute] tri[bute] 
 syn match   uiuaMonadicMod '[⋅⟜⊙∵≡∺≐⊞⊠⍥/⊕⊜\\⍘∩⊐]'
 
 " non-monadic modifiers
-syn keyword uiuaOtherMod lev[el] com[binate] und[er] fil[l] bind fol[d] bra[cket] for[k] try if
-syn match   uiuaOtherMod /[≑◳⍜⬚'∧⊓⊃⍣?]/
+syn keyword uiuaOtherMod lev[el] com[binate] do und[er] fil[l] fol[d] bra[cket] for[k] try if
+syn match   uiuaOtherMod /[≑◳⍢⍜⬚∧⊓⊃⍣?]/
 
 " ocean notation
 syn keyword uiuaOcean ro[ck] surface de[ep] ab[yss] se[abed]
