@@ -18,27 +18,23 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠]'
 
 " monadic non-pervasive functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] bre[ak] wait recv tryrecv gen parse utf type
-syn match   uiuaMonadic '[⧻△⇡⊢⇌♭⋯⍉⍏⍖⊚⊛⊝□⊔⎋↬]'
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box unb[ox] wait recv tryrecv gen parse utf type
+syn match   uiuaMonadic '[⧻△⇡⊢⇌♭¤⋯⍉⍏⍖⊚⊛⊝□⊔↬]'
 
 " dyadic non-pervasive functions
-syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] send deal regex
-syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯↙↘↻◫▽⌕∊⊗⍤]'
+syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] rer[ank] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] send deal regex
+syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯☇↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
 " gap, reach, and dip single-letter spellings aren't accounted for
 " 1. it's not very useful since adjacent ones won't be highlighted
 " 2. it'll get formatted anyways
-syn keyword uiuaMonadicMod gap rea[ch] dip eac[h] row[s] dis[tribute] tri[bute] tab[le] cro[ss] rep[eat] reduce scan gro[up] par[tition] inv[ert] bot[h] pac[k] spawn
-syn match   uiuaMonadicMod '[⋅⟜⊙∵≡∺≐⊞⊠⍥/⊕⊜\\⍘∩⊐]'
+syn keyword uiuaMonadicMod gap rea[ch] dip eac[h] row[s] tab[le] cro[ss] rep[eat] fol[d] reduce scan gro[up] par[tition] inv[ert] bot[h] pac[k] spawn
+syn match   uiuaMonadicMod '[⋅⟜⊙∵≡⊞⊠⍥∧/\\⊕⊜⍘∩⊐]'
 
 " non-monadic modifiers
-syn keyword uiuaOtherMod lev[el] com[binate] do und[er] fil[l] fol[d] bra[cket] for[k] try if
-syn match   uiuaOtherMod /[≑◳⍢⍜⬚∧⊓⊃⍣?]/
-
-" ocean notation
-syn keyword uiuaOcean ro[ck] surface de[ep] ab[yss] se[abed]
-syn match   uiuaOcean /[⋄~≊≃∸]/
+syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] try
+syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⍣]/
 " }}}
 
 " {{{ system functions
