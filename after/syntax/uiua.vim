@@ -9,9 +9,9 @@ syn keyword uiuaIdentifier e os Family Arch ExeExt DllExt Sep NumProcs MaxInt
 syn match   uiuaIdentifier '\a\+!*'
 
 " {{{ functions and modifiers
-" constants
-syn keyword uiuaNoadic eta pi tau inf[inity] rand[om] tag now
-syn match   uiuaNoadic '[ηπ∞τ⚂]'
+" constants and recur
+syn keyword uiuaNoadic eta pi tau inf[inity] rand[om] recu[r] tag now
+syn match   uiuaNoadic '[ηπ∞τ⚂↫]'
 
 " monadic and dyadic pervasive functions
 syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] rou[nd] add subtract multiply divide mod[ulus] pow[er] log[arithm] min[imum] max[imum] ata[ngent] com[plex]
@@ -26,15 +26,15 @@ syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] rer[ank
 syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯☇↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
-" gap, reach, and dip single-letter spellings aren't accounted for
+" gap, dip, and identity single-letter spellings aren't accounted for
 " 1. it's not very useful since adjacent ones won't be highlighted
 " 2. it'll get formatted anyways
-syn keyword uiuaMonadicMod gap rea[ch] dip eac[h] row[s] tab[le] cro[ss] rep[eat] fol[d] reduce scan gro[up] par[tition] inv[ert] bot[h] pac[k] spawn
-syn match   uiuaMonadicMod '[⋅⟜⊙∵≡⊞⊠⍥∧/\\⊕⊜⍘∩⊐]'
+syn keyword uiuaMonadicMod gap dip eac[h] row[s] tab[le] cro[ss] rep[eat] fol[d] reduce scan gro[up] par[tition] inv[ert] bot[h] pac[k] rect[ify] thi[s] spawn
+syn match   uiuaMonadicMod '[⋅⊙∵≡⊞⊠⍥∧/\\⊕⊜⍘∩⊐⌅↬]'
 
 " non-monadic modifiers
-syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] try
-syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⍣]/
+syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] all try setinv setund
+syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⋔⍣]/
 " }}}
 
 " {{{ system functions
@@ -74,12 +74,12 @@ syn match   uiuaSignature '|\d\+\(\.\d\+\)\?'
 " function placeholders in custom modifiers
 syn match   uiuaFunctionPlaceholder '\^\d\+\(\.\d\+\)\?'
 
-" test scopes, <- assignments, and stranded arrays
-syn match   uiuaFaded '^---$\|[←_]'
+" test scopes, <- assignments, stranded arrays, and ' or '' line joining
+syn match   uiuaFaded '^---$\|[←_']'
 
 " debug functions
-syn keyword uiuaDebug dump trac[e]
-syn match   uiuaDebug '⸮'
+syn keyword uiuaDebug dump stack trac[e]
+syn match   uiuaDebug '[⸮?]'
 
 " comments
 syn match   uiuaComment '#.*$'
