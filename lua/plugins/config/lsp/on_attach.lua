@@ -30,13 +30,15 @@ return function(client, bufnr)
     -- }}}
 
     -- {{{ other
-    -- attach navic and navbuddy
-    if client.name ~= 'null-ls' and client.name ~= 'zk' then
-        require('nvim-navic').attach(client, bufnr)
-        require('nvim-navbuddy').attach(client, bufnr)
-    end
+    if client then
+        -- attach navic and navbuddy
+        if client.name ~= 'null-ls' and client.name ~= 'zk' then
+            require('nvim-navic').attach(client, bufnr)
+            require('nvim-navbuddy').attach(client, bufnr)
+        end
 
-    -- disable semantic token highlighting (because I'm too lazy to rice it)
-    client.server_capabilities.semanticTokensProvider = {}
+        -- disable semantic token highlighting (because I'm too lazy to rice it)
+        client.server_capabilities.semanticTokensProvider = {}
+    end
     -- }}}
 end
