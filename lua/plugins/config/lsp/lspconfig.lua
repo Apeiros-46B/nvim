@@ -203,7 +203,7 @@ mason_lspconfig.setup_handlers({
     -- {{{ lua_ls
     lua_ls = function()
         -- lspconfig server, custom configuration
-        add(lspconfig.sumneko_lua, {
+        add(lspconfig.lua_ls, {
             settings = {
                 Lua = {
                     runtime = {

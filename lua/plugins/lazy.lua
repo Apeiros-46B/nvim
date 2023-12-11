@@ -355,6 +355,24 @@ local specs =  {
     {
         'lewis6991/gitsigns.nvim',
         init = gitloader('gitsigns.nvim'),
+        keys = {
+            key(']c', '<cmd>lua require"gitsigns.actions".next_hunk()<CR>', 'n'),
+            key('[c', '<cmd>lua require"gitsigns.actions".prev_hunk()<CR>', 'n'),
+
+            key('<leader>gs', '<cmd>lua require"gitsigns".stage_hunk()<CR>', 'n'),
+            key('<leader>gs', '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'v'),
+            key('<leader>gu', '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', 'n'),
+            key('<leader>gr', '<cmd>lua require"gitsigns".reset_hunk()<CR>', 'n'),
+            key('<leader>gr', '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'v'),
+            key('<leader>gR', '<cmd>lua require"gitsigns".reset_buffer()<CR>', 'n'),
+            key('<leader>gp', '<cmd>lua require"gitsigns".preview_hunk()<CR>', 'n'),
+            key('<leader>gb', '<cmd>Gitsigns blame_line<CR>', 'n'),
+            key('<leader>gS', '<cmd>lua require"gitsigns".stage_buffer()<CR>', 'n'),
+            key('<leader>gU', '<cmd>lua require"gitsigns".reset_buffer_index()<CR>', 'n'),
+
+            key('ih', ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>', 'o'),
+            key('ih', ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>', 'x'),
+        },
         config = cfg('git.gitsigns'),
     },
     -- }}}

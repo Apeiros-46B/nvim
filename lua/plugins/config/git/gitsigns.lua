@@ -1,27 +1,4 @@
 -- configuration for gitsigns plugin
--- {{{ keymaps
-local keymaps = {
-    noremap = true,
-    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
-    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
-
-    ['n <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-    ['v <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-    ['n <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-    ['v <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-    ['n <leader>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-    ['n <leader>gp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-    ['n <leader>gb'] = '<cmd>Gitsigns blame_line<CR>',
-    ['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
-    ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
-
-    -- Text objects
-    ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-    ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-}
--- }}}
-
 -- {{{ setup
 require('gitsigns').setup({
     signs = {
@@ -37,8 +14,6 @@ require('gitsigns').setup({
     numhl = false, -- toggle with `:Gitsigns toggle_numhl`
     linehl = false, -- toggle with `:Gitsigns toggle_linehl`
     word_diff = false, -- toggle with `:Gitsigns toggle_word_diff`
-
-    keymaps = keymaps,
 
     watch_gitdir = {
         interval = 1000,
