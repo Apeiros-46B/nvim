@@ -84,6 +84,7 @@ M.hl = {
     -- search
     Search    = { bg = M.colors.diff_add, fg = M.colors.green, bold = true },
     IncSearch = { bg = M.colors.green   , fg = M.colors.gray1, bold = true },
+    CurSearch = { bg = M.colors.green   , fg = M.colors.gray1, bold = true },
 
     -- window separator
     WinSeparator = { bg = M.colors.gray1, fg = M.colors.gray3 },

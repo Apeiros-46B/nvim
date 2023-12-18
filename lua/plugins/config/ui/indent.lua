@@ -9,7 +9,7 @@ return function(theme)
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        IblIndent = { fg = colors.gray3 },
+        IblIndent = { fg = colors.gray2 },
         IblScope  = { fg = colors.gray5 },
     }
 
@@ -28,7 +28,24 @@ return function(theme)
             show_start = false,
             show_end = false,
             highlight = 'IblScope',
-        }
+        },
+        exclude = {
+            filetypes = {
+                -- defaults
+                'lspinfo',
+                'packer',
+                'checkhealth',
+                'help',
+                'man',
+                'gitcommit',
+                'TelescopePrompt',
+                'TelescopeResults',
+                '',
+
+                -- venn.nvim files
+                'venn',
+            },
+        },
     })
     -- }}}
 end
