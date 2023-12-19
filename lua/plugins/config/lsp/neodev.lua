@@ -7,5 +7,5 @@ require('neodev').setup({
         plugins = { 'nvim-treesitter', 'plenary.nvim', 'telescope.nvim' },
     },
     setup_jsonls = false,
-    lspconfig = true,
+    lspconfig = false,
 })

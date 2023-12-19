@@ -496,11 +496,6 @@ local specs =  {
         config = cfg('lsp.trouble'),
     },
     {
-        'zbirenbaum/neodim',
-        event = 'LspAttach',
-        config = cfg('lsp.neodim'),
-    },
-    {
         'SmiteshP/nvim-navic',
         keys = {
             key('<leader>Tn', '<cmd>NavicToggle<CR>', 'n'),
@@ -709,25 +704,6 @@ local specs =  {
 
     -- {{{ other
     {
-        'mickael-menu/zk-nvim',
-        ft = 'norg',
-        cmd = {
-            'ZkBacklinks',
-            'ZkCd',
-            'ZkIndex',
-            'ZkInsertLink',
-            'ZkInsertLinkAtSelection',
-            'ZkLinks',
-            'ZkMatch',
-            'ZkNew',
-            'ZkNewFromContentSelection',
-            'ZkNewFromTitleSelection',
-            'ZkNotes',
-            'ZkTags',
-        },
-        config = cfg('util.zk'),
-    },
-    {
         'kyazdani42/nvim-tree.lua',
         cmd = {
             'NvimTreeFocus',
@@ -755,11 +731,6 @@ local specs =  {
     {
         'jghauser/mkdir.nvim',
         lazy = false,
-    },
-    {
-        'NFrid/due.nvim',
-        ft = 'norg',
-        config = cfg('util.due'),
     },
     {
         -- 'Apeiros-46B/qalc.nvim',

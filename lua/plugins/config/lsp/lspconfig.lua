@@ -226,6 +226,9 @@ mason_lspconfig.setup_handlers({
                     telemetry = { enable = false },
                 },
             },
+
+            -- setup neodev
+            before_init = require('neodev.lsp').before_init,
         })
     end,
     -- }}}
