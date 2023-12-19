@@ -30,7 +30,10 @@ local on_attach = require('plugins.config.lsp.on_attach')
 
 -- {{{ helper
 local function add(server, opts)
-    local new_opts = { on_attach = on_attach }
+    local new_opts = {
+        on_attach = on_attach,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    }
 
     if opts then
         -- add on_attach
