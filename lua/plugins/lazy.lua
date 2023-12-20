@@ -753,12 +753,13 @@ local specs =  {
     },
     {
         'jbyuki/venn.nvim',
-        event = 'VeryLazy',
         cmd = { 'VBox' },
         keys = {
             key('<leader>v', ':VBox<CR>', 'v'),
         },
         init = function()
+            fileloader('venn.nvim')()
+
             -- set virtualedit and no wrap in files with .venn extension
             vim.api.nvim_create_autocmd('BufEnter', { pattern = '*.venn', command = 'setlocal nowrap ve=all ft=venn' })
         end,

@@ -238,11 +238,10 @@ local spc = {
 
     -- {{{ single
     d = 'Show diagnostic',
-
-    x = 'Kill buffer',
-    X = 'Kill buffer (forcefully)',
     j = 'Previous buffer',
     k = 'Next buffer',
+    x = 'Kill buffer',
+    X = 'Kill buffer (forcefully)',
     -- }}}
 }
 
