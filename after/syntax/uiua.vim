@@ -1,3 +1,5 @@
+" uiua 0.8.0
+
 if exists("b:current_syntax")
 	finish
 endif
@@ -18,11 +20,11 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠ℂ]'
 
 " monadic non-pervasive functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box par[se] wait recv tryrecv gen utf type
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] box par[se] wait recv tryrecv gen utf type memo comptime
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭¤⋯⍉⍏⍖⊚⊛⊝□⋕↬]'
 
 " dyadic non-pervasive functions
-syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] rer[ank] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] send deal regex
+syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] rer[ank] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] send deal regex map has get insert remove
 syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯☇↙↘↻◫▽⌕∊⊗⍤]'
 
 " monadic modifiers
@@ -33,8 +35,8 @@ syn keyword uiuaMonadicMod gap dip eac[h] row[s] tab[le] cro[ss] rep[eat] fol[d]
 syn match   uiuaMonadicMod '[⋅⊙∵≡⊞⊠⍥∧/\\⊕⊜°∩⊐⌅↬]'
 
 " non-monadic modifiers
-syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] all try setinv setund
-syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⋔⍣]/
+syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] cas[cade] all try setinv setund
+syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⪾⋔⍣]/
 " }}}
 
 " {{{ system functions
