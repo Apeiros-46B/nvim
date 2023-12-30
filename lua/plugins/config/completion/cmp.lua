@@ -1,35 +1,4 @@
--- define a fibonacci function
-
 -- configuration for cmp completion engine
-local lspkind_name_map = {
-    Text          = 'text',
-    Method        = 'method',
-    Function      = 'func',
-    Constructor   = 'ctor',
-    Field         = 'field',
-    Variable      = 'var',
-    Class         = 'class',
-    Interface     = 'trait',
-    Module        = 'mod',
-    Property      = 'prop',
-    Unit          = 'unit',
-    Value         = 'val',
-    Enum          = 'enum',
-    Keyword       = 'keyw',
-    Snippet       = 'snip',
-    Color         = 'color',
-    File          = 'file',
-    Reference     = 'ref',
-    Folder        = 'dir',
-    EnumMember    = 'enumMb',
-    Constant      = 'const',
-    Struct        = 'struct',
-    Event         = 'event',
-    Operator      = 'oper',
-    TypeParameter = 'type',
-
-    Codeium = 'ai'
-}
 
 return function(theme)
     -- {{{ imports
@@ -37,6 +6,38 @@ return function(theme)
     local cmp = require('cmp')
     local lspkind = require('lspkind')
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    -- }}}
+
+    -- {{{ helper funcs and maps
+    local lspkind_name_map = {
+        Text          = 'text',
+        Method        = 'method',
+        Function      = 'func',
+        Constructor   = 'ctor',
+        Field         = 'field',
+        Variable      = 'var',
+        Class         = 'class',
+        Interface     = 'trait',
+        Module        = 'mod',
+        Property      = 'prop',
+        Unit          = 'unit',
+        Value         = 'val',
+        Enum          = 'enum',
+        Keyword       = 'keyw',
+        Snippet       = 'snip',
+        Color         = 'color',
+        File          = 'file',
+        Reference     = 'ref',
+        Folder        = 'dir',
+        EnumMember    = 'enumMb',
+        Constant      = 'const',
+        Struct        = 'struct',
+        Event         = 'event',
+        Operator      = 'oper',
+        TypeParameter = 'type',
+
+        Codeium = 'ai'
+    }
     -- }}}
 
     -- {{{ keymaps
@@ -95,8 +96,12 @@ return function(theme)
                 if vim.tbl_contains({ 'path' }, entry.source.name) then
                     -- {{{ path
                     local label = entry:get_completion_item().label
+                    item.menu = '(fs)'
 
-                    local icon = (string.find(label, '/$') and '') or require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+                    local icon =
+                        (string.find(label, '/$') and '')
+                        or require('nvim-web-devicons')
+                            .get_icon(entry:get_completion_item().label)
 
                     if icon then
                         item.kind = ' ' .. icon .. ' '
@@ -110,10 +115,12 @@ return function(theme)
                 else
                     -- {{{ normal kind
                     item = require('lspkind').cmp_format({ mode = 'symbol_text', maxwidth = 50 })(entry, item)
-                    local strings = vim.split(item.kind, '%s', { trimempty = true })
+                    local strs = vim.split(item.kind, '%s', { trimempty = true })
 
-                    item.kind = ' ' .. strings[1] .. ' '
-                    item.menu = '(' .. lspkind_name_map[strings[2]] .. ')'
+                    local menu = lspkind_name_map[strs[2]] or strs[2]:lower()
+
+                    item.kind = ' ' .. strs[1] .. ' '
+                    item.menu = '(' .. menu .. ')'
 
                     return item
                     -- }}}
@@ -216,7 +223,7 @@ return function(theme)
         CmpItemKindFolder        = { fg = colors.gray1,  bg = colors.white , bold = true },
         CmpItemKindModule        = { fg = colors.gray1,  bg = colors.white , bold = true },
 
-        CmpItemKindText          = { fg = colors.gray1,  bg = colors.gray8 , bold = true },
+        CmpItemKindText          = { fg = colors.gray1,  bg = colors.gray7 , bold = true },
         -- }}}
     }
 
