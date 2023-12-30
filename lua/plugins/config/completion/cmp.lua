@@ -1,6 +1,36 @@
 -- define a fibonacci function
 
 -- configuration for cmp completion engine
+local lspkind_name_map = {
+    Text          = 'text',
+    Method        = 'method',
+    Function      = 'func',
+    Constructor   = 'ctor',
+    Field         = 'field',
+    Variable      = 'var',
+    Class         = 'class',
+    Interface     = 'trait',
+    Module        = 'mod',
+    Property      = 'prop',
+    Unit          = 'unit',
+    Value         = 'val',
+    Enum          = 'enum',
+    Keyword       = 'keyw',
+    Snippet       = 'snip',
+    Color         = 'color',
+    File          = 'file',
+    Reference     = 'ref',
+    Folder        = 'dir',
+    EnumMember    = 'enumMb',
+    Constant      = 'const',
+    Struct        = 'struct',
+    Event         = 'event',
+    Operator      = 'oper',
+    TypeParameter = 'type',
+
+    Codeium = 'ai'
+}
+
 return function(theme)
     -- {{{ imports
     local colors = theme.colors
@@ -61,7 +91,7 @@ return function(theme)
         },
         formatting = {
             fields = { 'kind', 'abbr', 'menu' },
-            format = function(entry, vim_item)
+            format = function(entry, item)
                 if vim.tbl_contains({ 'path' }, entry.source.name) then
                     -- {{{ path
                     local label = entry:get_completion_item().label
@@ -69,23 +99,23 @@ return function(theme)
                     local icon = (string.find(label, '/$') and '') or require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
 
                     if icon then
-                        vim_item.kind = ' ' .. icon .. ' '
-                        vim_item.kind_hl_group = 'CmpItemKindFile'
+                        item.kind = ' ' .. icon .. ' '
+                        item.kind_hl_group = 'CmpItemKindFile'
 
-                        return vim_item
+                        return item
                     end
 
-                    return lspkind.cmp_format({ with_text = false })(entry, vim_item)
+                    return lspkind.cmp_format({ with_text = false })(entry, item)
                     -- }}}
                 else
                     -- {{{ normal kind
-                    vim_item = require('lspkind').cmp_format({ mode = 'symbol_text', maxwidth = 50 })(entry, vim_item)
-                    local strings = vim.split(vim_item.kind, '%s', { trimempty = true })
+                    item = require('lspkind').cmp_format({ mode = 'symbol_text', maxwidth = 50 })(entry, item)
+                    local strings = vim.split(item.kind, '%s', { trimempty = true })
 
-                    vim_item.kind = ' ' .. strings[1] .. ' '
-                    vim_item.menu = '      [' .. strings[2] .. ']'
+                    item.kind = ' ' .. strings[1] .. ' '
+                    item.menu = '(' .. lspkind_name_map[strings[2]] .. ')'
 
-                    return vim_item
+                    return item
                     -- }}}
                 end
             end,
@@ -146,10 +176,10 @@ return function(theme)
         -- }}}
 
         -- {{{ cmp general
-        CmpItemAbbrDeprecated    = { fg = colors.gray8,  bg = none, strikethrough = true }, -- strikethrough
-        CmpItemAbbrMatch         = { fg = colors.green,  bg = none, bold          = true }, -- bold
-        CmpItemAbbrMatchFuzzy    = { fg = colors.green,  bg = none, bold          = true }, -- bold
-        CmpItemMenu              = { fg = colors.green,  bg = none                       }, -- plain
+        CmpItemAbbrDeprecated    = { fg = colors.gray7, bg = none, strikethrough = true }, -- strikethrough
+        CmpItemAbbrMatch         = { fg = colors.green, bg = none, bold          = true }, -- bold
+        CmpItemAbbrMatchFuzzy    = { fg = colors.green, bg = none, bold          = true }, -- bold
+        CmpItemMenu              = { fg = colors.green, bg = none                       }, -- plain
         -- }}}
 
         -- {{{ kinds
