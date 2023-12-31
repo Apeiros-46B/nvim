@@ -124,7 +124,7 @@ mason_lspconfig.setup_handlers({
                     right_align = false,
                     only_current_line = true,
                     show_parameter_hints = true,
-                    parameter_hints_prefix = '=> ',
+                    parameter_hints_prefix = '<== ',
                     other_hints_prefix = '-> ',
                 },
             },
