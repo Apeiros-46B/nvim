@@ -1,5 +1,4 @@
 -- configuration for cmp completion engine
-
 return function(theme)
     -- {{{ imports
     local colors = theme.colors

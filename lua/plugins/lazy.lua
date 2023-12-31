@@ -497,18 +497,23 @@ local specs =  {
     },
     {
         'SmiteshP/nvim-navic',
-        keys = {
-            key('<leader>Tn', '<cmd>NavicToggle<CR>', 'n'),
-        },
         cmd = {
             'NavicToggle',
         },
+        keys = {
+            key('<leader>Tn', '<cmd>NavicToggle<CR>', 'n'),
+        },
+        config = cfg('lsp.navic'),
     },
     {
         'SmiteshP/nvim-navbuddy',
         cmd = {
             'Navbuddy',
         },
+        keys = {
+            key('<leader>ln', '<cmd>Navbuddy<CR>', 'n'),
+        },
+        config = cfg('lsp.navbuddy'),
     },
     -- }}}
     -- }}}

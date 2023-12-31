@@ -64,7 +64,7 @@ mason_lspconfig.setup_handlers({
             settings = {
                 java = {
                     completion = {
-                        importOrder = { '#', 'java', 'javax', 'lombok', 'org', 'com', 'net', 'io', 'me' }
+                        importOrder = { '#', 'java', 'javax', 'lombok', 'org', 'com', 'net', 'io', 'me', 'xyz' }
                     },
 
                     contentProvider = { preferred = 'fernflower' },
@@ -120,12 +120,12 @@ mason_lspconfig.setup_handlers({
             tools = {
                 autoSetHints = true,
                 inlay_hints = {
-                    auto = false,
+                    auto = true,
                     right_align = false,
                     only_current_line = true,
                     show_parameter_hints = true,
-                    parameter_hints_prefix = '',
-                    other_hints_prefix = '',
+                    parameter_hints_prefix = '=> ',
+                    other_hints_prefix = '-> ',
                 },
             },
 
@@ -135,6 +135,23 @@ mason_lspconfig.setup_handlers({
                     ['rust-analyzer'] = {
                         checkOnSave = {
                             command = 'clippy'
+                        },
+                        imports = {
+                            granularity = {
+                                enforce = true,
+                            },
+                            merge = {
+                                glob = false,
+                            },
+                        },
+                        inlayHints = {
+                            closureStyle = 'rust_analyzer',
+                            expressionAdjustmentHints = {
+                                enable = "reborrow",
+                            },
+                            lifetimeElisionHints = {
+                                enable = 'skip-trivial',
+                            },
                         },
                     }
                 }
