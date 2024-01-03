@@ -9,8 +9,8 @@ return function(client, bufnr)
     -- {{{ mappings
     local opts = { noremap = true, silent = true }
 
-    buf_map('n', '<leader>lgD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_map('n', '<leader>lgd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_map('n', '<leader>lgD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_map('n', '<leader>lgd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_map('n', '<leader>lgt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_map('n', '<leader>lgi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 
@@ -24,7 +24,7 @@ return function(client, bufnr)
     buf_map('n', '<leader>ll', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
     buf_map('n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_map('n', '<C-k>', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_map('n', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
     buf_map('n', '<leader>lF', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
     -- }}}

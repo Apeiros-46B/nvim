@@ -466,8 +466,8 @@ local specs =  {
             key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
             key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
             key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>' , 'n'),
-            key('<M-d>'     , '<cmd>Lspsaga term_toggle<CR>'           , 'n'),
-            key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga term_toggle<CR>', 't'),
+            -- key('<M-d>'     , '<cmd>Lspsaga term_toggle<CR>'           , 'n'),
+            -- key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga term_toggle<CR>', 't'),
             -- }}}
         },
         config = cfg('lsp.lspsaga'),
@@ -666,9 +666,6 @@ local specs =  {
         config = cfg('ui.indent')
     },
     -- }}}
-
-    -- {{{ not needed for now
-    -- }}}
     -- }}}
 
     -- {{{ [util] other utilities
@@ -694,7 +691,6 @@ local specs =  {
             key('<leader>gfc', '<cmd>Telescope git_commits<CR>' , 'n'),
             key('<leader>gfb', '<cmd>Telescope git_branches<CR>', 'n'),
         },
-
         config = cfg('util.telescope'),
     },
 
@@ -704,6 +700,38 @@ local specs =  {
         keys = {
             key('<leader>fs', '<cmd>lua require("telescope").extensions.dict.synonyms()<CR>', 'n')
         },
+    },
+    -- }}}
+
+    -- {{{ toggleterm
+    {
+        'akinsho/toggleterm.nvim',
+        cmd = {
+            'ToggleTerm',
+            'ToggleTermToggleAll',
+            'TermExec',
+            'TermSelect',
+            'ToggleTermSendCurrentLine',
+            'ToggleTermSendVisualLines',
+            'ToggleTermSendVisualSelection',
+            'ToggleTermSetName',
+        },
+        keys = {
+            key('<M-d>', '<cmd>ToggleTerm<CR>', 'n'),
+            key('<M-d>', '<C-\\><C-n><cmd>ToggleTerm<CR> ', 't'),
+            key(
+                '<M-t>',
+                function()
+                    vim.api.nvim_input(':ToggleTermSendVisualSelection ')
+                    vim.schedule(function()
+                        -- hack to redraw noice.nvim ui
+                        vim.api.nvim_input(" <bs>")
+                    end)
+                end,
+                'v'
+            ),
+        },
+        config = cfg('util.toggleterm'),
     },
     -- }}}
 

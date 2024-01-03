@@ -10,16 +10,17 @@ return function(theme)
             view    = 'cmdline_popup',
             opts    = {},
             format  = {
-                calculator  = {                  pattern = '^=',                        icon = ' % ', lang = 'vim',   title = '' },
-                cmdline     = {                  pattern = '^:',                        icon = ' 󰞷 ', lang = 'vim',   title = '' },
-                filter      = {                  pattern = '^:%s*!',                    icon = ' $ ', lang = 'bash',  title = '' },
-                help        = {                  pattern = '^:%s*he?l?p?%s+',           icon = '  ',                 title = '' },
-                highlight   = {                  pattern = '^:%s*hig?h?l?i?g?h?t?%s+',  icon = ' 󰏘 ',                 title = '' }, -- custom
-                lua         = {                  pattern = '^:%s*lua%s+',               icon = '  ', lang = 'lua',   title = '' },
-                luaInspect  = {                  pattern = '^:%s*lua%s*=%s*',           icon = '  ', lang = 'lua',   title = '' }, -- custom
-                search_down = { kind = 'search', pattern = '^/',                        icon = '  ', lang = 'regex', title = '' },
-                search_up   = { kind = 'search', pattern = '^%?',                       icon = '  ', lang = 'regex', title = '' },
-                set         = {                  pattern = '^:%s*set?%s+',              icon = '  ', lang = 'vim',   title = '' }, -- custom
+                calculator  = {                  pattern = '^=',                                      icon = ' % ', lang = 'vim',   title = '' },
+                cmdline     = {                  pattern = '^:',                                      icon = ' 󰞷 ', lang = 'vim',   title = '' },
+                filter      = {                  pattern = '^:%s*!',                                  icon = ' $ ', lang = 'bash',  title = '' },
+                help        = {                  pattern = '^:%s*he?l?p?%s+',                         icon = '  ',                 title = '' },
+                highlight   = {                  pattern = '^:%s*hig?h?l?i?g?h?t?%s+',                icon = ' 󰏘 ',                 title = '' }, -- custom
+                lua         = {                  pattern = '^:%s*lua%s+',                             icon = '  ', lang = 'lua',   title = '' },
+                luaInspect  = {                  pattern = '^:%s*lua%s*=%s*',                         icon = '  ', lang = 'lua',   title = '' }, -- custom
+                search_down = { kind = 'search', pattern = '^/',                                      icon = '  ', lang = 'regex', title = '' },
+                search_up   = { kind = 'search', pattern = '^%?',                                     icon = '  ', lang = 'regex', title = '' },
+                set         = {                  pattern = '^:%s*set?%s+',                            icon = '  ', lang = 'vim',   title = '' }, -- custom
+                termSend    = {                  pattern = "^:'<,'>ToggleTermSendVisualSelection%s+", icon = '  ',                 title = '' }, -- custom
 
                 -- hide ultisnips function triggers
                 ultisnips = { view = false, pattern = '^=UltiSnips#.*' },
@@ -287,7 +288,8 @@ return function(theme)
                     error = 'NoiceFormatLevelError',
                     off   = 'NoiceFormatLevelOff',
                 },
-                icons = { error = '', warn = '', info = '' },
+                -- icons = { error = '', warn = '', info = '' },
+                icons = { error = '▼', warn = '▲', info = '●' },
             },
             progress = {
                 contents = {},
@@ -358,6 +360,7 @@ return function(theme)
         NoiceCmdlineIconLuaInspect         = { bg = colors.orange   , fg = colors.gray1 ,                }, -- custom
         NoiceCmdlineIconSearch             = { bg = colors.purple   , fg = colors.gray1 ,                },
         NoiceCmdlineIconSet                = { bg = colors.teal     , fg = colors.gray1 ,                }, -- custom
+        NoiceCmdlineIconTermSend           = { bg = colors.teal     , fg = colors.gray1 ,                }, -- custom
 
         NoiceConfirm                       = { bg = colors.gray2    , fg = colors.white ,                },
         NoiceConfirmBorder                 = { bg = colors.gray2    , fg = colors.gray2 ,                },
