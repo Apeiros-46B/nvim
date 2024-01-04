@@ -19,17 +19,10 @@ return function(theme)
             adaptive_size               = false,
             centralize_selection        = false,
             width                       = 30,
-            hide_root_folder            = false,
             side                        = 'left',
             preserve_window_proportions = true,
 
             signcolumn = 'yes',
-            mappings = {
-                custom_only = false,
-                list = {
-                    -- user mappings go here
-                },
-            },
         },
         -- }}}
 
@@ -166,11 +159,13 @@ return function(theme)
         NvimTreeImageFile   = { fg = colors.white ,             },
     }
 
-    -- TODO: find out why this defer is needed for hl to be applied properly
+    -- HACK: for some reason, deferring makes the highlights apply;
+    -- without it, they do not apply. vim.schedule also works for
+    -- some reason, but it's quite inconsistent
     vim.defer_fn(function()
         for k, v in pairs(hl) do
             set_hl(0, k, v)
         end
-    end, 30)
+    end, 500)
     -- }}}
 end

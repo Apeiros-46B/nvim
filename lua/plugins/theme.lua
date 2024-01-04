@@ -94,6 +94,8 @@ M.hl = {
 
     -- window separator
     WinSeparator = { bg = M.colors.gray1, fg = M.colors.gray3 },
+
+    Directory = { fg = M.colors.blue },
 }
 
 for k, v in pairs(M.hl) do set_hl(0, k, v) end

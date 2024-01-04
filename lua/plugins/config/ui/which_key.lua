@@ -77,21 +77,25 @@ wk.setup({
 -- {{{ leader
 local spc = {
     -- {{{ multi
-	b = {
-		name = 'buffer',
-
-        f = 'Find',
-	    p = 'Picker',
-	},
-
 	f = {
 		name = 'Find',
 
-        b = 'Marks',
+        b = 'Buffers',
+        d = 'Diagnostics',
 		f = 'Files',
+		g = 'Git files',
+		h = 'Help tags',
+		j = 'Jumps',
+		l = 'Lua modules',
+		o = 'Options',
+		p = 'Pickers',
         r = 'Recent files',
-        s = 'Synonyms',
-		w = 'Live grep',
+        R = 'Resume last picker',
+		w = 'Pattern',
+
+		["'"] = 'Marks',
+		['"'] = 'Registers',
+		['/'] = 'Searches',
 	},
 
     F = {
@@ -138,88 +142,101 @@ local spc = {
 		n = 'Hop by line start',
 	},
 
-  J = {
-      name = 'JDTLS',
+    J = {
+        name = 'Java',
 
-      e = {
-          name = 'Extract',
+        e = {
+            name = 'Extract',
 
-          v = 'Variable',
-          c = 'Constant',
-          m = 'Method',
-      },
+            v = 'Variable',
+            c = 'Constant',
+            m = 'Method',
+        },
 
-      b = 'Build project with Maven',
-      o = 'Organize imports',
-  },
+        m = 'Build project with Maven',
+        o = 'Organize imports',
+    },
 
-  l = {
-      name = 'LSP',
+    l = {
+        name = 'LSP',
 
-      g = {
-          name = 'Go to',
+        f = {
+            name = 'Find',
 
-          d = 'Definition',
-          D = 'Declaration',
-          i = 'Implementation',
-          t = 'Type definition',
-      },
+            d = 'Definitions',
+            t = 'Type definitions',
+            r = 'References',
+            i = 'Implementations',
+            c = 'Incoming calls',
+            C = 'Outgoing calls',
+            s = 'Document symbols',
+            S = 'Workspace symbols',
 
-      w = {
-          name = 'Workspace',
+            ['<C-s>'] = 'Dynamic workspace symbols',
+        },
 
-          a = 'Add folder',
-          l = 'List folders',
-          r = 'Remove folder',
-      },
+        g = {
+            name = 'Go to',
 
-      d = 'Peek definition',
-      f = 'Find defs and refs',
-      j = 'Next diagnostic',
-      k = 'Previous diagnostic',
-      l = 'Toggle diagnostic lines',
-      n = 'Navigate nodes',
-      p = 'Open hover doc',
-      r = 'Rename',
-      R = 'See references',
-      t = 'Trouble',
-  },
+            d = 'Definition',
+            D = 'Declaration',
+            i = 'Implementation',
+            t = 'Type definition',
+        },
 
-  n = {
-      name = 'Neorg',
+        w = {
+            name = 'Workspace',
 
-      c = 'Toggle concealer',
-      C = 'Refresh concealer',
-      t = 'Open note for today',
-      T = 'Setup three-column notes',
-  },
+            a = 'Add folder',
+            l = 'List folders',
+            r = 'Remove folder',
+        },
 
-  q = {
-      name = 'Qalc',
+        j = 'Next diagnostic',
+        k = 'Previous diagnostic',
+        l = 'Toggle diagnostic lines',
+        n = 'Navigate symbols',
+        p = 'Open hover doc',
+        r = 'Rename',
+        R = 'See references',
+        t = 'Trouble',
+    },
 
-      n = 'Open',
-      y = 'Yank result',
-  },
+    n = {
+        name = 'Neorg',
 
-  t = {
-      name = 'Tab',
+        c = 'Toggle concealer',
+        C = 'Refresh concealer',
+        t = 'Open note for today',
+        T = 'Setup three-column notes',
+    },
 
-      d = 'Delete current',
-      h = 'Focus previous',
-      j = 'Focus first',
-      k = 'Focus last',
-      l = 'Focus next',
-      n = 'New',
-  },
+    q = {
+        name = 'Qalc',
 
-  T = {
-      name = 'Toggle',
+        n = 'Open',
+        y = 'Yank result',
+    },
 
-      n = 'Navic',
-      r = 'Relative line numbers',
-      W = 'Word wrap',
-      w = 'Word counter',
-  },
+    t = {
+        name = 'Tab',
+
+        d = 'Delete current',
+        h = 'Focus previous',
+        j = 'Focus first',
+        k = 'Focus last',
+        l = 'Focus next',
+        n = 'New',
+    },
+
+    T = {
+        name = 'Toggle',
+
+        n = 'Navic',
+        r = 'Relative line numbers',
+        W = 'Word wrap',
+        w = 'Word counter',
+    },
 
 	y = {
 		name = 'Yank',
@@ -239,6 +256,7 @@ local spc = {
     -- }}}
 
     -- {{{ single
+    b = 'Buffer picker',
     d = 'Show diagnostic',
     j = 'Previous buffer',
     k = 'Next buffer',

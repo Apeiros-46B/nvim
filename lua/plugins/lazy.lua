@@ -458,10 +458,10 @@ local specs =  {
         cmd = 'Lspsaga',
         keys = {
             -- {{{ lspsaga keys
-            key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'            , 'n'),
-            key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
-            key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
-            key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>' , 'n'),
+            -- key('<leader>lf', '<cmd>Lspsaga lsp_finder<CR>'            , 'n'),
+            -- key('<leader>lp', '<cmd>Lspsaga hover_doc<CR>'             , 'n'),
+            -- key('<leader>ld', '<cmd>Lspsaga peek_definition<CR>'       , 'n'),
+            -- key('<M-CR>'    , '<cmd>lua vim.lsp.buf.code_action()<CR>' , 'n'),
             -- key('<M-d>'     , '<cmd>Lspsaga term_toggle<CR>'           , 'n'),
             -- key('<M-d>'     , '<C-\\><C-n><cmd>Lspsaga term_toggle<CR>', 't'),
             -- }}}
@@ -541,7 +541,7 @@ local specs =  {
         'mfussenegger/nvim-jdtls',
         keys = {
             -- {{{ jdtls keys
-            key('<leader>Jb',  '<cmd>vs | terminal<CR>imvn clean package -T 4<CR>'   , 'n'),
+            key('<leader>Jm',  '<cmd>ToggleTerm<CR>mvn<CR>'                          , 'n'),
             key('<leader>Jo',  '<cmd>lua require("jdtls").organize_imports()<CR>'    , 'n'),
             key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable()<CR>'    , 'n'),
             key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable(true)<CR>', 'v'),
@@ -694,25 +694,36 @@ local specs =  {
         },
         cmd = 'Telescope',
         keys = {
-            key('<leader>bf', '<cmd>Telescope buffers<CR>', 'n'),
-
-            key('<leader>fb', '<cmd>Telescope marks<CR>'     , 'n'),
-            key('<leader>ff', '<cmd>Telescope find_files<CR>', 'n'),
-            key('<leader>fr', '<cmd>Telescope oldfiles<CR>'  , 'n'),
-            key('<leader>fw', '<cmd>Telescope live_grep<CR>' , 'n'),
+            key('<leader>fb', '<cmd>Telescope buffers<CR>'       , 'n'),
+            key('<leader>fd', '<cmd>Telescope diagnostics<CR>'   , 'n'),
+            key('<leader>ff', '<cmd>Telescope find_files<CR>'    , 'n'),
+            key('<leader>fg', '<cmd>Telescope git_files<CR>'     , 'n'),
+            key('<leader>fh', '<cmd>Telescope help_tags<CR>'     , 'n'),
+            key('<leader>fj', '<cmd>Telescope jumplist<CR>'      , 'n'),
+            key('<leader>fl', '<cmd>Telescope reloader<CR>'      , 'n'),
+            key('<leader>fo', '<cmd>Telescope vim_options<CR>'   , 'n'),
+            key('<leader>fp', '<cmd>Telescope builtin<CR>'       , 'n'),
+            key('<leader>fr', '<cmd>Telescope oldfiles<CR>'      , 'n'),
+            key('<leader>fR', '<cmd>Telescope resume<CR>'        , 'n'),
+            key('<leader>fw', '<cmd>Telescope live_grep<CR>'     , 'n'),
+            key("<leader>f'", '<cmd>Telescope marks<CR>'         , 'n'),
+            key('<leader>f"', '<cmd>Telescope registers<CR>'     , 'n'),
+            key('<leader>f/', '<cmd>Telescope search_history<CR>', 'n'),
 
             key('<leader>gfc', '<cmd>Telescope git_commits<CR>' , 'n'),
             key('<leader>gfb', '<cmd>Telescope git_branches<CR>', 'n'),
+
+            key('<leader>lfd',     '<cmd>Telescope lsp_definitions<CR>'              , 'n'),
+            key('<leader>lft',     '<cmd>Telescope lsp_type_definitions<CR>'         , 'n'),
+            key('<leader>lfr',     '<cmd>Telescope lsp_references<CR>'               , 'n'),
+            key('<leader>lfi',     '<cmd>Telescope lsp_implementations<CR>'          , 'n'),
+            key('<leader>lfc',     '<cmd>Telescope lsp_incoming_calls<CR>'           , 'n'),
+            key('<leader>lfC',     '<cmd>Telescope lsp_outgoing_calls<CR>'           , 'n'),
+            key('<leader>lfs',     '<cmd>Telescope lsp_document_symbols<CR>'         , 'n'),
+            key('<leader>lfS',     '<cmd>Telescope lsp_workspace_symbols<CR>'        , 'n'),
+            key('<leader>lf<C-s>', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', 'n'),
         },
         config = cfg('util.telescope'),
-    },
-
-    -- extensions
-    {
-        url = 'https://code.sitosis.com/rudism/telescope-dict.nvim.git',
-        keys = {
-            key('<leader>fs', '<cmd>lua require("telescope").extensions.dict.synonyms()<CR>', 'n')
-        },
     },
     -- }}}
 

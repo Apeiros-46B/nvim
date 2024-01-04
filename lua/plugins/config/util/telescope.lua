@@ -33,9 +33,13 @@ return function(theme)
                         require('telescope.builtin').resume()
                     end,
 
+                    -- scroll item
+                    ['<C-j>'] = actions.move_selection_next,
+                    ['<C-k>'] = actions.move_selection_previous,
+
                     -- scroll preview with ctrl j and ctrl k
-                    ['<C-j>'] = actions.preview_scrolling_down,
-                    ['<C-k>'] = actions.preview_scrolling_up,
+                    ['<C-n>'] = actions.preview_scrolling_down,
+                    ['<C-p>'] = actions.preview_scrolling_up,
 
                     -- close with ctrl d
                     ['<C-d>'] = actions.close,
@@ -53,8 +57,8 @@ return function(theme)
                 },
                 n = {
                     -- scroll preview with ctrl j and ctrl k
-                    ['<C-j>'] = actions.preview_scrolling_down,
-                    ['<C-k>'] = actions.preview_scrolling_up,
+                    ['<C-n>'] = actions.preview_scrolling_down,
+                    ['<C-p>'] = actions.preview_scrolling_up,
 
                     -- close with ctrl d
                     ['<C-d>'] = actions.close,

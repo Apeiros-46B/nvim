@@ -21,11 +21,11 @@ return function(theme)
         local icon
 
         if type == 'image' then
-            icon = ''
+            icon = '󰋩'
         elseif type == 'audio' then
             icon = '󰎈'
         elseif type == 'video' then
-            icon = '󰟞'
+            icon = ''
         end
 
         return {
@@ -37,7 +37,7 @@ return function(theme)
     end
 
     devicons.set_icon({
-        -- {{{ plain-text documents/markup langs
+        -- {{{ plain-text formats
         txt = {
             icon = '',
             color = colors.blue,
@@ -61,6 +61,12 @@ return function(theme)
             color = colors.orange,
             cterm_color = '208',
             name = 'XML',
+        },
+        toml = {
+            icon = "",
+            color = colors.gray7,
+            cterm_color = "7",
+            name = "Toml"
         },
         -- }}}
 

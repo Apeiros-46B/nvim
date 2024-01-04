@@ -108,7 +108,7 @@ return function(conds, utils, sp, sep, sepl, sepr, align)
         sp,
     }
 
-    vim.keymap.set('n', '<leader>bp', function()
+    vim.keymap.set('n', '<leader>b', function()
         local tabline = require('heirline').tabline
         local buflist = tabline._buflist[1]
         buflist._picker_labels = {}
