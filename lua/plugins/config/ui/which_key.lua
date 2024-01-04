@@ -175,8 +175,10 @@ local spc = {
 
       d = 'Peek definition',
       f = 'Find defs and refs',
-      h = 'Previous diagnostic',
-      l = 'Next diagnostic',
+      j = 'Next diagnostic',
+      k = 'Previous diagnostic',
+      l = 'Toggle diagnostic lines',
+      n = 'Navigate nodes',
       p = 'Open hover doc',
       r = 'Rename',
       R = 'See references',

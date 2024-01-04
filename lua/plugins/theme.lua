@@ -71,6 +71,11 @@ M.hl = {
     DiagnosticSignInfo  = { fg = M.colors.green  },
     DiagnosticSignHint  = { fg = M.colors.teal   },
 
+    DiagnosticVirtualTextError = { fg = M.colors.red    },
+    DiagnosticVirtualTextWarn  = { fg = M.colors.yellow },
+    DiagnosticVirtualTextInfo  = { fg = M.colors.green  },
+    DiagnosticVirtualTextHint  = { fg = M.colors.teal   },
+
     DiagnosticError = { fg = M.colors.red    },
     DiagnosticWarn  = { fg = M.colors.yellow },
     DiagnosticInfo  = { fg = M.colors.green  },

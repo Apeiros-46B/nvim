@@ -69,12 +69,12 @@ vim.diagnostic.config({
     signs = true,
     virtual_text = false,
     float = {
-        header = 'Diagnostics',
+        header = '',
         source = 'always',
         focusable = true,
     },
-    update_in_insert = true, -- default to false
-    severity_sort = true, -- default to false
+    update_in_insert = true,
+    severity_sort = true,
 })
 
 -- {{{ neovide

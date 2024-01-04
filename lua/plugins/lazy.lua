@@ -447,10 +447,6 @@ local specs =  {
 
     -- {{{ other lsp-related plugins
     {
-        'folke/lsp-colors.nvim',
-        event = 'LspAttach',
-    },
-    {
         'onsails/lspkind-nvim',
         event = 'LspAttach',
         config = cfg('lsp.lspkind'),
@@ -514,6 +510,23 @@ local specs =  {
             key('<leader>ln', '<cmd>Navbuddy<CR>', 'n'),
         },
         config = cfg('lsp.navbuddy'),
+    },
+    {
+        url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+        branch = 'main',
+        event = 'LspAttach',
+        keys = {
+            key(
+                '<leader>ll',
+                function()
+                    -- needed to wrap it in a function so nvim doesn't immediately
+                    -- call `require` (thus loading it) upon sourcing this file
+                    require('lsp_lines').toggle()
+                end,
+                'n'
+            ),
+        },
+        config = cfg('lsp.lines'),
     },
     -- }}}
     -- }}}
