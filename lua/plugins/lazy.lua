@@ -534,7 +534,25 @@ local specs =  {
     -- {{{ [langs] language support
     -- {{{ programming
     -- the following two are setup with mason
-    'simrat39/rust-tools.nvim', -- rust
+    -- rust
+    {
+        'simrat39/rust-tools.nvim',
+        keys = {
+            -- {{{ rust keys
+            -- TODO
+            key('<leader>rc',  '<cmd>RustOpenCargo<CR>',    'n'),
+            key('<leader>re',  '<cmd>RustExpand<CR>',       'n'),
+            key('<leader>rE',  '<cmd>RustExpandMacro<CR>',  'n'),
+            key('<leader>rf',  '<cmd>RustFmt<CR>',          'n'),
+            key('<leader>rj',  '<cmd>RustMoveDown<CR>',     'n'),
+            key('<leader>rJ',  '<cmd>RustJoinLines<CR>',    'n'),
+            key('<leader>rk',  '<cmd>RustMoveUp<CR>',       'n'),
+            key('<leader>rp',  '<cmd>RustParentModule<CR>', 'n'),
+            key('<leader>rt',  '<cmd>RustTest<CR>',         'n'),
+            key('<leader>rT',  '<cmd>RustTest!<CR>',        'n'),
+            -- }}}
+        },
+    },
 
     -- java
     {
