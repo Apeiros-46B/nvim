@@ -18,12 +18,15 @@ return function(theme)
             -- ascending sort
     		sorting_strategy = 'ascending',
 
-            -- Layout
-            layout_strategy = 'horizontal',
+            -- layout
+            layout_strategy = 'flex',
             layout_config = {
-                horizontal = {
-                    -- Put the search box at the top
-                    prompt_position = 'top',
+                prompt_position = 'top',
+                flex = {
+                    flip_columns = 130,
+                    vertical = {
+                        mirror = true,
+                    },
                 },
             },
             mappings = {
@@ -49,10 +52,10 @@ return function(theme)
                         vim.api.nvim_input('<C-\\><C-n>')
 
                         -- disable line numbers in normal mode
-                        vim.defer_fn(function()
+                        vim.schedule(function()
                             vim.wo.number = false
                             vim.wo.relativenumber = false
-                        end, 0)
+                        end)
                     end,
                 },
                 n = {
@@ -74,6 +77,7 @@ return function(theme)
     		},
             ['ui-select'] = {
                 require('telescope.themes').get_cursor()
+
 
                 -- pseudo code / specification for writing custom displays, like the one
                 -- for 'codeactions'

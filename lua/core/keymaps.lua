@@ -66,7 +66,8 @@ map('n', '<leader><CR>h',    '<cmd>sp | terminal<CR>i')
 -- }}}
 
 -- {{{ other
-map('n', 'WW',    '<cmd>w<CR>')
+map('n', 'WW',     '<cmd>w<CR>')
+map('n', '<M-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 -- }}}
 -- }}}
 
