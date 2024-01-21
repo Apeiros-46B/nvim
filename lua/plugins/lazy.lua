@@ -314,14 +314,16 @@ local specs =  {
         keys = {
             -- {{{ hop keys
             key('<leader>hh', ':HopWord<CR>'           , 'n', { silent = false }),
-            key('<leader>hk', ':HopWordBC<CR>'         , 'n', { silent = false }),
             key('<leader>hj', ':HopWordAC<CR>'         , 'n', { silent = false }),
+            key('<leader>hk', ':HopWordBC<CR>'         , 'n', { silent = false }),
             key('<leader>hl', ':HopWordMW<CR>'         , 'n', { silent = false }),
             key('<leader>hc', ':HopChar1<CR>'          , 'n', { silent = false }),
             key('<leader>hC', ':HopChar2<CR>'          , 'n', { silent = false }),
             key('<leader>hg', ':HopPattern<CR>'        , 'n', { silent = false }),
             key('<leader>hn', ':HopLineStart<CR>'      , 'n', { silent = false }),
             key('<leader>hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
+            key('\\',         ':HopChar2<CR>'          , 'n', { silent = false }),
+            key('|',          ':HopChar1<CR>'          , 'n', { silent = false }),
             -- }}}
         },
         config = cfg('editor.hop'),
