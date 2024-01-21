@@ -324,6 +324,8 @@ local specs =  {
             key('<leader>hf', ':HopWordCurrentLine<CR>', 'n', { silent = false }),
             key('\\',         ':HopChar2<CR>'          , 'n', { silent = false }),
             key('|',          ':HopChar1<CR>'          , 'n', { silent = false }),
+            key('\\',         ':HopChar2<CR>'          , 'o', { silent = false }),
+            key('|',          ':HopChar1<CR>'          , 'o', { silent = false }),
             -- }}}
         },
         config = cfg('editor.hop'),
