@@ -53,3 +53,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
         ]]):format(vim.fn.expand('<amatch>')))
     end,
 })
+
+-- HVM
+vim.filetype.add({ extension = { hvm  = 'hvm'  } })
+vim.filetype.add({ extension = { hvmc = 'hvmc' } })
+vim.filetype.add({ extension = { hvml = 'hvml' } })
