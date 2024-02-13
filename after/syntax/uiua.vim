@@ -12,15 +12,15 @@ syn match   uiuaIdentifier '\a\+!*'
 
 " {{{ functions and modifiers
 " constants and recur
-syn keyword uiuaNoadic eta pi tau inf[inity] rand[om] recu[r] tag now
-syn match   uiuaNoadic '[ηπ∞τ⚂↫]'
+syn keyword uiuaNoadic eta pi tau inf[inity] rand[om] tag now
+syn match   uiuaNoadic '[ηπ∞τ⚂]'
 
 " monadic and dyadic pervasive functions
 syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] rou[nd] add subtract multiply divide mod[ulus] pow[er] log[arithm] min[imum] max[imum] ata[ngent] com[plex]
 syn match   uiuaPervasive '[¬±`¯⌵√○⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠ℂ]'
 
 " monadic non-pervasive functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] uni[que] ded[uplicate] box par[se] wait recv tryrecv gen utf type memo comptime
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] uni[que] ded[uplicate] box par[se] wait recv tryrecv gen utf type repr
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭¤⋯⍉⍏⍖⊚⊛◰◴□⋕↬]'
 
 " dyadic non-pervasive functions
@@ -31,12 +31,12 @@ syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯☇↙↘↻◫▽⌕∊⊗⍤]'
 " gap, dip, and identity single-letter spellings aren't accounted for
 " 1. it's not very useful since adjacent ones won't be highlighted
 " 2. it'll get formatted anyways
-syn keyword uiuaMonadicMod gap dip eac[h] row[s] tab[le] rep[eat] fol[d] reduce scan gro[up] par[tition] un bot[h] con[tent] rect[ify] thi[s] spawn bind
-syn match   uiuaMonadicMod '[⋅⊙∵≡⊞⍥∧/\\⊕⊜°∩⊔⌅↬]'
+syn keyword uiuaMonadicMod gap dip eac[h] row[s] tab[le] inv[entory] rep[eat] fol[d] reduce scan gro[up] par[tition] un bot[h] con[tent] bind memo comptime spawn shapes types
+syn match   uiuaMonadicMod '[⋅⊙∵≡⊞⎏⍥∧/\\⊕⊜°∩⊔]'
 
 " non-monadic modifiers
-syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] cas[cade] all try setinv setund
-syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⪾⋔⍣]/
+syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] try setinv setund
+syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⍣]/
 " }}}
 
 " {{{ system functions
@@ -46,7 +46,7 @@ syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⪾⋔⍣]/
 " modules
 syn match   uiuaModuleSF   '&i'
 
-syn match   uiuaDyadicSF   '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw)'
+syn match   uiuaDyadicSF   '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw|ffi)'
 syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|raw|var|runi|runc|cd|cl|fo|fc|fde|ftr|fe|fld|fif|fras|frab|fwa|imd|ims|gifd|gife|ad|ap|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
 syn match   uiuaNoadicSF   '\v\&(sc|ts|args|asr)'
 syn match   uiuaModifierSF '&ast'

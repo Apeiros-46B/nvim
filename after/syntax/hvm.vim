@@ -4,25 +4,26 @@ endif
 
 let b:current_syntax = "hvm"
 
-syn match   hvmIdFld   '\i\+' contained
-syn match   hvmIdSub   '\.\i\+' contained contains=hvmPunct,hvmIdFld,hvmConsNil
-syn match   hvmId      '\u\i*\(\.\i\+\)*' contains=hvmIdSub,hvmBuiltin
-syn match   hvmLambda  '[@λ]\s*\i\+'
+syn match   hvmIdRaw   '\i\+' contained contains=hvmConsNil,hvmKeyword
+syn match   hvmIdFld   '\.\i\+' contained contains=hvmPunct,hvmIdRaw
+syn match   hvmId      '\u\i*\(\.\i\+\)*' contains=hvmIdFld,hvmBuiltin
+syn match   hvmLambda  '[@λ]\s*\i\+' contains=hvmIdRaw
 
 syn match   hvmNum     '\d\+\(\.\d*\(e\d\+\)\?\)\?'
-syn region  hvmStr     start='"' end='"' contains=uiuaEsc
-syn keyword hvmConsNil cons Cons nil Nil
-syn keyword hvmBuiltin List String HVM contained
+syn region  hvmStr     start='"' end='"'
+syn keyword hvmConsNil cons Cons nil Nil contained
+syn keyword hvmBuiltin List String Both HVM U60 contained
 
-syn match   hvmOp      '[+\-*/%=<>]'
+syn match   hvmOp      '[+\-*/%=<>&|^]'
 syn match   hvmPunct   '[.,]'
 syn match   hvmComment '//.*$'
-syn keyword hvmKeyword let
+syn keyword hvmKeyword if let swap
 
 " {{{ highlight groups
-hi def link hvmId      Function
+hi def link hvmIdRaw   Define
 hi def link hvmIdFld   Identifier
-hi def link hvmLambda  Identifier
+hi def link hvmId      Function
+hi def link hvmLambda  Ignore
 
 hi def link hvmNum     Number
 hi def link hvmStr     String
