@@ -575,12 +575,6 @@ local specs =  {
             -- }}}
         },
     },
-
-    -- pest
-    {
-        'pest-parser/pest.vim',
-        ft = 'pest',
-    },
     -- }}}
 
     -- {{{ neorg

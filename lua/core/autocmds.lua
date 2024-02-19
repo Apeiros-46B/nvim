@@ -55,6 +55,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 -- HVM
-vim.filetype.add({ extension = { hvm  = 'hvm'  } })
+vim.filetype.add({ extension = { hvm  = 'hvm', hvm1 = 'hvm' } })
 vim.filetype.add({ extension = { hvmc = 'hvmc' } })
 vim.filetype.add({ extension = { hvml = 'hvml' } })
