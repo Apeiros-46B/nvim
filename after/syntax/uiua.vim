@@ -1,4 +1,5 @@
-" uiua 0.9.0?
+" uiua 0.9.0
+" no support for deprecated functions
 
 if exists("b:current_syntax")
 	finish
@@ -47,8 +48,8 @@ syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⍣]/
 " &i and &ime, &s and &sc, etc. is correct
 
 " modules
-syn match   uiuaDyadicSF   '\v\&(rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw|ffi)'
-syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|raw|var|runi|runc|cd|cl|fo|fc|fde|ftr|fe|fld|fif|fras|frab|fwa|imd|ims|gifd|gife|ad|ap|tcpl|tcpa|tcpc|tcpsnb|tcpaddr|invk)'
+syn match   uiuaDyadicSF   '\v\&(runs|rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|httpsw|ffi)'
+syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|raw|var|runi|runc|cd|cl|fo|fc|fde|ftr|fe|fld|fif|fras|frab|fwa|imd|ims|gifd|gife|gifs|ad|ap|tcpl|tcpaddr|tcpa|tcpc|tcpsnb|invk)'
 syn match   uiuaNoadicSF   '\v\&(sc|ts|args|asr)'
 syn match   uiuaModifierSF '&ast'
 " }}}
@@ -78,7 +79,7 @@ syn match   uiuaSignature '|\d\+\(\.\d\+\)\?'
 syn match   uiuaFunctionPlaceholder '\^\d\+\(\.\d\+\)\?'
 
 " test scopes, <- assignments, stranded arrays, and ' or '' line joining
-syn match   uiuaFaded '^---$\|[←_']'
+syn match   uiuaFaded '^---$\|[←↚_']\|=\~'
 
 " debug functions
 syn keyword uiuaDebug dump stack trac[e]
@@ -89,7 +90,7 @@ syn match   uiuaComment '#.*$'
 " }}}
 
 " {{{ highlight groups
-hi def link uiuaConst               Constant
+hi def link uiuaConst               Operator
 hi def link uiuaNoadic              Keyword
 hi def link uiuaNoadicSF            Keyword
 hi def link uiuaPervasive           Operator
