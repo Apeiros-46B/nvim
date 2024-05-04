@@ -1,23 +1,14 @@
--- sub-configuration for mason.nvim (lspconfig)
+-- sub-configuration for lspconfig
 -- {{{ imports
 local lspconfig = require('lspconfig')
 local mason_lspconfig = require('mason-lspconfig')
+local on_attach = require('plugins.config.lsp.on_attach')
 -- }}}
 
--- {{{ setup
+-- {{{ mason setup
 local servers = {
-    'awk_ls',
-    'gopls',
-    'hls',
-    'html',
     'jdtls',
-    'julials',
-    'pyright',
     'lua_ls',
-    'svelte',
-    'tsserver',
-    'rust_analyzer',
-    'zls',
 }
 
 mason_lspconfig.setup({
@@ -25,9 +16,7 @@ mason_lspconfig.setup({
 })
 -- }}}
 
--- {{{ handlers
-local on_attach = require('plugins.config.lsp.on_attach')
-
+-- servers
 -- {{{ helper
 local function add(server, opts)
     local new_opts = {
@@ -44,7 +33,7 @@ local function add(server, opts)
 end
 -- }}}
 
--- {{{ setup
+-- {{{ managed by mason
 mason_lspconfig.setup_handlers({
     -- {{{ default
     function(server_name)
@@ -80,13 +69,14 @@ mason_lspconfig.setup_handlers({
                     },
 
                     configuration = {
+                        -- TODO: update this to work with nixos
                         runtimes = {
                             {
                                 name = 'JavaSE-1.8',
                                 path = '/usr/lib/jvm/java-8-amazon-corretto/',
                             },
                             {
-                                name = 'JavaSE-16',
+                                name = 'JavaSE-11',
                                 path = '/usr/lib/jvm/java-16-amazon-corretto/',
                             },
                             {
@@ -112,143 +102,65 @@ mason_lspconfig.setup_handlers({
         })
     end,
     -- }}}
-
-    -- {{{ [rust-tools] rust-analyzer
-    rust_analyzer = function()
-        -- setup
-        require('rust-tools').setup({
-            tools = {
-                autoSetHints = true,
-                inlay_hints = {
-                    auto = true,
-                    right_align = false,
-                    only_current_line = true,
-                    show_parameter_hints = true,
-                    parameter_hints_prefix = '<== ',
-                    other_hints_prefix = '-> ',
-                },
-            },
-
-            server = {
-                on_attach = on_attach,
-                settings = {
-                    ['rust-analyzer'] = {
-                        checkOnSave = {
-                            command = 'clippy'
-                        },
-                        imports = {
-                            granularity = {
-                                enforce = true,
-                            },
-                            merge = {
-                                glob = false,
-                            },
-                        },
-                        inlayHints = {
-                            closureStyle = 'rust_analyzer',
-                            expressionAdjustmentHints = {
-                                enable = "reborrow",
-                            },
-                            lifetimeElisionHints = {
-                                enable = 'skip-trivial',
-                            },
-                        },
-                    }
-                }
-            },
-        })
-    end,
-    -- }}}
-
-    -- {{{ html
-    html = function()
-        -- broadcast snippet capabilities for completion
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-        add(lspconfig.html, {
-            capabilities = capabilities,
-            settings = {
-                html = {
-                    completion = {
-                        attributeDefaultValue = 'singlequotes'
-                    },
-                    format = {
-                        indentInnerHtml = true,
-                        templating = true,
-                        wrapLineLength = 120,
-                        wrapAttributes = 'auto',
-                    },
-                    hover = {
-                        documentation = true,
-                        references = true,
-                    },
-                    mirrorCursorOnMatchingTag = true,
-                },
-            },
-        })
-    end,
-    -- }}}
-
-    -- {{{ julials
-    julials = function()
-        add(lspconfig.julials, {
-            settings = {
-                enableTelemetry = false,
-
-                NumThreads = 2,
-
-                completionmode = 'import',
-                runtimeCompletions = true,
-
-                lint = {
-                    missingrefs = 'all',
-                }
-            },
-
-            on_new_config = function(new_config, _)
-                -- custom julia executable
-                local julia = os.getenv('HOME') .. '/.julia/environments/nvim-lspconfig/bin/julia'
-
-                if lspconfig.util.path.is_file(julia) then
-                    new_config.cmd[1] = julia
-                else
-                    vim.notify('follow instructions @ https://discourse.julialang.org/t/neovim-languageserver-jl/37286/83 for instant startup')
-                end
-            end
-        })
-    end,
-    -- }}}
-
-    -- {{{ lua_ls
-    lua_ls = function()
-        -- lspconfig server, custom configuration
-        add(lspconfig.lua_ls, {
-            settings = {
-                Lua = {
-                    runtime = {
-                        version = 'LuaJIT',
-                    },
-                    diagnostics = {
-                        -- recognize globals
-                        globals = {
-                            'vim',                                        -- vim-related globals
-                            'awesome', 'client', 'root', 'screen', 'tag', -- awesome-related globals
-                            'ipe',
-                        },
-                    },
-                    workspace = {
-                        checkThirdParty = false,
-                    },
-                    telemetry = { enable = false },
-                },
-            },
-
-            -- setup neodev
-            before_init = require('neodev.lsp').before_init,
-        })
-    end,
-    -- }}}
 })
 -- }}}
+
+-- {{{ manual
+-- {{{ html
+-- broadcast snippet capabilities for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+add(lspconfig.html, {
+    capabilities = capabilities,
+    settings = {
+        html = {
+            completion = {
+                attributeDefaultValue = 'singlequotes'
+            },
+            format = {
+                indentInnerHtml = true,
+                templating = true,
+                wrapLineLength = 120,
+                wrapAttributes = 'auto',
+            },
+            hover = {
+                documentation = true,
+                references = true,
+            },
+            mirrorCursorOnMatchingTag = true,
+        },
+    },
+})
+-- }}}
+
+-- {{{ lua_ls
+add(lspconfig.lua_ls, {
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- recognize globals
+                globals = {
+                    'vim',                                        -- vim-related globals
+                    'awesome', 'client', 'root', 'screen', 'tag', -- awesome-related globals
+                },
+            },
+            workspace = {
+                checkThirdParty = false,
+            },
+            telemetry = { enable = false },
+        },
+    },
+
+    -- setup neodev
+    before_init = require('neodev.lsp').before_init,
+})
+-- }}}
+
+-- no configs
+add(lspconfig.nil_ls, {})
+add(lspconfig.wgsl_analyzer, {})
 -- }}}

@@ -170,7 +170,7 @@ local spc = {
             c = 'Incoming calls',
             C = 'Outgoing calls',
             s = 'Document symbols',
-            S = 'Workspace symbols',
+            w = 'Workspace symbols',
 
             ['<C-s>'] = 'Dynamic workspace symbols',
         },

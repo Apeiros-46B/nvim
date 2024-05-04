@@ -449,6 +449,48 @@ local specs =  {
     },
     -- }}}
 
+    -- {{{ language support
+    -- rust
+    {
+        'mrcjkb/rustaceanvim',
+        lazy = false,
+        keys = {
+            -- {{{ rust keys
+            key('<leader>ra',  '<cmd>RustLsp codeAction<CR>',   'n'),
+            key('<leader>rc',  '<cmd>RustLsp openCargo<CR>',    'n'),
+            key('<leader>rd',  '<cmd>RustLsp debuggables<CR>',  'n'),
+            key('<leader>re',  '<cmd>RustLsp expand<CR>',       'n'),
+            key('<leader>rE',  '<cmd>RustLsp expandMacro<CR>',  'n'),
+            key('<leader>rj',  '<cmd>RustLsp moveItemDown<CR>', 'n'),
+            key('<leader>rJ',  '<cmd>RustLsp joinLines<CR>',    'n'),
+            key('<leader>rk',  '<cmd>RustLsp moveItemUp<CR>',   'n'),
+            key('<leader>rp',  '<cmd>RustLsp parentModule<CR>', 'n'),
+            key('<leader>rt',  '<cmd>RustLsp test<CR>',         'n'),
+            key('<leader>rT',  '<cmd>RustLsp test!<CR>',        'n'),
+            key('<leader>rf',  '<cmd>RustFmt<CR>',              'n'),
+            -- }}}
+        },
+        init = cfg('lsp.rustacean'),
+    },
+
+    -- java
+    -- configured in lsp.lspconfig
+    {
+        'mfussenegger/nvim-jdtls',
+        keys = {
+            -- {{{ jdtls keys
+            key('<leader>Jm',  '<cmd>ToggleTerm<CR>mvn<CR>'                          , 'n'),
+            key('<leader>Jo',  '<cmd>lua require("jdtls").organize_imports()<CR>'    , 'n'),
+            key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable()<CR>'    , 'n'),
+            key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable(true)<CR>', 'v'),
+            key('<leader>Jec', '<cmd>lua require("jdtls").extract_constant()<CR>'    , 'n'),
+            key('<leader>Jec', '<cmd>lua require("jdtls").extract_constant(true)<CR>', 'v'),
+            key('<leader>Jem', '<cmd>lua require("jdtls").extract_method(true)<CR>'  , 'v'),
+            -- }}}
+        },
+    },
+    -- }}}
+
     -- {{{ other lsp-related plugins
     {
         'onsails/lspkind-nvim',
@@ -531,75 +573,6 @@ local specs =  {
             ),
         },
         config = cfg('lsp.lines'),
-    },
-    -- }}}
-    -- }}}
-
-    -- {{{ [langs] language support
-    -- {{{ programming
-    -- the following two are setup with mason
-    -- rust
-    {
-        'simrat39/rust-tools.nvim',
-        keys = {
-            -- {{{ rust keys
-            -- TODO
-            key('<leader>ra',  '<cmd>RustCodeAction<CR>',   'n'),
-            key('<leader>rc',  '<cmd>RustOpenCargo<CR>',    'n'),
-            key('<leader>rd',  '<cmd>RustDebuggables<CR>',  'n'),
-            key('<leader>re',  '<cmd>RustExpand<CR>',       'n'),
-            key('<leader>rE',  '<cmd>RustExpandMacro<CR>',  'n'),
-            key('<leader>rf',  '<cmd>RustFmt<CR>',          'n'),
-            key('<leader>rj',  '<cmd>RustMoveItemDown<CR>', 'n'),
-            key('<leader>rJ',  '<cmd>RustJoinLines<CR>',    'n'),
-            key('<leader>rk',  '<cmd>RustMoveItemUp<CR>',   'n'),
-            key('<leader>rp',  '<cmd>RustParentModule<CR>', 'n'),
-            key('<leader>rt',  '<cmd>RustTest<CR>',         'n'),
-            key('<leader>rT',  '<cmd>RustTest!<CR>',        'n'),
-            -- }}}
-        },
-    },
-
-    -- java
-    {
-        'mfussenegger/nvim-jdtls',
-        keys = {
-            -- {{{ jdtls keys
-            key('<leader>Jm',  '<cmd>ToggleTerm<CR>mvn<CR>'                          , 'n'),
-            key('<leader>Jo',  '<cmd>lua require("jdtls").organize_imports()<CR>'    , 'n'),
-            key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable()<CR>'    , 'n'),
-            key('<leader>Jev', '<cmd>lua require("jdtls").extract_variable(true)<CR>', 'v'),
-            key('<leader>Jec', '<cmd>lua require("jdtls").extract_constant()<CR>'    , 'n'),
-            key('<leader>Jec', '<cmd>lua require("jdtls").extract_constant(true)<CR>', 'v'),
-            key('<leader>Jem', '<cmd>lua require("jdtls").extract_method(true)<CR>'  , 'v'),
-            -- }}}
-        },
-    },
-
-    -- pest
-    {
-        'pest-parser/pest.vim',
-        ft = 'pest',
-    },
-    -- }}}
-
-    -- {{{ neorg
-    {
-        'nvim-neorg/neorg',
-        build = ':Neorg sync-parsers',
-        dependencies = {
-            'nvim-neorg/neorg-telescope'
-        },
-        ft = 'norg',
-        keys = {
-            key('<leader>nc', '<cmd>Neorg toggle-concealer<CR>'                               , 'n'),
-            key('<leader>nC', '<cmd>Neorg toggle-concealer<CR><cmd>Neorg toggle-concealer<CR>', 'n'),
-        },
-        init = function()
-            -- set textwidth in norg files
-            vim.api.nvim_create_autocmd('BufEnter', { pattern = '*.norg', command = 'setlocal textwidth=80' })
-        end,
-        config = cfg('lang.neorg'),
     },
     -- }}}
     -- }}}
@@ -744,7 +717,7 @@ local specs =  {
             key('<leader>lfc',     '<cmd>Telescope lsp_incoming_calls<CR>'           , 'n'),
             key('<leader>lfC',     '<cmd>Telescope lsp_outgoing_calls<CR>'           , 'n'),
             key('<leader>lfs',     '<cmd>Telescope lsp_document_symbols<CR>'         , 'n'),
-            key('<leader>lfS',     '<cmd>Telescope lsp_workspace_symbols<CR>'        , 'n'),
+            key('<leader>lfw',     '<cmd>Telescope lsp_workspace_symbols<CR>'        , 'n'),
             key('<leader>lf<C-s>', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', 'n'),
         },
         config = cfg('util.telescope'),
@@ -814,8 +787,8 @@ local specs =  {
         lazy = false,
     },
     {
-        -- 'Apeiros-46B/qalc.nvim',
-	    dir = '/home/apeiros/code/projects/qalc.nvim.orig/',
+      'Apeiros-46B/qalc.nvim',
+	    -- dir = '/home/apeiros/code/projects/qalc.nvim.orig/',
         keys = {
             key('<leader>qn', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
             key('<leader>qy', '<cmd>QalcYank<CR>', 'n'),  -- yank result

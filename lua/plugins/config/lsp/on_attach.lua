@@ -37,8 +37,10 @@ return function(client, bufnr)
             require('nvim-navbuddy').attach(client, bufnr)
         end
 
-        -- disable semantic token highlighting (because I'm too lazy to rice it)
-        client.server_capabilities.semanticTokensProvider = {}
+        -- disable semantic token highlighting if it's not rust-analyzer
+        if client.name ~= 'rust-analyzer' then
+            client.server_capabilities.semanticTokensProvider = {}
+        end
     end
     -- }}}
 end
