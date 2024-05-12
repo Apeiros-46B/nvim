@@ -49,14 +49,15 @@ M.colors = {
 -- }}}
 
 -- {{{ custom highlights & theme overrides
--- set diagnostic sign icons
+-- {{{ set diagnostic sign icons
 -- for type, icon in pairs({ Error = '', Warn = '', Info = '', Hint = '' }) do
 for type, icon in pairs({ Error = '▼', Warn = '▲', Info = '■', Hint = '●' }) do
     local name = 'DiagnosticSign' .. type
     vim.fn.sign_define(name, { text = icon, texthl = name, numhl = name })
 end
+-- }}}
 
--- set highlights
+-- {{{ set highlights
 M.hl = {
     -- non-TS highlighting
     String = { link = '@string' },
@@ -99,6 +100,11 @@ M.hl = {
 }
 
 for k, v in pairs(M.hl) do set_hl(0, k, v) end
+-- }}}
+
+-- change terminal colors
+-- more readable dim text
+vim.g.terminal_color_8 = M.colors.gray7
 -- }}}
 
 -- {{{ return

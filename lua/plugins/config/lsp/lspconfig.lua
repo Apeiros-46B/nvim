@@ -162,5 +162,5 @@ add(lspconfig.lua_ls, {
 
 -- no configs
 add(lspconfig.nil_ls, {})
-add(lspconfig.wgsl_analyzer, {})
+add(lspconfig.glsl_analyzer, {})
 -- }}}

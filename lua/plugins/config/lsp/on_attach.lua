@@ -32,7 +32,7 @@ return function(client, bufnr)
     -- {{{ other
     if client then
         -- attach navic and navbuddy
-        if client.name ~= 'null-ls' and client.name ~= 'zk' then
+        if client.name ~= 'null-ls' and client.name ~= 'glsl_analyzer' then
             require('nvim-navic').attach(client, bufnr)
             require('nvim-navbuddy').attach(client, bufnr)
         end
