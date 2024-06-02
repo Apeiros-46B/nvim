@@ -787,8 +787,8 @@ local specs =  {
         lazy = false,
     },
     {
-      'Apeiros-46B/qalc.nvim',
-	    -- dir = '/home/apeiros/code/projects/qalc.nvim.orig/',
+        -- 'Apeiros-46B/qalc.nvim',
+	    dir = '/home/apeiros/code/projects/qalc.nvim/',
         keys = {
             key('<leader>qn', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
             key('<leader>qy', '<cmd>QalcYank<CR>', 'n'),  -- yank result

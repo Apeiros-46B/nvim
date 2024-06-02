@@ -23,7 +23,7 @@ return function(theme)
                 termSend    = {                  pattern = "^:'<,'>ToggleTermSendVisualSelection%s+", icon = '  ',                 title = '' }, -- custom
 
                 -- hide ultisnips function triggers
-                ultisnips = { view = false, pattern = '^=UltiSnips#.*' },
+                ultisnips = { view = false, pattern = '^=U.*' },
 
                 -- inc rename
                 IncRename = {
