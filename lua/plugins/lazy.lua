@@ -736,7 +736,18 @@ local specs =  {
             key(
                 '<M-t>',
                 function()
-                    vim.api.nvim_input(':ToggleTermSendVisualSelection ')
+                    local cmd = ':ToggleTermSendVisual'
+                    local mode = vim.api.nvim_get_mode().mode
+
+                    if mode == 'v' or mode == 'vs' then
+                        cmd = cmd .. 'Selection'
+                    elseif mode == 'V' or mode == 'Vs' then
+                        cmd = cmd .. 'Lines'
+                    else
+                        return
+                    end
+
+                    vim.api.nvim_input(cmd .. ' ')
                     vim.schedule(function()
                         -- hack to redraw noice.nvim ui
                         vim.api.nvim_input(" <bs>")
