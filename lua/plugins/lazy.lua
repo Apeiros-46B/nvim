@@ -194,17 +194,6 @@ local specs =  {
         'hrsh7th/cmp-nvim-lsp',
         event = 'LspAttach',
     },
-    {
-        'jcdickinson/codeium.nvim',
-        enabled = false,
-        event = 'InsertEnter',
-        cmd = 'Codeium',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'hrsh7th/nvim-cmp',
-        },
-        opts = {}
-    },
     -- }}}
 
     -- {{{ ultisnips
@@ -604,6 +593,10 @@ local specs =  {
     {
         'norcalli/nvim-colorizer.lua',
         init = fileloader('nvim-colorizer.lua'),
+        opts = {},
+        keys = {
+            key('<leader>Tc', '<cmd>ColorizerToggle<CR>', 'n'),
+        },
     },
     -- }}}
     -- }}}
@@ -862,6 +855,7 @@ local config = {
     ui = {
         size = { width = 0.8, height = 0.8 },
         border = 'none',
+        backdrop = 100,
         icons = {
             loaded     = '+',
             not_loaded = '',

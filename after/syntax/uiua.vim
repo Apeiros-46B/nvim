@@ -24,7 +24,7 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√∿⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠ℂ]'
 
 " monadic non-pervasive functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] uni[que] box par[se] wait recv tryrecv gen utf type repr csv
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] uni[que] box par[se] wait recv tryrecv gen utf type repr csv json xlsx
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭¤⋯⍉⍏⍖⊚⊛◰◴□⋕↬]'
 
 " dyadic non-pervasive functions
@@ -92,36 +92,39 @@ syn match   uiuaOtherSwizzle /['λ]\a\a\a\+/
 syn match   uiuaMacroSpecial '\(\^[!:.,]\|[←↚]^\)'
 
 " comments
-" TODO: special highlighting for signature doc comments
-syn match   uiuaComment '#.*$'
+syn match   uiuaExperimental contained 'Experimental!'
+syn match   uiuaSignatureComment contained '\(\a\+ \)*?\( \a\+\)\+'
+syn region  uiuaComment start='#' end='$' contains=uiuaSignatureComment,uiuaExperimental
 " }}}
 
 " {{{ highlight groups
-hi def link uiuaShadowConst      Number
-hi def link uiuaConst            Operator
-hi def link uiuaNoadic           Keyword
-hi def link uiuaNoadicSF         Keyword
-hi def link uiuaPervasive        Operator
-hi def link uiuaMonadic          Function
-hi def link uiuaMonadicSF        Function
-hi def link uiuaDyadic           Identifier
-hi def link uiuaDyadicSF         Identifier
-hi def link uiuaMonadicMod       Type
-hi def link uiuaOtherMod         Number
-hi def link uiuaModifierSF       Type
+hi def link uiuaShadowConst         Number
+hi def link uiuaConst               Operator
+hi def link uiuaNoadic              Keyword
+hi def link uiuaNoadicSF            Keyword
+hi def link uiuaPervasive           Operator
+hi def link uiuaMonadic             Function
+hi def link uiuaMonadicSF           Function
+hi def link uiuaDyadic              Identifier
+hi def link uiuaDyadicSF            Identifier
+hi def link uiuaMonadicMod          Type
+hi def link uiuaOtherMod            Number
+hi def link uiuaModifierSF          Type
 
-hi def link uiuaNum              Number
-hi def link uiuaEsc              SpecialChar
-hi def link uiuaChar             String
-hi def link uiuaFmt              Operator
-hi def link uiuaStr              String
+hi def link uiuaNum                 Number
+hi def link uiuaEsc                 SpecialChar
+hi def link uiuaChar                String
+hi def link uiuaFmt                 Operator
+hi def link uiuaStr                 String
 
-hi def link uiuaSignature        Type
-hi def link uiuaDebug            Operator
-hi def link uiuaFaded            Comment
-hi def link uiuaMonadicSwizzle   Function
-hi def link uiuaDyadicSwizzle    Identifier
-hi def link uiuaOtherSwizzle     Number
-hi def link uiuaMacroSpecial     Keyword
-hi def link uiuaComment          Comment
+hi def link uiuaSignature           Type
+hi def link uiuaDebug               Operator
+hi def link uiuaFaded               Comment
+hi def link uiuaMonadicSwizzle      Function
+hi def link uiuaDyadicSwizzle       Identifier
+hi def link uiuaOtherSwizzle        Number
+hi def link uiuaMacroSpecial        Keyword
+hi def link uiuaExperimental        Keyword
+hi def link uiuaSignatureComment    Number
+hi def link uiuaComment             Comment
 " }}}

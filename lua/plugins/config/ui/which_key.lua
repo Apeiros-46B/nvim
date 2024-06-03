@@ -232,10 +232,9 @@ local spc = {
     T = {
         name = 'Toggle',
 
+        c = 'Colorizer',
         n = 'Navic',
-        r = 'Relative line numbers',
         W = 'Word wrap',
-        w = 'Word counter',
     },
 
 	y = {
