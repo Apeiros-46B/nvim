@@ -99,7 +99,8 @@ return function(theme)
                 min = vim.diagnostic.severity.HINT,
                 max = vim.diagnostic.severity.ERROR
             },
-            icons = { error = '', warning = '', info = '', hint = '' },
+            -- icons = { error = '', warning = '', info = '', hint = '' },
+            icons = { error = '▼', warning = '▲', info = '■', hint = '●' },
         },
 
         filesystem_watchers = {

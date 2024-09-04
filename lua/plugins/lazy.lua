@@ -419,7 +419,12 @@ local specs =  {
             lsp_ins_start = vim.api.nvim_create_autocmd('InsertEnter', {
                 pattern = '*',
                 callback = function()
-                    vim.cmd('do FileType')
+                    -- this breaks syntax highlighting in specifically lua
+                    -- luals also starts fine without this
+                    if vim.bo.filetype ~= 'lua' then
+                        -- HACK: start LSP on InsertEnter
+                        vim.cmd('do FileType')
+                    end
 
                     if vim.bo.filetype ~= 'TelescopePrompt' then
                         -- remove after first run

@@ -141,6 +141,9 @@ add(lspconfig.lua_ls, {
             runtime = {
                 version = 'LuaJIT',
             },
+            semantic = {
+                variable = false,
+            },
             diagnostics = {
                 -- recognize globals
                 globals = {
@@ -149,7 +152,7 @@ add(lspconfig.lua_ls, {
                 },
             },
             workspace = {
-                checkThirdParty = false,
+                checkThirdParty = 'ApplyInMemory',
             },
             telemetry = { enable = false },
         },
@@ -162,5 +165,6 @@ add(lspconfig.lua_ls, {
 
 -- no configs
 add(lspconfig.nil_ls, {})
+add(lspconfig.clangd, {})
 add(lspconfig.glsl_analyzer, {})
 -- }}}
