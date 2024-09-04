@@ -1,15 +1,16 @@
-" uiua 0.11.0
-" no support for deprecated functions
+" uiua 0.13.0
+" experimental functions supported
+" deprecated functions unsupported
 
 if exists("b:current_syntax")
 	finish
 endif
 
 let b:current_syntax = "uiua"
-syn iskeyword a-z,A-Z
+syn iskeyword a-z,A-Z,₀,₁,₂,₃,₄,₅,₆,₇,₈,₉
 
-syn keyword uiuaShadowConst e i NaN W MaxInt Os Family Arch ExeExt DllExt Sep ThisFile ThisFileName ThisFileDir WorkingDir NumProcs True False NULL HexDigits Days Months MonthDays LeapMonthDays Planets Zodiac Suits Cards Chess Moon Skin People Hair Logo Lena
-syn match   uiuaIdentifier  '\a\+[‼!]*'
+syn keyword uiuaShadowConst e i NaN W MaxInt Os Family Arch ExeExt DllExt Sep ThisFile ThisFileName ThisFileDir WorkingDir NumProcs True False NULL HexDigits Days Months MonthDays LeapMonthDays Planets Zodiac Suits Cards Chess Moon Skin People Hair Logo Lena Music
+syn match   uiuaIdentifier  '\(utf₈\)\@!\a\+\(__[0-9]\+\|[₀₁₂₃₄₅₆₇₈₉]\+\)\?[‼!]*'
 
 " {{{ functions and modifiers
 " constants
@@ -24,23 +25,29 @@ syn keyword uiuaPervasive not sig[n] abs[olute] sqr[t] sin[e] flo[or] cei[ling] 
 syn match   uiuaPervasive '[¬±`¯⌵√∿⌊⌈⁅]\|!=\|<=\|>=\|[=≠<≤>≥+\-×*÷%◿ⁿₙ↧↥∠ℂ]'
 
 " monadic non-pervasive functions
-syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] uni[que] box par[se] wait recv tryrecv gen utf type repr csv json xlsx
+syn keyword uiuaMonadic len[gth] sha[pe] rang[e] fir[st] rev[erse] des[hape] fix bit[s] tran[spose] ris[e] fal[e] whe[re] cla[ssify] ded[uplicate] uni[que] box par[se] wait recv tryrecv gen utf₈ type repr csv json xlsx datetime fft
 syn match   uiuaMonadic '[⧻△⇡⊢⇌♭¤⋯⍉⍏⍖⊚⊛◰◴□⋕↬]'
 
 " dyadic non-pervasive functions
-syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] rer[ank] tak[e] dro[p] rot[ate] win[dows] kee[p] fin[d] mem[ber] ind[exof] ass[ert] send regex map has get insert remove coo[rdinate] mas[k]
-syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯☇↙↘↻◫▽⌕∊⊗⍤⟔⦷]'
+syn keyword uiuaDyadic joi[n] cou[ple] mat[ch] pic[k] sel[ect] res[hape] rer[ank] tak[e] dro[p] rot[ate] win[dows] chu[nks] kee[p] fin[d] mem[berof] ind[exof] ass[ert] mas[k] ori[ent] send regex map has get insert remove img gif choose permute
+syn match   uiuaDyadic '[⊂⊟≍⊡⊏↯☇↙↘↻◫⑄▽⌕∊∈⊗⍤⦷⮌]'
+" NOTE: legacy member symbol is kept --^ because it's stated in the changelog
+" that the memberof symbol will be changed to the old member symbol once
+" member is removed
+
+" triadic (or above) functions
+syn keyword uiuaTriadic audio
 
 " monadic modifiers
 " gap, dip, and identity single-letter spellings aren't accounted for
 " 1. it's not very useful since adjacent ones won't be highlighted
 " 2. it'll get formatted anyways
-syn keyword uiuaMonadicMod gap dip on by eac[h] row[s] tab[le] inv[entory] rep[eat] fol[d] reduce scan gro[up] par[tition] un bot[h] con[tent] memo quote comptime stringify spawn pool
-syn match   uiuaMonadicMod '[⋅⊙⟜⊸∵≡⊞⍚⍥∧/\\⊕⊜°∩◇λ]'
+syn keyword uiuaMonadicMod gap dip on by but wit[h] eac[h] row[s] tab[le] inv[entory] rep[eat] fol[d] reduce scan gro[up] par[tition] un bot[h] con[tent] tri[angle] abo[ve] bel[ow] memo quote comptime stringify spawn pool case  struct
+syn match   uiuaMonadicMod '[⋅⊙⟜⊸⤙⤚∵≡⊞⍚⍥∧/\\⊕⊜°∩◇◹◠◡]'
 
 " non-monadic modifiers
-syn keyword uiuaOtherMod do und[er] fil[l] bra[cket] for[k] try setinv setund
-syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⍣]/
+syn keyword uiuaOtherMod sw[itch] do und[er] fil[l] bra[cket] for[k] try setinv setund astar
+syn match   uiuaOtherMod '[⨬⍢⍜⬚⊓⊃⍣]'
 " }}}
 
 " {{{ system functions
@@ -49,8 +56,8 @@ syn match   uiuaOtherMod /[⍢⍜⬚⊓⊃⍣]/
 
 " modules
 syn match   uiuaOtherSF    '\v\&(memcpy)'
-syn match   uiuaDyadicSF   '\v\&(runs|rs|rb|ru|w|fwa|ime|ae|tcpsrt|tcpswt|ffi)'
-syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|raw|var|runi|runc|clset|cd|cl|fo|fc|fde|ftr|fe|fld|fif|fras|frab|fwa|imd|ims|gifd|gife|gifs|ad|ap|tlsc|tlsltcpl|tcpaddr|tcpa|tcpc|tcpsnb|invk|exit|memfree)'
+syn match   uiuaDyadicSF   '\v\&(runs|rs|rb|ru|w|fwa|tcpsrt|tcpswt|ffi)'
+syn match   uiuaMonadicSF  '\v\&(sl|s|pf|p|raw|var|runi|runc|clset|cd|cl|fo|fc|fde|ftr|fe|fld|fif|fras|frab|fwa|fmd|ims|gifs|ap|tlsc|tlsl|tcpl|tcpaddr|tcpa|tcpc|tcpsnb|invk|exit|memfree|camcap)'
 syn match   uiuaNoadicSF   '\v\&(clget|sc|ts|args|asr)'
 syn match   uiuaModifierSF '&ast'
 " }}}
@@ -76,25 +83,28 @@ syn region  uiuaStr start='\$ ' end='$' contains=uiuaEsc,uiuaFmt
 " function signatures
 syn match   uiuaSignature '|\d\+\(\.\d\+\)\?'
 
-" test scopes, <- assignments, stranded arrays, and ' or '' line joining
-syn match   uiuaFaded '^---$\|[←↚_']\|=\~'
+" assignments, stranded arrays, and ' or '' line joining
+syn match   uiuaFaded '[←↚_']\|=\~\|\~'
 
-" debug functions
+" modules
+syn match   uiuaModPunct contained '---\|\~'
+syn match   uiuaModName contained '\a\+[‼!]*'
+syn match   uiuaModBind '^\a\+ \~' contains=uiuaModPunct,uiuaModName
+syn match   uiuaModRef '\a\+\~\a\+[‼!]*' contains=uiuaModPunct,uiuaModName
+syn match   uiuaModScope '^---\(\a\+\( \~\( \a\+[‼!]*\)\+\)\?\)\?$' contains=uiuaModPunct,uiuaModName
+syn match   uiuaModImportMember '\~\( \a\+[‼!]*\)\+$' contains=uiuaModPunct,uiuaModName
+
+" debug functions and labels
 syn keyword uiuaDebug dump stack trac[e]
-syn match   uiuaDebug '[⸮?]'
-
-" swizzles
-syn match   uiuaMonadicSwizzle /\(['λ]\a\|⋊\a\+\|''\a\+\)/
-syn match   uiuaDyadicSwizzle /['λ]\a\a/
-syn match   uiuaOtherSwizzle /['λ]\a\a\a\+/
+syn match   uiuaDebug '\([⸮?]\|\$\a\+\)'
 
 " operand functions and array macro assignments
 syn match   uiuaMacroSpecial '\(\^[!:.,]\|[←↚]^\)'
 
 " comments
-syn match   uiuaExperimental contained 'Experimental!'
+syn match   uiuaSemanticComment contained 'Track caller!\|Experimental!'
 syn match   uiuaSignatureComment contained '\(\a\+ \)*?\( \a\+\)\+'
-syn region  uiuaComment start='#' end='$' contains=uiuaSignatureComment,uiuaExperimental
+syn region  uiuaComment start='#' end='$' contains=uiuaSemanticComment,uiuaSignatureComment
 " }}}
 
 " {{{ highlight groups
@@ -107,6 +117,7 @@ hi def link uiuaMonadic             Function
 hi def link uiuaMonadicSF           Function
 hi def link uiuaDyadic              Identifier
 hi def link uiuaDyadicSF            Identifier
+hi def link uiuaTriadic             Function " TODO: more unique highlight
 hi def link uiuaMonadicMod          Type
 hi def link uiuaOtherMod            Number
 hi def link uiuaModifierSF          Type
@@ -118,13 +129,16 @@ hi def link uiuaFmt                 Operator
 hi def link uiuaStr                 String
 
 hi def link uiuaSignature           Type
-hi def link uiuaDebug               Operator
 hi def link uiuaFaded               Comment
-hi def link uiuaMonadicSwizzle      Function
-hi def link uiuaDyadicSwizzle       Identifier
-hi def link uiuaOtherSwizzle        Number
+hi def link uiuaModPunct            Comment
+hi def link uiuaModName             Keyword
+hi def link uiuaModBind             Keyword
+hi def link uiuaModRef              Keyword
+hi def link uiuaModScope            Keyword
+hi def link uiuaModImportMember     Keyword
+hi def link uiuaDebug               Operator
 hi def link uiuaMacroSpecial        Keyword
-hi def link uiuaExperimental        Keyword
+hi def link uiuaSemanticComment     Keyword
 hi def link uiuaSignatureComment    Number
 hi def link uiuaComment             Comment
 " }}}
