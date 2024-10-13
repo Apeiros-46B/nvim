@@ -483,6 +483,15 @@ local specs =  {
             -- }}}
         },
     },
+
+    -- uiua
+    -- configured in lsp.lspconfig
+    {
+        'Apeiros-46B/uiua.vim',
+        event = 'BufEnter *.ua',
+        ft = 'uiua',
+        config = cfg('lsp.uiua'),
+    },
     -- }}}
 
     -- {{{ other lsp-related plugins

@@ -164,6 +164,7 @@ add(lspconfig.lua_ls, {
 -- }}}
 
 -- no configs
+add(lspconfig.uiua, {})
 add(lspconfig.nil_ls, {})
 add(lspconfig.clangd, {})
 add(lspconfig.glsl_analyzer, {})

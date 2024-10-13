@@ -37,6 +37,13 @@ M.colors = {
     blue   = '#7fbbb3',
     purple = '#d699b6',
 
+    -- my own colors, not from everforest
+    sand       = '#dece95',
+    pink       = '#dbb4cc',
+    lavender   = '#b399d6',
+    alt_blue   = '#92b7d1',
+    alt_green  = '#afc499',
+
     -- misc
     visual_bg = '#503946',
     diff_del  = '#4e3e43',
