@@ -650,6 +650,7 @@ local specs =  {
     -- {{{ keybind help
     {
         'folke/which-key.nvim',
+        enabled = false,
         lazy = false,
         config = cfg('ui.which_key'),
     },

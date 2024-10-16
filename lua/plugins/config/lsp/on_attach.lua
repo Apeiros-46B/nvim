@@ -1,4 +1,8 @@
 -- on_attach function
+
+local navic_deny = { ['null-ls'] = true, ['glsl_analyzer'] = true, ['uiua'] = true }
+local semantic_tokens_allow = { ['rust-analyzer'] = true }
+
 return function(client, bufnr)
     -- {{{ helpers
     local function buf_map(...)
@@ -31,14 +35,12 @@ return function(client, bufnr)
 
     -- {{{ other
     if client then
-        -- attach navic and navbuddy
-        if client.name ~= 'null-ls' and client.name ~= 'glsl_analyzer' then
+        if not navic_deny[client.name] then
             require('nvim-navic').attach(client, bufnr)
             require('nvim-navbuddy').attach(client, bufnr)
         end
 
-        -- disable semantic token highlighting if it's not rust-analyzer
-        if client.name ~= 'rust-analyzer' then
+        if not semantic_tokens_allow[client.name] then
             client.server_capabilities.semanticTokensProvider = {}
         end
     end
