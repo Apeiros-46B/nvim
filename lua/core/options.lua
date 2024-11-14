@@ -15,7 +15,7 @@ o.mouse = 'a'
 o.mousemodel = 'extend'
 
 o.cursorline = true
-o.cursorlineopt = 'line'
+o.cursorlineopt = 'both'
 o.modeline = true
 o.modelines = 5
 
