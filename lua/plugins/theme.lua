@@ -111,7 +111,8 @@ for k, v in pairs(M.hl) do set_hl(0, k, v) end
 
 -- change terminal colors
 -- more readable dim text
-vim.g.terminal_color_8 = M.colors.gray7
+vim.g.terminal_color_0 = M.colors.gray2
+vim.g.terminal_color_7 = M.colors.gray7
 -- }}}
 
 -- {{{ return

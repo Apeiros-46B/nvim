@@ -806,22 +806,18 @@ local specs =  {
         lazy = false,
     },
     {
-        -- 'Apeiros-46B/qalc.nvim',
-	    dir = '/home/apeiros/code/projects/qalc.nvim/',
-        keys = {
-            key('<leader>qn', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
-            key('<leader>qy', '<cmd>QalcYank<CR>', 'n'),  -- yank result
-        },
+        --'Apeiros-46B/qalc.nvim',
+        dir = '/home/apeiros/code/projects/qalc.nvim/',
         cmd = {
             'Qalc',
             'QalcAttach',
         },
-        init = function()
-            -- lazy loading for specific file extension
-            vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-                pattern = { '*.qalc' }, command = 'QalcAttach'
-            })
-        end,
+        event = 'BufEnter *.qalc',
+        ft = 'qalc',
+        keys = {
+            key('<leader>qn', '<cmd>vs | Qalc<CR>', 'n'),
+            key('<leader>qy', '<cmd>QalcYank<CR>', 'n'),
+        },
         config = cfg('util.qalc'),
     },
     {

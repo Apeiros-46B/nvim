@@ -52,7 +52,7 @@
   "todo-comments.nvim": { "branch": "main", "commit": "ae0a2afb47cf7395dc400e5dc4e05274bf4fb9e0" },
   "toggleterm.nvim": { "branch": "main", "commit": "48be57eaba817f038d61bbf64d2c597f578c0827" },
   "trouble.nvim": { "branch": "main", "commit": "40c5317a6e90fe3393f07b0fee580d9e93a216b4" },
-  "uiua.vim": { "branch": "main", "commit": "559a74a87aa51db1ba52a008eaf9986dfe6b74f3" },
+  "uiua.vim": { "branch": "main", "commit": "34484213440f0ce24063b21958ea6729c43ffcb6" },
   "ultisnips": { "branch": "master", "commit": "7dc30c55e5c41c98a8c7421bb01fec1d559256fd" },
   "venn.nvim": { "branch": "main", "commit": "b09c2f36ddf70b498281845109bedcf08a7e0de0" },
   "vim-fugitive": { "branch": "master", "commit": "96c1009fcf8ce60161cc938d149dd5a66d570756" },
