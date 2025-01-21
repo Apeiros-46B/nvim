@@ -487,7 +487,8 @@ local specs =  {
     -- uiua
     -- configured in lsp.lspconfig
     {
-        'Apeiros-46B/uiua.vim',
+        -- 'Apeiros-46B/uiua.vim',
+        dir = '/home/apeiros/dev/uiua/uiua.vim',
         event = 'BufEnter *.ua',
         ft = 'uiua',
         config = cfg('lsp.uiua'),
@@ -806,8 +807,14 @@ local specs =  {
         lazy = false,
     },
     {
-        --'Apeiros-46B/qalc.nvim',
-        dir = '/home/apeiros/code/projects/qalc.nvim/',
+        'Apeiros-46B/qalc.nvim',
+        branch = 'rewrite',
+        build = 'build_nix.lua',
+        -- dir = '/home/apeiros/code/projects/qalc.nvim/',
+        keys = {
+            key('<leader>qn', '<cmd>vs | Qalc<CR>', 'n'), -- open qalc in vertical split
+            key('<leader>qy', '<cmd>QalcYank<CR>', 'n'),  -- yank result
+        },
         cmd = {
             'Qalc',
             'QalcAttach',
