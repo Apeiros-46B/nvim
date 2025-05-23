@@ -40,8 +40,10 @@ o.shiftwidth = 0
 o.expandtab = false
 o.smartindent = true
 o.cinoptions = '=sl1g0N-sE-s'
-g.rust_recommended_style = false
+g.rust_recommended_style = true
 g.python_recommended_style = false
+g.zig_fmt_autosave = false
+g.editorconfig = true
 
 -- folding
 o.foldmethod = 'marker'
