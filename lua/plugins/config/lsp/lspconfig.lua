@@ -168,4 +168,16 @@ add(lspconfig.uiua, {})
 add(lspconfig.nil_ls, {})
 add(lspconfig.clangd, {})
 add(lspconfig.glsl_analyzer, {})
+add(lspconfig.ts_ls, {})
 -- }}}
+
+-- workaround for "server cancelled the request" error
+for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+    local default_handler = vim.lsp.handlers[method]
+    vim.lsp.handlers[method] = function(err, res, ctx, cfg)
+        if err ~= nil and err.code == -32802 then
+            return
+        end
+        return default_handler(err, res, ctx, cfg)
+    end
+end

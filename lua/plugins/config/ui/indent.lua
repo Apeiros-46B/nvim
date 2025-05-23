@@ -9,8 +9,8 @@ return function(theme)
     local set_hl = vim.api.nvim_set_hl
 
     local hl = {
-        IblIndent = { fg = colors.gray2 },
-        IblScope  = { fg = colors.gray5 },
+        IblIndent = { fg = colors.gray4 },
+        IblScope  = { fg = colors.gray6 },
     }
 
     for k, v in pairs(hl) do set_hl(0, k, v) end

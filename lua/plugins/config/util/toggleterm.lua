@@ -7,9 +7,11 @@ return function(theme)
         on_open = function(t)
             -- for some reason, from second open and onwards, it does not open in term mode
             -- this fixes that
-            if t.__state.mode == 'n' then
-                vim.cmd('startinsert')
-            end
+            vim.defer_fn(function ()
+                if t.__state.mode == 'n' then
+                    vim.cmd('startinsert')
+                end
+            end, 10)
         end,
         highlights = {
             NormalFloat = {
