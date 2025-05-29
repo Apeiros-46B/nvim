@@ -1,37 +1,75 @@
--- initialize configuration
--- {{{ bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        'git',
-        'clone',
-        '--filter=blob:none',
-        '--single-branch',
-        'https://github.com/folke/lazy.nvim.git',
-        lazypath,
-    })
+if not vim.uv.fs_stat(lazypath) then
+	vim.fn.system({
+		'git', 'clone', '--filter=blob:none', '--single-branch',
+		'https://github.com/folke/lazy.nvim.git', lazypath,
+	})
 end
-vim.opt.runtimepath:prepend(lazypath)
--- }}}
+vim.opt.rtp:prepend(lazypath)
+vim.deprecate = function() end
 
--- {{{ core
---> disable shadafile during core config loading
-vim.opt.shadafile = 'NONE'
-
---> autocommands
-require('core.autocmds')
-
---> keymaps and bindings
-require('core.keymaps')
-
---> general vim options
-require('core.options')
-
---> re-enable shadafile
-vim.opt.shadafile = ''
--- }}}
-
--- {{{ plugins
---> load
-require('plugins.lazy')
--- }}}
+require('core')
+require('lazy').setup {
+	spec = {
+		{
+			'Apeiros-46B/elysium',
+			lazy = false,
+			priority = 1000,
+			config = function(plugin)
+				require('core.theme')
+				vim.opt.rtp:append(plugin.dir .. '/ports/vim')
+				vim.cmd('colorscheme elysium')
+			end,
+		},
+		{ import = 'plugins' },
+	},
+	dev = {
+		path = '~/dev/nvim',
+		patterns = { 'elysium' },
+		fallback = true,
+	},
+	change_detection = { enabled = false },
+	ui = {
+		border = 'none',
+		backdrop = 100,
+		icons = {
+			loaded     = '●',
+			not_loaded = '',
+			cmd        = '󰞷',
+			config     = '󰊕',
+			event      = '',
+			ft         = '󰈙',
+			init       = '',
+			keys       = '󰘳',
+			plugin     = '󰏓',
+			runtime    = '󰆧',
+			source     = '',
+			start      = '',
+			task       = '󰄬',
+			lazy       = '   ',
+			list       = { '', '', '', '' },
+		},
+	},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				'tohtml',
+				'getscript',
+				'getscriptPlugin',
+				'logipat',
+				'man',
+				'matchit',
+				'netrw',
+				'netrwPlugin',
+				'netrwSettings',
+				'netrwFileHandlers',
+				'rplugin',
+				'rrhelper',
+				'spellfile',
+				'tutor',
+				'vimball',
+				'vimballPlugin',
+			},
+		},
+	},
+}
