@@ -1,5 +1,5 @@
 local util = require('util')
-local colors = require('core.theme').colors
+local colors = require('colors').palette
 
 return {
 	{
@@ -91,7 +91,6 @@ return {
 					{
 						condition = function()
 							return vim.bo.buftype ~= 'terminal'
-							   and vim.bo.buftype ~= 'help'
 							   and (not vim.bo.modifiable or vim.bo.readonly)
 						end,
 						provider = 'RO ',
@@ -134,7 +133,7 @@ return {
 					{
 						condition = function(self) return self:is_nvim_tree() end,
 						provider = ' ',
-						hl = 'VertSplit',
+						hl = { bg = 'bg0' },
 					},
 					-- TODO: buffer switcher
 					hutils.make_buflist {

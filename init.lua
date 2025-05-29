@@ -11,16 +11,7 @@ vim.deprecate = function() end
 require('core')
 require('lazy').setup {
 	spec = {
-		{
-			'Apeiros-46B/elysium',
-			lazy = false,
-			priority = 1000,
-			config = function(plugin)
-				require('core.theme')
-				vim.opt.rtp:append(plugin.dir .. '/ports/vim')
-				vim.cmd('colorscheme elysium')
-			end,
-		},
+		require('colors').spec,
 		{ import = 'plugins' },
 	},
 	dev = {

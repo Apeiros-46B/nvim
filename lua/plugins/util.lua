@@ -1,7 +1,6 @@
 local util = require('util')
-local colors = require('core.theme').colors
+local colors = require('colors').palette
 
--- TODO: select UI for lsp actions
 return {
   {
 		'jghauser/mkdir.nvim',
@@ -76,11 +75,11 @@ return {
 
 				TelescopePreviewTitle   = { bg = colors.purple, fg = colors.bg0 },
 
-				TelescopeSelection      = { bg = colors.bg_blue, fg = colors.fg0, bold = true },
+				TelescopeSelection      = { bg = colors.bg_accent, fg = colors.fg0, bold = true },
 
 				TelescopeMultiIcon      = { fg = colors.purple              },
 				TelescopeMultiSelection = { fg = colors.fg0                 },
-				TelescopeMatching       = { fg = colors.purple, bold = true },
+				TelescopeMatching       = { fg = colors.accent, bold = true },
 			}
 			return {
 				defaults = {
@@ -157,6 +156,7 @@ return {
 			{
 				hijack_cursor = true,
 				reload_on_bufenter = true,
+				sync_root_with_cwd = true,
 				modified = { enable = true },
 				view = { signcolumn = 'no' },
 				renderer = {
@@ -182,7 +182,6 @@ return {
 					highlight_hidden       = 'all',
 					highlight_clipboard    = 'all',
 					highlight_opened_files = 'name',
-
 					icons = {
 						bookmarks_placement = 'after',
 						git_placement       = 'right_align',
@@ -215,21 +214,44 @@ return {
 						},
 						symlink_arrow = '  ',
 					}
-				}
+				},
+				filters = {
+					custom = {
+						'^\\.git$',
+						'^\\.direnv$',
+					},
+				},
+				live_filter = {
+					prefix = ' ',
+					always_show_folders = false,
+				},
+				actions = {
+					change_dir = { global = true },
+				},
+				ui = {
+					confirm = { default_yes = true },
+				},
 			},
 			{
-				NvimTreeNormal       = { bg = colors.bg_cursor                             },
+				NvimTreeNormal       = { bg = colors.bg_shade                              },
+				NvimTreeEndOfBuffer  = { bg = colors.bg_shade                              },
 				NvimTreeWindowPicker = { bg = colors.bg_blue, fg = colors.fg0, bold = true },
 				NvimTreeIndentMarker = { fg = colors.bg5                                   },
 
+				NvimTreeCursorLine = { bg = colors.bg1 },
+
 				NvimTreeRootFolder        = { fg = colors.fg3                 },
 				NvimTreeFolderIcon        = { fg = colors.fg3                 },
+				NvimTreeFolderName        = { fg = colors.blue                },
+				NvimTreeEmptyFolderName   = { fg = colors.blue                },
+				NvimTreeOpenedFolderName  = { fg = colors.blue                },
 				NvimTreeSymlinkFolderName = { fg = colors.aqua,   bold = true },
 				NvimTreeSymlink           = { fg = colors.aqua,   bold = true },
 				NvimTreeExecFile          = { fg = colors.green,  bold = true },
 				NvimTreeSpecialFile       = { fg = colors.purple              },
 
 				NvimTreeModifiedFile   = { fg = colors.red       },
+				NvimTreeHiddenIcon     = { fg = colors.fg3       },
 				NvimTreeGitDeletedIcon = { fg = colors.red       },
 				NvimTreeGitDirtyIcon   = { fg = colors.blue      },
 				NvimTreeGitIgnoredIcon = { fg = colors.fg3       },

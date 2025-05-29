@@ -1,5 +1,5 @@
 local util = require('util')
-local colors = require('core.theme').colors
+local colors = require('colors').palette
 
 return {
 	{
