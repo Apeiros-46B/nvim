@@ -79,7 +79,7 @@ return {
 					},
 				}, -- }}}
 				winbar = { -- {{{
-					hl = { bg = 'bg0', fg = 'fg0' },
+					hl = { bg = 'bg_shade', fg = 'fg0' },
 					{ provider = ' %f ' },
 					{
 						condition = function()

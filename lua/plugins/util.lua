@@ -77,9 +77,9 @@ return {
 
 				TelescopeSelection      = { bg = colors.bg_accent, fg = colors.fg0, bold = true },
 
-				TelescopeMultiIcon      = { fg = colors.purple              },
-				TelescopeMultiSelection = { fg = colors.fg0                 },
-				TelescopeMatching       = { fg = colors.accent, bold = true },
+				TelescopeMultiIcon      = { fg = colors.purple            },
+				TelescopeMultiSelection = { fg = colors.fg0               },
+				TelescopeMatching       = { fg = colors.aqua, bold = true },
 			}
 			return {
 				defaults = {

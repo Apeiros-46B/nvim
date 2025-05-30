@@ -33,12 +33,12 @@ M.spec = {
 	'Apeiros-46B/elysium',
 	lazy = false,
 	priority = 1000,
-	init = function()
-	end,
 	config = function(plugin)
 		vim.opt.rtp:append(plugin.dir .. '/ports/vim')
 		vim.cmd('colorscheme elysium')
 	end,
 }
+
+M.dark = false
 
 return M

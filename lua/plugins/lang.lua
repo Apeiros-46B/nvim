@@ -53,17 +53,17 @@ return {
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
 					on_attach(client, args.buf) end
 			})
-
-			local function enable(srv, opts)
-				opts = opts or {}
+			local servers = {
+				lua_ls = {},
+				nil_ls = {},
+				basedpyright = {},
+				zls = {},
+				uiua = {},
+			}
+			for srv, opts in pairs(servers) do
 				vim.lsp.config(srv, opts)
 				vim.lsp.enable(srv)
 			end
-
-			enable('lua_ls')
-			enable('nil_ls')
-			enable('basedpyright')
-			enable('zls')
 		end,
 	},
 	{
@@ -192,5 +192,48 @@ return {
 				NavicSeparator          = { fg = colors.fg3    },
 			}
 		),
-	}
+	},
+	{
+		'Apeiros-46B/uiua.vim',
+		filetype = 'uiua',
+		init = function()
+			vim.g.uiua_recommended_style = 1
+			vim.g.uiua_format_on_save = 1
+			vim.g.uiua_dark_mode = require('colors').dark
+		end,
+		config = function()
+			util.hl {
+				uiuaRed              = { fg = colors.red    },
+				uiuaOrange           = { fg = colors.orange },
+				uiuaYellow           = { fg = colors.yellow },
+				uiuaBeige            = { fg = colors.yellow },
+				uiuaGreen            = { fg = colors.green  },
+				uiuaAqua             = { fg = colors.aqua   },
+				uiuaBlue             = { fg = colors.blue   },
+				uiuaIndigo           = { fg = colors.purple },
+				uiuaPurple           = { fg = colors.purple },
+				uiuaPink             = { fg = colors.purple },
+				uiuaLightPink        = { fg = colors.purple },
+				uiuaFaded            = { fg = colors.fg3    },
+				uiuaForegroundDark   = { fg = colors.fg0    },
+				uiuaForegroundLight  = { fg = colors.fg0    },
+				uiuaMacroSpecial     = { link = 'uiuaRed'      },
+				uiuaPunctuation      = { link = 'uiuaFaded'    },
+				uiuaMonadicP         = { link = 'uiuaOrange'   },
+				uiuaDyadicP          = { link = 'uiuaOrange'   },
+				uiuaPentadic         = { link = 'uiuaPurple'   },
+				uiuaNum              = { link = 'uiuaPurple'   },
+				uiuaNumShadow        = { link = 'uiuaNum'      },
+				uiuaEsc              = { link = 'uiuaYellow'   },
+				uiuaFmt              = { link = 'uiuaIndigo'   },
+				uiuaUnicodeLiteral   = { link = 'uiuaIndigo'   },
+				uiuaSignature        = { link = 'uiuaYellow'   },
+				uiuaModPunct         = { link = 'uiuaFaded'    },
+				uiuaLabel            = { link = 'uiuaAqua'     },
+				uiuaSemanticComment  = { link = 'uiuaRed'      },
+				uiuaSignatureComment = { link = 'uiuaPurple'   },
+				uiuaComment          = { link = 'Comment'      },
+			}
+		end,
+	},
 }

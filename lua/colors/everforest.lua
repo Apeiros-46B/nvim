@@ -54,6 +54,8 @@ M.spec = {
 	end,
 }
 
+M.dark = true
+
 require('util').hl {
 	Search      = { bg = M.palette.bg_aqua, fg = M.palette.aqua },
 	IncSearch   = { bg = M.palette.aqua,    fg = M.palette.bg0  },

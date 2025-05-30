@@ -39,7 +39,10 @@ return {
 	},
 	{
 		'echasnovski/mini.align',
-		keys = { 'ga', 'gA' },
+		keys = {
+			{ 'ga', mode = { 'n', 'v' }},
+			{ 'gA', mode = { 'n', 'v' }},
+		},
 		opts = {},
 	},
 	{
