@@ -57,12 +57,20 @@ M.spec = {
 M.dark = true
 
 require('util').hl {
-	Search      = { bg = M.palette.bg_aqua, fg = M.palette.aqua },
-	IncSearch   = { bg = M.palette.aqua,    fg = M.palette.bg0  },
-	NormalFloat = { bg = M.palette.bg1,     fg = M.palette.fg0  },
-	FloatBorder = { bg = M.palette.bg1,     fg = M.palette.bg1  },
-	VertSplit   = { bg = M.palette.bg0,     fg = M.palette.bg0  },
-	PmenuThumb  = { bg = M.palette.bg5                          },
+	Search       = { bg = M.palette.bg_aqua, fg = M.palette.aqua   },
+	IncSearch    = { bg = M.palette.aqua,    fg = M.palette.bg0    },
+	NormalFloat  = { bg = M.palette.bg1,     fg = M.palette.fg0    },
+	FloatBorder  = { bg = M.palette.bg1,     fg = M.palette.bg1    },
+	ErrorFloat   = { bg = M.palette.bg1,     fg = M.palette.red    },
+	WarningFloat = { bg = M.palette.bg1,     fg = M.palette.yellow },
+	InfoFloat    = { bg = M.palette.bg1,     fg = M.palette.blue   },
+	HintFloat    = { bg = M.palette.bg1,     fg = M.palette.green  },
+	VertSplit    = { bg = M.palette.bg0,     fg = M.palette.bg0    },
+	PmenuThumb   = { bg = M.palette.bg5                            },
+
+	CursorLine     = { bg = M.palette.bg_shade                     },
+	CursorLineSign = { bg = M.palette.bg_shade                     },
+	CursorLineNr   = { bg = M.palette.bg_shade, fg = M.palette.fg2 },
 }
 
 return M

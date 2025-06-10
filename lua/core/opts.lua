@@ -26,6 +26,7 @@ vim.o.incsearch = true
 vim.o.modeline = true
 vim.o.modelines = 5
 vim.o.foldmethod = 'marker'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 vim.o.swapfile = true
 vim.o.undofile = true

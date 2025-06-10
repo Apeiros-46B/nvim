@@ -58,6 +58,7 @@ return {
 				nil_ls = {},
 				basedpyright = {},
 				zls = {},
+				ts_ls = {},
 				uiua = {},
 			}
 			for srv, opts in pairs(servers) do
