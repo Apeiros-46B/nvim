@@ -11,26 +11,26 @@ return {
 			{ 'ih', ':<C-U>lua require("gitsigns.actions").select_hunk()<CR>', mode = 'o' },
 			{ 'ih', ':<C-U>lua require("gitsigns.actions").select_hunk()<CR>', mode = 'x' },
 
-			{ '<leader>gs', '<cmd>lua require("gitsigns").stage_buffer()<CR>'    },
+			{ '<leader>gS', '<cmd>lua require("gitsigns").stage_buffer()<CR>'    },
 			{
-				'<leader>gS',
+				'<leader>gs',
 				'<cmd>lua require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })<CR>',
 				mode = 'v'
 			},
-			{ '<leader>gS', '<cmd>lua require("gitsigns").stage_hunk()<CR>'      },
+			{ '<leader>gs', '<cmd>lua require("gitsigns").stage_hunk()<CR>'      },
 			{ '<leader>gu', '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>' },
 			{ '<leader>gp', '<cmd>lua require("gitsigns").preview_hunk()<CR>'    },
 
-			{ '<leader>gr', '<cmd>lua require("gitsigns").reset_buffer()<CR>' },
+			{ '<leader>gR', '<cmd>lua require("gitsigns").reset_buffer()<CR>' },
 			{
-				'<leader>gR',
+				'<leader>gr',
 				'<cmd>lua require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })<CR>',
 				mode = 'v'
 			},
-			{ '<leader>gR', '<cmd>lua require("gitsigns").reset_hunk()<CR>'   },
+			{ '<leader>gr', '<cmd>lua require("gitsigns").reset_hunk()<CR>'   },
 
-			{ '<leader>gb',  '<cmd>Gitsigns blame_line<CR>'                },
 			{ '<leader>gB',  '<cmd>Gitsigns blame<CR>'                     },
+			{ '<leader>gb',  '<cmd>Gitsigns blame_line<CR>'                },
 			{ '<leader>gtb', '<cmd>Gitsigns toggle_current_line_blame<CR>' },
 		},
 		opts = util.opts_with_hl(
