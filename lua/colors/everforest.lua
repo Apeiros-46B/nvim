@@ -70,7 +70,7 @@ require('util').hl {
 
 	CursorLine     = { bg = M.palette.bg_shade                     },
 	CursorLineSign = { bg = M.palette.bg_shade                     },
-	CursorLineNr   = { bg = M.palette.bg_shade, fg = M.palette.fg2 },
+	CursorLineNr   = { bg = M.palette.bg_shade, fg = M.palette.fg3 },
 }
 
 return M
