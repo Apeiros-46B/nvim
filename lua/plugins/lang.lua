@@ -56,9 +56,13 @@ return {
 			local servers = {
 				lua_ls = {},
 				nil_ls = {},
+				ts_ls = {},
 				basedpyright = {},
 				zls = {},
 				uiua = {},
+				qmlls = {
+					cmd = { 'qmlls', '-E' }
+				},
 			}
 			for srv, opts in pairs(servers) do
 				vim.lsp.config(srv, opts)
@@ -104,6 +108,49 @@ return {
 		'mfussenegger/nvim-jdtls',
 		event = 'VeryLazy',
 		-- TODO: configure
+	},
+	{
+		'Apeiros-46B/uiua.vim',
+		filetype = 'uiua',
+		init = function()
+			vim.g.uiua_recommended_style = 1
+			vim.g.uiua_format_on_save = 1
+			vim.g.uiua_dark_mode = require('colors').dark
+		end,
+		config = function()
+			util.hl {
+				uiuaRed              = { fg = colors.red    },
+				uiuaOrange           = { fg = colors.orange },
+				uiuaYellow           = { fg = colors.yellow },
+				uiuaBeige            = { fg = colors.yellow },
+				uiuaGreen            = { fg = colors.green  },
+				uiuaAqua             = { fg = colors.aqua   },
+				uiuaBlue             = { fg = colors.blue   },
+				uiuaIndigo           = { fg = colors.purple },
+				uiuaPurple           = { fg = colors.purple },
+				uiuaPink             = { fg = colors.purple },
+				uiuaLightPink        = { fg = colors.purple },
+				uiuaFaded            = { fg = colors.fg3    },
+				uiuaForegroundDark   = { fg = colors.fg0    },
+				uiuaForegroundLight  = { fg = colors.fg0    },
+				uiuaMacroSpecial     = { link = 'uiuaRed'      },
+				uiuaPunctuation      = { link = 'uiuaFaded'    },
+				uiuaMonadicP         = { link = 'uiuaOrange'   },
+				uiuaDyadicP          = { link = 'uiuaOrange'   },
+				uiuaPentadic         = { link = 'uiuaPurple'   },
+				uiuaNum              = { link = 'uiuaPurple'   },
+				uiuaNumShadow        = { link = 'uiuaNum'      },
+				uiuaEsc              = { link = 'uiuaYellow'   },
+				uiuaFmt              = { link = 'uiuaIndigo'   },
+				uiuaUnicodeLiteral   = { link = 'uiuaIndigo'   },
+				uiuaSignature        = { link = 'uiuaYellow'   },
+				uiuaModPunct         = { link = 'uiuaFaded'    },
+				uiuaLabel            = { link = 'uiuaAqua'     },
+				uiuaSemanticComment  = { link = 'uiuaRed'      },
+				uiuaSignatureComment = { link = 'uiuaPurple'   },
+				uiuaComment          = { link = 'Comment'      },
+			}
+		end,
 	},
 	{
 		'smjonas/inc-rename.nvim',
@@ -194,46 +241,12 @@ return {
 		),
 	},
 	{
-		'Apeiros-46B/uiua.vim',
-		filetype = 'uiua',
-		init = function()
-			vim.g.uiua_recommended_style = 1
-			vim.g.uiua_format_on_save = 1
-			vim.g.uiua_dark_mode = require('colors').dark
-		end,
-		config = function()
-			util.hl {
-				uiuaRed              = { fg = colors.red    },
-				uiuaOrange           = { fg = colors.orange },
-				uiuaYellow           = { fg = colors.yellow },
-				uiuaBeige            = { fg = colors.yellow },
-				uiuaGreen            = { fg = colors.green  },
-				uiuaAqua             = { fg = colors.aqua   },
-				uiuaBlue             = { fg = colors.blue   },
-				uiuaIndigo           = { fg = colors.purple },
-				uiuaPurple           = { fg = colors.purple },
-				uiuaPink             = { fg = colors.purple },
-				uiuaLightPink        = { fg = colors.purple },
-				uiuaFaded            = { fg = colors.fg3    },
-				uiuaForegroundDark   = { fg = colors.fg0    },
-				uiuaForegroundLight  = { fg = colors.fg0    },
-				uiuaMacroSpecial     = { link = 'uiuaRed'      },
-				uiuaPunctuation      = { link = 'uiuaFaded'    },
-				uiuaMonadicP         = { link = 'uiuaOrange'   },
-				uiuaDyadicP          = { link = 'uiuaOrange'   },
-				uiuaPentadic         = { link = 'uiuaPurple'   },
-				uiuaNum              = { link = 'uiuaPurple'   },
-				uiuaNumShadow        = { link = 'uiuaNum'      },
-				uiuaEsc              = { link = 'uiuaYellow'   },
-				uiuaFmt              = { link = 'uiuaIndigo'   },
-				uiuaUnicodeLiteral   = { link = 'uiuaIndigo'   },
-				uiuaSignature        = { link = 'uiuaYellow'   },
-				uiuaModPunct         = { link = 'uiuaFaded'    },
-				uiuaLabel            = { link = 'uiuaAqua'     },
-				uiuaSemanticComment  = { link = 'uiuaRed'      },
-				uiuaSignatureComment = { link = 'uiuaPurple'   },
-				uiuaComment          = { link = 'Comment'      },
-			}
-		end,
+		url = 'https://git.sr.ht/~hedy/outline.nvim',
+		lazy = true,
+		cmd = { 'Outline', 'OutlineOpen' },
+		keys = { { '<leader>lo', '<cmd>Outline<CR>' } },
+		opts = {
+			-- TODO
+		},
 	},
 }
