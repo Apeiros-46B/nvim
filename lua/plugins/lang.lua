@@ -59,6 +59,7 @@ return {
 				ts_ls = {},
 				basedpyright = {},
 				zls = {},
+				ts_ls = {},
 				uiua = {},
 				qmlls = {
 					cmd = { 'qmlls', '-E' }
