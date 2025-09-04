@@ -1,4 +1,4 @@
-local M = require('colors.everforest')
+local M = require('colors.elysium')
 
 require('util').hl {
 	iCursor = { bg = M.palette.blue   },

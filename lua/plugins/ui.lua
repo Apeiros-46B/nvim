@@ -181,7 +181,7 @@ return {
 	{
 		-- TODO: fix bufdelete errors and spontaneous <C-g>
 		'Apeiros-46B/nvim-scrlbkun',
-		cond = true,
+		cond = false,
 		event = 'VeryLazy',
 		opts = util.opts_with_hl(
 			{

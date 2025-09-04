@@ -71,6 +71,39 @@ return {
 		end,
 	},
 	{
+		'mfussenegger/nvim-dap',
+		event = 'VeryLazy',
+		config = function()
+			local dap = require('dap')
+			dap.adapters.gdb = {
+				type = 'executable',
+				command = 'gdb',
+				args = { '--interpreter=dap', '--eval-command', 'set print pretty on' }
+			}
+			dap.configurations.c = {
+				{
+					name = 'Launch',
+					type = 'gdb',
+					request = 'launch',
+					program = function()
+						return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+					end,
+					args = {},
+					cwd = '${workspaceFolder}',
+					stopAtBeginningOfMainSubprogram = false,
+				},
+			}
+			dap.configurations.cpp = dap.configurations.c
+		end,
+		-- TODO
+	},
+	{
+		'igorlfs/nvim-dap-view',
+		event = 'VeryLazy',
+		opts = {},
+		-- TODO
+	},
+	{
 		'mrcjkb/rustaceanvim',
 		lazy = false,
 		init = function()

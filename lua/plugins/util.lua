@@ -31,7 +31,6 @@ return {
 	},
 	{
 		'nvim-telescope/telescope.nvim',
-		dependencies = { { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' } },
 		cmd = 'Telescope',
 		keys = {
 			{ '<leader>fb',      '<cmd>Telescope buffers<CR>',                       mode = 'n' },
@@ -141,7 +140,6 @@ return {
 		config = function(_, opts)
 			local telescope = require('telescope')
 			telescope.setup(opts)
-			telescope.load_extension('fzf')
 		end
 	},
 	{
@@ -265,5 +263,33 @@ return {
 				NvimTreeCopiedHL = { bg = colors.bg_purple, fg = colors.fg0 },
 			}
 		),
+	},
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build = 'make',
+		event = 'VeryLazy',
+		config = function(_, _)
+			require('telescope').load_extension('fzf')
+		end,
+	},
+	{
+		'nosduco/remote-sshfs.nvim',
+		dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+		event = 'VeryLazy',
+		keys = {
+			{ '<leader>rc',  '<cmd>RemoteSSHFSConnect<CR>',    mode = 'n' },
+			{ '<leader>rd',  '<cmd>RemoteSSHFSDisconnect<CR>', mode = 'n' },
+			{ '<leader>rff', '<cmd>RemoteSSHFSFindFiles<CR>',  mode = 'n' },
+			{ '<leader>rfw', '<cmd>RemoteSSHFSLiveGrep<CR>',   mode = 'n' },
+		},
+		opts = {
+			connections = {
+				ssh_configs = { vim.fn.expand('$HOME') .. '/.ssh/config' },
+			},
+		},
+		config = function(_, opts)
+			require('remote-sshfs').setup(opts)
+			require('telescope').load_extension('remote-sshfs')
+		end,
 	},
 }
