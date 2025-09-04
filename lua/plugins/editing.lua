@@ -56,7 +56,7 @@ return {
 		'hrsh7th/nvim-cmp',
 		dependencies = {
 			'hrsh7th/cmp-path',
-			'quangnguyen30192/cmp-nvim-ultisnips',
+			-- 'quangnguyen30192/cmp-nvim-ultisnips',
 		},
 		event = 'InsertEnter',
 		opts = function()
@@ -165,14 +165,14 @@ return {
 				},
 
 				sources = cmp.config.sources {
-					{ name = 'ultisnips', priority = 3 },
+					-- { name = 'ultisnips', priority = 3 },
 					{ name = 'nvim_lsp',  priority = 2 },
 					{ name = 'path',      priority = 1 },
 				},
 				snippet = {
-					expand = function(args)
-						vim.fn['UltiSnips#Anon'](args.body)
-					end
+					-- expand = function(args)
+					-- 	vim.fn['UltiSnips#Anon'](args.body)
+					-- end
 				},
 			}
 		end,
@@ -181,18 +181,18 @@ return {
 		'hrsh7th/cmp-nvim-lsp',
 		event = 'LspAttach',
 	},
-	{
-		'SirVer/ultisnips',
-		ft = 'snippets',
-		event = 'InsertEnter',
-		init = function()
-			vim.g.UltiSnipsJumpForwardTrigger = '<Tab>'
-			vim.g.UltiSnipsJumpBackwardTrigger = '<S-Tab>'
-			vim.g.UltiSnipsEdit = 'vertical'
-			vim.g.UltiSnipsSnippetDirectories = {
-				'UltiSnips',
-				vim.fn.stdpath('config') .. '/snippets',
-			}
-		end
-	},
+	-- {
+	-- 	'SirVer/ultisnips',
+	-- 	ft = 'snippets',
+	-- 	event = 'InsertEnter',
+	-- 	init = function()
+	-- 		vim.g.UltiSnipsJumpForwardTrigger = '<Tab>'
+	-- 		vim.g.UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+	-- 		vim.g.UltiSnipsEdit = 'vertical'
+	-- 		vim.g.UltiSnipsSnippetDirectories = {
+	-- 			'UltiSnips',
+	-- 			vim.fn.stdpath('config') .. '/snippets',
+	-- 		}
+	-- 	end
+	-- },
 }

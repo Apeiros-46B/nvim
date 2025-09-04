@@ -54,16 +54,15 @@ return {
 					on_attach(client, args.buf) end
 			})
 			local servers = {
-				lua_ls = {},
 				nil_ls = {},
-				ts_ls = {},
-				basedpyright = {},
-				zls = {},
-				ts_ls = {},
+				qmlls = {},
 				uiua = {},
-				qmlls = {
-					cmd = { 'qmlls', '-E' }
-				},
+				basedpyright = {},
+				ts_ls = {},
+				jdtls = {},
+				lua_ls = {},
+				clangd = {},
+				zls = {},
 			}
 			for srv, opts in pairs(servers) do
 				vim.lsp.config(srv, opts)
@@ -108,7 +107,6 @@ return {
 	{
 		'mfussenegger/nvim-jdtls',
 		event = 'VeryLazy',
-		-- TODO: configure
 	},
 	{
 		'Apeiros-46B/uiua.vim',
