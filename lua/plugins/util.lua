@@ -292,4 +292,8 @@ return {
 			require('telescope').load_extension('remote-sshfs')
 		end,
 	},
+	{
+		'Apeiros-46B/qalc.nvim',
+		cmd = { 'Qalc' },
+	},
 }

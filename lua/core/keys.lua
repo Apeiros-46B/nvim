@@ -13,6 +13,11 @@ map('n', '<leader>X', '<cmd>bdelete!<CR>')
 map('n', '<leader>j', '<cmd>bnext!<CR>')
 map('n', '<leader>k', '<cmd>bprev!<CR>')
 
+map('n', '<leader>tx', '<cmd>tabclose<CR>')
+map('n', '<leader>tj', '<cmd>tabnext<CR>')
+map('n', '<leader>tk', '<cmd>tabprev<CR>')
+map('n', '<leader>tn', '<cmd>tabnew %<CR>')
+
 map('n', '<leader>z', '<cmd>tabclose<CR>')
 map('n', '<leader>u', '<cmd>tabnext<CR>')
 map('n', '<leader>i', '<cmd>tabprev<CR>')

@@ -16,7 +16,7 @@ require('lazy').setup {
 	},
 	dev = {
 		path = '~/dev/vim',
-		patterns = { 'elysium', 'uiua.vim' },
+		patterns = { 'elysium', 'uiua.vim', 'qalc.nvim' },
 		fallback = true,
 	},
 	change_detection = { enabled = false },

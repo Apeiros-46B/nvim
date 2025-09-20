@@ -54,15 +54,21 @@ return {
 					on_attach(client, args.buf) end
 			})
 			local servers = {
-				nil_ls = {},
-				qmlls = {},
-				uiua = {},
+				jdtls = {},
+				clangd = {},
+				ocamllsp = {},
+				zls = {},
+
 				basedpyright = {},
 				ts_ls = {},
-				jdtls = {},
 				lua_ls = {},
-				clangd = {},
-				zls = {},
+				uiua = {},
+
+				racket_langserver = {},
+				r_language_server = {},
+
+				nil_ls = {},
+				qmlls = {},
 			}
 			for srv, opts in pairs(servers) do
 				vim.lsp.config(srv, opts)
