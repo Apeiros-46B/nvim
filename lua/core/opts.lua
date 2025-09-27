@@ -9,7 +9,8 @@ vim.o.nu = true
 vim.o.cul = true
 vim.o.culopt = 'both'
 vim.o.signcolumn = 'yes'
-vim.o.fillchars = 'vert: ,fold: ,foldopen:,foldclose:,eob: ,trunc:⋮,truncrl:⋮'
+-- vim.o.fillchars = 'vert: ,fold: ,foldopen:,foldclose:,eob: ,trunc:⋮,truncrl:⋮'
+vim.o.fillchars = 'vert: ,fold: ,eob: '
 vim.o.listchars = 'tab:. ,trail:-,nbsp:+,precedes:⋮'
 
 vim.o.ruler = true

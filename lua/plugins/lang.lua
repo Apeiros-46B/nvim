@@ -24,7 +24,63 @@ return {
 		event = 'VeryLazy',
 		cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
 		opts = {
-			ensure_installed = 'all',
+			ensure_installed = {
+				'asm',
+				'awk',
+				'bash',
+				'bibtex',
+				'c',
+				'cmake',
+				'cpp',
+				'css',
+				'cuda',
+				'diff',
+				'doxygen',
+				'gdscript',
+				'git_config',
+				'git_rebase',
+				'gitattributes',
+				'gitcommit',
+				'gitignore',
+				'glsl',
+				'hlsl',
+				'html',
+				'java',
+				'javadoc',
+				'javascript',
+				'jq',
+				'json',
+				'kdl',
+				'kotlin',
+				-- 'latex',
+				'llvm',
+				'lua',
+				'luadoc',
+				-- 'lua patterns',
+				'make',
+				'markdown',
+				'menhir',
+				'nasm',
+				'nix',
+				'ocaml',
+				'ocaml_interface',
+				-- 'ocamllex',
+				'python',
+				'qmldir',
+				'qmljs',
+				'r',
+				'regex',
+				'rust',
+				'sql',
+				'tsx',
+				'typescript',
+				'vim',
+				'vimdoc',
+				'yaml',
+				'zig',
+				'ziggy',
+				'ziggy_schema',
+			},
 			indent = {
 				enable = true,
 			},
@@ -51,7 +107,8 @@ return {
 			vim.api.nvim_create_autocmd('LspAttach', {
 				callback = function(args)
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					on_attach(client, args.buf) end
+					on_attach(client, args.buf)
+				end
 			})
 			local servers = {
 				jdtls = {},
@@ -74,6 +131,7 @@ return {
 				vim.lsp.config(srv, opts)
 				vim.lsp.enable(srv)
 			end
+			vim.api.nvim_exec_autocmds('FileType', {})
 		end,
 	},
 	{
