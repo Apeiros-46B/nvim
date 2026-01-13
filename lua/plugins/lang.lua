@@ -9,9 +9,10 @@ local function on_attach(client, bufnr)
 	if client:supports_method('textDocument/documentSymbol') then
 		require('nvim-navic').attach(client, bufnr)
 	end
-	if not semantic_tokens_enabled[client.name] then
-		client.server_capabilities.semanticTokensProvider = {}
-	end
+	-- broken in new nvim
+	-- if not semantic_tokens_enabled[client.name] then
+	-- 	client.server_capabilities.semanticTokensProvider = {}
+	-- end
 end
 
 return {

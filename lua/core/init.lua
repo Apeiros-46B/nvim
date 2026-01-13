@@ -7,5 +7,20 @@ vim.api.nvim_create_autocmd('ModeChanged', {
 })
 vim.api.nvim_create_autocmd('SwapExists', {
 	pattern = '*',
-	command = 'echo "Opening RO due to swapfile" | let v:swapchoice = "o"',
+	callback = function()
+		vim.v.swapchoice = 'o'
+		vim.defer_fn(function() print('Opened RO due to swapfile') end, 100)
+	end
 })
+
+-- fix double-press issue on some terminals
+local function fix_kbd()
+	io.write('\27[>0u')
+	io.flush()
+end
+local ns
+ns = vim.on_key(function()
+	fix_kbd()
+	vim.on_key(nil, ns)
+end)
+vim.defer_fn(fix_kbd, 100)
