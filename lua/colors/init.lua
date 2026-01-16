@@ -1,9 +1,9 @@
 local M = require('colors.elysium')
 
 require('util').hl {
-	iCursor = { bg = M.palette.blue   },
-	vCursor = { bg = M.palette.purple },
-	rCursor = { bg = M.palette.red    },
+	iCursor = { fg = M.palette.bg0, bg = M.palette.blue   },
+	vCursor = { fg = M.palette.bg0, bg = M.palette.purple },
+	rCursor = { fg = M.palette.bg0, bg = M.palette.red    },
 
 	StatusLine     = { bg = M.palette.bg1, fg = M.palette.fg3 },
 	StatusLineTerm = { bg = M.palette.bg1, fg = M.palette.fg3 },

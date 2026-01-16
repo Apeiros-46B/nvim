@@ -15,6 +15,14 @@ local function on_attach(client, bufnr)
 	-- end
 end
 
+local function md_callout(icon, name, hl)
+	return {
+		raw = '[!' .. name:upper() .. ']',
+		rendered = icon .. ' ' .. name,
+		highlight = 'RenderMarkdown' .. hl,
+	}
+end
+
 return {
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -60,6 +68,7 @@ return {
 				-- 'lua patterns',
 				'make',
 				'markdown',
+				'markdown_inline',
 				'menhir',
 				'nasm',
 				'nix',
@@ -73,6 +82,7 @@ return {
 				'regex',
 				'rust',
 				'sql',
+				'toml',
 				'tsx',
 				'typescript',
 				'vim',
@@ -208,6 +218,7 @@ return {
 	},
 	{
 		'Apeiros-46B/uiua.vim',
+		event = 'VeryLazy',
 		filetype = 'uiua',
 		init = function()
 			vim.g.uiua_recommended_style = 1
@@ -345,5 +356,111 @@ return {
 		opts = {
 			-- TODO
 		},
+	},
+	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		ft = { 'markdown', 'Avante' },
+		opts = util.opts_with_hl(
+			{
+				render_modes = { 'n', 'c', 't', 'i', 'v', 'V' },
+				file_types = { "markdown", "Avante" },
+				nested = false,
+				anti_conceal = {
+					ignore = {
+						bullet = true,
+						code_background = true,
+						indent = true,
+						quote = true,
+						sign = true,
+					},
+				},
+				heading = {
+					position = 'inline',
+					-- icons = { '◉ ', ' ◈ ', '  ◉ ', '   ◈ ', '    ◉ ', '     ◈ ' },
+					icons = { '◉ ', '◈ ' },
+					sign = false,
+					backgrounds = { 'RenderMarkdownHBg' },
+					foregrounds = {
+						'markdownH1',
+						'markdownH2',
+						'markdownH3',
+						'markdownH4',
+						'markdownH5',
+						'markdownH6',
+					},
+				},
+				-- code = { -- style 1
+				-- 	width = 'block',
+				-- 	border = 'thin',
+				-- 	left_pad = 1,
+				-- 	right_pad = 1,
+				-- 	language_border = '▄',
+				-- 	language_left = '█',
+				-- 	language_right = '█',
+				-- 	inline_pad = 1,
+				-- 	highlight_language = '@comment',
+				-- },
+				code = { -- style 2
+					width = 'full',
+					border = 'thick',
+					left_pad = 0,
+					inline_pad = 1,
+					highlight_language = '@comment',
+				},
+				bullet = {
+					icons = { '·', '∘' },
+				},
+				checkbox = {
+					unchecked = { icon = '[ ]' },
+					checked   = { icon = '[󰄬]' },
+					custom = {
+						todo = {
+							raw = '[-]',
+							rendered = '[-]',
+							highlight = 'RenderMarkdownTodo',
+						},
+					},
+				},
+				quote = {
+					icon = '│',
+					repeat_linebreak = true,
+				},
+				pipe_table = {
+					cell = 'raw',
+					border_enabled = false,
+				},
+				callout = {
+					note      = md_callout('●', 'Note', 'Info'),
+					tip       = md_callout('▼', 'Tip', 'Success'),
+					important = md_callout('●', 'Important', 'Hint'),
+					warning   = md_callout('▲', 'Warning', 'Warn'),
+					caution   = md_callout('▼', 'Caution', 'Error'),
+				},
+				link = {
+					-- TODO
+					footnote = { icon = '' }
+				},
+				indent = {
+					enabled = true,
+					per_level = 1,
+					icon = ' ',
+					highlight = { '@markup.quote' },
+				},
+			},
+			{
+				RenderMarkdownCode = { bg = colors.bg_shade },
+				RenderMarkdownCodeInline = { fg = colors.blue, bg = colors.bg1 },
+
+				RenderMarkdownUnhecked = { fg = colors.fg3 },
+				RenderMarkdownChecked = { fg = colors.aqua },
+				RenderMarkdownTodo = { fg = colors.yellow },
+
+				RenderMarkdownTableHead = { fg = colors.bg4 },
+				RenderMarkdownTableRow  = { fg = colors.bg4 },
+
+				RenderMarkdownInlineHighlight = { fg = colors.yellow, bg = colors.bg_yellow },
+			}
+		),
 	},
 }

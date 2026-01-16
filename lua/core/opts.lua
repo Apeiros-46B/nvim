@@ -4,16 +4,16 @@ vim.o.mouse = 'a'
 vim.o.mousemodel = 'popup_setpos'
 vim.o.guicursor = 'n-c-t:block,o:hor50,v-ve:block-vCursor,i-ci-sm:ver25-iCursor,r-cr:block-rCursor'
 
-vim.o.rnu = true
-vim.o.nu = true
-vim.o.cul = true
-vim.o.culopt = 'both'
+vim.o.relativenumber = true
+vim.o.number = true
+vim.o.cursorline = true
+vim.o.cursorlineopt = 'both'
 vim.o.signcolumn = 'yes'
--- vim.o.fillchars = 'vert: ,fold: ,foldopen:,foldclose:,eob: ,trunc:⋮,truncrl:⋮'
-vim.o.fillchars = 'vert: ,fold: ,eob: '
+vim.o.fillchars = 'vert: ,fold: ,foldopen:,foldclose:,eob: ,trunc:⋮,truncrl:⋮'
+-- vim.o.fillchars = 'vert: ,fold: ,eob: '
 vim.o.listchars = 'tab:. ,trail:-,nbsp:+,precedes:⋮'
 
-vim.o.ruler = true
+vim.o.ruler = false
 vim.o.showmode = false
 vim.o.shortmess = 'aoOstTIcCS'
 vim.o.laststatus = 3
@@ -32,10 +32,10 @@ vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.o.swapfile = true
 vim.o.undofile = true
 
-vim.o.ts = 2
-vim.o.sts = -1
-vim.o.sw = 0
-vim.o.et = false
+vim.o.tabstop = 2
+vim.o.softtabstop = -1
+vim.o.shiftwidth = 0
+vim.o.expandtab = false
 vim.o.smartindent = true
 vim.o.cinoptions = '=sl1g0N-sE-s'
 vim.g.editorconfig = true

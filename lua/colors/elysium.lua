@@ -41,4 +41,8 @@ M.spec = {
 
 M.dark = false
 
+require('util').hl {
+	['@markup.quote'] = { fg = M.palette.fg3 },
+}
+
 return M
