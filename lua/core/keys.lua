@@ -8,8 +8,7 @@ end
 
 vim.g.mapleader = ' '
 
-map('n', '<leader>x', '<cmd>bdelete<CR>')
-map('n', '<leader>X', '<cmd>bdelete!<CR>')
+-- closing buffers is handled by mini.bufremove
 map('n', '<leader>j', '<cmd>bnext!<CR>')
 map('n', '<leader>k', '<cmd>bprev!<CR>')
 
@@ -27,6 +26,7 @@ map('n', '<leader><Bslash>', '<cmd>bot terminal<CR>')
 map('t', '<C-w><C-n>', '<C-\\><C-n>')
 
 map('', '<leader>y', '"+y')
+map('', '<leader>w', '<cmd>lua vim.wo.wrap = not vim.wo.wrap<CR>')
 
 map('n', '<leader>d',   '<cmd>lua vim.diagnostic.open_float()<CR>')
 map('n', '<leader>lj',  '<cmd>lua vim.diagnostic.goto_next()<CR>')

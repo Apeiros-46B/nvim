@@ -376,19 +376,20 @@ return {
 					},
 				},
 				heading = {
+					enabled = false,
 					position = 'inline',
-					-- icons = { '◉ ', ' ◈ ', '  ◉ ', '   ◈ ', '    ◉ ', '     ◈ ' },
-					icons = { '◉ ', '◈ ' },
-					sign = false,
-					backgrounds = { 'RenderMarkdownHBg' },
-					foregrounds = {
-						'markdownH1',
-						'markdownH2',
-						'markdownH3',
-						'markdownH4',
-						'markdownH5',
-						'markdownH6',
-					},
+					-- icons = { '─ ', '── ', '─── ', '──── ', '───── ', '────── ' },
+					-- icons = { '─ ', '─ ' },
+					-- sign = false,
+					-- backgrounds = { 'RenderMarkdownHBg' },
+					-- foregrounds = {
+					-- 	'@markup.heading.1',
+					-- 	'@markup.heading.2',
+					-- 	'@markup.heading.3',
+					-- 	'@markup.heading.4',
+					-- 	'@markup.heading.5',
+					-- 	'@markup.heading.6',
+					-- },
 				},
 				-- code = { -- style 1
 				-- 	width = 'block',
@@ -441,17 +442,18 @@ return {
 					-- TODO
 					footnote = { icon = '' }
 				},
-				indent = {
-					enabled = true,
-					per_level = 1,
-					icon = ' ',
-					highlight = { '@markup.quote' },
+				win_options = {
+					breakindent = {
+						default = vim.o.breakindent,
+						rendered = true,
+					},
 				},
 			},
 			{
 				RenderMarkdownCode = { bg = colors.bg_shade },
 				RenderMarkdownCodeInline = { fg = colors.blue, bg = colors.bg1 },
 
+				RenderMarkdownBullet = { fg = colors.fg3 },
 				RenderMarkdownUnhecked = { fg = colors.fg3 },
 				RenderMarkdownChecked = { fg = colors.aqua },
 				RenderMarkdownTodo = { fg = colors.yellow },

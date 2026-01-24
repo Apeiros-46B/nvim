@@ -225,7 +225,7 @@ return {
 	{
 		'j-hui/fidget.nvim',
 		event = 'VeryLazy',
-		opts = {
+		opts = {--TODO
 		},
 	},
 	{
@@ -234,5 +234,14 @@ return {
 		config = function()
 			require('telescope').load_extension('ui-select')
 		end
+	},
+	{
+		'nvim-mini/mini.bufremove',
+		-- TODO: convert all string "lua require" across the config to a deferred require helper
+		keys = {
+			{ '<leader>x', '<cmd>lua require("mini.bufremove").delete()<CR>', mode = 'n' },
+			{ '<leader>X', '<cmd>lua require("mini.bufremove").delete(0, true)<CR>', mode = 'n' },
+		},
+		opts = {},
 	},
 }

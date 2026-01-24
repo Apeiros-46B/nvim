@@ -12,6 +12,12 @@ vim.api.nvim_create_autocmd('SwapExists', {
 		vim.defer_fn(function() print('Opened RO due to swapfile') end, 100)
 	end
 })
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'markdown',
+	callback = function()
+		vim.opt_local.formatlistpat = [[^\s*\(\([│>]\|╰─\)\s*\)\?\(\d\+\.\|[-+*]\)\?\s*]]
+	end
+})
 
 -- fix double-press issue on some terminals
 local function fix_kbd()

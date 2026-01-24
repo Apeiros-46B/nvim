@@ -12,6 +12,7 @@ vim.o.signcolumn = 'yes'
 vim.o.fillchars = 'vert: ,fold: ,foldopen:,foldclose:,eob: ,trunc:⋮,truncrl:⋮'
 -- vim.o.fillchars = 'vert: ,fold: ,eob: '
 vim.o.listchars = 'tab:. ,trail:-,nbsp:+,precedes:⋮'
+vim.o.breakindentopt = 'list:-1'
 
 vim.o.ruler = false
 vim.o.showmode = false
@@ -70,4 +71,15 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT]  = 'DiagnosticSignHint',
 		},
 	},
+})
+
+function apply_flp(opt)
+	opt.formatlistpat = [[^\s*\(\([│>]\|╰─\)\s*\)\?\(\d\+\.\|[-+*]\)\?\s*]]
+end
+apply_flp(vim.o)
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'markdown',
+	callback = function()
+		apply_flp(vim.opt_local)
+	end
 })

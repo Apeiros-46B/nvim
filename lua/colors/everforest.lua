@@ -71,6 +71,14 @@ require('util').hl {
 	CursorLine     = { bg = M.palette.bg_shade                     },
 	CursorLineSign = { bg = M.palette.bg_shade                     },
 	CursorLineNr   = { bg = M.palette.bg_shade, fg = M.palette.fg3 },
+
+	DiagnosticHint     = { fg = M.palette.aqua },
+	DiagnosticSignHint = { fg = M.palette.aqua },
+
+	Constant = { fg = M.palette.purple },
+	TSConstant = { fg = M.palette.purple },
+	['@constant'] = { fg = M.palette.purple },
+	['@lsp.type.decorator'] = { fg = M.palette.purple },
 }
 
 return M

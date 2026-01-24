@@ -33,17 +33,49 @@ return {
 		},
 	},
 	{
-		'echasnovski/mini.splitjoin',
-		keys = 'gS',
+		'Wansmer/treesj',
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		keys = {
+			{
+				'gs', mode = 'n',
+				function()
+					local ok, _ = pcall(vim.treesitter.get_parser, 0)
+					if ok then
+						require('treesj').toggle()
+					else
+						-- fallback to mini.splitjoin if there is no TS parser
+						require('mini.splitjoin').toggle()
+					end
+				end,
+			},
+		},
+		opts = {
+			use_default_keymaps = false,
+			max_join_length = 240,
+		},
+	},
+	{
+		'nvim-mini/mini.splitjoin',
+		lazy = true,
+		opts = { mappings = { toggle = '' } },
+	},
+	{
+		'nvim-mini/mini.align',
+		keys = {
+			{ 'ga', mode = { 'n', 'v' } },
+			{ 'gA', mode = { 'n', 'v' } },
+		},
 		opts = {},
 	},
 	{
-		'echasnovski/mini.align',
+		'nvim-mini/mini.trailspace',
+		event = 'VeryLazy',
 		keys = {
-			{ 'ga', mode = { 'n', 'v' }},
-			{ 'gA', mode = { 'n', 'v' }},
+			{ 'gS', '<cmd>lua require("mini.trailspace").trim()<CR>', mode = 'n' }
 		},
-		opts = {},
+		opts = util.opts_with_hl({}, {
+			MiniTrailspace = { bg = colors.bg_yellow },
+		}),
 	},
 	{
 		'ggandor/leap.nvim',
