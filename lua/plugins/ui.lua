@@ -83,6 +83,15 @@ return {
 					{ provider = ' %f ' },
 					{
 						condition = function()
+							return vim.bo.ft and vim.bo.ft ~= '' and vim.bo.ft ~= vim.fn.expand('%:e')
+						end,
+						provider = function()
+							return '(' .. vim.bo.ft .. ') '
+						end,
+						hl = { fg = 'fg3' },
+					},
+					{
+						condition = function()
 							return vim.bo.modified
 						end,
 						provider = '* ',
@@ -98,10 +107,10 @@ return {
 					},
 					{
 						condition = function()
-							return vim.bo.fenc ~= '' and vim.bo.fenc ~= 'utf-8'
+							return vim.bo.fenc and vim.bo.fenc ~= '' and vim.bo.fenc ~= 'utf-8'
 						end,
 						provider = function()
-							return '(' .. vim.bo.fenc .. ') '
+							return vim.bo.fenc
 						end,
 						hl = { fg = 'bg5' },
 					},

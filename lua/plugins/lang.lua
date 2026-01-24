@@ -129,6 +129,7 @@ return {
 
 				basedpyright = {},
 				ts_ls = {},
+				denols = {},
 				lua_ls = {},
 				uiua = {},
 
