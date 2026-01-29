@@ -16,13 +16,13 @@ return {
 				providers = {
 					moonshot = {
 						endpoint = 'https://api.moonshot.ai/v1',
-						model = 'kimi-k2-0905-preview',
+						model = 'kimi-k2.5',
+						-- model = 'kimi-k2-0905-preview',
 						timeout = 30000,
 						extra_request_body = {
 							temperature = 1.0,
 							max_tokens = 32768,
 						},
-						disabled_tools = { 'think' }, -- just want fast code edits
 					},
 					gemini = {
 						model = 'gemini-3-flash-preview',

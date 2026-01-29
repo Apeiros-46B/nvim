@@ -77,8 +77,10 @@ require('util').hl {
 
 	Constant = { fg = M.palette.purple },
 	TSConstant = { fg = M.palette.purple },
+	TSNamespace = { fg = M.palette.orange },
 	['@constant'] = { fg = M.palette.purple },
 	['@lsp.type.decorator'] = { fg = M.palette.purple },
+	['@lsp.type.enumMember'] = { fg = M.palette.purple },
 }
 
 return M
