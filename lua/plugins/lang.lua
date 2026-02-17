@@ -124,20 +124,39 @@ return {
 			local servers = {
 				jdtls = {},
 				clangd = {},
-				ocamllsp = {},
+				slangd = {},
 				zls = {},
 
 				basedpyright = {},
 				ts_ls = {},
 				denols = {},
-				lua_ls = {},
+				lua_ls = {
+					settings = {
+						Lua = {
+							runtime = { version = 'LuaJIT' },
+							diagnostics = { globals = { 'vim' } },
+							workspace = {
+								library = {
+									vim.env.VIMRUNTIME,
+									"${3rd}/luv/library",
+								},
+								checkThirdParty = false,
+							},
+							telemetry = {
+								enable = false,
+							},
+						},
+					},
+				},
 				uiua = {},
 
 				racket_langserver = {},
 				r_language_server = {},
 
 				nil_ls = {},
-				qmlls = {},
+				qmlls = {
+					cmd = { 'qmlls', '-E' }
+				},
 			}
 			for srv, opts in pairs(servers) do
 				vim.lsp.config(srv, opts)

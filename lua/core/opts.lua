@@ -2,7 +2,7 @@ vim.o.errorbells = false
 vim.o.termguicolors = true
 vim.o.mouse = 'a'
 vim.o.mousemodel = 'popup_setpos'
-vim.o.guicursor = 'n-c-t:block,o:hor50,v-ve:block-vCursor,i-ci-sm:ver25-iCursor,r-cr:block-rCursor'
+-- vim.o.guicursor = 'n-c-t:block,o:hor50,v-ve:block-vCursor,i-ci-sm:ver25-iCursor,r-cr:block-rCursor'
 
 vim.o.relativenumber = true
 vim.o.number = true

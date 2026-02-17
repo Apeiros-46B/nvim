@@ -197,6 +197,7 @@ return {
 				},
 
 				sources = cmp.config.sources {
+					{ name = 'qalc',      priority = 4 },
 					-- { name = 'ultisnips', priority = 3 },
 					{ name = 'nvim_lsp',  priority = 2 },
 					{ name = 'path',      priority = 1 },

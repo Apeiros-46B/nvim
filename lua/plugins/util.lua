@@ -294,6 +294,7 @@ return {
 	},
 	{
 		'Apeiros-46B/qalc.nvim',
-		cmd = { 'Qalc' },
+		ft = { 'qalc' },
+		cmd = { 'Qalc', 'QalcAttach' },
 	},
 }
