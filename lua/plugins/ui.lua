@@ -188,7 +188,7 @@ return {
 		end,
 	},
 	{
-		-- TODO: fix bufdelete errors and spontaneous <C-g>
+		-- TODO: fix bufdelete errors, "can't split window", and <C-g> when switching buf
 		'Apeiros-46B/nvim-scrlbkun',
 		cond = false,
 		event = 'VeryLazy',
