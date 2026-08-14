@@ -2,7 +2,7 @@ local util = require('util')
 local colors = require('colors').palette
 
 local semantic_tokens_enabled = {
- 	['rust-analyzer'] = true
+ 	['rust-analyzer'] = true,
 }
 local function on_attach(client, bufnr)
 	if not client then return end
@@ -127,7 +127,7 @@ return {
 				slangd = {},
 				zls = {},
 
-				basedpyright = {},
+				pyrefly = {},
 				ts_ls = {},
 				denols = {},
 				lua_ls = {

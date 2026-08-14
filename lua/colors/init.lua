@@ -1,6 +1,8 @@
 local M = require('colors.elysium')
 
 require('util').hl {
+	['@lsp.type.variable.zig'] = {},
+
 	iCursor = { fg = M.palette.bg0, bg = M.palette.blue   },
 	vCursor = { fg = M.palette.bg0, bg = M.palette.purple },
 	rCursor = { fg = M.palette.bg0, bg = M.palette.red    },

@@ -9,6 +9,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.deprecate = function() end
 
 require('core')
+-- TODO: lazy header buttons are colored wrong
 require('lazy').setup {
 	spec = {
 		require('colors').spec,
