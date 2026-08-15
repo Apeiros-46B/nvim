@@ -54,7 +54,7 @@ vim.diagnostic.config({
 	virtual_text = false,
 	float = {
 		header = '',
-		source = 'always',
+		source = true,
 		focusable = true,
 	},
 	signs = {
@@ -73,7 +73,7 @@ vim.diagnostic.config({
 	},
 })
 
-function apply_flp(opt)
+local function apply_flp(opt)
 	opt.formatlistpat = [[^\s*\(\([│>]\|╰─\)\s*\)\?\(\d\+\.\|[-+*]\)\?\s*]]
 end
 apply_flp(vim.o)

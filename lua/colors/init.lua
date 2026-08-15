@@ -1,4 +1,4 @@
-local M = require('colors.elysium')
+local M = require('colors.everforest')
 
 require('util').hl {
 	['@lsp.type.variable.zig'] = {},

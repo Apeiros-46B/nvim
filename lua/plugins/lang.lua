@@ -25,15 +25,24 @@ end
 
 return {
 	{
+		-- TODO: get incremental selection back
 		'nvim-treesitter/nvim-treesitter',
-		branch = 'master',
 		build = ':TSUpdate',
 		dependencies = { 'RRethy/nvim-treesitter-endwise' },
 
 		event = 'VeryLazy',
 		cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
-		opts = {
-			ensure_installed = {
+
+		init = function()
+			vim.api.nvim_create_autocmd('FileType', {
+				callback = function()
+					pcall(vim.treesitter.start)
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
+			})
+		end,
+		config = function()
+			require('nvim-treesitter').install {
 				'asm',
 				'awk',
 				'bash',
@@ -91,25 +100,8 @@ return {
 				'zig',
 				'ziggy',
 				'ziggy_schema',
-			},
-			indent = {
-				enable = true,
-			},
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<BS>",
-				},
-			},
-		},
-		main = 'nvim-treesitter.configs',
+			}
+		end,
 	},
 	{
 		'neovim/nvim-lspconfig',
@@ -380,11 +372,11 @@ return {
 	{
 		'MeanderingProgrammer/render-markdown.nvim',
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
-		ft = { 'markdown', 'Avante' },
+		ft = 'markdown',
 		opts = util.opts_with_hl(
 			{
 				render_modes = { 'n', 'c', 't', 'i', 'v', 'V' },
-				file_types = { "markdown", "Avante" },
+				file_types = { 'markdown' },
 				nested = false,
 				anti_conceal = {
 					ignore = {
