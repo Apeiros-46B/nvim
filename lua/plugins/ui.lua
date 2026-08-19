@@ -156,7 +156,7 @@ return {
 							local name = vim.api.nvim_buf_get_name(self.bufnr)
 							if name == '' then
 								name = '[No Name]'
-							else
+							elseif not name:match('/$') then
 								name = vim.fn.fnamemodify(name, ':t')
 							end
 							return ' ' .. name .. ' '

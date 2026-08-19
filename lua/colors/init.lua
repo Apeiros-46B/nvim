@@ -2,6 +2,7 @@ local M = require('colors.everforest')
 
 require('util').hl {
 	['@lsp.type.variable.zig'] = {},
+	['@lsp.type.variable.python'] = {},
 
 	iCursor = { fg = M.palette.bg0, bg = M.palette.blue   },
 	vCursor = { fg = M.palette.bg0, bg = M.palette.purple },
